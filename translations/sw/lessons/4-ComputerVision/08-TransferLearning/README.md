@@ -1,81 +1,90 @@
-# Förtränade Nätverk och Överföringsinlärning
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "178c0b5ee5395733eb18aec51e71a0a9",
+  "translation_date": "2025-09-23T10:59:22+00:00",
+  "source_file": "lessons/4-ComputerVision/08-TransferLearning/README.md",
+  "language_code": "sw"
+}
+-->
+# Mitandao Iliyojifunza Kabla na Kujifunza kwa Uhamisho
 
-Att träna CNN:er kan ta mycket tid, och en stor mängd data krävs för den uppgiften. Mycket av tiden går åt till att lära sig de bästa lågnivåfiltrena som ett nätverk kan använda för att extrahera mönster från bilder. En naturlig fråga uppstår - kan vi använda ett neuralt nätverk som har tränats på en dataset och anpassa det för att klassificera olika bilder utan att behöva en fullständig träningsprocess?
+Kufundisha CNNs inaweza kuchukua muda mwingi, na data nyingi inahitajika kwa kazi hiyo. Hata hivyo, muda mwingi hutumika kujifunza vichujio vya kiwango cha chini ambavyo mtandao unaweza kutumia kutoa mifumo kutoka kwa picha. Swali la asili linatokea - je, tunaweza kutumia mtandao wa neva uliyojifunza kwenye seti moja ya data na kuubadilisha ili kuainisha picha tofauti bila kuhitaji mchakato kamili wa mafunzo?
 
-## [För-föreläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/108)
+## [Maswali ya awali ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/15)
 
-Denna metod kallas **överföringsinlärning**, eftersom vi överför viss kunskap från en neuralt nätverksmodell till en annan. Vid överföringsinlärning börjar vi vanligtvis med en förtränad modell, som har tränats på en stor bilddataset, såsom **ImageNet**. Dessa modeller kan redan göra ett bra jobb med att extrahera olika egenskaper från generiska bilder, och i många fall kan det att bara bygga en klassificerare ovanpå dessa extraherade egenskaper ge ett bra resultat.
+Mbinu hii inaitwa **kujifunza kwa uhamisho**, kwa sababu tunahamisha maarifa fulani kutoka kwa mfano mmoja wa mtandao wa neva kwenda mwingine. Katika kujifunza kwa uhamisho, kwa kawaida tunaanza na mfano uliyojifunza kabla, ambao umefundishwa kwenye seti kubwa ya data ya picha, kama vile **ImageNet**. Mifano hiyo tayari inaweza kufanya kazi nzuri ya kutoa vipengele tofauti kutoka kwa picha za kawaida, na mara nyingi kujenga kionainishaji juu ya vipengele hivyo vilivyotolewa kunaweza kutoa matokeo mazuri.
 
-> ✅ Överföringsinlärning är ett begrepp som du hittar inom andra akademiska områden, såsom utbildning. Det hänvisar till processen att ta kunskap från ett område och tillämpa den på ett annat.
+> ✅ Kujifunza kwa Uhamisho ni neno linalopatikana katika nyanja nyingine za kitaaluma, kama vile Elimu. Linahusu mchakato wa kuchukua maarifa kutoka uwanja mmoja na kuyatumia kwa mwingine.
 
-## Förtränade Modeller som Funktionsextraktorer
+## Mifano Iliyojifunza Kabla kama Vitoa Vipengele
 
-De konvolutionella nätverken som vi har pratat om i den föregående sektionen innehöll ett antal lager, där varje lager är avsett att extrahera vissa egenskaper från bilden, som börjar med lågnivåpixelkombinationer (såsom horisontella/vertikala linjer eller streck), upp till högre nivåkombinationer av egenskaper, motsvarande saker som ett öga på en låga. Om vi tränar CNN på en tillräckligt stor dataset av generiska och mångsidiga bilder, bör nätverket lära sig att extrahera dessa gemensamma egenskaper.
+Mitandao ya convolutional tuliyozungumzia katika sehemu iliyopita ina idadi ya tabaka, kila moja ikitarajiwa kutoa vipengele fulani kutoka kwa picha, kuanzia mchanganyiko wa pikseli wa kiwango cha chini (kama vile mstari wa mlalo/mwima au stroke), hadi mchanganyiko wa kiwango cha juu wa vipengele, vinavyohusiana na vitu kama jicho la moto. Ikiwa tunafundisha CNN kwenye seti kubwa ya data ya picha za kawaida na tofauti, mtandao unapaswa kujifunza kutoa vipengele hivyo vya kawaida.
 
-Både Keras och PyTorch innehåller funktioner för att enkelt ladda förtränade neurala nätverksvikter för vissa vanliga arkitekturer, de flesta av vilka har tränats på bilder från ImageNet. De mest använda beskrivs på sidan [CNN Arkitekturer](../07-ConvNets/CNN_Architectures.md) från den tidigare lektionen. Specifikt kan du överväga att använda en av följande:
+Keras na PyTorch zote zina kazi za kupakia kwa urahisi uzito wa mtandao wa neva uliyojifunza kabla kwa baadhi ya usanifu wa kawaida, nyingi zikiwa zimefundishwa kwenye picha za ImageNet. Zilizozoea zaidi zimeelezwa kwenye ukurasa wa [Usanifu wa CNN](../07-ConvNets/CNN_Architectures.md) kutoka somo la awali. Hasa, unaweza kutaka kuzingatia kutumia mojawapo ya zifuatazo:
 
-* **VGG-16/VGG-19** som är relativt enkla modeller som fortfarande ger bra noggrannhet. Att ofta använda VGG som ett första försök är ett bra val för att se hur överföringsinlärning fungerar.
-* **ResNet** är en familj av modeller som föreslagits av Microsoft Research 2015. De har fler lager och tar därför mer resurser.
-* **MobileNet** är en familj av modeller med minskad storlek, lämpliga för mobila enheter. Använd dem om du har ont om resurser och kan offra lite noggrannhet.
+* **VGG-16/VGG-19** ambazo ni mifano rahisi inayotoa usahihi mzuri. Mara nyingi kutumia VGG kama jaribio la kwanza ni chaguo zuri kuona jinsi kujifunza kwa uhamisho kunavyofanya kazi.
+* **ResNet** ni familia ya mifano iliyopendekezwa na Microsoft Research mwaka 2015. Ina tabaka zaidi, na hivyo inahitaji rasilimali zaidi.
+* **MobileNet** ni familia ya mifano yenye ukubwa mdogo, inayofaa kwa vifaa vya mkononi. Tumia ikiwa una uhaba wa rasilimali na unaweza kukubali kupoteza usahihi kidogo.
 
-Här är exempel på egenskaper som extraherats från en bild av en katt av VGG-16-nätverket:
+Hapa kuna vipengele vya mfano vilivyotolewa kutoka kwa picha ya paka na mtandao wa VGG-16:
 
-![Egenskaper extraherade av VGG-16](../../../../../translated_images/features.6291f9c7ba3a0b951af88fc9864632b9115365410765680680d30c927dd67354.sw.png)
+![Vipengele vilivyotolewa na VGG-16](../../../../../translated_images/features.6291f9c7ba3a0b951af88fc9864632b9115365410765680680d30c927dd67354.sw.png)
 
-## Katter vs. Hundar Dataset
+## Seti ya Data ya Paka na Mbwa
 
-I det här exemplet kommer vi att använda en dataset av [Katter och Hundar](https://www.microsoft.com/download/details.aspx?id=54765&WT.mc_id=academic-77998-cacaste), som ligger mycket nära ett verkligt bildklassificeringsscenario.
+Katika mfano huu, tutatumia seti ya data ya [Paka na Mbwa](https://www.microsoft.com/download/details.aspx?id=54765&WT.mc_id=academic-77998-cacaste), ambayo iko karibu sana na hali halisi ya uainishaji wa picha.
 
-## ✍️ Övning: Överföringsinlärning
+## ✍️ Zoezi: Kujifunza kwa Uhamisho
 
-Låt oss se överföringsinlärning i praktiken i motsvarande anteckningsböcker:
+Tuone kujifunza kwa uhamisho kwa vitendo katika daftari husika:
 
-* [Överföringsinlärning - PyTorch](../../../../../lessons/4-ComputerVision/08-TransferLearning/TransferLearningPyTorch.ipynb)
-* [Överföringsinlärning - TensorFlow](../../../../../lessons/4-ComputerVision/08-TransferLearning/TransferLearningTF.ipynb)
+* [Kujifunza kwa Uhamisho - PyTorch](TransferLearningPyTorch.ipynb)
+* [Kujifunza kwa Uhamisho - TensorFlow](TransferLearningTF.ipynb)
 
-## Visualisering av Fiendens Katt
+## Kuonyesha Paka ya Kihasama
 
-Det förtränade neurala nätverket innehåller olika mönster inuti sin *hjärna*, inklusive begrepp om **ideal katt** (liksom ideal hund, ideal zebra, etc.). Det skulle vara intressant att på något sätt **visualisera denna bild**. Det är dock inte enkelt, eftersom mönster är spridda över nätverksvikterna och också organiserade i en hierarkisk struktur.
+Mtandao wa neva uliyojifunza kabla una mifumo tofauti ndani ya "ubongo" wake, ikiwa ni pamoja na dhana za **paka bora** (pamoja na mbwa bora, punda milia bora, nk.). Itakuwa ya kuvutia kuonyesha **picha hii** kwa namna fulani. Hata hivyo, si rahisi, kwa sababu mifumo imesambazwa kote kwenye uzito wa mtandao, na pia imepangwa katika muundo wa kihierarkia.
 
-En metod vi kan använda är att börja med en slumpmässig bild och sedan försöka använda **gradientnedstigningsoptimering** för att justera den bilden på ett sätt så att nätverket börjar tro att det är en katt.
+Njia moja tunayoweza kuchukua ni kuanza na picha ya nasibu, kisha kujaribu kutumia mbinu ya **ufanisi wa gradient descent** kurekebisha picha hiyo kwa namna ambayo mtandao unaanza kufikiria kuwa ni paka.
 
-![Bildoptimeringsloop](../../../../../translated_images/ideal-cat-loop.999fbb8ff306e044f997032f4eef9152b453e6a990e449bbfb107de2493cc37e.sw.png)
+![Mzunguko wa Uboreshaji wa Picha](../../../../../translated_images/ideal-cat-loop.999fbb8ff306e044f997032f4eef9152b453e6a990e449bbfb107de2493cc37e.sw.png)
 
-Men om vi gör detta, kommer vi att få något som liknar slumpmässigt brus. Detta beror på att *det finns många sätt att få nätverket att tro att inmatningsbilden är en katt*, inklusive vissa som inte ger visuell mening. Medan dessa bilder innehåller många mönster som är typiska för en katt, finns det inget som begränsar dem att vara visuellt distinkta.
+Hata hivyo, tukifanya hivyo, tutapata kitu kinachofanana sana na kelele ya nasibu. Hii ni kwa sababu *kuna njia nyingi za kufanya mtandao kufikiria picha ya ingizo ni paka*, ikiwa ni pamoja na baadhi ambazo hazina maana kwa macho. Ingawa picha hizo zina mifumo mingi inayotambulika kwa paka, hakuna kitu kinachozuia kuwa tofauti kwa macho.
 
-För att förbättra resultatet kan vi lägga till en annan term i förlustfunktionen, som kallas **variationsförlust**. Det är en metrisk som visar hur lika angränsande pixlar i bilden är. Att minimera variationsförlust gör bilden jämnare och blir av med brus - vilket avslöjar mer visuellt tilltalande mönster. Här är ett exempel på sådana "ideala" bilder, som klassificeras som katt och zebra med hög sannolikhet:
+Ili kuboresha matokeo, tunaweza kuongeza kipengele kingine kwenye kazi ya hasara, kinachoitwa **variation loss**. Ni kipimo kinachoonyesha jinsi pikseli za jirani za picha zinavyofanana. Kupunguza variation loss hufanya picha kuwa laini, na kuondoa kelele - hivyo kufichua mifumo inayovutia zaidi kwa macho. Hapa kuna mfano wa picha "bora" zinazotambuliwa kama paka na kama punda milia kwa uwezekano mkubwa:
 
-![Ideal Katt](../../../../../translated_images/ideal-cat.203dd4597643d6b0bd73038b87f9c0464322725e3a06ab145d25d4a861c70592.sw.png) | ![Ideal Zebra](../../../../../translated_images/ideal-zebra.7f70e8b54ee15a7a314000bb5df38a6cfe086ea04d60df4d3ef313d046b98a2b.sw.png)
+![Paka Bora](../../../../../translated_images/ideal-cat.203dd4597643d6b0bd73038b87f9c0464322725e3a06ab145d25d4a861c70592.sw.png) | ![Punda Milia Bora](../../../../../translated_images/ideal-zebra.7f70e8b54ee15a7a314000bb5df38a6cfe086ea04d60df4d3ef313d046b98a2b.sw.png)
 -----|-----
- *Ideal Katt* | *Ideal Zebra*
+ *Paka Bora* | *Punda Milia Bora*
 
-En liknande metod kan användas för att utföra så kallade **fiendens attacker** på ett neuralt nätverk. Anta att vi vill lura ett neuralt nätverk och få en hund att se ut som en katt. Om vi tar en bild av en hund, som nätverket känner igen som en hund, kan vi sedan justera den lite med hjälp av gradientnedstigningsoptimering, tills nätverket börjar klassificera den som en katt:
+Njia sawa inaweza kutumika kufanya kile kinachoitwa **mashambulizi ya kihasama** kwenye mtandao wa neva. Tuseme tunataka kudanganya mtandao wa neva na kufanya mbwa aonekane kama paka. Ikiwa tutachukua picha ya mbwa, ambayo inatambuliwa na mtandao kama mbwa, tunaweza kuirekebisha kidogo kwa kutumia ufanisi wa gradient descent, hadi mtandao uanze kuainisha kama paka:
 
-![Bild av en Hund](../../../../../translated_images/original-dog.8f68a67d2fe0911f33041c0f7fce8aa4ea919f9d3917ec4b468298522aeb6356.sw.png) | ![Bild av en hund klassificerad som en katt](../../../../../translated_images/adversarial-dog.d9fc7773b0142b89752539bfbf884118de845b3851c5162146ea0b8809fc820f.sw.png)
+![Picha ya Mbwa](../../../../../translated_images/original-dog.8f68a67d2fe0911f33041c0f7fce8aa4ea919f9d3917ec4b468298522aeb6356.sw.png) | ![Picha ya mbwa inayotambuliwa kama paka](../../../../../translated_images/adversarial-dog.d9fc7773b0142b89752539bfbf884118de845b3851c5162146ea0b8809fc820f.sw.png)
 -----|-----
-*Originalbild av en hund* | *Bild av en hund klassificerad som en katt*
+*Picha ya asili ya mbwa* | *Picha ya mbwa inayotambuliwa kama paka*
 
-Se koden för att återskapa resultaten ovan i följande anteckningsbok:
+Tazama msimbo wa kuzalisha matokeo yaliyo hapo juu katika daftari lifuatalo:
 
-* [Ideal och Fiendens Katt - TensorFlow](../../../../../lessons/4-ComputerVision/08-TransferLearning/AdversarialCat_TF.ipynb)
+* [Paka Bora na Kihasama - TensorFlow](AdversarialCat_TF.ipynb)
 
-## Slutsats
+## Hitimisho
 
-Genom att använda överföringsinlärning kan du snabbt sätta ihop en klassificerare för en anpassad objektklassificeringsuppgift och uppnå hög noggrannhet. Du kan se att mer komplexa uppgifter som vi löser nu kräver högre beräkningskraft och inte enkelt kan lösas på CPU:n. I nästa enhet kommer vi att försöka använda en mer lättviktsimplementation för att träna samma modell med lägre beräkningsresurser, vilket resulterar i något lägre noggrannhet.
+Kwa kutumia kujifunza kwa uhamisho, unaweza kuunda haraka kionainishaji kwa kazi ya uainishaji wa kitu maalum na kufikia usahihi wa juu. Unaweza kuona kwamba kazi ngumu zaidi tunazotatua sasa zinahitaji nguvu kubwa ya kompyuta, na haziwezi kutatuliwa kwa urahisi kwenye CPU. Katika kitengo kinachofuata, tutajaribu kutumia utekelezaji mwepesi zaidi kufundisha mfano huo kwa kutumia rasilimali za chini, ambayo inasababisha kupungua kidogo kwa usahihi.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-I de medföljande anteckningsböckerna finns det anteckningar i botten om hur överförd kunskap fungerar bäst med något liknande träningsdata (kanske en ny typ av djur). Gör några experiment med helt nya typer av bilder för att se hur bra eller dåligt dina överförda kunskapsmodeller presterar.
+Katika daftari zinazofuatana, kuna maelezo chini kuhusu jinsi maarifa ya uhamisho yanavyofanya kazi vizuri zaidi na data ya mafunzo inayofanana kidogo (aina mpya ya mnyama, labda). Fanya majaribio na aina mpya kabisa za picha ili kuona jinsi mifano yako ya maarifa ya uhamisho inavyofanya kazi vizuri au vibaya.
 
-## [Efter-föreläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/208)
+## [Maswali ya baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/16)
 
-## Granskning & Självstudie
+## Mapitio na Kujisomea
 
-Läs igenom [TrainingTricks.md](TrainingTricks.md) för att fördjupa din kunskap om några andra sätt att träna dina modeller.
+Soma kupitia [TrainingTricks.md](TrainingTricks.md) ili kuongeza maarifa yako kuhusu njia nyingine za kufundisha mifano yako.
 
-## [Uppgift](lab/README.md)
+## [Kazi ya Nyumbani](lab/README.md)
 
-I detta labb kommer vi att använda verkliga [Oxford-IIIT](https://www.robots.ox.ac.uk/~vgg/data/pets/) husdjursdataset med 35 raser av katter och hundar, och vi kommer att bygga en överföringsinlärningsklassificerare.
+Katika maabara hii, tutatumia seti halisi ya data ya [Oxford-IIIT](https://www.robots.ox.ac.uk/~vgg/data/pets/) ya wanyama wa kipenzi yenye aina 35 za paka na mbwa, na tutaunda kionainishaji cha kujifunza kwa uhamisho.
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+---
+

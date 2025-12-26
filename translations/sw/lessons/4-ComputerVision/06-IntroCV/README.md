@@ -1,31 +1,40 @@
-# Introduktion till Datorseende
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "feeca98225cb420afc89415f24f63d92",
+  "translation_date": "2025-09-23T10:59:47+00:00",
+  "source_file": "lessons/4-ComputerVision/06-IntroCV/README.md",
+  "language_code": "sw"
+}
+-->
+# Utangulizi wa Uelewa wa Picha na Kompyuta
 
-[Datorseende](https://wikipedia.org/wiki/Computer_vision) är en disciplin vars syfte är att möjliggöra för datorer att få en hög nivå av förståelse av digitala bilder. Detta är en ganska bred definition, eftersom *förståelse* kan betyda många olika saker, inklusive att hitta ett objekt på en bild (**objektdetektering**), förstå vad som händer (**händelsedetektering**), beskriva en bild med text eller rekonstruera en scen i 3D. Det finns också särskilda uppgifter relaterade till mänskliga bilder: ålders- och känslomätningsuppskattning, ansiktsdetektering och identifiering, samt 3D-hållningsuppskattning, för att nämna några.
+[Computer Vision](https://wikipedia.org/wiki/Computer_vision) ni taaluma inayolenga kuwezesha kompyuta kupata uelewa wa kiwango cha juu wa picha za kidijitali. Hii ni tafsiri pana, kwa sababu *uelewa* unaweza kumaanisha mambo mengi tofauti, ikiwa ni pamoja na kutambua kitu kwenye picha (**utambuzi wa vitu**), kuelewa kinachotokea (**utambuzi wa matukio**), kuelezea picha kwa maandishi, au kujenga upya mandhari kwa 3D. Pia kuna kazi maalum zinazohusiana na picha za binadamu: makadirio ya umri na hisia, utambuzi wa uso na utambulisho, na makadirio ya mkao wa 3D, miongoni mwa mengine.
 
-## [För-föreläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/106)
+## [Maswali ya awali ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/11)
 
-En av de enklaste uppgifterna inom datorseende är **bildklassificering**.
+Moja ya kazi rahisi za uelewa wa picha ni **uwekaji wa picha katika makundi**.
 
-Datorseende betraktas ofta som en gren av AI. Numera löses de flesta uppgifter inom datorseende med hjälp av neurala nätverk. Vi kommer att lära oss mer om den speciella typen av neurala nätverk som används för datorseende, [konvolutionella neurala nätverk](../07-ConvNets/README.md), under denna sektion.
+Uelewa wa picha mara nyingi huchukuliwa kuwa tawi la AI. Siku hizi, kazi nyingi za uelewa wa picha zinatatuliwa kwa kutumia mitandao ya neva. Tutajifunza zaidi kuhusu aina maalum ya mitandao ya neva inayotumika kwa uelewa wa picha, [convolutional neural networks](../07-ConvNets/README.md), katika sehemu hii.
 
-Innan du skickar bilden till ett neuralt nätverk är det dock i många fall förnuftigt att använda några algoritmiska tekniker för att förbättra bilden.
+Hata hivyo, kabla ya kupitisha picha kwenye mtandao wa neva, mara nyingi inafaa kutumia mbinu za kialgorithimu kuboresha picha.
 
-Det finns flera Python-bibliotek tillgängliga för bildbehandling:
+Kuna maktaba kadhaa za Python zinazopatikana kwa usindikaji wa picha:
 
-* **[imageio](https://imageio.readthedocs.io/en/stable/)** kan användas för att läsa/skriva olika bildformat. Det stöder också ffmpeg, ett användbart verktyg för att konvertera videoramar till bilder.
-* **[Pillow](https://pillow.readthedocs.io/en/stable/index.html)** (även känt som PIL) är något mer kraftfullt och stöder även viss bildmanipulation såsom morphing, palettjusteringar och mer.
-* **[OpenCV](https://opencv.org/)** är ett kraftfullt bildbehandlingsbibliotek skrivet i C++, som har blivit den *de facto* standarden för bildbehandling. Det har ett praktiskt Python-gränssnitt.
-* **[dlib](http://dlib.net/)** är ett C++-bibliotek som implementerar många maskininlärningsalgoritmer, inklusive några av datorseendets algoritmer. Det har också ett Python-gränssnitt och kan användas för utmanande uppgifter såsom ansikts- och ansiktslandmarksdetektering.
+* **[imageio](https://imageio.readthedocs.io/en/stable/)** inaweza kutumika kusoma/kuandika miundo tofauti ya picha. Pia inaunga mkono ffmpeg, zana muhimu ya kubadilisha fremu za video kuwa picha.
+* **[Pillow](https://pillow.readthedocs.io/en/stable/index.html)** (pia inajulikana kama PIL) ina nguvu zaidi, na pia inaunga mkono baadhi ya urekebishaji wa picha kama kubadilisha maumbo, kurekebisha paleti, na zaidi.
+* **[OpenCV](https://opencv.org/)** ni maktaba yenye nguvu ya usindikaji wa picha iliyoandikwa kwa C++, ambayo imekuwa kiwango cha *de facto* kwa usindikaji wa picha. Ina kiolesura cha Python kinachofaa.
+* **[dlib](http://dlib.net/)** ni maktaba ya C++ inayotekeleza algorithimu nyingi za kujifunza kwa mashine, ikiwa ni pamoja na baadhi ya algorithimu za uelewa wa picha. Pia ina kiolesura cha Python, na inaweza kutumika kwa kazi ngumu kama utambuzi wa uso na alama za uso.
 
 ## OpenCV
 
-[OpenCV](https://opencv.org/) anses vara den *de facto* standarden för bildbehandling. Det innehåller många användbara algoritmer, implementerade i C++. Du kan även anropa OpenCV från Python.
+[OpenCV](https://opencv.org/) inachukuliwa kuwa kiwango cha *de facto* kwa usindikaji wa picha. Ina algorithimu nyingi muhimu, zilizotekelezwa kwa C++. Unaweza pia kuitumia OpenCV kutoka Python.
 
-En bra plats att lära sig OpenCV är [denna Learn OpenCV-kurs](https://learnopencv.com/getting-started-with-opencv/). I vår läroplan är vårt mål inte att lära oss OpenCV, utan att visa dig några exempel på när det kan användas och hur.
+Mahali pazuri pa kujifunza OpenCV ni [kozi hii ya Learn OpenCV](https://learnopencv.com/getting-started-with-opencv/). Katika mtaala wetu, lengo letu si kujifunza OpenCV, bali kukuonyesha mifano ya jinsi inavyoweza kutumika, na jinsi ya kuitumia.
 
-### Ladda Bilder
+### Kupakia Picha
 
-Bilder i Python kan bekvämt representeras av NumPy-arrayer. Till exempel skulle gråskalebilder med storleken 320x200 pixlar lagras i en 200x320-array, och färgbilder av samma dimension skulle ha formen 200x320x3 (för 3 färgkanaler). För att ladda en bild kan du använda följande kod:
+Picha katika Python zinaweza kuwakilishwa kwa urahisi na safu za NumPy. Kwa mfano, picha za kijivu zenye ukubwa wa pikseli 320x200 zingewekwa kwenye safu ya 200x320, na picha za rangi za vipimo sawa zingekuwa na umbo la 200x320x3 (kwa njia 3 za rangi). Ili kupakia picha, unaweza kutumia msimbo ufuatao:
 
 ```python
 import cv2
@@ -35,78 +44,78 @@ im = cv2.imread('image.jpeg')
 plt.imshow(im)
 ```
 
-Traditionellt använder OpenCV BGR (Blå-Grön-Röd) kodning för färgbilder, medan resten av Python-verktygen använder den mer traditionella RGB (Röd-Grön-Blå). För att bilden ska se korrekt ut måste du konvertera den till RGB-färgrymden, antingen genom att byta dimensioner i NumPy-arrayen eller genom att anropa en OpenCV-funktion:
+Kiasili, OpenCV hutumia usimbaji wa BGR (Blue-Green-Red) kwa picha za rangi, wakati zana nyingine za Python hutumia RGB (Red-Green-Blue) ya jadi zaidi. Ili picha ionekane sawa, unahitaji kuibadilisha kuwa nafasi ya rangi ya RGB, ama kwa kubadilisha vipimo kwenye safu ya NumPy, au kwa kuita kazi ya OpenCV:
 
 ```python
 im = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)
 ```
 
-De samma `cvtColor` function can be used to perform other color space transformations such as converting an image to grayscale or to the HSV (Hue-Saturation-Value) color space.
+Kazi hiyo hiyo ya `cvtColor` inaweza kutumika kufanya mabadiliko mengine ya nafasi ya rangi kama kubadilisha picha kuwa kijivu au nafasi ya rangi ya HSV (Hue-Saturation-Value).
 
-You can also use OpenCV to load video frame-by-frame - an example is given in the exercise [OpenCV Notebook](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb).
+Unaweza pia kutumia OpenCV kupakia fremu za video moja baada ya nyingine - mfano umetolewa katika zoezi [OpenCV Notebook](OpenCV.ipynb).
 
-### Image Processing
+### Usindikaji wa Picha
 
-Before feeding an image to a neural network, you may want to apply several pre-processing steps. OpenCV can do many things, including:
+Kabla ya kulisha picha kwenye mtandao wa neva, unaweza kutaka kutumia hatua kadhaa za usindikaji wa awali. OpenCV inaweza kufanya mambo mengi, ikiwa ni pamoja na:
 
-* **Resizing** the image using `im = cv2.resize(im, (320,200),interpolation=cv2.INTER_LANCZOS)`
-* **Blurring** the image using `im = cv2.medianBlur(im,3)` or `im = cv2.GaussianBlur(im, (3,3), 0)`
-* Changing the **brightness and contrast** of the image can be done by NumPy array manipulations, as described [in this Stackoverflow note](https://stackoverflow.com/questions/39308030/how-do-i-increase-the-contrast-of-an-image-in-python-opencv).
-* Using [thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) by calling `cv2.threshold`/`cv2.adaptiveThreshold` funktionerna, som ofta är att föredra framför att justera ljusstyrka eller kontrast.
-* Tillämpa olika [transformeringar](https://docs.opencv.org/4.5.5/da/d6e/tutorial_py_geometric_transformations.html) på bilden:
-    - **[Affina transformationer](https://docs.opencv.org/4.5.5/d4/d61/tutorial_warp_affine.html)** kan vara användbara om du behöver kombinera rotation, ändring av storlek och snedvridning på bilden och du känner till käll- och destinationslägen för tre punkter i bilden. Affina transformationer håller parallella linjer parallella.
-    - **[Perspektivtransformationer](https://medium.com/analytics-vidhya/opencv-perspective-transformation-9edffefb2143)** kan vara användbara när du känner till käll- och destinationspositionerna för 4 punkter i bilden. Till exempel, om du tar en bild av ett rektangulärt dokument via en smartphonekamera från en viss vinkel, och du vill göra en rektangulär bild av dokumentet självt.
-* Förstå rörelse inuti bilden genom att använda **[optisk flöde](https://docs.opencv.org/4.5.5/d4/dee/tutorial_optical_flow.html)**.
+* **Kubadilisha ukubwa** wa picha kwa kutumia `im = cv2.resize(im, (320,200),interpolation=cv2.INTER_LANCZOS)`
+* **Kufifisha** picha kwa kutumia `im = cv2.medianBlur(im,3)` au `im = cv2.GaussianBlur(im, (3,3), 0)`
+* Kubadilisha **mwangaza na utofauti** wa picha kunaweza kufanywa kwa kutumia manipulations za safu za NumPy, kama ilivyoelezwa [katika maelezo haya ya Stackoverflow](https://stackoverflow.com/questions/39308030/how-do-i-increase-the-contrast-of-an-image-in-python-opencv).
+* Kutumia [thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) kwa kuita kazi za `cv2.threshold`/`cv2.adaptiveThreshold`, ambayo mara nyingi inapendekezwa kuliko kurekebisha mwangaza au utofauti.
+* Kutumia [mabadiliko tofauti](https://docs.opencv.org/4.5.5/da/d6e/tutorial_py_geometric_transformations.html) kwenye picha:
+    - **[Affine transformations](https://docs.opencv.org/4.5.5/d4/d61/tutorial_warp_affine.html)** inaweza kuwa muhimu ikiwa unahitaji kuchanganya mzunguko, kubadilisha ukubwa na kupotosha picha na unajua eneo la chanzo na marudio la alama tatu kwenye picha. Mabadiliko ya affine huhifadhi mistari sambamba.
+    - **[Perspective transformations](https://medium.com/analytics-vidhya/opencv-perspective-transformation-9edffefb2143)** inaweza kuwa muhimu unapojua nafasi za chanzo na marudio za alama 4 kwenye picha. Kwa mfano, ikiwa unapiga picha ya hati ya mstatili kupitia kamera ya simu kutoka pembe fulani, na unataka kufanya picha ya mstatili ya hati yenyewe.
+* Kuelewa harakati ndani ya picha kwa kutumia **[optical flow](https://docs.opencv.org/4.5.5/d4/dee/tutorial_optical_flow.html)**.
 
-## Exempel på att använda Datorseende
+## Mifano ya Kutumia Uelewa wa Picha
 
-I vår [OpenCV Notebook](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb) ger vi några exempel på när datorseende kan användas för att utföra specifika uppgifter:
+Katika [OpenCV Notebook](OpenCV.ipynb) yetu, tunatoa mifano ya wakati uelewa wa picha unaweza kutumika kutekeleza kazi maalum:
 
-* **Förbehandling av ett fotografi av en Braillebok**. Vi fokuserar på hur vi kan använda tröskelvärden, funktionsdetektering, perspektivtransformation och NumPy-manipulationer för att separera individuella Braille-symboler för vidare klassificering av ett neuralt nätverk.
+* **Usindikaji wa awali wa picha ya kitabu cha Braille**. Tunazingatia jinsi tunavyoweza kutumia thresholding, utambuzi wa vipengele, mabadiliko ya mtazamo na manipulations za NumPy kutenganisha alama za Braille kwa uainishaji zaidi na mtandao wa neva.
 
 ![Braille Image](../../../../../translated_images/braille.341962ff76b1bd7044409371d3de09ced5028132aef97344ea4b7468c1208126.sw.jpeg) | ![Braille Image Pre-processed](../../../../../translated_images/braille-result.46530fea020b03c76aac532d7d6eeef7f6fb35b55b1001cd21627907dabef3ed.sw.png) | ![Braille Symbols](../../../../../translated_images/braille-symbols.0159185ab69d533909dc4d7d26a1971b51401c6a80eb3a5584f250ea880af88b.sw.png)
 ----|-----|-----
 
-> Bild från [OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+> Picha kutoka [OpenCV.ipynb](OpenCV.ipynb)
 
-* **Detektera rörelse i video med hjälp av ramdiff**. Om kameran är fixerad, bör ramar från kameraflödet vara ganska lika varandra. Eftersom ramar representeras som arrayer, får vi genom att subtrahera dessa arrayer för två efterföljande ramar pixel-differensen, som bör vara låg för statiska ramar och bli högre när det finns betydande rörelse i bilden.
+* **Kutambua harakati kwenye video kwa kutumia tofauti ya fremu**. Ikiwa kamera imetulia, basi fremu kutoka mlisho wa kamera zinapaswa kufanana sana. Kwa kuwa fremu zinawakilishwa kama safu, kwa kutoa tofauti ya safu hizo kwa fremu mbili mfululizo tutapata tofauti ya pikseli, ambayo inapaswa kuwa ndogo kwa fremu tuli, na kuwa kubwa zaidi mara kuna harakati kubwa kwenye picha.
 
 ![Image of video frames and frame differences](../../../../../translated_images/frame-difference.706f805491a0883c938e16447bf5eb2f7d69e812c7f743cbe7d7c7645168f81f.sw.png)
 
-> Bild från [OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+> Picha kutoka [OpenCV.ipynb](OpenCV.ipynb)
 
-* **Detektera rörelse med hjälp av Optisk Flöde**. [Optisk flöde](https://docs.opencv.org/3.4/d4/dee/tutorial_optical_flow.html) gör att vi kan förstå hur individuella pixlar på videoramrörelser. Det finns två typer av optiskt flöde:
+* **Kutambua harakati kwa kutumia Optical Flow**. [Optical flow](https://docs.opencv.org/3.4/d4/dee/tutorial_optical_flow.html) inatuwezesha kuelewa jinsi pikseli za kibinafsi kwenye fremu za video zinavyohama. Kuna aina mbili za optical flow:
 
-   - **Tätt optiskt flöde** beräknar vektorfältet som visar för varje pixel var den rör sig.
-   - **Spars optiskt flöde** baseras på att ta några distinkta funktioner i bilden (t.ex. kanter) och bygga deras bana från ram till ram.
+   - **Dense Optical Flow** huhesabu uwanja wa vekta unaoonyesha kwa kila pikseli inahama wapi.
+   - **Sparse Optical Flow** inategemea kuchukua vipengele vya kipekee kwenye picha (mfano, kingo), na kujenga mwelekeo wake kutoka fremu hadi fremu.
 
 ![Image of Optical Flow](../../../../../translated_images/optical.1f4a94464579a83a10784f3c07fe7228514714b96782edf50e70ccd59d2d8c4f.sw.png)
 
-> Bild från [OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+> Picha kutoka [OpenCV.ipynb](OpenCV.ipynb)
 
-## ✍️ Exempel Notebooks: OpenCV [prova OpenCV i praktiken](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+## ✍️ Mifano ya Notebooks: OpenCV [jaribu OpenCV kwa Vitendo](OpenCV.ipynb)
 
-Låt oss göra några experiment med OpenCV genom att utforska [OpenCV Notebook](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+Hebu tufanye majaribio na OpenCV kwa kuchunguza [OpenCV Notebook](OpenCV.ipynb)
 
-## Slutsats
+## Hitimisho
 
-Ibland kan relativt komplexa uppgifter som rörelsedetektering eller fingertoppsdetektering lösas enbart med datorseende. Därför är det mycket hjälpsamt att känna till de grundläggande teknikerna inom datorseende och vad bibliotek som OpenCV kan göra.
+Wakati mwingine, kazi ngumu kama kutambua harakati au kutambua ncha za vidole zinaweza kutatuliwa kwa kutumia uelewa wa picha pekee. Kwa hivyo, ni muhimu kujua mbinu za msingi za uelewa wa picha, na kile maktaba kama OpenCV zinaweza kufanya.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Titta på [denna video](https://docs.microsoft.com/shows/ai-show/ai-show--2021-opencv-ai-competition--grand-prize-winners--cortic-tigers--episode-32?WT.mc_id=academic-77998-cacaste) från AI-showen för att lära dig om Cortic Tigers-projektet och hur de byggde en blockbaserad lösning för att demokratisera datorseendeuppgifter via en robot. Gör lite forskning om andra projekt som detta som hjälper nya inlärare att komma in i området.
+Tazama [video hii](https://docs.microsoft.com/shows/ai-show/ai-show--2021-opencv-ai-competition--grand-prize-winners--cortic-tigers--episode-32?WT.mc_id=academic-77998-cacaste) kutoka kipindi cha AI ili ujifunze kuhusu mradi wa Cortic Tigers na jinsi walivyojenga suluhisho la msingi wa vizuizi ili kurahisisha kazi za uelewa wa picha kupitia roboti. Fanya utafiti kuhusu miradi mingine kama hii inayosaidia wanafunzi wapya kuingia katika uwanja huu.
 
-## [Efter-föreläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/206)
+## [Maswali ya baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/12)
 
-## Granskning & Självstudie
+## Mapitio na Kujisomea
 
-Läs mer om optiskt flöde [i denna fantastiska handledning](https://learnopencv.com/optical-flow-in-opencv/).
+Soma zaidi kuhusu optical flow [katika mafunzo haya mazuri](https://learnopencv.com/optical-flow-in-opencv/).
 
-## [Uppgift](lab/README.md)
+## [Kazi ya Nyumbani](lab/README.md)
 
-I detta laboratorium kommer du att spela in en video med enkla gester, och ditt mål är att extrahera upp/ned/vänster/höger rörelser med hjälp av optiskt flöde.
+Katika maabara hii, utachukua video yenye ishara rahisi, na lengo lako ni kutoa harakati za juu/chini/kushoto/kulia kwa kutumia optical flow.
 
 <img src="images/palm-movement.png" width="30%" alt="Palm Movement Frame"/>
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+---
+

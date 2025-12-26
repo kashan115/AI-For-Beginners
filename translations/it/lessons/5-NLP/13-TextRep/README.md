@@ -1,76 +1,85 @@
-# Representación de Texto como Tensores
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "dbd3f73e4139f030ecb2e20387d70fee",
+  "translation_date": "2025-09-23T08:36:44+00:00",
+  "source_file": "lessons/5-NLP/13-TextRep/README.md",
+  "language_code": "it"
+}
+-->
+# Rappresentare il Testo come Tensors
 
-## [Cuestionario previo a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/113)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/25)
 
-## Clasificación de Texto
+## Classificazione del Testo
 
-A lo largo de la primera parte de esta sección, nos enfocaremos en la tarea de **clasificación de texto**. Utilizaremos el conjunto de datos [AG News](https://www.kaggle.com/amananandrai/ag-news-classification-dataset), que contiene artículos de noticias como los siguientes:
+Nella prima parte di questa sezione, ci concentreremo sul compito di **classificazione del testo**. Utilizzeremo il dataset [AG News](https://www.kaggle.com/amananandrai/ag-news-classification-dataset), che contiene articoli di notizie come il seguente:
 
-* Categoría: Sci/Tech
-* Título: La empresa de Ky. gana una subvención para estudiar péptidos (AP)
-* Cuerpo: AP - Una empresa fundada por un investigador en química de la Universidad de Louisville ganó una subvención para desarrollar...
+* Categoria: Sci/Tech  
+* Titolo: Ky. Company Wins Grant to Study Peptides (AP)  
+* Corpo: AP - Una compagnia fondata da un ricercatore di chimica dell'Università di Louisville ha ottenuto un finanziamento per sviluppare...
 
-Nuestro objetivo será clasificar el artículo de noticias en una de las categorías basándonos en el texto.
+Il nostro obiettivo sarà classificare l'articolo di notizie in una delle categorie basandoci sul testo.
 
-## Representación de texto
+## Rappresentare il testo
 
-Si queremos resolver tareas de Procesamiento de Lenguaje Natural (NLP) con redes neuronales, necesitamos alguna forma de representar el texto como tensores. Las computadoras ya representan los caracteres textuales como números que se mapean a fuentes en tu pantalla utilizando codificaciones como ASCII o UTF-8.
+Se vogliamo risolvere compiti di Elaborazione del Linguaggio Naturale (NLP) con reti neurali, abbiamo bisogno di un modo per rappresentare il testo come tensors. I computer rappresentano già i caratteri testuali come numeri che mappano i font sullo schermo utilizzando codifiche come ASCII o UTF-8.
 
-<img alt="Imagen que muestra un diagrama que mapea un carácter a una representación ASCII y binaria" src="images/ascii-character-map.png" width="50%"/>
+<img alt="Immagine che mostra un diagramma che mappa un carattere a una rappresentazione ASCII e binaria" src="images/ascii-character-map.png" width="50%"/>
 
-> [Fuente de la imagen](https://www.seobility.net/en/wiki/ASCII)
+> [Fonte immagine](https://www.seobility.net/en/wiki/ASCII)
 
-Como humanos, entendemos lo que cada letra **representa** y cómo todos los caracteres se combinan para formar las palabras de una oración. Sin embargo, las computadoras por sí solas no tienen tal comprensión, y la red neuronal tiene que aprender el significado durante el entrenamiento.
+Come esseri umani, comprendiamo cosa rappresenta ogni lettera e come tutti i caratteri si uniscono per formare le parole di una frase. Tuttavia, i computer da soli non hanno questa comprensione, e la rete neurale deve apprendere il significato durante l'addestramento.
 
-Por lo tanto, podemos usar diferentes enfoques al representar texto:
+Pertanto, possiamo utilizzare diversi approcci per rappresentare il testo:
 
-* **Representación a nivel de carácter**, cuando representamos el texto tratando cada carácter como un número. Dado que tenemos *C* caracteres diferentes en nuestro corpus de texto, la palabra *Hola* se representaría mediante un tensor de 5x*C*. Cada letra correspondería a una columna de tensor en codificación one-hot.
-* **Representación a nivel de palabra**, en la que creamos un **vocabulario** de todas las palabras en nuestro texto, y luego representamos las palabras utilizando codificación one-hot. Este enfoque es algo mejor, porque cada letra por sí sola no tiene mucho significado, y así al usar conceptos semánticos de mayor nivel - palabras - simplificamos la tarea para la red neuronal. Sin embargo, dado el gran tamaño del diccionario, necesitamos lidiar con tensores dispersos de alta dimensión.
+* **Rappresentazione a livello di carattere**, in cui rappresentiamo il testo trattando ogni carattere come un numero. Dato che abbiamo *C* caratteri diversi nel nostro corpus di testo, la parola *Hello* sarebbe rappresentata da un tensor 5x*C*. Ogni lettera corrisponderebbe a una colonna del tensor in codifica one-hot.  
+* **Rappresentazione a livello di parola**, in cui creiamo un **vocabolario** di tutte le parole nel nostro testo e rappresentiamo le parole utilizzando la codifica one-hot. Questo approccio è in qualche modo migliore, perché ogni lettera da sola non ha molto significato, e quindi utilizzando concetti semantici di livello superiore - le parole - semplifichiamo il compito per la rete neurale. Tuttavia, data la grande dimensione del dizionario, dobbiamo gestire tensors sparsi ad alta dimensionalità.
 
-Independientemente de la representación, primero necesitamos convertir el texto en una secuencia de **tokens**, siendo un token ya sea un carácter, una palabra, o a veces incluso parte de una palabra. Luego, convertimos el token en un número, típicamente usando un **vocabulario**, y este número puede ser alimentado a una red neuronal usando codificación one-hot.
+Indipendentemente dalla rappresentazione, dobbiamo prima convertire il testo in una sequenza di **token**, dove un token può essere un carattere, una parola o talvolta anche una parte di una parola. Poi, convertiamo il token in un numero, tipicamente utilizzando un **vocabolario**, e questo numero può essere fornito a una rete neurale utilizzando la codifica one-hot.
 
 ## N-Grams
 
-En el lenguaje natural, el significado preciso de las palabras solo puede determinarse en contexto. Por ejemplo, los significados de *red neuronal* y *red de pesca* son completamente diferentes. Una de las formas de tener esto en cuenta es construir nuestro modelo en pares de palabras, considerando los pares de palabras como tokens de vocabulario separados. De esta manera, la oración *Me gusta ir a pescar* se representará mediante la siguiente secuencia de tokens: *Me gusta*, *gusta ir*, *ir a*, *a pescar*. El problema con este enfoque es que el tamaño del diccionario crece significativamente, y combinaciones como *ir a pescar* y *ir de compras* se presentan con diferentes tokens, que no comparten ninguna similitud semántica a pesar de tener el mismo verbo.
+Nel linguaggio naturale, il significato preciso delle parole può essere determinato solo nel contesto. Ad esempio, i significati di *neural network* e *fishing network* sono completamente diversi. Uno dei modi per tenerne conto è costruire il nostro modello su coppie di parole, considerando le coppie di parole come token separati del vocabolario. In questo modo, la frase *I like to go fishing* sarà rappresentata dalla seguente sequenza di token: *I like*, *like to*, *to go*, *go fishing*. Il problema con questo approccio è che la dimensione del dizionario cresce significativamente, e combinazioni come *go fishing* e *go shopping* sono rappresentate da token diversi, che non condividono alcuna somiglianza semantica nonostante lo stesso verbo.
 
-En algunos casos, también podemos considerar usar tri-gramas -- combinaciones de tres palabras --. Por lo tanto, este enfoque se conoce a menudo como **n-grams**. También tiene sentido usar n-grams con representación a nivel de carácter, en cuyo caso los n-grams corresponderán aproximadamente a diferentes sílabas.
+In alcuni casi, possiamo considerare l'uso di tri-grammi -- combinazioni di tre parole -- o più. Questo approccio è spesso chiamato **n-grams**. Inoltre, ha senso utilizzare n-grams con rappresentazioni a livello di carattere, in cui gli n-grams corrisponderanno approssimativamente a diverse sillabe.
 
-## Bolsa de Palabras y TF/IDF
+## Bag-of-Words e TF/IDF
 
-Al resolver tareas como la clasificación de texto, necesitamos ser capaces de representar el texto mediante un vector de tamaño fijo, que utilizaremos como entrada para el clasificador denso final. Una de las formas más simples de hacerlo es combinar todas las representaciones individuales de palabras, por ejemplo, sumándolas. Si sumamos las codificaciones one-hot de cada palabra, terminaremos con un vector de frecuencias, que muestra cuántas veces aparece cada palabra dentro del texto. Tal representación de texto se llama **bolsa de palabras** (BoW).
+Quando risolviamo compiti come la classificazione del testo, dobbiamo essere in grado di rappresentare il testo con un vettore di dimensione fissa, che utilizzeremo come input per il classificatore denso finale. Uno dei modi più semplici per farlo è combinare tutte le rappresentazioni individuali delle parole, ad esempio sommando. Se sommiamo le codifiche one-hot di ogni parola, otterremo un vettore di frequenze, che mostra quante volte ogni parola appare nel testo. Questa rappresentazione del testo è chiamata **bag of words** (BoW).
 
 <img src="images/bow.png" width="90%"/>
 
-> Imagen del autor
+> Immagine dell'autore
 
-Un BoW representa esencialmente qué palabras aparecen en el texto y en qué cantidades, lo que puede ser una buena indicación de sobre qué trata el texto. Por ejemplo, un artículo de noticias sobre política probablemente contendrá palabras como *presidente* y *país*, mientras que una publicación científica tendría algo como *colisionador*, *descubierto*, etc. Por lo tanto, las frecuencias de palabras pueden ser en muchos casos un buen indicador del contenido del texto.
+Un BoW rappresenta essenzialmente quali parole appaiono nel testo e in quali quantità, il che può effettivamente essere un buon indicatore di cosa tratta il testo. Ad esempio, un articolo di notizie sulla politica è probabile che contenga parole come *president* e *country*, mentre una pubblicazione scientifica potrebbe avere termini come *collider*, *discovered*, ecc. Pertanto, le frequenze delle parole possono in molti casi essere un buon indicatore del contenuto del testo.
 
-El problema con BoW es que ciertas palabras comunes, como *y*, *es*, etc., aparecen en la mayoría de los textos, y tienen las frecuencias más altas, ocultando las palabras que realmente son importantes. Podemos disminuir la importancia de esas palabras al tener en cuenta la frecuencia con la que ocurren las palabras en toda la colección de documentos. Esta es la idea principal detrás del enfoque TF/IDF, que se cubre con más detalle en los cuadernos adjuntos a esta lección.
+Il problema con BoW è che alcune parole comuni, come *and*, *is*, ecc., appaiono nella maggior parte dei testi e hanno le frequenze più alte, oscurando le parole che sono realmente importanti. Possiamo ridurre l'importanza di queste parole tenendo conto della frequenza con cui appaiono in tutta la collezione di documenti. Questa è l'idea principale dietro l'approccio TF/IDF, che è trattato in maggior dettaglio nei notebook allegati a questa lezione.
 
-Sin embargo, ninguno de estos enfoques puede tener en cuenta completamente la **semántica** del texto. Necesitamos modelos de redes neuronales más poderosos para hacer esto, que discutiremos más adelante en esta sección.
+Tuttavia, nessuno di questi approcci può tenere pienamente conto della **semantica** del testo. Abbiamo bisogno di modelli di reti neurali più potenti per farlo, che discuteremo più avanti in questa sezione.
 
-## ✍️ Ejercicios: Representación de Texto
+## ✍️ Esercizi: Rappresentazione del Testo
 
-Continúa tu aprendizaje en los siguientes cuadernos:
+Continua il tuo apprendimento nei seguenti notebook:
 
-* [Representación de Texto con PyTorch](../../../../../lessons/5-NLP/13-TextRep/TextRepresentationPyTorch.ipynb)
-* [Representación de Texto con TensorFlow](../../../../../lessons/5-NLP/13-TextRep/TextRepresentationTF.ipynb)
+* [Rappresentazione del Testo con PyTorch](TextRepresentationPyTorch.ipynb)  
+* [Rappresentazione del Testo con TensorFlow](TextRepresentationTF.ipynb)
 
-## Conclusión
+## Conclusione
 
-Hasta ahora, hemos estudiado técnicas que pueden agregar peso de frecuencia a diferentes palabras. Sin embargo, no son capaces de representar el significado o el orden. Como dijo el famoso lingüista J. R. Firth en 1935, "El significado completo de una palabra siempre es contextual, y ningún estudio del significado separado del contexto puede tomarse en serio." Aprenderemos más adelante en el curso cómo capturar información contextual del texto utilizando modelado de lenguaje.
+Finora, abbiamo studiato tecniche che possono aggiungere peso di frequenza a diverse parole. Tuttavia, queste tecniche non sono in grado di rappresentare il significato o l'ordine. Come disse il famoso linguista J. R. Firth nel 1935, "Il significato completo di una parola è sempre contestuale, e nessuno studio del significato al di fuori del contesto può essere preso seriamente." Impareremo più avanti nel corso come catturare le informazioni contestuali dal testo utilizzando il linguaggio modellato.
 
-## 🚀 Desafío
+## 🚀 Sfida
 
-Intenta algunos otros ejercicios utilizando bolsa de palabras y diferentes modelos de datos. Podrías inspirarte en esta [competencia en Kaggle](https://www.kaggle.com/competitions/word2vec-nlp-tutorial/overview/part-1-for-beginners-bag-of-words)
+Prova altri esercizi utilizzando bag-of-words e diversi modelli di dati. Potresti trovare ispirazione in questa [competizione su Kaggle](https://www.kaggle.com/competitions/word2vec-nlp-tutorial/overview/part-1-for-beginners-bag-of-words)
 
-## [Cuestionario posterior a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/213)
+## [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/26)
 
-## Revisión y Autoestudio
+## Revisione e Studio Autonomo
 
-Practica tus habilidades con técnicas de embeddings de texto y bolsa de palabras en [Microsoft Learn](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste)
+Esercitati con le tecniche di embedding del testo e bag-of-words su [Microsoft Learn](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste)
 
-## [Asignación: Cuadernos](assignment.md)
+## [Compito: Notebook](assignment.md)
 
-**Disclaimer**:  
-This document has been translated using machine-based AI translation services. While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+---
+

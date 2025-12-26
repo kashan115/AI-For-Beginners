@@ -1,53 +1,62 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "ddd216f558a255260a9374008002c971",
+  "translation_date": "2025-09-23T08:44:15+00:00",
+  "source_file": "lessons/3-NeuralNetworks/05-Frameworks/README.md",
+  "language_code": "tr"
+}
+-->
 # Sinir Ağı Çerçeveleri
 
-Zaten öğrendiğimiz gibi, sinir ağlarını verimli bir şekilde eğitebilmek için iki şey yapmamız gerekiyor:
+Daha önce öğrendiğimiz gibi, sinir ağlarını verimli bir şekilde eğitebilmek için iki şeyi yapmamız gerekiyor:
 
-* Tensörler üzerinde işlem yapmak, örneğin çarpma, toplama ve sigmoid veya softmax gibi bazı fonksiyonları hesaplama
+* Tensörler üzerinde işlem yapmak, örneğin çarpma, toplama ve sigmoid veya softmax gibi bazı fonksiyonları hesaplamak
 * Tüm ifadelerin gradyanlarını hesaplamak, böylece gradyan inişi optimizasyonu gerçekleştirebilmek
 
-## [Ön-ders sınavı](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/105)
+## [Ders Öncesi Test](https://ff-quizzes.netlify.app/en/ai/quiz/9)
 
-`numpy` kütüphanesi ilk kısmı yapabilse de, gradyanları hesaplamak için bir mekanizmaya ihtiyacımız var. Önceki bölümde geliştirdiğimiz [çerçevemizde](../../../../../lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb), `backward` yönteminin içinde tüm türev fonksiyonlarını manuel olarak programlamak zorunda kaldık. İdeal olarak, bir çerçeve, tanımlayabileceğimiz *herhangi bir ifadenin* gradyanlarını hesaplama fırsatını bize vermelidir.
+`numpy` kütüphanesi ilk kısmı yapabilse de, gradyanları hesaplamak için bir mekanizmaya ihtiyacımız var. Önceki bölümde geliştirdiğimiz [kendi çerçevemizde](../04-OwnFramework/OwnFramework.ipynb), `backward` metodunun içinde tüm türev fonksiyonlarını manuel olarak programlamamız gerekiyordu. İdeal olarak, bir çerçeve bize tanımlayabileceğimiz *herhangi bir ifadenin* gradyanlarını hesaplama fırsatı sunmalıdır.
 
-Başka önemli bir şey de GPU veya diğer özel hesaplama birimleri, örneğin [TPU](https://en.wikipedia.org/wiki/Tensor_Processing_Unit) üzerinde hesaplamalar yapabilmektir. Derin sinir ağı eğitimi *çok fazla* hesaplama gerektirir ve bu hesaplamaları GPU'larda paralelleştirebilmek çok önemlidir.
+Bir diğer önemli şey ise GPU veya [TPU](https://en.wikipedia.org/wiki/Tensor_Processing_Unit) gibi diğer özel işlem birimlerinde hesaplama yapabilmektir. Derin sinir ağı eğitimi *çok fazla* hesaplama gerektirir ve bu hesaplamaları GPU'larda paralelleştirebilmek çok önemlidir.
 
 > ✅ 'Paralelleştirme' terimi, hesaplamaları birden fazla cihaz arasında dağıtmak anlamına gelir.
 
-Şu anda, en popüler iki sinir ağı çerçevesi: [TensorFlow](http://TensorFlow.org) ve [PyTorch](https://pytorch.org/). Her ikisi de CPU ve GPU üzerinde tensörlerle çalışmak için düşük seviyeli bir API sağlar. Düşük seviyeli API'nin üstünde, sırasıyla [Keras](https://keras.io/) ve [PyTorch Lightning](https://pytorchlightning.ai/) adında daha yüksek seviyeli API'ler de bulunmaktadır.
+Şu anda en popüler iki sinir ağı çerçevesi: [TensorFlow](http://TensorFlow.org) ve [PyTorch](https://pytorch.org/). Her ikisi de hem CPU hem de GPU üzerinde tensörlerle çalışmak için düşük seviyeli bir API sağlar. Düşük seviyeli API'nin yanı sıra, sırasıyla [Keras](https://keras.io/) ve [PyTorch Lightning](https://pytorchlightning.ai/) olarak adlandırılan yüksek seviyeli bir API de bulunmaktadır.
 
-Düşük Seviye API | [TensorFlow](http://TensorFlow.org) | [PyTorch](https://pytorch.org/)
------------------|-------------------------------------|--------------------------------
-Yüksek Seviye API | [Keras](https://keras.io/) | [PyTorch Lightning](https://pytorchlightning.ai/)
+Düşük Seviyeli API | [TensorFlow](http://TensorFlow.org) | [PyTorch](https://pytorch.org/)
+--------------------|-------------------------------------|--------------------------------
+Yüksek Seviyeli API | [Keras](https://keras.io/) | [PyTorch Lightning](https://pytorchlightning.ai/)
 
-**Düşük seviye API'ler**, her iki çerçevede de **hesaplama grafikleri** adı verilen yapılar oluşturmanıza olanak tanır. Bu grafik, belirli giriş parametreleriyle çıktıyı (genellikle kayıp fonksiyonu) nasıl hesaplayacağınızı tanımlar ve mevcutsa GPU üzerinde hesaplama için itilebilir. Bu hesaplama grafiğini farklılaştırmak ve gradyanları hesaplamak için işlevler vardır; bu gradyanlar daha sonra model parametrelerini optimize etmek için kullanılabilir.
+**Düşük seviyeli API'ler**, her iki çerçevede de **hesaplama grafikleri** oluşturmanıza olanak tanır. Bu grafik, verilen giriş parametreleriyle çıktının (genellikle kayıp fonksiyonu) nasıl hesaplanacağını tanımlar ve GPU'da hesaplama için gönderilebilir. Bu hesaplama grafiğini türetmek ve gradyanları hesaplamak için fonksiyonlar vardır, bu gradyanlar daha sonra model parametrelerini optimize etmek için kullanılabilir.
 
-**Yüksek seviye API'ler**, sinir ağlarını **katmanlar dizisi** olarak düşünür ve çoğu sinir ağını inşa etmeyi çok daha kolay hale getirir. Modeli eğitmek genellikle verileri hazırlamayı ve ardından işi yapmak için `fit` fonksiyonunu çağırmayı gerektirir.
+**Yüksek seviyeli API'ler**, sinir ağlarını genellikle bir **katmanlar dizisi** olarak ele alır ve çoğu sinir ağını oluşturmayı çok daha kolay hale getirir. Modeli eğitmek genellikle veriyi hazırlamayı ve ardından işi yapmak için bir `fit` fonksiyonunu çağırmayı gerektirir.
 
-Yüksek seviye API, tipik sinir ağlarını çok hızlı bir şekilde inşa etmenize olanak tanır; birçok detay hakkında endişelenmenize gerek kalmaz. Aynı zamanda, düşük seviye API, eğitim süreci üzerinde çok daha fazla kontrol sağlar, bu nedenle yeni sinir ağı mimarileriyle çalışırken araştırmalarda sıklıkla kullanılır.
+Yüksek seviyeli API, tipik sinir ağlarını çok hızlı bir şekilde oluşturmanıza olanak tanır ve birçok detayı düşünmenize gerek kalmaz. Aynı zamanda, düşük seviyeli API, eğitim süreci üzerinde çok daha fazla kontrol sağlar ve bu nedenle yeni sinir ağı mimarileriyle çalışırken araştırmalarda çok kullanılır.
 
-Her iki API'yi bir arada kullanabileceğinizi de anlamak önemlidir; örneğin, düşük seviye API kullanarak kendi ağ katmanı mimarinizi geliştirebilir ve ardından yüksek seviye API ile inşa edilen ve eğitilen daha büyük bir ağın içinde kullanabilirsiniz. Ya da yüksek seviye API'yi katmanlar dizisi olarak kullanarak bir ağ tanımlayabilir ve ardından optimizasyon yapmak için kendi düşük seviye eğitim döngünüzü kullanabilirsiniz. Her iki API de aynı temel kavramları kullanır ve birlikte iyi çalışacak şekilde tasarlanmıştır.
+Her iki API'yi birlikte kullanabileceğinizi anlamak da önemlidir. Örneğin, düşük seviyeli API kullanarak kendi ağ katmanı mimarinizi geliştirebilir ve ardından bunu daha büyük bir ağ içinde kullanabilir ve yüksek seviyeli API ile eğitebilirsiniz. Ya da katmanlar dizisi olarak yüksek seviyeli API kullanarak bir ağ tanımlayabilir ve ardından kendi düşük seviyeli eğitim döngünüzü kullanarak optimizasyon yapabilirsiniz. Her iki API de aynı temel kavramları kullanır ve birlikte iyi çalışacak şekilde tasarlanmıştır.
 
 ## Öğrenme
 
-Bu kursta, içeriğin çoğunu hem PyTorch hem de TensorFlow için sunuyoruz. Tercih ettiğiniz çerçeveyi seçebilir ve yalnızca ilgili not defterlerini inceleyebilirsiniz. Hangi çerçeveyi seçeceğinizden emin değilseniz, **PyTorch ve TensorFlow** ile ilgili internette bazı tartışmaları okuyabilirsiniz. Daha iyi bir anlayış elde etmek için her iki çerçeveye de göz atabilirsiniz.
+Bu derste, içeriğin çoğunu hem PyTorch hem de TensorFlow için sunuyoruz. Tercih ettiğiniz çerçeveyi seçebilir ve yalnızca ilgili not defterlerini inceleyebilirsiniz. Hangi çerçeveyi seçeceğinizden emin değilseniz, **PyTorch vs. TensorFlow** hakkında internetteki bazı tartışmaları okuyabilirsiniz. Ayrıca her iki çerçeveye de göz atarak daha iyi bir anlayış elde edebilirsiniz.
 
-Mümkün olduğunda, basitlik için Yüksek Seviye API'leri kullanacağız. Ancak, sinir ağlarının nasıl çalıştığını en baştan anlamanın önemli olduğunu düşünüyoruz, bu nedenle başlangıçta düşük seviye API ve tensörlerle çalışmaya başlıyoruz. Ancak, hızlı bir şekilde ilerlemek istiyorsanız ve bu detayları öğrenmek için çok fazla zaman harcamak istemiyorsanız, bunları atlayabilir ve doğrudan yüksek seviye API not defterlerine geçebilirsiniz.
+Mümkün olduğunda, basitlik için Yüksek Seviyeli API'leri kullanacağız. Ancak, sinir ağlarının temelden nasıl çalıştığını anlamanın önemli olduğuna inanıyoruz, bu nedenle başlangıçta düşük seviyeli API ve tensörlerle çalışmaya başlıyoruz. Ancak, hızlı bir şekilde başlamak ve bu detayları öğrenmek için çok fazla zaman harcamak istemiyorsanız, bunları atlayabilir ve doğrudan yüksek seviyeli API not defterlerine geçebilirsiniz.
 
-## ✍️ Alıştırmalar: Çerçeveler
+## ✍️ Egzersizler: Çerçeveler
 
-Aşağıdaki not defterlerinde öğreniminize devam edin:
+Aşağıdaki not defterlerinde öğrenmeye devam edin:
 
-Düşük Seviye API | [TensorFlow+Keras Not Defteri](../../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb) | [PyTorch](../../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb)
------------------|-------------------------------------|--------------------------------
-Yüksek Seviye API | [Keras](../../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroKeras.ipynb) | *PyTorch Lightning*
+Düşük Seviyeli API | [TensorFlow+Keras Not Defteri](IntroKerasTF.ipynb) | [PyTorch](IntroPyTorch.ipynb)
+--------------------|-------------------------------------|--------------------------------
+Yüksek Seviyeli API | [Keras](IntroKeras.ipynb) | *PyTorch Lightning*
 
-Çerçeveleri öğrendikten sonra, aşırı uyum kavramını gözden geçirelim.
+Çerçeveleri öğrendikten sonra, aşırı öğrenme (overfitting) kavramını tekrar gözden geçirelim.
 
-# Aşırı Uyum
+# Aşırı Öğrenme (Overfitting)
 
-Aşırı uyum, makine öğreniminde son derece önemli bir kavramdır ve doğru bir şekilde anlamak çok önemlidir!
+Aşırı öğrenme, makine öğreniminde son derece önemli bir kavramdır ve doğru anlamak çok önemlidir!
 
-Aşağıdaki 5 noktayı (aşağıdaki grafiklerde `x` ile temsil edilmiştir) yaklaşık olarak çözme sorununu düşünün:
+Aşağıdaki 5 noktayı (grafiklerde `x` ile gösterilen) yaklaşık olarak tahmin etme problemini düşünün:
 
 ![linear](../../../../../translated_images/overfit1.f24b71c6f652e59e6bed7245ffbeaecc3ba320e16e2221f6832b432052c4da43.tr.jpg) | ![overfit](../../../../../translated_images/overfit2.131f5800ae10ca5e41d12a411f5f705d9ee38b1b10916f284b787028dd55cc1c.tr.jpg)
 -------------------------|--------------------------
@@ -55,69 +64,69 @@ Aşağıdaki 5 noktayı (aşağıdaki grafiklerde `x` ile temsil edilmiştir) ya
 Eğitim hatası = 5.3 | Eğitim hatası = 0
 Doğrulama hatası = 5.1 | Doğrulama hatası = 20
 
-* Solda, iyi bir doğru çizgi yaklaşık olarak görüyoruz. Parametre sayısı uygun olduğundan, model nokta dağılımının arkasındaki fikri doğru anlıyor.
-* Sağda, model çok güçlü. Sadece 5 noktamız olduğu için ve modelin 7 parametresi olduğu için, tüm noktaların üzerinden geçecek şekilde ayarlanabilir, bu da eğitim hatasının 0 olmasına neden olur. Ancak, bu modelin verilerin arkasındaki doğru deseni anlamasını engeller, bu nedenle doğrulama hatası çok yüksektir.
+* Solda, iyi bir doğru çizgisi yaklaşımı görüyoruz. Parametre sayısı uygun olduğu için model, nokta dağılımının arkasındaki fikri doğru bir şekilde kavrıyor.
+* Sağda, model çok güçlü. Sadece 5 noktamız olduğu ve modelin 7 parametresi olduğu için, tüm noktalardan geçecek şekilde ayarlanabiliyor, bu da eğitim hatasını 0 yapıyor. Ancak bu, modelin verinin arkasındaki doğru deseni anlamasını engelliyor, dolayısıyla doğrulama hatası çok yüksek.
 
 Modelin zenginliği (parametre sayısı) ile eğitim örneklerinin sayısı arasında doğru bir denge kurmak çok önemlidir.
 
-## Aşırı Uyumun Nedenleri
+## Aşırı Öğrenme Neden Oluşur?
 
-  * Yeterince eğitim verisi olmaması
-  * Çok güçlü model
-  * Giriş verilerinde fazla gürültü
+  * Yeterli eğitim verisinin olmaması
+  * Çok güçlü bir model
+  * Giriş verilerinde çok fazla gürültü
 
-## Aşırı Uyumun Tespit Edilmesi
+## Aşırı Öğrenme Nasıl Tespit Edilir?
 
-Yukarıdaki grafikten görebileceğiniz gibi, aşırı uyum, çok düşük bir eğitim hatası ve yüksek bir doğrulama hatası ile tespit edilebilir. Genellikle eğitim sırasında hem eğitim hem de doğrulama hatalarının azalmaya başladığını görürüz, ve sonra bir noktada doğrulama hatası azalmayı durdurup artmaya başlayabilir. Bu, aşırı uyumun bir işareti olacak ve muhtemelen bu noktada eğitimi durdurmamız gerektiğini (veya en azından modelin bir anlık görüntüsünü almamız gerektiğini) gösterir.
+Yukarıdaki grafikten görebileceğiniz gibi, aşırı öğrenme çok düşük bir eğitim hatası ve yüksek bir doğrulama hatası ile tespit edilebilir. Normalde eğitim sırasında hem eğitim hem de doğrulama hatalarının azalmaya başladığını görürüz, ancak bir noktada doğrulama hatası azalmayı durdurabilir ve artmaya başlayabilir. Bu, aşırı öğrenmenin bir işareti ve eğitimi muhtemelen bu noktada durdurmamız gerektiğinin (veya en azından modelin bir anlık görüntüsünü almamız gerektiğinin) göstergesidir.
 
 ![overfitting](../../../../../translated_images/Overfitting.408ad91cd90b4371d0a81f4287e1409c359751adeb1ae450332af50e84f08c3e.tr.png)
 
-## Aşırı Uyumun Önlenmesi
+## Aşırı Öğrenme Nasıl Önlenir?
 
-Aşırı uyumun meydana geldiğini görüyorsanız, aşağıdakilerden birini yapabilirsiniz:
+Aşırı öğrenmenin meydana geldiğini görüyorsanız, aşağıdakilerden birini yapabilirsiniz:
 
- * Eğitim verisi miktarını artırın
+ * Eğitim verilerinin miktarını artırın
  * Modelin karmaşıklığını azaltın
- * Daha sonra ele alacağımız [düzenleme tekniklerinden](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md) birini kullanın, örneğin [Dropout](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md#Dropout).
+ * [Dropout](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md#Dropout) gibi bazı [düzenleme tekniklerini](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md) kullanın, bunları daha sonra ele alacağız.
 
-## Aşırı Uyum ve Bias-Variance Ticaret Dengesi
+## Aşırı Öğrenme ve Hata-Varyans Dengesi
 
-Aşırı uyum aslında istatistikte daha genel bir problem olan [Bias-Variance Tradeoff](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff) durumudur. Modelimizdeki hata kaynaklarını dikkate aldığımızda, iki tür hata görebiliriz:
+Aşırı öğrenme aslında istatistikte [Hata-Varyans Dengesi](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff) olarak adlandırılan daha genel bir problemin bir örneğidir. Modelimizdeki hata kaynaklarını düşünürsek, iki tür hata görebiliriz:
 
-* **Bias hataları**, algoritmamızın eğitim verileri arasındaki ilişkiyi doğru bir şekilde yakalayamamasından kaynaklanır. Bu, modelimizin yeterince güçlü olmamasından kaynaklanabilir (**aşırı uyum**).
-* **Variance hataları**, modelin gürültüyü verilerdeki anlamlı ilişki yerine yaklaşık olarak değerlendirmesinden kaynaklanır (**aşırı uyum**).
+* **Hata hataları**, algoritmamızın eğitim verileri arasındaki ilişkiyi doğru bir şekilde yakalayamamasından kaynaklanır. Bu, modelimizin yeterince güçlü olmamasından kaynaklanabilir (**eksik öğrenme**).
+* **Varyans hataları**, modelin giriş verilerindeki gürültüyü anlamlı bir ilişki yerine tahmin etmesinden kaynaklanır (**aşırı öğrenme**).
 
-Eğitim sırasında, bias hatası azalır (modelimiz verileri yaklaşık olarak öğrenirken) ve variance hatası artar. Aşırı uyumu önlemek için eğitimi durdurmak önemlidir - ya manuel olarak (aşırı uyumu tespit ettiğimizde) ya da otomatik olarak (düzenleme yaparak).
+Eğitim sırasında, hata hatası azalır (modelimiz veriyi tahmin etmeyi öğrenir) ve varyans hatası artar. Aşırı öğrenmeyi önlemek için eğitimi durdurmak - ya manuel olarak (aşırı öğrenmeyi tespit ettiğimizde) ya da otomatik olarak (düzenleme ekleyerek) - önemlidir.
 
 ## Sonuç
 
-Bu derste, en popüler iki AI çerçevesi olan TensorFlow ve PyTorch için çeşitli API'ler arasındaki farkları öğrendiniz. Ayrıca, çok önemli bir konu olan aşırı uyumu da öğrendiniz.
+Bu derste, iki en popüler AI çerçevesi olan TensorFlow ve PyTorch için çeşitli API'ler arasındaki farkları öğrendiniz. Ayrıca, çok önemli bir konu olan aşırı öğrenmeyi öğrendiniz.
 
-## 🚀 Zorluk
+## 🚀 Meydan Okuma
 
-Eşlik eden not defterlerinde, en altta 'görevler' bulacaksınız; not defterlerini inceleyin ve görevleri tamamlayın.
+Eşlik eden not defterlerinde, 'görevler' bölümünü bulacaksınız; not defterlerini inceleyin ve görevleri tamamlayın.
 
-## [Ders sonrası sınav](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/205)
+## [Ders Sonrası Test](https://ff-quizzes.netlify.app/en/ai/quiz/10)
 
-## Gözden Geçirme & Kendi Kendine Çalışma
+## Gözden Geçirme ve Kendi Kendine Çalışma
 
 Aşağıdaki konular hakkında biraz araştırma yapın:
 
 - TensorFlow
 - PyTorch
-- Aşırı uyum
+- Aşırı öğrenme
 
 Kendinize şu soruları sorun:
 
 - TensorFlow ve PyTorch arasındaki fark nedir?
-- Aşırı uyum ve yetersiz uyum arasındaki fark nedir?
+- Aşırı öğrenme ile eksik öğrenme arasındaki fark nedir?
 
 ## [Ödev](lab/README.md)
 
-Bu laboratuvar çalışmasında, PyTorch veya TensorFlow kullanarak tek ve çok katmanlı tam bağlı ağlar ile iki sınıflandırma problemini çözmeniz isteniyor.
+Bu laboratuvarda, PyTorch veya TensorFlow kullanarak tek katmanlı ve çok katmanlı tam bağlantılı ağlarla iki sınıflandırma problemini çözmeniz isteniyor.
 
 * [Talimatlar](lab/README.md)
-* [Not Defteri](../../../../../lessons/3-NeuralNetworks/05-Frameworks/lab/LabFrameworks.ipynb)
+* [Not Defteri](lab/LabFrameworks.ipynb)
 
-**Açıklama**:  
-Bu belge, makine tabanlı AI çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluğa özen göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, ana dilinde, otoriter kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+

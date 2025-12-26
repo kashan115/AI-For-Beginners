@@ -1,31 +1,40 @@
-# Introducción a la Visión por Computadora
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "feeca98225cb420afc89415f24f63d92",
+  "translation_date": "2025-09-23T08:29:01+00:00",
+  "source_file": "lessons/4-ComputerVision/06-IntroCV/README.md",
+  "language_code": "it"
+}
+-->
+# Introduzione alla Visione Artificiale
 
-[Visión por Computadora](https://wikipedia.org/wiki/Computer_vision) es una disciplina cuyo objetivo es permitir que las computadoras obtengan una comprensión de alto nivel de las imágenes digitales. Esta es una definición bastante amplia, porque *comprensión* puede significar muchas cosas diferentes, incluyendo encontrar un objeto en una imagen (**detección de objetos**), entender lo que está sucediendo (**detección de eventos**), describir una imagen en texto, o reconstruir una escena en 3D. También hay tareas especiales relacionadas con imágenes humanas: estimación de edad y emociones, detección e identificación de rostros, y estimación de pose en 3D, por nombrar algunas.
+[Computer Vision](https://wikipedia.org/wiki/Computer_vision) è una disciplina il cui obiettivo è permettere ai computer di ottenere una comprensione di alto livello delle immagini digitali. Questa è una definizione piuttosto ampia, poiché *comprensione* può significare molte cose diverse, tra cui trovare un oggetto in un'immagine (**rilevamento di oggetti**), capire cosa sta accadendo (**rilevamento di eventi**), descrivere un'immagine in testo o ricostruire una scena in 3D. Ci sono anche compiti specifici legati alle immagini umane: stima dell'età e delle emozioni, rilevamento e identificazione del volto, e stima della posa 3D, solo per citarne alcuni.
 
-## [Cuestionario previo a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/106)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/11)
 
-Una de las tareas más simples de la visión por computadora es **clasificación de imágenes**.
+Uno dei compiti più semplici della visione artificiale è la **classificazione delle immagini**.
 
-La visión por computadora a menudo se considera una rama de la IA. Hoy en día, la mayoría de las tareas de visión por computadora se resuelven utilizando redes neuronales. Aprenderemos más sobre el tipo especial de redes neuronales utilizadas para la visión por computadora, [redes neuronales convolucionales](../07-ConvNets/README.md), a lo largo de esta sección.
+La visione artificiale è spesso considerata un ramo dell'AI. Oggi, la maggior parte dei compiti di visione artificiale viene risolta utilizzando reti neurali. Impareremo di più sul tipo speciale di reti neurali utilizzate per la visione artificiale, le [reti neurali convoluzionali](../07-ConvNets/README.md), in questa sezione.
 
-Sin embargo, antes de pasar la imagen a una red neuronal, en muchos casos tiene sentido utilizar algunas técnicas algorítmicas para mejorar la imagen.
+Tuttavia, prima di passare un'immagine a una rete neurale, in molti casi ha senso utilizzare alcune tecniche algoritmiche per migliorare l'immagine.
 
-Hay varias bibliotecas de Python disponibles para el procesamiento de imágenes:
+Esistono diverse librerie Python disponibili per l'elaborazione delle immagini:
 
-* **[imageio](https://imageio.readthedocs.io/en/stable/)** se puede utilizar para leer/escribir diferentes formatos de imagen. También soporta ffmpeg, una herramienta útil para convertir fotogramas de video en imágenes.
-* **[Pillow](https://pillow.readthedocs.io/en/stable/index.html)** (también conocido como PIL) es un poco más poderosa, y también soporta algunas manipulaciones de imágenes como morfología, ajustes de paleta, y más.
-* **[OpenCV](https://opencv.org/)** es una poderosa biblioteca de procesamiento de imágenes escrita en C++, que se ha convertido en el estándar *de facto* para el procesamiento de imágenes. Tiene una interfaz conveniente para Python.
-* **[dlib](http://dlib.net/)** es una biblioteca de C++ que implementa muchos algoritmos de aprendizaje automático, incluyendo algunos de los algoritmos de Visión por Computadora. También tiene una interfaz de Python y se puede utilizar para tareas desafiantes como la detección de rostros y puntos de referencia faciales.
+* **[imageio](https://imageio.readthedocs.io/en/stable/)** può essere utilizzata per leggere/scrivere diversi formati di immagini. Supporta anche ffmpeg, uno strumento utile per convertire i fotogrammi video in immagini.
+* **[Pillow](https://pillow.readthedocs.io/en/stable/index.html)** (conosciuta anche come PIL) è un po' più potente e supporta anche alcune manipolazioni delle immagini come morphing, regolazioni della palette e altro.
+* **[OpenCV](https://opencv.org/)** è una potente libreria di elaborazione delle immagini scritta in C++, che è diventata lo standard *de facto* per l'elaborazione delle immagini. Ha un'interfaccia Python comoda.
+* **[dlib](http://dlib.net/)** è una libreria C++ che implementa molti algoritmi di machine learning, inclusi alcuni algoritmi di visione artificiale. Ha anche un'interfaccia Python e può essere utilizzata per compiti impegnativi come il rilevamento del volto e dei punti di riferimento facciali.
 
 ## OpenCV
 
-[OpenCV](https://opencv.org/) se considera el estándar *de facto* para el procesamiento de imágenes. Contiene muchos algoritmos útiles, implementados en C++. También puedes llamar a OpenCV desde Python.
+[OpenCV](https://opencv.org/) è considerata lo standard *de facto* per l'elaborazione delle immagini. Contiene molti algoritmi utili, implementati in C++. Puoi utilizzare OpenCV anche da Python.
 
-Un buen lugar para aprender OpenCV es [este curso de Aprende OpenCV](https://learnopencv.com/getting-started-with-opencv/). En nuestro currículo, nuestro objetivo no es aprender OpenCV, sino mostrarte algunos ejemplos de cuándo se puede usar y cómo.
+Un buon punto di partenza per imparare OpenCV è [questo corso Learn OpenCV](https://learnopencv.com/getting-started-with-opencv/). Nel nostro curriculum, il nostro obiettivo non è imparare OpenCV, ma mostrarti alcuni esempi di quando può essere utilizzato e come.
 
-### Cargando Imágenes
+### Caricamento delle immagini
 
-Las imágenes en Python pueden ser representadas de manera conveniente por arreglos de NumPy. Por ejemplo, las imágenes en escala de grises con un tamaño de 320x200 píxeles se almacenarían en un arreglo de 200x320, y las imágenes a color de la misma dimensión tendrían una forma de 200x320x3 (para 3 canales de color). Para cargar una imagen, puedes usar el siguiente código:
+Le immagini in Python possono essere comodamente rappresentate da array NumPy. Ad esempio, immagini in scala di grigi con dimensioni di 320x200 pixel sarebbero memorizzate in un array 200x320, e immagini a colori della stessa dimensione avrebbero una forma di 200x320x3 (per 3 canali di colore). Per caricare un'immagine, puoi utilizzare il seguente codice:
 
 ```python
 import cv2
@@ -35,78 +44,78 @@ im = cv2.imread('image.jpeg')
 plt.imshow(im)
 ```
 
-Tradicionalmente, OpenCV utiliza codificación BGR (Azul-Verde-Rojo) para imágenes a color, mientras que el resto de las herramientas de Python utilizan el más tradicional RGB (Rojo-Verde-Azul). Para que la imagen se vea correctamente, necesitas convertirla al espacio de color RGB, ya sea intercambiando dimensiones en el arreglo de NumPy o llamando a una función de OpenCV:
+Tradizionalmente, OpenCV utilizza la codifica BGR (Blu-Verde-Rosso) per le immagini a colori, mentre il resto degli strumenti Python utilizza la più tradizionale RGB (Rosso-Verde-Blu). Per far sì che l'immagine appaia correttamente, è necessario convertirla nello spazio colore RGB, sia scambiando le dimensioni nell'array NumPy, sia chiamando una funzione OpenCV:
 
 ```python
 im = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)
 ```
 
-Las mismas funciones `cvtColor` function can be used to perform other color space transformations such as converting an image to grayscale or to the HSV (Hue-Saturation-Value) color space.
+La stessa funzione `cvtColor` può essere utilizzata per eseguire altre trasformazioni dello spazio colore, come convertire un'immagine in scala di grigi o nello spazio colore HSV (Tonalità-Saturazione-Valore).
 
-You can also use OpenCV to load video frame-by-frame - an example is given in the exercise [OpenCV Notebook](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb).
+Puoi anche utilizzare OpenCV per caricare video fotogramma per fotogramma - un esempio è fornito nell'esercizio [OpenCV Notebook](OpenCV.ipynb).
 
-### Image Processing
+### Elaborazione delle immagini
 
-Before feeding an image to a neural network, you may want to apply several pre-processing steps. OpenCV can do many things, including:
+Prima di passare un'immagine a una rete neurale, potresti voler applicare diversi passaggi di pre-elaborazione. OpenCV può fare molte cose, tra cui:
 
-* **Resizing** the image using `im = cv2.resize(im, (320,200),interpolation=cv2.INTER_LANCZOS)`
-* **Blurring** the image using `im = cv2.medianBlur(im,3)` or `im = cv2.GaussianBlur(im, (3,3), 0)`
-* Changing the **brightness and contrast** of the image can be done by NumPy array manipulations, as described [in this Stackoverflow note](https://stackoverflow.com/questions/39308030/how-do-i-increase-the-contrast-of-an-image-in-python-opencv).
-* Using [thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) by calling `cv2.threshold`/`cv2.adaptiveThreshold`, que a menudo son preferibles a ajustar el brillo o el contraste.
-* Aplicar diferentes [transformaciones](https://docs.opencv.org/4.5.5/da/d6e/tutorial_py_geometric_transformations.html) a la imagen:
-    - **[Transformaciones afines](https://docs.opencv.org/4.5.5/d4/d61/tutorial_warp_affine.html)** pueden ser útiles si necesitas combinar rotación, redimensionamiento y sesgo en la imagen y conoces la ubicación de origen y destino de tres puntos en la imagen. Las transformaciones afines mantienen las líneas paralelas.
-    - **[Transformaciones de perspectiva](https://medium.com/analytics-vidhya/opencv-perspective-transformation-9edffefb2143)** pueden ser útiles cuando conoces las posiciones de origen y destino de 4 puntos en la imagen. Por ejemplo, si tomas una foto de un documento rectangular a través de la cámara de un smartphone desde algún ángulo, y deseas hacer una imagen rectangular del documento en sí.
-* Comprender el movimiento dentro de la imagen utilizando **[flujo óptico](https://docs.opencv.org/4.5.5/d4/dee/tutorial_optical_flow.html)**.
+* **Ridimensionare** l'immagine utilizzando `im = cv2.resize(im, (320,200),interpolation=cv2.INTER_LANCZOS)`
+* **Sfocare** l'immagine utilizzando `im = cv2.medianBlur(im,3)` o `im = cv2.GaussianBlur(im, (3,3), 0)`
+* Modificare la **luminosità e il contrasto** dell'immagine può essere fatto tramite manipolazioni degli array NumPy, come descritto [in questa nota di Stackoverflow](https://stackoverflow.com/questions/39308030/how-do-i-increase-the-contrast-of-an-image-in-python-opencv).
+* Utilizzare [thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) chiamando le funzioni `cv2.threshold`/`cv2.adaptiveThreshold`, che spesso è preferibile rispetto alla regolazione della luminosità o del contrasto.
+* Applicare diverse [trasformazioni](https://docs.opencv.org/4.5.5/da/d6e/tutorial_py_geometric_transformations.html) all'immagine:
+    - **[Trasformazioni affini](https://docs.opencv.org/4.5.5/d4/d61/tutorial_warp_affine.html)** possono essere utili se hai bisogno di combinare rotazione, ridimensionamento e inclinazione dell'immagine e conosci la posizione di origine e destinazione di tre punti nell'immagine. Le trasformazioni affini mantengono le linee parallele parallele.
+    - **[Trasformazioni prospettiche](https://medium.com/analytics-vidhya/opencv-perspective-transformation-9edffefb2143)** possono essere utili quando conosci la posizione di origine e destinazione di 4 punti nell'immagine. Ad esempio, se scatti una foto di un documento rettangolare tramite la fotocamera di uno smartphone da un certo angolo e vuoi ottenere un'immagine rettangolare del documento stesso.
+* Comprendere il movimento all'interno dell'immagine utilizzando **[optical flow](https://docs.opencv.org/4.5.5/d4/dee/tutorial_optical_flow.html)**.
 
-## Ejemplos de uso de la Visión por Computadora
+## Esempi di utilizzo della Visione Artificiale
 
-En nuestro [Cuaderno de OpenCV](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb), damos algunos ejemplos de cuándo se puede usar la visión por computadora para realizar tareas específicas:
+Nel nostro [OpenCV Notebook](OpenCV.ipynb), forniamo alcuni esempi di quando la visione artificiale può essere utilizzata per svolgere compiti specifici:
 
-* **Pre-procesar una fotografía de un libro en Braille**. Nos enfocamos en cómo podemos usar umbralización, detección de características, transformación de perspectiva y manipulaciones de NumPy para separar símbolos individuales de Braille para su posterior clasificación por una red neuronal.
+* **Pre-elaborazione di una fotografia di un libro in Braille**. Ci concentriamo su come possiamo utilizzare thresholding, rilevamento delle caratteristiche, trasformazione prospettica e manipolazioni NumPy per separare i singoli simboli Braille per una successiva classificazione tramite una rete neurale.
 
-![Imagen de Braille](../../../../../translated_images/braille.341962ff76b1bd7044409371d3de09ced5028132aef97344ea4b7468c1208126.it.jpeg) | ![Imagen de Braille Pre-procesada](../../../../../translated_images/braille-result.46530fea020b03c76aac532d7d6eeef7f6fb35b55b1001cd21627907dabef3ed.it.png) | ![Símbolos de Braille](../../../../../translated_images/braille-symbols.0159185ab69d533909dc4d7d26a1971b51401c6a80eb3a5584f250ea880af88b.it.png)
+![Immagine Braille](../../../../../translated_images/braille.341962ff76b1bd7044409371d3de09ced5028132aef97344ea4b7468c1208126.it.jpeg) | ![Immagine Braille Pre-elaborata](../../../../../translated_images/braille-result.46530fea020b03c76aac532d7d6eeef7f6fb35b55b1001cd21627907dabef3ed.it.png) | ![Simboli Braille](../../../../../translated_images/braille-symbols.0159185ab69d533909dc4d7d26a1971b51401c6a80eb3a5584f250ea880af88b.it.png)
 ----|-----|-----
 
-> Imagen de [OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+> Immagine da [OpenCV.ipynb](OpenCV.ipynb)
 
-* **Detectar movimiento en video utilizando diferencia de fotogramas**. Si la cámara está fija, entonces los fotogramas del flujo de la cámara deberían ser bastante similares entre sí. Dado que los fotogramas se representan como arreglos, al restar esos arreglos de dos fotogramas subsecuentes obtendremos la diferencia de píxeles, que debería ser baja para fotogramas estáticos y aumentar una vez que haya un movimiento sustancial en la imagen.
+* **Rilevamento del movimento in video utilizzando la differenza tra fotogrammi**. Se la fotocamera è fissa, i fotogrammi del feed della fotocamera dovrebbero essere abbastanza simili tra loro. Poiché i fotogrammi sono rappresentati come array, semplicemente sottraendo questi array per due fotogrammi consecutivi otterremo la differenza dei pixel, che dovrebbe essere bassa per fotogrammi statici e diventare più alta quando c'è un movimento sostanziale nell'immagine.
 
-![Imagen de fotogramas de video y diferencias de fotogramas](../../../../../translated_images/frame-difference.706f805491a0883c938e16447bf5eb2f7d69e812c7f743cbe7d7c7645168f81f.it.png)
+![Immagine dei fotogrammi video e differenze tra fotogrammi](../../../../../translated_images/frame-difference.706f805491a0883c938e16447bf5eb2f7d69e812c7f743cbe7d7c7645168f81f.it.png)
 
-> Imagen de [OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+> Immagine da [OpenCV.ipynb](OpenCV.ipynb)
 
-* **Detectar movimiento utilizando Flujo Óptico**. [El flujo óptico](https://docs.opencv.org/3.4/d4/dee/tutorial_optical_flow.html) nos permite entender cómo se mueven los píxeles individuales en los fotogramas de video. Hay dos tipos de flujo óptico:
+* **Rilevamento del movimento utilizzando Optical Flow**. [Optical flow](https://docs.opencv.org/3.4/d4/dee/tutorial_optical_flow.html) ci permette di capire come si muovono i singoli pixel nei fotogrammi video. Ci sono due tipi di optical flow:
 
-   - **Flujo Óptico Denso** calcula el campo vectorial que muestra para cada píxel hacia dónde se está moviendo.
-   - **Flujo Óptico Escaso** se basa en tomar algunas características distintivas en la imagen (por ejemplo, bordes) y construir su trayectoria de un fotograma a otro.
+   - **Dense Optical Flow** calcola il campo vettoriale che mostra per ogni pixel dove si sta muovendo.
+   - **Sparse Optical Flow** si basa sull'individuazione di alcune caratteristiche distintive nell'immagine (ad esempio, bordi) e sulla costruzione della loro traiettoria da fotogramma a fotogramma.
 
-![Imagen de Flujo Óptico](../../../../../translated_images/optical.1f4a94464579a83a10784f3c07fe7228514714b96782edf50e70ccd59d2d8c4f.it.png)
+![Immagine di Optical Flow](../../../../../translated_images/optical.1f4a94464579a83a10784f3c07fe7228514714b96782edf50e70ccd59d2d8c4f.it.png)
 
-> Imagen de [OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+> Immagine da [OpenCV.ipynb](OpenCV.ipynb)
 
-## ✍️ Cuadernos de Ejemplo: OpenCV [prueba OpenCV en acción](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+## ✍️ Notebook di esempio: OpenCV [prova OpenCV in azione](OpenCV.ipynb)
 
-Hagamos algunos experimentos con OpenCV explorando [Cuaderno de OpenCV](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+Facciamo alcuni esperimenti con OpenCV esplorando [OpenCV Notebook](OpenCV.ipynb)
 
-## Conclusión
+## Conclusione
 
-A veces, tareas relativamente complejas como la detección de movimiento o la detección de yemas de los dedos pueden resolverse puramente mediante visión por computadora. Por lo tanto, es muy útil conocer las técnicas básicas de visión por computadora y lo que bibliotecas como OpenCV pueden hacer.
+A volte, compiti relativamente complessi come il rilevamento del movimento o il rilevamento della punta delle dita possono essere risolti esclusivamente tramite visione artificiale. Pertanto, è molto utile conoscere le tecniche di base della visione artificiale e cosa possono fare librerie come OpenCV.
 
-## 🚀 Desafío
+## 🚀 Sfida
 
-Mira [este video](https://docs.microsoft.com/shows/ai-show/ai-show--2021-opencv-ai-competition--grand-prize-winners--cortic-tigers--episode-32?WT.mc_id=academic-77998-cacaste) del programa de IA para aprender sobre el proyecto Cortic Tigers y cómo construyeron una solución basada en bloques para democratizar las tareas de visión por computadora a través de un robot. Investiga sobre otros proyectos como este que ayuden a nuevos aprendices a ingresar al campo.
+Guarda [questo video](https://docs.microsoft.com/shows/ai-show/ai-show--2021-opencv-ai-competition--grand-prize-winners--cortic-tigers--episode-32?WT.mc_id=academic-77998-cacaste) dello show AI per conoscere il progetto Cortic Tigers e come hanno costruito una soluzione basata su blocchi per democratizzare i compiti di visione artificiale tramite un robot. Fai qualche ricerca su altri progetti simili che aiutano i nuovi studenti a entrare nel campo.
 
-## [Cuestionario posterior a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/206)
+## [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/12)
 
-## Revisión y Autoestudio
+## Revisione & Studio Autonomo
 
-Lee más sobre el flujo óptico [en este gran tutorial](https://learnopencv.com/optical-flow-in-opencv/).
+Leggi di più sull'optical flow [in questo ottimo tutorial](https://learnopencv.com/optical-flow-in-opencv/).
 
-## [Asignación](lab/README.md)
+## [Compito](lab/README.md)
 
-En este laboratorio, tomarás un video con gestos simples, y tu objetivo es extraer movimientos arriba/abajo/izquierda/derecha utilizando flujo óptico.
+In questo laboratorio, registrerai un video con gesti semplici, e il tuo obiettivo sarà estrarre movimenti su/giù/sinistra/destra utilizzando optical flow.
 
-<img src="images/palm-movement.png" width="30%" alt="Marco de Movimiento de Palma"/>
+<img src="images/palm-movement.png" width="30%" alt="Fotogramma Movimento del Palmo"/>
 
-**Disclaimer**: 
-This document has been translated using machine-based AI translation services. While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+---
+

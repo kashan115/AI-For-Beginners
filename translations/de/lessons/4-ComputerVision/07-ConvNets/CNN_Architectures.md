@@ -1,12 +1,21 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "53faab85adfcebd8c10bcd71dc2fa557",
+  "translation_date": "2025-09-23T12:17:02+00:00",
+  "source_file": "lessons/4-ComputerVision/07-ConvNets/CNN_Architectures.md",
+  "language_code": "de"
+}
+-->
 # Bekannte CNN-Architekturen
 
 ### VGG-16
 
-VGG-16 ist ein Netzwerk, das 2014 eine Genauigkeit von 92,7 % bei der Top-5-Klassifizierung von ImageNet erreicht hat. Es hat die folgende Schichtstruktur:
+VGG-16 ist ein Netzwerk, das 2014 eine Genauigkeit von 92,7 % bei der ImageNet-Top-5-Klassifikation erreichte. Es hat die folgende Schichtstruktur:
 
 ![ImageNet Layers](../../../../../translated_images/vgg-16-arch1.d901a5583b3a51baeaab3e768567d921e5d54befa46e1e642616c5458c934028.de.jpg)
 
-Wie Sie sehen können, folgt VGG einer traditionellen Pyramidenarchitektur, die aus einer Sequenz von Faltungs-Pooling-Schichten besteht.
+Wie man sehen kann, folgt VGG einer traditionellen Pyramidenarchitektur, die aus einer Abfolge von Convolution-Pooling-Schichten besteht.
 
 ![ImageNet Pyramid](../../../../../translated_images/vgg-16-arch.64ff2137f50dd49fdaa786e3f3a975b3f22615efd13efb19c5d22f12e01451a1.de.jpg)
 
@@ -14,51 +23,51 @@ Wie Sie sehen können, folgt VGG einer traditionellen Pyramidenarchitektur, die 
 
 ### ResNet
 
-ResNet ist eine Familie von Modellen, die 2015 von Microsoft Research vorgeschlagen wurde. Die Hauptidee von ResNet besteht darin, **Residualblöcke** zu verwenden:
+ResNet ist eine Modellfamilie, die 2015 von Microsoft Research vorgeschlagen wurde. Die Hauptidee von ResNet ist die Verwendung von **Residual Blocks**:
 
 <img src="images/resnet-block.png" width="300"/>
 
-> Bild aus [diesem Papier](https://arxiv.org/pdf/1512.03385.pdf)
+> Bild aus [diesem Paper](https://arxiv.org/pdf/1512.03385.pdf)
 
-Der Grund für die Verwendung von Identitätsdurchgängen besteht darin, dass unsere Schicht **die Differenz** zwischen dem Ergebnis einer vorherigen Schicht und der Ausgabe des Residualblocks vorhersagen soll - daher der Name *residual*. Diese Blöcke sind viel einfacher zu trainieren, und man kann Netzwerke mit mehreren Hundert dieser Blöcke konstruieren (die gebräuchlichsten Varianten sind ResNet-52, ResNet-101 und ResNet-152).
+Der Grund für die Verwendung von Identity-Pass-Through ist, dass die Schicht **die Differenz** zwischen dem Ergebnis einer vorherigen Schicht und dem Output des Residual Blocks vorhersagen soll – daher der Name *residual*. Diese Blöcke sind viel einfacher zu trainieren, und man kann Netzwerke mit mehreren Hunderten dieser Blöcke konstruieren (die häufigsten Varianten sind ResNet-52, ResNet-101 und ResNet-152).
 
-Man kann sich dieses Netzwerk auch so vorstellen, dass es seine Komplexität an den Datensatz anpassen kann. Zu Beginn, wenn Sie das Netzwerk zu trainieren beginnen, sind die Gewichtswerte klein, und das meiste Signal geht durch die Identitätsschichten. Mit dem Fortschreiten des Trainings und zunehmenden Gewichtswerten wächst die Bedeutung der Netzwerkparameter, und das Netzwerk passt sich an, um die erforderliche Ausdruckskraft zu gewährleisten, um die Trainingsbilder korrekt zu klassifizieren.
+Man kann sich dieses Netzwerk auch so vorstellen, dass es seine Komplexität an den Datensatz anpassen kann. Zu Beginn des Trainings sind die Gewichtswerte klein, und die meisten Signale gehen durch die Identity-Layer. Im Laufe des Trainings, wenn die Gewichte größer werden, steigt die Bedeutung der Netzwerkparameter, und das Netzwerk passt sich an, um die erforderliche Ausdruckskraft zu erreichen, um die Trainingsbilder korrekt zu klassifizieren.
 
 ### Google Inception
 
-Die Google Inception-Architektur geht einen Schritt weiter und baut jede Netzwerkschicht als Kombination aus mehreren verschiedenen Pfaden auf:
+Die Google Inception-Architektur geht einen Schritt weiter und baut jede Netzwerkschicht als Kombination aus mehreren verschiedenen Pfaden:
 
 <img src="images/inception.png" width="400"/>
 
 > Bild von [Researchgate](https://www.researchgate.net/figure/Inception-module-with-dimension-reductions-left-and-schema-for-Inception-ResNet-v1_fig2_355547454)
 
-Hier müssen wir die Rolle von 1x1-Faltungen betonen, da sie zunächst keinen Sinn zu ergeben scheinen. Warum sollten wir mit einem 1x1-Filter über das Bild fahren? Sie müssen jedoch daran denken, dass Faltungfilter auch mit mehreren Tiefenkanälen arbeiten (ursprünglich - RGB-Farben, in nachfolgenden Schichten - Kanäle für verschiedene Filter), und die 1x1-Faltung wird verwendet, um diese Eingangskanäle mithilfe unterschiedlicher trainierbarer Gewichte zu mischen. Es kann auch als Herunterrechnen (Pooling) über die Kanaldimension betrachtet werden.
+Hier müssen wir die Rolle der 1x1-Convolutions hervorheben, da sie zunächst keinen Sinn ergeben. Warum sollte man ein Bild mit einem 1x1-Filter durchlaufen? Man muss jedoch bedenken, dass Convolution-Filter auch mit mehreren Tiefenkanälen arbeiten (ursprünglich RGB-Farben, in nachfolgenden Schichten Kanäle für verschiedene Filter), und die 1x1-Convolution wird verwendet, um diese Eingabekanäle mit unterschiedlichen trainierbaren Gewichten zu mischen. Sie kann auch als Downsampling (Pooling) über die Kanaldimension betrachtet werden.
 
-Hier ist [ein guter Blogbeitrag](https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578) zu diesem Thema sowie [das ursprüngliche Papier](https://arxiv.org/pdf/1312.4400.pdf).
+Hier ist [ein guter Blogbeitrag](https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578) zu diesem Thema und [das Original-Paper](https://arxiv.org/pdf/1312.4400.pdf).
 
 ### MobileNet
 
-MobileNet ist eine Familie von Modellen mit reduzierter Größe, die für mobile Geräte geeignet sind. Verwenden Sie sie, wenn Ihnen die Ressourcen ausgehen und Sie ein wenig Genauigkeit opfern können. Die Hauptidee dahinter ist die sogenannte **depthwise separable convolution**, die es ermöglicht, Faltungfilter als Kombination aus räumlichen Faltungen und 1x1-Faltungen über Tiefenkanäle darzustellen. Dies reduziert erheblich die Anzahl der Parameter, wodurch das Netzwerk kleiner wird und auch einfacher mit weniger Daten trainiert werden kann.
+MobileNet ist eine Modellfamilie mit reduzierter Größe, die für mobile Geräte geeignet ist. Verwenden Sie sie, wenn Sie wenig Ressourcen haben und ein wenig Genauigkeit opfern können. Die Hauptidee dahinter ist die sogenannte **Depthwise Separable Convolution**, die es ermöglicht, Convolution-Filter durch eine Zusammensetzung von räumlichen Convolutions und 1x1-Convolution über Tiefenkanäle darzustellen. Dies reduziert die Anzahl der Parameter erheblich, wodurch das Netzwerk kleiner wird und auch mit weniger Daten leichter zu trainieren ist.
 
 Hier ist [ein guter Blogbeitrag über MobileNet](https://medium.com/analytics-vidhya/image-classification-with-mobilenet-cc6fbb2cd470).
 
 ## Fazit
 
-In dieser Einheit haben Sie das Hauptkonzept hinter neuronalen Netzwerken für Computer Vision - den Faltungsnetzwerken - kennengelernt. Echte Architekturen, die Bildklassifizierung, Objekterkennung und sogar Bildgenerierungsnetzwerke antreiben, basieren alle auf CNNs, nur mit mehr Schichten und einigen zusätzlichen Trainingstricks.
+In dieser Einheit haben Sie das Hauptkonzept hinter neuronalen Netzwerken für Computer Vision gelernt – Convolutional Networks. Realitätsnahe Architekturen, die Bildklassifikation, Objekterkennung und sogar Bildgenerierungsnetzwerke antreiben, basieren alle auf CNNs, nur mit mehr Schichten und einigen zusätzlichen Trainingstricks.
 
 ## 🚀 Herausforderung
 
-In den begleitenden Notizbüchern finden Sie am Ende Hinweise, wie Sie eine höhere Genauigkeit erzielen können. Machen Sie einige Experimente, um zu sehen, ob Sie eine höhere Genauigkeit erreichen können.
+In den begleitenden Notebooks gibt es am Ende Hinweise darauf, wie man eine höhere Genauigkeit erzielen kann. Führen Sie einige Experimente durch, um zu sehen, ob Sie eine höhere Genauigkeit erreichen können.
 
-## [Quiz nach der Vorlesung](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/207)
+## [Quiz nach der Vorlesung](https://ff-quizzes.netlify.app/en/ai/quiz/14)
 
-## Überprüfung & Selbststudium
+## Rückblick & Selbststudium
 
-Während CNNs am häufigsten für Aufgaben der Computer Vision verwendet werden, sind sie im Allgemeinen gut geeignet, um Muster fester Größe zu extrahieren. Wenn wir beispielsweise mit Klängen arbeiten, möchten wir möglicherweise auch CNNs verwenden, um nach bestimmten Mustern im Audiosignal zu suchen - in diesem Fall wären die Filter eindimensional (und dieses CNN würde als 1D-CNN bezeichnet). Manchmal wird auch ein 3D-CNN verwendet, um Merkmale im mehrdimensionalen Raum zu extrahieren, wie etwa bestimmte Ereignisse, die in einem Video auftreten - CNNs können bestimmte Muster der Merkmalsänderung über die Zeit erfassen. Machen Sie einige Überprüfungen und Selbststudien zu anderen Aufgaben, die mit CNNs durchgeführt werden können.
+Während CNNs am häufigsten für Aufgaben im Bereich Computer Vision verwendet werden, eignen sie sich im Allgemeinen gut für die Extraktion von Mustern fester Größe. Wenn wir beispielsweise mit Geräuschen arbeiten, möchten wir möglicherweise auch CNNs verwenden, um nach bestimmten Mustern im Audiosignal zu suchen – in diesem Fall wären die Filter eindimensional (und dieses CNN würde als 1D-CNN bezeichnet). Außerdem wird manchmal 3D-CNN verwendet, um Merkmale in einem mehrdimensionalen Raum zu extrahieren, wie bestimmte Ereignisse, die in Videos auftreten – CNN kann bestimmte Muster von Merkmalsänderungen über die Zeit erfassen. Machen Sie eine Rückschau und ein Selbststudium über andere Aufgaben, die mit CNNs erledigt werden können.
 
 ## [Aufgabe](lab/README.md)
 
-In diesem Labor sind Sie damit beauftragt, verschiedene Katzen- und Hunderassen zu klassifizieren. Diese Bilder sind komplexer als der MNIST-Datensatz und haben höhere Dimensionen, und es gibt mehr als 10 Klassen.
+In diesem Labor sollen Sie verschiedene Katzen- und Hunderassen klassifizieren. Diese Bilder sind komplexer als der MNIST-Datensatz, haben höhere Dimensionen und es gibt mehr als 10 Klassen.
 
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit maschinellen KI-Übersetzungsdiensten übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als die maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+---
+

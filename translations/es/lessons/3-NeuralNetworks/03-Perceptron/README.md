@@ -1,8 +1,17 @@
-# Introducción a las Redes Neuronales: Perceptrón
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "c34cbba802058b6fa267e1a294d4e510",
+  "translation_date": "2025-09-23T12:11:58+00:00",
+  "source_file": "lessons/3-NeuralNetworks/03-Perceptron/README.md",
+  "language_code": "es"
+}
+-->
+# Introducción a Redes Neuronales: Perceptrón
 
-## [Cuestionario previo a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/103)
+## [Cuestionario previo a la lección](https://ff-quizzes.netlify.app/en/ai/quiz/5)
 
-Uno de los primeros intentos de implementar algo similar a una red neuronal moderna fue realizado por Frank Rosenblatt del Laboratorio Aeronáutico de Cornell en 1957. Fue una implementación de hardware llamada "Mark-1", diseñada para reconocer figuras geométricas primitivas, como triángulos, cuadrados y círculos.
+Uno de los primeros intentos de implementar algo similar a una red neuronal moderna fue realizado por Frank Rosenblatt del Laboratorio Aeronáutico de Cornell en 1957. Fue una implementación en hardware llamada "Mark-1", diseñada para reconocer figuras geométricas primitivas, como triángulos, cuadrados y círculos.
 
 |      |      |
 |--------------|-----------|
@@ -10,7 +19,7 @@ Uno de los primeros intentos de implementar algo similar a una red neuronal mode
 
 > Imágenes [de Wikipedia](https://en.wikipedia.org/wiki/Perceptron)
 
-Una imagen de entrada se representaba mediante una matriz de fotoceldas de 20x20, por lo que la red neuronal tenía 400 entradas y una salida binaria. Una red simple contenía una neurona, también llamada **unidad de lógica de umbral**. Los pesos de la red neuronal actuaban como potenciómetros que requerían ajuste manual durante la fase de entrenamiento.
+Una imagen de entrada se representaba mediante una matriz de fotoceldas de 20x20, por lo que la red neuronal tenía 400 entradas y una salida binaria. Una red simple contenía una neurona, también llamada **unidad lógica de umbral**. Los pesos de la red neuronal actuaban como potenciómetros que requerían ajuste manual durante la fase de entrenamiento.
 
 > ✅ Un potenciómetro es un dispositivo que permite al usuario ajustar la resistencia de un circuito.
 
@@ -18,33 +27,33 @@ Una imagen de entrada se representaba mediante una matriz de fotoceldas de 20x20
 
 ## Modelo de Perceptrón
 
-Supongamos que tenemos N características en nuestro modelo, en cuyo caso el vector de entrada sería un vector de tamaño N. Un perceptrón es un modelo de **clasificación binaria**, es decir, puede distinguir entre dos clases de datos de entrada. Supondremos que para cada vector de entrada x, la salida de nuestro perceptrón sería +1 o -1, dependiendo de la clase. La salida se calculará utilizando la fórmula:
+Supongamos que tenemos N características en nuestro modelo, en cuyo caso el vector de entrada sería un vector de tamaño N. Un perceptrón es un modelo de **clasificación binaria**, es decir, puede distinguir entre dos clases de datos de entrada. Asumiremos que para cada vector de entrada x, la salida de nuestro perceptrón será +1 o -1, dependiendo de la clase. La salida se calculará usando la fórmula:
 
 y(x) = f(w<sup>T</sup>x)
 
-donde f es una función de activación escalonada.
+donde f es una función de activación escalón.
 
 <!-- img src="http://www.sciweavers.org/tex2img.php?eq=f%28x%29%20%3D%20%5Cbegin%7Bcases%7D%0A%20%20%20%20%20%20%20%20%20%2B1%20%26%20x%20%5Cgeq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20-1%20%26%20x%20%3C%200%0A%20%20%20%20%20%20%20%5Cend%7Bcases%7D%20%5C%5C%0A&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="f(x) = \begin{cases} +1 & x \geq 0 \\ -1 & x < 0 \end{cases} \\" width="154" height="50" / -->
 <img src="images/activation-func.png"/>
 
 ## Entrenamiento del Perceptrón
 
-Para entrenar un perceptrón necesitamos encontrar un vector de pesos w que clasifique correctamente la mayoría de los valores, es decir, que resulte en el menor **error**. Este error E se define mediante el **criterio del perceptrón** de la siguiente manera:
+Para entrenar un perceptrón, necesitamos encontrar un vector de pesos w que clasifique la mayoría de los valores correctamente, es decir, que resulte en el menor **error**. Este error E se define mediante el **criterio del perceptrón** de la siguiente manera:
 
-E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
+E(w) = -&sum;w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
 donde:
 
 * la suma se toma sobre aquellos puntos de datos de entrenamiento i que resultan en una clasificación incorrecta
-* x<sub>i</sub> son los datos de entrada, y t<sub>i</sub> es -1 o +1 para ejemplos negativos y positivos, respectivamente.
+* x<sub>i</sub> es el dato de entrada, y t<sub>i</sub> es -1 o +1 para ejemplos negativos y positivos, respectivamente.
 
-Este criterio se considera como una función de los pesos w, y necesitamos minimizarlo. A menudo, se utiliza un método llamado **descenso por gradiente**, en el que comenzamos con algunos pesos iniciales w<sup>(0)</sup>, y luego en cada paso actualizamos los pesos según la fórmula:
+Este criterio se considera como una función de los pesos w, y necesitamos minimizarlo. A menudo se utiliza un método llamado **descenso de gradiente**, en el cual comenzamos con algunos pesos iniciales w<sup>(0)</sup>, y luego en cada paso actualizamos los pesos según la fórmula:
 
-w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
+w<sup>(t+1)</sup> = w<sup>(t)</sup> - &eta;&nabla;E(w)
 
-Aquí η es la llamada **tasa de aprendizaje**, y ∇E(w) denota el **gradiente** de E. Después de calcular el gradiente, terminamos con
+Aquí &eta; es la llamada **tasa de aprendizaje**, y &nabla;E(w) denota el **gradiente** de E. Después de calcular el gradiente, terminamos con:
 
-w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
+w<sup>(t+1)</sup> = w<sup>(t)</sup> + &sum;&eta;x<sub>i</sub>t<sub>i</sub>
 
 El algoritmo en Python se ve así:
 
@@ -70,26 +79,26 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
 
 ## Conclusión
 
-En esta lección, aprendiste sobre un perceptrón, que es un modelo de clasificación binaria, y cómo entrenarlo utilizando un vector de pesos.
+En esta lección, aprendiste sobre el perceptrón, que es un modelo de clasificación binaria, y cómo entrenarlo utilizando un vector de pesos.
 
 ## 🚀 Desafío
 
-Si deseas intentar construir tu propio perceptrón, prueba [este laboratorio en Microsoft Learn](https://docs.microsoft.com/en-us/azure/machine-learning/component-reference/two-class-averaged-perceptron?WT.mc_id=academic-77998-cacaste) que utiliza el [diseñador de Azure ML](https://docs.microsoft.com/en-us/azure/machine-learning/concept-designer?WT.mc_id=academic-77998-cacaste).
+Si te gustaría intentar construir tu propio perceptrón, prueba [este laboratorio en Microsoft Learn](https://docs.microsoft.com/en-us/azure/machine-learning/component-reference/two-class-averaged-perceptron?WT.mc_id=academic-77998-cacaste) que utiliza el [diseñador de Azure ML](https://docs.microsoft.com/en-us/azure/machine-learning/concept-designer?WT.mc_id=academic-77998-cacaste).
 
-## [Cuestionario posterior a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/203)
+## [Cuestionario posterior a la lección](https://ff-quizzes.netlify.app/en/ai/quiz/6)
 
 ## Revisión y Autoestudio
 
-Para ver cómo podemos usar el perceptrón para resolver un problema simple así como problemas de la vida real, y para continuar aprendiendo, ve al cuaderno [Perceptron](../../../../../lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb).
+Para ver cómo podemos usar el perceptrón para resolver un problema sencillo, así como problemas de la vida real, y para continuar aprendiendo, visita el cuaderno [Perceptrón](Perceptron.ipynb).
 
-Aquí hay un interesante [artículo sobre perceptrones](https://towardsdatascience.com/what-is-a-perceptron-basics-of-neural-networks-c4cfea20c590) también.
+Aquí tienes un interesante [artículo sobre perceptrones](https://towardsdatascience.com/what-is-a-perceptron-basics-of-neural-networks-c4cfea20c590).
 
 ## [Asignación](lab/README.md)
 
-En esta lección, hemos implementado un perceptrón para la tarea de clasificación binaria, y lo hemos utilizado para clasificar entre dos dígitos manuscritos. En este laboratorio, se te pide que resuelvas el problema de clasificación de dígitos por completo, es decir, determinar qué dígito es más probable que corresponda a una imagen dada.
+En esta lección, hemos implementado un perceptrón para una tarea de clasificación binaria, y lo hemos utilizado para clasificar entre dos dígitos escritos a mano. En este laboratorio, se te pide resolver el problema de clasificación de dígitos por completo, es decir, determinar qué dígito corresponde más probablemente a una imagen dada.
 
 * [Instrucciones](lab/README.md)
-* [Cuaderno](../../../../../lessons/3-NeuralNetworks/03-Perceptron/lab/PerceptronMultiClass.ipynb)
+* [Cuaderno](lab/PerceptronMultiClass.ipynb)
 
-**Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando servicios de traducción automática basados en IA. Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No somos responsables de malentendidos o malas interpretaciones que surjan del uso de esta traducción.
+---
+

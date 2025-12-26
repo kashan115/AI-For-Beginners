@@ -1,69 +1,78 @@
-# Segmentering
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "6568aaae7e0e4afed4b5d74b5b223700",
+  "translation_date": "2025-09-23T11:01:28+00:00",
+  "source_file": "lessons/4-ComputerVision/12-Segmentation/README.md",
+  "language_code": "sw"
+}
+-->
+# Ugawaji
 
-Vi har tidigare lärt oss om Objektigenkänning, som gör det möjligt för oss att lokalisera objekt i bilden genom att förutsäga deras *ramar*. Men för vissa uppgifter behöver vi inte bara ramar, utan också mer exakt lokalisering av objekt. Denna uppgift kallas för **segmentering**.
+Tumejifunza awali kuhusu Utambuzi wa Vitu, ambao hutuwezesha kutambua vitu kwenye picha kwa kutabiri *maboksi ya mipaka*. Hata hivyo, kwa baadhi ya kazi hatuhitaji tu maboksi ya mipaka, bali pia utambuzi wa vitu kwa usahihi zaidi. Kazi hii inaitwa **ugawaji**.
 
-## [För-lärare quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/112)
+## [Maswali ya awali ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/23)
 
-Segmentering kan ses som **pixelkategorisering**, där vi för **varje** pixel i bilden måste förutsäga dess klass (*bakgrund* är en av klasserna). Det finns två huvudalgoritmer för segmentering:
+Ugawaji unaweza kuonekana kama **uainishaji wa pikseli**, ambapo kwa **kila** pikseli ya picha tunapaswa kutabiri darasa lake (*mandharinyuma* ikiwa mojawapo ya madarasa). Kuna mbinu kuu mbili za ugawaji:
 
-* **Semantisk segmentering** berättar endast pixelns klass och gör ingen åtskillnad mellan olika objekt av samma klass.
-* **Instanssegmentering** delar klasser i olika instanser.
+* **Ugawaji wa kisemantiki** huonyesha tu darasa la pikseli, na haifanyi tofauti kati ya vitu tofauti vya darasa moja.
+* **Ugawaji wa mfano** hugawanya madarasa katika mifano tofauti.
 
-För instanssegmentering är dessa får olika objekt, men för semantisk segmentering representeras alla får av en klass.
+Kwa ugawaji wa mfano, kondoo hawa ni vitu tofauti, lakini kwa ugawaji wa kisemantiki kondoo wote wanawakilishwa na darasa moja.
 
 <img src="images/instance_vs_semantic.jpeg" width="50%">
 
-> Bild från [detta blogginlägg](https://nirmalamurali.medium.com/image-classification-vs-semantic-segmentation-vs-instance-segmentation-625c33a08d50)
+> Picha kutoka [makala hii ya blogu](https://nirmalamurali.medium.com/image-classification-vs-semantic-segmentation-vs-instance-segmentation-625c33a08d50)
 
-Det finns olika neurala arkitekturer för segmentering, men de har alla samma struktur. På ett sätt liknar det autoencodern du lärde dig om tidigare, men istället för att dekonstruera den ursprungliga bilden, är vårt mål att dekonstruera en **mask**. Således har ett segmenteringsnätverk följande delar:
+Kuna usanifu tofauti wa neva kwa ugawaji, lakini zote zina muundo sawa. Kwa namna fulani, ni sawa na autoencoder uliyojifunza awali, lakini badala ya kuvunja picha ya asili, lengo letu ni kuvunja **maski**. Kwa hivyo, mtandao wa ugawaji una sehemu zifuatazo:
 
-* **Encoder** extraherar funktioner från inmatningsbilden.
-* **Decoder** omvandlar dessa funktioner till **maskbilden**, med samma storlek och antal kanaler motsvarande antalet klasser.
+* **Encoder** huchukua vipengele kutoka kwenye picha ya ingizo.
+* **Decoder** hubadilisha vipengele hivyo kuwa **picha ya maski**, yenye ukubwa sawa na idadi ya njia zinazolingana na idadi ya madarasa.
 
 <img src="images/segm.png" width="80%">
 
-> Bild från [denna publikation](https://arxiv.org/pdf/2001.05566.pdf)
+> Picha kutoka [chapisho hili](https://arxiv.org/pdf/2001.05566.pdf)
 
-Vi bör särskilt nämna förlustfunktionen som används för segmentering. När vi använder klassiska autoencoders behöver vi mäta likheten mellan två bilder, och vi kan använda medelkvadratfel (MSE) för att göra det. Vid segmentering representerar varje pixel i målmaskbilden klassnumret (one-hot-kodad längs den tredje dimensionen), så vi behöver använda förlustfunktioner specifika för klassificering - korsentropiförlust, genomsnittlig över alla pixlar. Om masken är binär - används **binär korsentropiförlust** (BCE).
+Tunapaswa kutaja hasa kazi ya hasara inayotumika kwa ugawaji. Tunapotumia autoencoders za kawaida, tunahitaji kupima kufanana kati ya picha mbili, na tunaweza kutumia kosa la mraba wa wastani (MSE) kufanya hivyo. Katika ugawaji, kila pikseli kwenye picha ya maski ya lengo inawakilisha namba ya darasa (imekodwa kwa njia moja kwenye kipimo cha tatu), kwa hivyo tunahitaji kutumia kazi za hasara maalum kwa uainishaji - hasara ya msalaba-entropy, iliyowekwa wastani kwa pikseli zote. Ikiwa maski ni ya binary - **binary cross-entropy loss** (BCE) hutumika.
 
-> ✅ One-hot-kodning är ett sätt att koda en klassetikett till en vektor av längd som är lika med antalet klasser. Ta en titt på [denna artikel](https://datagy.io/sklearn-one-hot-encode/) om denna teknik.
+> ✅ Ukodaji wa njia moja ni njia ya kuweka lebo ya darasa kwenye vekta yenye urefu sawa na idadi ya madarasa. Angalia [makala hii](https://datagy.io/sklearn-one-hot-encode/) kuhusu mbinu hii.
 
-## Segmentering för Medicinsk Avbildning
+## Ugawaji kwa Picha za Matibabu
 
-I denna lektion kommer vi att se segmentering i praktiken genom att träna nätverket att känna igen mänskliga nevi (även kända som födelsemärken) på medicinska bilder. Vi kommer att använda <a href="https://www.fc.up.pt/addi/ph2%20database.html">PH<sup>2</sup> Databas</a> av dermatoskopibilder som bildkälla. Denna dataset innehåller 200 bilder av tre klasser: typiskt nevus, atypiskt nevus och melanom. Alla bilder innehåller också en motsvarande **mask** som omger nevuset.
+Katika somo hili, tutaona ugawaji ukifanya kazi kwa kufundisha mtandao kutambua nevi za binadamu (pia zinajulikana kama moles) kwenye picha za matibabu. Tutatumia <a href="https://www.fc.up.pt/addi/ph2%20database.html">Hifadhidata ya PH<sup>2</sup></a> ya picha za dermoscopy kama chanzo cha picha. Hifadhidata hii ina picha 200 za madarasa matatu: nevus ya kawaida, nevus isiyo ya kawaida, na melanoma. Picha zote pia zina **maski** inayotambulisha nevus.
 
-> ✅ Denna teknik är särskilt lämplig för denna typ av medicinsk avbildning, men vilka andra verkliga tillämpningar kan du föreställa dig?
+> ✅ Mbinu hii inafaa hasa kwa aina hii ya picha za matibabu, lakini ni matumizi gani mengine ya ulimwengu halisi unayoweza kufikiria?
 
 <img alt="navi" src="images/navi.png"/>
 
-> Bild från PH<sup>2</sup> Databas
+> Picha kutoka Hifadhidata ya PH<sup>2</sup>
 
-Vi kommer att träna en modell för att segmentera vilket nevus som helst från dess bakgrund.
+Tutafundisha mfano wa kugawa nevus yoyote kutoka kwenye mandharinyuma yake.
 
-## ✍️ Övningar: Semantisk Segmentering
+## ✍️ Mazoezi: Ugawaji wa Kisemantiki
 
-Öppna anteckningarna nedan för att lära dig mer om olika arkitekturer för semantisk segmentering, öva på att arbeta med dem och se dem i aktion.
+Fungua daftari zilizo hapa chini ili ujifunze zaidi kuhusu usanifu tofauti wa ugawaji wa kisemantiki, ufanye mazoezi ya kufanya kazi nao, na uone jinsi wanavyofanya kazi.
 
-* [Semantisk Segmentering Pytorch](../../../../../lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationPytorch.ipynb)
-* [Semantisk Segmentering TensorFlow](../../../../../lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationTF.ipynb)
+* [Ugawaji wa Kisemantiki Pytorch](SemanticSegmentationPytorch.ipynb)
+* [Ugawaji wa Kisemantiki TensorFlow](SemanticSegmentationTF.ipynb)
 
-## [Efter-lärare quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/212)
+## [Maswali ya baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/24)
 
-## Slutsats
+## Hitimisho
 
-Segmentering är en mycket kraftfull teknik för bildklassificering, som går bortom ramar till klassificering på pixelnivå. Det är en teknik som används inom medicinsk avbildning, bland andra tillämpningar.
+Ugawaji ni mbinu yenye nguvu sana kwa uainishaji wa picha, ikihama kutoka maboksi ya mipaka hadi uainishaji wa kiwango cha pikseli. Ni mbinu inayotumika katika picha za matibabu, miongoni mwa matumizi mengine.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Kroppsegmentering är bara en av de vanliga uppgifterna vi kan utföra med bilder av människor. Andra viktiga uppgifter inkluderar **skelettdetektion** och **ställningsdetektion**. Prova [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) biblioteket för att se hur ställningsdetektion kan användas.
+Ugawaji wa mwili ni mojawapo ya kazi za kawaida tunazoweza kufanya na picha za watu. Kazi nyingine muhimu ni pamoja na **utambuzi wa mifupa** na **utambuzi wa mkao**. Jaribu maktaba ya [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) ili uone jinsi utambuzi wa mkao unavyoweza kutumika.
 
-## Granskning & Självstudie
+## Mapitio na Kujifunza Binafsi
 
-Denna [wikipediaartikel](https://wikipedia.org/wiki/Image_segmentation) erbjuder en bra översikt över de olika tillämpningarna av denna teknik. Lär dig mer på egen hand om underområdena för instanssegmentering och panoptisk segmentering inom detta forskningsområde.
+Makala hii ya [Wikipedia](https://wikipedia.org/wiki/Image_segmentation) inatoa muhtasari mzuri wa matumizi mbalimbali ya mbinu hii. Jifunze zaidi peke yako kuhusu matawi madogo ya Ugawaji wa Mfano na Ugawaji wa Panoptiki katika uwanja huu wa uchunguzi.
 
-## [Uppgift](lab/README.md)
+## [Kazi ya nyumbani](lab/README.md)
 
-I detta laboratorium, prova **segmentering av människokroppen** med [Segmentation Full Body MADS Dataset](https://www.kaggle.com/datasets/tapakah68/segmentation-full-body-mads-dataset) från Kaggle.
+Katika maabara hii, jaribu **ugawaji wa mwili wa binadamu** ukitumia [Hifadhidata ya Segmentation Full Body MADS](https://www.kaggle.com/datasets/tapakah68/segmentation-full-body-mads-dataset) kutoka Kaggle.
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+---
+

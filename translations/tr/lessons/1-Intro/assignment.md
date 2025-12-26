@@ -1,6 +1,19 @@
-# Oyun Jamı
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "a334df77a82aaaf2a29c77065d3e481e",
+  "translation_date": "2025-11-18T21:27:04+00:00",
+  "source_file": "lessons/1-Intro/assignment.md",
+  "language_code": "tr"
+}
+-->
+# Oyun Maratonu
 
-Oyunlar, AI ve ML'deki gelişmelerden yoğun bir şekilde etkilenen bir alandır. Bu ödevde, AI'nın evriminden etkilenen ve hoşlandığınız bir oyun hakkında kısa bir makale yazın. Bu oyun, çeşitli bilgisayar işleme sistemlerinden etkilenmiş kadar eski olmalıdır. İyi bir örnek olarak Satranç veya Go verilebilir, ancak Pong veya Pac-Man gibi video oyunlarına da göz atabilirsiniz. Oyununun geçmişini, güncel durumunu ve AI geleceğini tartışan bir deneme yazın.
+Oyunlar, yapay zeka (AI) ve makine öğrenimi (ML) gelişmelerinden büyük ölçüde etkilenmiş bir alandır. Bu ödevde, yapay zekanın evrimiyle şekillenmiş bir oyun hakkında kısa bir makale yazın. Seçtiğiniz oyun, birden fazla bilgisayar işlem sistemi türünden etkilenmiş kadar eski bir oyun olmalıdır. İyi bir örnek Satranç veya Go olabilir, ancak Pong ya da Pac-Man gibi video oyunlarına da göz atabilirsiniz. Oyunun geçmişini, bugününü ve yapay zeka ile geleceğini tartışan bir makale yazın.
 
-**Açıklama**:  
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk konusunda çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen dikkate alınız. Yerel dildeki orijinal belge, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanılması sonucu ortaya çıkan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:  
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

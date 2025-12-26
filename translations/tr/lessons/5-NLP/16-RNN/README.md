@@ -1,86 +1,96 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "e2273cc150380a5e191903cea858f021",
+  "translation_date": "2025-09-23T08:46:25+00:00",
+  "source_file": "lessons/5-NLP/16-RNN/README.md",
+  "language_code": "tr"
+}
+-->
 # Tekrarlayan Sinir Ağları
 
-## [Ders öncesi quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/116)
+## [Ders Öncesi Quiz](https://ff-quizzes.netlify.app/en/ai/quiz/31)
 
-Önceki bölümlerde, metnin zengin anlamsal temsillerini ve gömme katmanlarının üstünde basit bir doğrusal sınıflayıcı kullanıyorduk. Bu mimari, bir cümledeki kelimelerin toplam anlamını yakalamaya çalışır, ancak kelimelerin **sırasını** dikkate almaz; çünkü gömme katmanları üzerindeki toplama işlemi, bu bilgiyi orijinal metinden çıkarmıştır. Bu modeller kelime sıralamasını modelleyemediğinden, metin üretimi veya soru yanıtlama gibi daha karmaşık veya belirsiz görevleri yerine getiremezler.
+Önceki bölümlerde, metnin zengin anlamsal temsillerini ve gömme katmanlarının üzerine basit bir doğrusal sınıflandırıcı kullandık. Bu mimarinin yaptığı şey, bir cümledeki kelimelerin toplu anlamını yakalamaktır, ancak gömme katmanlarının üzerindeki toplama işlemi, orijinal metindeki **kelime sırasını** dikkate almaz. Bu modeller kelime sırasını modelleyemediği için, metin üretimi veya soru yanıtlama gibi daha karmaşık veya belirsiz görevleri çözemezler.
 
-Metin dizisinin anlamını yakalamak için, **tekrarlayan sinir ağı** (RNN) adı verilen başka bir sinir ağı mimarisi kullanmamız gerekiyor. RNN'de, cümlemizi bir sembolü bir seferde geçiriyoruz ve ağ, ardından bir **durum** üretiyor; bu durumu bir sonraki sembol ile birlikte tekrar ağa iletiyoruz.
+Metin dizisinin anlamını yakalamak için, **tekrarlayan sinir ağı** veya RNN adı verilen başka bir sinir ağı mimarisi kullanmamız gerekir. RNN'de, cümlemizi ağdan bir sembol biriminde geçiririz ve ağ bir **durum** üretir, bu durumu bir sonraki sembolle birlikte tekrar ağa geçiririz.
 
 ![RNN](../../../../../translated_images/rnn.27f5c29c53d727b546ad3961637a267f0fe9ec5ab01f2a26a853c92fcefbb574.tr.png)
 
-> Yazarın resmi
+> Görsel yazar tarafından oluşturulmuştur
 
-X<sub>0</sub>,...,X<sub>n</sub> token dizisi verildiğinde, RNN bir sinir ağı blokları dizisi oluşturur ve bu diziyi geri yayılım kullanarak uçtan uca eğitir. Her ağ bloğu, bir çift (X<sub>i</sub>,S<sub>i</sub>) alır ve S<sub>i+1</sub> olarak bir sonuç üretir. Son durum S<sub>n</sub> veya (çıkış Y<sub>n</sub>) bir doğrusal sınıflayıcıya gider ve sonucu üretir. Tüm ağ blokları aynı ağırlıkları paylaşır ve tek bir geri yayılım geçişi kullanılarak uçtan uca eğitilir.
+X<sub>0</sub>,...,X<sub>n</sub> giriş dizisi verildiğinde, RNN bir sinir ağı blokları dizisi oluşturur ve bu diziyi uçtan uca geri yayılım kullanarak eğitir. Her ağ bloğu bir çift (X<sub>i</sub>,S<sub>i</sub>) alır ve sonuç olarak S<sub>i+1</sub> üretir. Son durum S<sub>n</sub> veya (çıktı Y<sub>n</sub>) sonucu üretmek için doğrusal bir sınıflandırıcıya gider. Tüm ağ blokları aynı ağırlıkları paylaşır ve tek bir geri yayılım geçişiyle uçtan uca eğitilir.
 
-Durum vektörleri S<sub>0</sub>,...,S<sub>n</sub> ağdan geçirilerek, kelimeler arasındaki sıralı bağımlılıkları öğrenebilir. Örneğin, dizide *not* kelimesi geçtiğinde, belirli öğeleri durum vektöründe olumsuzlamak için öğrenebiliriz, bu da olumsuzluk yaratır.
+Durum vektörleri S<sub>0</sub>,...,S<sub>n</sub> ağdan geçtiği için, ağ kelimeler arasındaki sıralı bağımlılıkları öğrenebilir. Örneğin, dizide *değil* kelimesi bir yerde geçtiğinde, durum vektöründeki belirli öğeleri olumsuzlamak için öğrenebilir, bu da olumsuzlama ile sonuçlanır.
 
-> ✅ Yukarıdaki resimdeki tüm RNN bloklarının ağırlıkları paylaşıldığından, aynı resim, ağın çıkış durumunu girdi olarak geri ileten bir tekrarlayan geri besleme döngüsü ile bir blok (sağda) olarak temsil edilebilir.
+> ✅ Yukarıdaki resimdeki tüm RNN bloklarının ağırlıkları paylaşıldığından, aynı resim bir geri besleme döngüsü olan tek bir blok (sağda) olarak temsil edilebilir; bu döngü, ağın çıktı durumunu tekrar girişe geçirir.
 
-## RNN Hücresinin Anatomisi
+## Bir RNN Hücresinin Anatomisi
 
-Basit bir RNN hücresinin nasıl organize edildiğine bakalım. Önceki durum S<sub>i-1</sub> ve mevcut sembol X<sub>i</sub> olarak girdileri kabul eder ve çıkış durumu S<sub>i</sub> üretmelidir (ve bazen, üretken ağlarla olduğu gibi, başka bir çıkış Y<sub>i</sub> ile de ilgileniyoruz).
+Basit bir RNN hücresinin nasıl organize edildiğini görelim. Önceki durum S<sub>i-1</sub> ve mevcut sembol X<sub>i</sub>'yi giriş olarak alır ve çıktı durumu S<sub>i</sub>'yi üretmek zorundadır (ve bazen, üretici ağlarda olduğu gibi, başka bir çıktı Y<sub>i</sub> ile de ilgileniriz).
 
-Basit bir RNN hücresinin içinde iki ağırlık matris vardır: biri bir giriş sembolünü dönüştürür (buna W diyelim), diğeri ise bir giriş durumunu dönüştürür (H). Bu durumda, ağın çıktısı σ(W×X<sub>i</sub>+H×S<sub>i-1</sub>+b) olarak hesaplanır; burada σ aktivasyon fonksiyonu ve b ek bir önyargıdır.
+Basit bir RNN hücresinin içinde iki ağırlık matrisi vardır: biri bir giriş sembolünü dönüştürür (buna W diyelim), diğeri ise bir giriş durumunu dönüştürür (H). Bu durumda ağın çıktısı &sigma;(W&times;X<sub>i</sub>+H&times;S<sub>i-1</sub>+b) olarak hesaplanır, burada &sigma; aktivasyon fonksiyonu ve b ek bir bias'tır.
 
-<img alt="RNN Hücre Anatomisi" src="images/rnn-anatomy.png" width="50%"/>
+<img alt="RNN Hücresi Anatomisi" src="images/rnn-anatomy.png" width="50%"/>
 
-> Yazarın resmi
+> Görsel yazar tarafından oluşturulmuştur
 
-Birçok durumda, giriş tokenları RNN'ye girmeden önce gömme katmanından geçirilir, bu da boyutu azaltır. Bu durumda, giriş vektörlerinin boyutu *emb_size* ve durum vektörü *hid_size* ise, W'nin boyutu *emb_size*×*hid_size* ve H'nin boyutu *hid_size*×*hid_size* olur.
+Çoğu durumda, giriş token'ları RNN'ye girmeden önce boyutları düşürmek için gömme katmanından geçirilir. Bu durumda, eğer giriş vektörlerinin boyutu *emb_size* ve durum vektörünün boyutu *hid_size* ise, W'nin boyutu *emb_size*&times;*hid_size*, H'nin boyutu ise *hid_size*&times;*hid_size* olur.
 
 ## Uzun Kısa Süreli Bellek (LSTM)
 
-Klasik RNN'lerin en büyük problemlerinden biri, sözde **kaybolan gradyanlar** problemidir. RNN'ler, tek bir geri yayılım geçişinde uçtan uca eğitildiğinden, hatayı ağın ilk katmanlarına iletmekte zorluk çeker ve dolayısıyla ağ, uzak tokenlar arasındaki ilişkileri öğrenemez. Bu problemi aşmanın yollarından biri, **açık durum yönetimi** sağlamak için sözde **kapılar** kullanmaktır. Bu türde iki iyi bilinen mimari vardır: **Uzun Kısa Süreli Bellek** (LSTM) ve **Kapalı Röle Birimi** (GRU).
+Klasik RNN'lerin ana sorunlarından biri, **kaybolan gradyanlar** problemidir. RNN'ler uçtan uca tek bir geri yayılım geçişiyle eğitildiğinden, hatayı ağın ilk katmanlarına iletmekte zorlanır ve bu nedenle ağ uzak token'lar arasındaki ilişkileri öğrenemez. Bu sorunu önlemenin yollarından biri, **kapılar** kullanarak **açık durum yönetimi** tanıtmaktır. Bu tür iki iyi bilinen mimari vardır: **Uzun Kısa Süreli Bellek** (LSTM) ve **Kapılı Röle Birimi** (GRU).
 
-![Uzun Kısa Süreli Bellek hücresini gösteren bir resim](../../../../../lessons/5-NLP/16-RNN/images/long-short-term-memory-cell.svg)
+![Uzun Kısa Süreli Bellek hücresine bir örnek gösteren görsel](../../../../../lessons/5-NLP/16-RNN/images/long-short-term-memory-cell.svg)
 
-> Resim kaynağı TBD
+> Görsel kaynağı belirlenecek
 
-LSTM Ağı, RNN'e benzer bir şekilde organize edilmiştir, ancak katmanlar arasında geçirilen iki durum vardır: gerçek durum C ve gizli vektör H. Her birimde, gizli vektör H<sub>i</sub>, giriş X<sub>i</sub> ile birleştirilir ve durum C üzerindeki etkilerini **kapılar** aracılığıyla kontrol ederler. Her kapı, sigmoid aktivasyona sahip bir sinir ağıdır (çıkış [0,1] aralığında), bu da durum vektörü ile çarpıldığında bit düzeyinde bir maske olarak düşünülebilir. Yukarıdaki resimde soldan sağa doğru şu kapılar vardır:
+LSTM Ağı, RNN'ye benzer bir şekilde organize edilmiştir, ancak katmandan katmana iki durum aktarılır: gerçek durum C ve gizli vektör H. Her birimde, gizli vektör H<sub>i</sub> giriş X<sub>i</sub> ile birleştirilir ve bunlar **kapılar** aracılığıyla durum C'de ne olacağını kontrol eder. Her kapı, sigmoid aktivasyonlu (çıktı aralığı [0,1]) bir sinir ağıdır ve durum vektörüyle çarpıldığında bit düzeyinde bir maske olarak düşünülebilir. Yukarıdaki resimde soldan sağa doğru şu kapılar vardır:
 
-* **Unutma kapısı**, bir gizli vektör alır ve vektör C'nin hangi bileşenlerini unutmamız gerektiğini ve hangilerini geçirmemiz gerektiğini belirler.
-* **Giriş kapısı**, giriş ve gizli vektörlerden bazı bilgileri alır ve bunu duruma ekler.
-* **Çıkış kapısı**, durumu *tanh* aktivasyonuna sahip bir doğrusal katman aracılığıyla dönüştürür, ardından yeni bir durum C<sub>i+1</sub> üretmek için gizli vektör H<sub>i</sub> kullanarak bazı bileşenlerini seçer.
+* **Unutma kapısı**, gizli bir vektör alır ve C vektörünün hangi bileşenlerini unutmamız gerektiğini ve hangilerini geçirmemiz gerektiğini belirler.
+* **Giriş kapısı**, giriş ve gizli vektörlerden bazı bilgileri alır ve duruma ekler.
+* **Çıkış kapısı**, durumu *tanh* aktivasyonlu bir doğrusal katman aracılığıyla dönüştürür, ardından yeni bir durum C<sub>i+1</sub> üretmek için gizli vektör H<sub>i</sub>'yi kullanarak bazı bileşenlerini seçer.
 
-Durum C'nin bileşenleri, açılıp kapanabilen bazı bayraklar olarak düşünülebilir. Örneğin, dizide *Alice* adını bulduğumuzda, bunun bir kadın karakteri ifade ettiğini varsayabiliriz ve cümlede bir kadın isim olduğu bayrağını açarız. Daha sonra *and Tom* ifadeleri ile karşılaştığımızda, çoğul bir isim olduğuna dair bayrağı açarız. Böylece durumu manipüle ederek cümle parçalarının dilbilgisel özelliklerini takip edebiliriz.
+Durum C'nin bileşenleri, açılıp kapatılabilen bayraklar olarak düşünülebilir. Örneğin, dizide *Alice* adını gördüğümüzde, bunun bir kadın karaktere atıfta bulunduğunu varsayabilir ve cümlede bir kadın isim olduğunu belirten bayrağı kaldırabiliriz. Daha sonra *ve Tom* ifadelerini gördüğümüzde, çoğul bir isim olduğunu belirten bayrağı kaldırabiliriz. Böylece, durumu manipüle ederek cümle parçalarının dilbilgisel özelliklerini takip edebiliriz.
 
-> ✅ LSTM'nin iç işleyişini anlamak için harika bir kaynak, Christopher Olah tarafından yazılmış [LSTM Ağlarını Anlamak](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) adlı makaledir.
+> ✅ LSTM'nin iç işleyişini anlamak için mükemmel bir kaynak, Christopher Olah'ın [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) adlı harika makalesidir.
 
-## İki Yönlü ve Çok Katmanlı RNN'ler
+## Çift Yönlü ve Çok Katmanlı RNN'ler
 
-Bir dizinin başlangıcından sonuna doğru tek yönde çalışan tekrarlayan ağları tartıştık. Bu doğal görünmektedir, çünkü okumaya ve konuşmayı dinlemeye benzer. Ancak, birçok pratik durumda girdi dizisine rastgele erişimimiz olduğundan, tekrarlayan hesaplamayı her iki yönde de çalıştırmak mantıklı olabilir. Bu tür ağlara **iki yönlü** RNN'ler denir. İki yönlü bir ağla çalışırken, her yön için iki gizli durum vektörüne ihtiyacımız olacaktır.
+Şimdiye kadar, bir dizinin başından sonuna doğru tek yönlü çalışan tekrarlayan ağları tartıştık. Bu doğal görünüyor, çünkü okuma ve konuşmayı dinleme şeklimize benziyor. Ancak, birçok pratik durumda giriş dizisine rastgele erişimimiz olduğundan, tekrarlayan hesaplamayı her iki yönde çalıştırmak mantıklı olabilir. Bu tür ağlara **çift yönlü** RNN'ler denir. Çift yönlü bir ağla çalışırken, her yön için birer gizli durum vektörüne ihtiyacımız olacaktır.
 
-Bir Tekrarlayan ağ, ister tek yönlü ister iki yönlü olsun, bir dizideki belirli kalıpları yakalar ve bunları bir durum vektöründe depolayabilir veya çıkışa iletebilir. Konvolüsyonel ağlarla olduğu gibi, ilk katmanın çıkışından daha yüksek düzeyde kalıpları yakalamak ve ilk katmanın çıkardığı düşük düzey kalıplardan inşa etmek için üstte başka bir tekrarlayan katman oluşturabiliriz. Bu, **çok katmanlı RNN** kavramına götürür; bu, bir önceki katmanın çıktısının bir sonraki katmana girdi olarak iletildiği iki veya daha fazla tekrarlayan ağdan oluşur.
+Tek yönlü veya çift yönlü bir tekrarlayan ağ, bir dizideki belirli kalıpları yakalar ve bunları bir durum vektörüne depolayabilir veya çıktıya aktarabilir. Konvolüsyonel ağlarda olduğu gibi, ilk katman tarafından çıkarılan düşük seviyeli kalıplardan daha yüksek seviyeli kalıpları yakalamak ve inşa etmek için ilk katmanın üzerine başka bir tekrarlayan katman inşa edebiliriz. Bu bizi, önceki katmanın çıktısının bir sonraki katmana giriş olarak geçtiği iki veya daha fazla tekrarlayan ağdan oluşan bir **çok katmanlı RNN** kavramına götürür.
 
-![Çok Katmanlı uzun-kısa süreli bellek RNN'yi gösteren bir resim](../../../../../translated_images/multi-layer-lstm.dd975e29bb2a59fe58b429db833932d734c81f211cad2783797a9608984acb8c.tr.jpg)
+![Çok katmanlı uzun kısa süreli bellek RNN'yi gösteren görsel](../../../../../translated_images/multi-layer-lstm.dd975e29bb2a59fe58b429db833932d734c81f211cad2783797a9608984acb8c.tr.jpg)
 
-*Resim [bu harika yazıdan](https://towardsdatascience.com/from-a-lstm-cell-to-a-multilayer-lstm-network-with-pytorch-2899eb5696f3) Fernando López tarafından alınmıştır.*
+*[Bu harika yazıdan](https://towardsdatascience.com/from-a-lstm-cell-to-a-multilayer-lstm-network-with-pytorch-2899eb5696f3) Fernando López tarafından alınmıştır.*
 
-## ✍️ Alıştırmalar: Gömme
+## ✍️ Alıştırmalar: Gömme Katmanları
 
-Aşağıdaki defterlerde öğrenmeye devam edin:
+Aşağıdaki not defterlerinde öğrenmeye devam edin:
 
-* [PyTorch ile RNN'ler](../../../../../lessons/5-NLP/16-RNN/RNNPyTorch.ipynb)
-* [TensorFlow ile RNN'ler](../../../../../lessons/5-NLP/16-RNN/RNNTF.ipynb)
+* [PyTorch ile RNN'ler](RNNPyTorch.ipynb)
+* [TensorFlow ile RNN'ler](RNNTF.ipynb)
 
 ## Sonuç
 
-Bu birimde, RNN'lerin dizi sınıflandırması için kullanılabileceğini gördük, ancak aslında metin üretimi, makine çevirisi ve daha fazlası gibi birçok başka görevi de yerine getirebilirler. Bu görevleri bir sonraki birimde ele alacağız.
+Bu birimde, RNN'lerin dizi sınıflandırması için kullanılabileceğini gördük, ancak aslında metin üretimi, makine çevirisi ve daha fazlası gibi birçok görevi de yerine getirebilirler. Bu görevleri bir sonraki birimde ele alacağız.
 
-## 🚀 Zorluk
+## 🚀 Meydan Okuma
 
 LSTM'ler hakkında bazı literatürleri okuyun ve uygulamalarını düşünün:
 
-- [Grid Uzun Kısa Süreli Bellek](https://arxiv.org/pdf/1507.01526v1.pdf)
-- [Göster, Katıl ve Söyle: Görsel Dikkat ile Sinirsel Görüntü Başlığı Üretimi](https://arxiv.org/pdf/1502.03044v2.pdf)
+- [Grid Long Short-Term Memory](https://arxiv.org/pdf/1507.01526v1.pdf)
+- [Show, Attend and Tell: Neural Image Caption
+Generation with Visual Attention](https://arxiv.org/pdf/1502.03044v2.pdf)
 
-## [Ders sonrası quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/216)
+## [Ders Sonrası Quiz](https://ff-quizzes.netlify.app/en/ai/quiz/32)
 
-## İnceleme & Kendi Kendine Çalışma
+## Gözden Geçirme ve Kendi Kendine Çalışma
 
-- [LSTM Ağlarını Anlamak](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) Christopher Olah tarafından.
+- Christopher Olah'ın [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) adlı makalesi.
 
-## [Ödev: Defterler](assignment.md)
+## [Ödev: Not Defterleri](assignment.md)
 
-**Açıklama**:  
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanılması sonucu ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumlama için sorumluluk kabul etmiyoruz.
+---
+

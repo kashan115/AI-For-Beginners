@@ -1,123 +1,132 @@
-# Frameworks de Redes Neurais
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "ddd216f558a255260a9374008002c971",
+  "translation_date": "2025-09-23T08:33:54+00:00",
+  "source_file": "lessons/3-NeuralNetworks/05-Frameworks/README.md",
+  "language_code": "it"
+}
+-->
+# Framework per Reti Neurali
 
-Como já aprendemos, para treinar redes neurais de forma eficiente, precisamos fazer duas coisas:
+Come abbiamo già appreso, per allenare reti neurali in modo efficiente dobbiamo fare due cose:
 
-* Operar em tensores, por exemplo, multiplicar, adicionar e calcular algumas funções como sigmoid ou softmax
-* Calcular gradientes de todas as expressões, a fim de realizar a otimização por descida de gradiente
+* Operare sui tensori, ad esempio moltiplicare, sommare e calcolare alcune funzioni come sigmoid o softmax
+* Calcolare i gradienti di tutte le espressioni, per eseguire l'ottimizzazione tramite discesa del gradiente
 
-## [Questionário pré-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/105)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/9)
 
-Enquanto a biblioteca `numpy` pode realizar a primeira parte, precisamos de algum mecanismo para calcular gradientes. No [nosso framework](../../../../../lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb) que desenvolvemos na seção anterior, tivemos que programar manualmente todas as funções derivadas dentro do método `backward`, que realiza a retropropagação. Idealmente, um framework deve nos oferecer a oportunidade de calcular gradientes de *qualquer expressão* que possamos definir.
+Mentre la libreria `numpy` può gestire la prima parte, abbiamo bisogno di un meccanismo per calcolare i gradienti. Nel [nostro framework](../04-OwnFramework/OwnFramework.ipynb) che abbiamo sviluppato nella sezione precedente, abbiamo dovuto programmare manualmente tutte le funzioni derivate all'interno del metodo `backward`, che esegue la retropropagazione. Idealmente, un framework dovrebbe offrirci la possibilità di calcolare i gradienti di *qualsiasi espressione* che possiamo definire.
 
-Outra coisa importante é ser capaz de realizar cálculos em GPU ou em outras unidades de computação especializadas, como o [TPU](https://en.wikipedia.org/wiki/Tensor_Processing_Unit). O treinamento de redes neurais profundas exige *muitos* cálculos, e a capacidade de paralelizar esses cálculos em GPUs é muito importante.
+Un altro aspetto importante è la capacità di eseguire calcoli su GPU o su altre unità di calcolo specializzate, come [TPU](https://en.wikipedia.org/wiki/Tensor_Processing_Unit). L'allenamento di reti neurali profonde richiede *molti* calcoli, e poter parallelizzare questi calcoli su GPU è fondamentale.
 
-> ✅ O termo 'paralelizar' significa distribuir os cálculos entre vários dispositivos.
+> ✅ Il termine 'parallelizzare' significa distribuire i calcoli su più dispositivi.
 
-Atualmente, os dois frameworks de redes neurais mais populares são: [TensorFlow](http://TensorFlow.org) e [PyTorch](https://pytorch.org/). Ambos fornecem uma API de baixo nível para operar com tensores tanto em CPU quanto em GPU. Além da API de baixo nível, também existe uma API de nível superior, chamada [Keras](https://keras.io/) e [PyTorch Lightning](https://pytorchlightning.ai/) respectivamente.
+Attualmente, i due framework per reti neurali più popolari sono: [TensorFlow](http://TensorFlow.org) e [PyTorch](https://pytorch.org/). Entrambi forniscono un'API di basso livello per operare con tensori sia su CPU che su GPU. Oltre all'API di basso livello, esiste anche un'API di alto livello, chiamata [Keras](https://keras.io/) e [PyTorch Lightning](https://pytorchlightning.ai/) rispettivamente.
 
-API de Baixo Nível | [TensorFlow](http://TensorFlow.org) | [PyTorch](https://pytorch.org/)
--------------------|-------------------------------------|--------------------------------
-API de Alto Nível  | [Keras](https://keras.io/) | [PyTorch Lightning](https://pytorchlightning.ai/)
+API di basso livello | [TensorFlow](http://TensorFlow.org) | [PyTorch](https://pytorch.org/)
+----------------------|-------------------------------------|--------------------------------
+API di alto livello   | [Keras](https://keras.io/)         | [PyTorch Lightning](https://pytorchlightning.ai/)
 
-**APIs de baixo nível** em ambos os frameworks permitem que você construa os chamados **gráficos computacionais**. Este gráfico define como calcular a saída (geralmente a função de perda) com parâmetros de entrada dados, e pode ser enviado para computação na GPU, se disponível. Existem funções para diferenciar esse gráfico computacional e calcular gradientes, que podem então ser usados para otimizar os parâmetros do modelo.
+**Le API di basso livello** in entrambi i framework permettono di costruire i cosiddetti **grafi computazionali**. Questo grafo definisce come calcolare l'output (di solito la funzione di perdita) con parametri di input dati, e può essere inviato per il calcolo su GPU, se disponibile. Esistono funzioni per differenziare questo grafo computazionale e calcolare i gradienti, che possono poi essere utilizzati per ottimizzare i parametri del modello.
 
-**APIs de alto nível** consideram essencialmente redes neurais como uma **sequência de camadas**, tornando a construção da maioria das redes neurais muito mais fácil. O treinamento do modelo geralmente requer a preparação dos dados e, em seguida, a chamada de uma função `fit` para realizar a tarefa.
+**Le API di alto livello** considerano le reti neurali come una **sequenza di strati**, rendendo la costruzione della maggior parte delle reti neurali molto più semplice. L'allenamento del modello di solito richiede la preparazione dei dati e poi la chiamata a una funzione `fit` per svolgere il lavoro.
 
-A API de alto nível permite que você construa redes neurais típicas rapidamente, sem se preocupar com muitos detalhes. Ao mesmo tempo, a API de baixo nível oferece muito mais controle sobre o processo de treinamento, e, portanto, é muito utilizada em pesquisas, quando você está lidando com novas arquiteturas de redes neurais.
+L'API di alto livello consente di costruire reti neurali tipiche molto rapidamente senza preoccuparsi di molti dettagli. Allo stesso tempo, l'API di basso livello offre un controllo molto maggiore sul processo di allenamento, ed è quindi molto utilizzata nella ricerca, quando si lavora con nuove architetture di reti neurali.
 
-É também importante entender que você pode usar ambas as APIs juntas, por exemplo, você pode desenvolver sua própria arquitetura de camada de rede usando a API de baixo nível e, em seguida, usá-la dentro da rede maior construída e treinada com a API de alto nível. Ou você pode definir uma rede usando a API de alto nível como uma sequência de camadas e, em seguida, usar seu próprio loop de treinamento de baixo nível para realizar a otimização. Ambas as APIs utilizam os mesmos conceitos básicos subjacentes e são projetadas para funcionar bem juntas.
+È anche importante capire che è possibile utilizzare entrambe le API insieme, ad esempio si può sviluppare la propria architettura di strato di rete utilizzando l'API di basso livello, e poi usarla all'interno di una rete più grande costruita e allenata con l'API di alto livello. Oppure si può definire una rete utilizzando l'API di alto livello come una sequenza di strati, e poi utilizzare il proprio ciclo di allenamento di basso livello per eseguire l'ottimizzazione. Entrambe le API utilizzano gli stessi concetti di base e sono progettate per funzionare bene insieme.
 
-## Aprendizado
+## Apprendimento
 
-Neste curso, oferecemos a maior parte do conteúdo tanto para PyTorch quanto para TensorFlow. Você pode escolher seu framework preferido e apenas percorrer os notebooks correspondentes. Se você não tiver certeza de qual framework escolher, leia algumas discussões na internet sobre **PyTorch vs. TensorFlow**. Você também pode dar uma olhada em ambos os frameworks para obter uma melhor compreensão.
+In questo corso, offriamo la maggior parte dei contenuti sia per PyTorch che per TensorFlow. Puoi scegliere il framework che preferisci e seguire solo i notebook corrispondenti. Se non sei sicuro di quale framework scegliere, leggi alcune discussioni online riguardo **PyTorch vs. TensorFlow**. Puoi anche dare un'occhiata a entrambi i framework per ottenere una migliore comprensione.
 
-Sempre que possível, usaremos APIs de Alto Nível por uma questão de simplicidade. No entanto, acreditamos que é importante entender como as redes neurais funcionam desde o início, portanto, no começo, começamos trabalhando com a API de baixo nível e tensores. Contudo, se você quiser avançar rapidamente e não quiser passar muito tempo aprendendo esses detalhes, pode pular essas partes e ir direto para os notebooks da API de alto nível.
+Dove possibile, utilizzeremo le API di alto livello per semplicità. Tuttavia, riteniamo importante capire come funzionano le reti neurali dalle basi, quindi inizialmente lavoreremo con l'API di basso livello e i tensori. Tuttavia, se vuoi iniziare rapidamente e non vuoi dedicare troppo tempo a imparare questi dettagli, puoi saltare questa parte e passare direttamente ai notebook con l'API di alto livello.
 
-## ✍️ Exercícios: Frameworks
+## ✍️ Esercizi: Framework
 
-Continue seu aprendizado nos seguintes notebooks:
+Continua il tuo apprendimento nei seguenti notebook:
 
-API de Baixo Nível | [Notebook TensorFlow+Keras](../../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb) | [PyTorch](../../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb)
--------------------|-------------------------------------|--------------------------------
-API de Alto Nível  | [Keras](../../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroKeras.ipynb) | *PyTorch Lightning*
+API di basso livello | [Notebook TensorFlow+Keras](IntroKerasTF.ipynb) | [PyTorch](IntroPyTorch.ipynb)
+----------------------|-------------------------------------|--------------------------------
+API di alto livello   | [Keras](IntroKeras.ipynb)         | *PyTorch Lightning*
 
-Após dominar os frameworks, vamos recapitular a noção de sobreajuste.
+Dopo aver padroneggiato i framework, ripassiamo il concetto di overfitting.
 
-# Sobreajuste
+# Overfitting
 
-O sobreajuste é um conceito extremamente importante em aprendizado de máquina, e é crucial compreendê-lo corretamente!
+L'overfitting è un concetto estremamente importante nel machine learning, ed è fondamentale comprenderlo correttamente!
 
-Considere o seguinte problema de aproximar 5 pontos (representados por `x` nos gráficos abaixo):
+Considera il seguente problema di approssimazione di 5 punti (rappresentati da `x` nei grafici sottostanti):
 
 ![linear](../../../../../translated_images/overfit1.f24b71c6f652e59e6bed7245ffbeaecc3ba320e16e2221f6832b432052c4da43.it.jpg) | ![overfit](../../../../../translated_images/overfit2.131f5800ae10ca5e41d12a411f5f705d9ee38b1b10916f284b787028dd55cc1c.it.jpg)
 -------------------------|--------------------------
-**Modelo linear, 2 parâmetros** | **Modelo não-linear, 7 parâmetros**
-Erro de treinamento = 5.3 | Erro de validação = 0
-Erro de validação = 5.1 | Erro de validação = 20
+**Modello lineare, 2 parametri** | **Modello non lineare, 7 parametri**
+Errore di training = 5.3 | Errore di training = 0
+Errore di validazione = 5.1 | Errore di validazione = 20
 
-* À esquerda, vemos uma boa aproximação de linha reta. Como o número de parâmetros é adequado, o modelo compreende bem a distribuição dos pontos.
-* À direita, o modelo é muito poderoso. Como temos apenas 5 pontos e o modelo possui 7 parâmetros, ele pode se ajustar de tal forma a passar por todos os pontos, fazendo com que o erro de treinamento seja 0. No entanto, isso impede que o modelo entenda o padrão correto por trás dos dados, resultando em um erro de validação muito alto.
+* A sinistra, vediamo una buona approssimazione con una linea retta. Poiché il numero di parametri è adeguato, il modello coglie correttamente la distribuzione dei punti.
+* A destra, il modello è troppo potente. Poiché abbiamo solo 5 punti e il modello ha 7 parametri, può adattarsi in modo da passare attraverso tutti i punti, facendo sì che l'errore di training sia 0. Tuttavia, questo impedisce al modello di comprendere il pattern corretto dei dati, causando un errore di validazione molto alto.
 
-É muito importante encontrar um equilíbrio adequado entre a complexidade do modelo (número de parâmetros) e o número de amostras de treinamento.
+È molto importante trovare il giusto equilibrio tra la complessità del modello (numero di parametri) e il numero di campioni di training.
 
-## Por que o sobreajuste ocorre
+## Perché si verifica l'overfitting
 
-  * Dados de treinamento insuficientes
-  * Modelo excessivamente poderoso
-  * Muito ruído nos dados de entrada
+  * Dati di training insufficienti
+  * Modello troppo potente
+  * Troppo rumore nei dati di input
 
-## Como detectar o sobreajuste
+## Come rilevare l'overfitting
 
-Como você pode ver no gráfico acima, o sobreajuste pode ser detectado por um erro de treinamento muito baixo e um erro de validação alto. Normalmente, durante o treinamento, observamos ambos os erros de treinamento e validação começando a diminuir, e então, em algum momento, o erro de validação pode parar de diminuir e começar a aumentar. Isso será um sinal de sobreajuste e um indicativo de que devemos provavelmente parar o treinamento neste ponto (ou pelo menos fazer uma captura do modelo).
+Come puoi vedere dal grafico sopra, l'overfitting può essere rilevato da un errore di training molto basso e un errore di validazione molto alto. Normalmente durante l'allenamento vedremo sia l'errore di training che quello di validazione iniziare a diminuire, e poi a un certo punto l'errore di validazione potrebbe smettere di diminuire e iniziare a salire. Questo sarà un segnale di overfitting e un indicatore che probabilmente dovremmo interrompere l'allenamento a questo punto (o almeno fare uno snapshot del modello).
 
 ![overfitting](../../../../../translated_images/Overfitting.408ad91cd90b4371d0a81f4287e1409c359751adeb1ae450332af50e84f08c3e.it.png)
 
-## Como prevenir o sobreajuste
+## Come prevenire l'overfitting
 
-Se você perceber que o sobreajuste está ocorrendo, pode fazer uma das seguintes ações:
+Se noti che si verifica l'overfitting, puoi fare una delle seguenti cose:
 
- * Aumentar a quantidade de dados de treinamento
- * Diminuir a complexidade do modelo
- * Utilizar alguma [técnica de regularização](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md), como [Dropout](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md#Dropout), que consideraremos mais adiante.
+ * Aumentare la quantità di dati di training
+ * Ridurre la complessità del modello
+ * Utilizzare qualche [tecnica di regolarizzazione](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md), come [Dropout](../../4-ComputerVision/08-TransferLearning/TrainingTricks.md#Dropout), che considereremo più avanti.
 
-## Sobreajuste e a Troca de Viés-Variância
+## Overfitting e Tradeoff Bias-Varianza
 
-O sobreajuste é, na verdade, um caso de um problema mais genérico em estatísticas chamado [Troca de Viés-Variância](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff). Se considerarmos as possíveis fontes de erro em nosso modelo, podemos observar dois tipos de erros:
+L'overfitting è in realtà un caso di un problema più generico in statistica chiamato [Tradeoff Bias-Varianza](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff). Se consideriamo le possibili fonti di errore nel nostro modello, possiamo vedere due tipi di errori:
 
-* **Erros de viés** são causados pelo fato de nosso algoritmo não conseguir capturar corretamente a relação entre os dados de treinamento. Isso pode resultar do fato de nosso modelo não ser poderoso o suficiente (**subajuste**).
-* **Erros de variância**, que são causados pelo modelo aproximar o ruído nos dados de entrada em vez de uma relação significativa (**sobreajuste**).
+* **Errori di bias**, causati dal fatto che il nostro algoritmo non riesce a catturare correttamente la relazione tra i dati di training. Questo può derivare dal fatto che il nostro modello non è abbastanza potente (**underfitting**).
+* **Errori di varianza**, causati dal modello che approssima il rumore nei dati di input invece di una relazione significativa (**overfitting**).
 
-Durante o treinamento, o erro de viés diminui (à medida que nosso modelo aprende a aproximar os dados), e o erro de variância aumenta. É importante parar o treinamento - seja manualmente (quando detectamos sobreajuste) ou automaticamente (introduzindo regularização) - para evitar o sobreajuste.
+Durante l'allenamento, l'errore di bias diminuisce (poiché il nostro modello impara ad approssimare i dati), e l'errore di varianza aumenta. È importante interrompere l'allenamento - manualmente (quando rileviamo l'overfitting) o automaticamente (introducendo la regolarizzazione) - per prevenire l'overfitting.
 
-## Conclusão
+## Conclusione
 
-Nesta lição, você aprendeu sobre as diferenças entre as várias APIs dos dois frameworks de IA mais populares, TensorFlow e PyTorch. Além disso, você aprendeu sobre um tópico muito importante, o sobreajuste.
+In questa lezione, hai appreso le differenze tra le varie API dei due framework di AI più popolari, TensorFlow e PyTorch. Inoltre, hai approfondito un argomento molto importante: l'overfitting.
 
-## 🚀 Desafio
+## 🚀 Sfida
 
-Nos notebooks acompanhantes, você encontrará 'tarefas' na parte inferior; trabalhe pelos notebooks e complete as tarefas.
+Nei notebook allegati troverai delle 'attività' alla fine; lavora sui notebook e completa le attività.
 
-## [Questionário pós-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/205)
+## [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/10)
 
-## Revisão e Autoestudo
+## Revisione & Studio Autonomo
 
-Faça uma pesquisa sobre os seguintes tópicos:
+Fai delle ricerche sui seguenti argomenti:
 
 - TensorFlow
 - PyTorch
-- Sobreajuste
+- Overfitting
 
-Pergunte a si mesmo as seguintes questões:
+Poniti le seguenti domande:
 
-- Qual é a diferença entre TensorFlow e PyTorch?
-- Qual é a diferença entre sobreajuste e subajuste?
+- Qual è la differenza tra TensorFlow e PyTorch?
+- Qual è la differenza tra overfitting e underfitting?
 
-## [Tarefa](lab/README.md)
+## [Compito](lab/README.md)
 
-Neste laboratório, você é solicitado a resolver dois problemas de classificação usando redes totalmente conectadas de uma e várias camadas, utilizando PyTorch ou TensorFlow.
+In questo laboratorio, ti viene chiesto di risolvere due problemi di classificazione utilizzando reti completamente connesse a uno o più strati, utilizzando PyTorch o TensorFlow.
 
-* [Instruções](lab/README.md)
-* [Notebook](../../../../../lessons/3-NeuralNetworks/05-Frameworks/lab/LabFrameworks.ipynb)
+* [Istruzioni](lab/README.md)
+* [Notebook](lab/LabFrameworks.ipynb)
 
-**Disclaimer**:  
-This document has been translated using machine-based AI translation services. While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+---
+

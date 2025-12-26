@@ -1,6 +1,19 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "a334df77a82aaaf2a29c77065d3e481e",
+  "translation_date": "2025-11-18T20:31:41+00:00",
+  "source_file": "lessons/1-Intro/assignment.md",
+  "language_code": "fr"
+}
+-->
 # Game Jam
 
-Les jeux sont un domaine qui a été fortement influencé par les développements en IA et en ML. Dans cette tâche, rédigez un court document sur un jeu que vous aimez et qui a été influencé par l'évolution de l'IA. Il doit s'agir d'un jeu suffisamment ancien pour avoir été influencé par plusieurs types de systèmes de traitement informatique. Un bon exemple est les échecs ou le go, mais jetez également un œil aux jeux vidéo comme Pong ou Pac-Man. Rédigez un essai qui discute du passé, du présent et de l'avenir de l'IA dans le jeu.
+Les jeux sont un domaine qui a été fortement influencé par les avancées en IA et en apprentissage automatique. Dans cet exercice, rédigez un court article sur un jeu que vous appréciez et qui a été influencé par l'évolution de l'IA. Il devrait s'agir d'un jeu suffisamment ancien pour avoir été impacté par plusieurs types de systèmes de traitement informatique. Un bon exemple est le jeu d'échecs ou le jeu de Go, mais vous pouvez également examiner des jeux vidéo comme Pong ou Pac-Man. Rédigez un essai qui discute du passé, du présent et de l'avenir de l'IA dans ce jeu.
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Avertissement** :  
-Ce document a été traduit à l'aide de services de traduction automatique basés sur l'IA. Bien que nous visons l'exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source autoritaire. Pour des informations critiques, une traduction professionnelle par un humain est recommandée. Nous ne sommes pas responsables des malentendus ou des erreurs d'interprétation résultant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction IA [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

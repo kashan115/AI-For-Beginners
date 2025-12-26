@@ -1,6 +1,19 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "a334df77a82aaaf2a29c77065d3e481e",
+  "translation_date": "2025-11-18T21:21:55+00:00",
+  "source_file": "lessons/1-Intro/assignment.md",
+  "language_code": "it"
+}
+-->
 # Game Jam
 
-Los juegos son un área que ha sido fuertemente influenciada por los desarrollos en IA y ML. En esta tarea, escribe un breve artículo sobre un juego que te guste y que haya sido influenciado por la evolución de la IA. Debe ser un juego lo suficientemente antiguo como para haber sido impactado por varios tipos de sistemas de procesamiento computacional. Un buen ejemplo es el ajedrez o el go, pero también echa un vistazo a videojuegos como pong o Pac-Man. Escribe un ensayo que discuta el pasado, presente y futuro de la IA en el juego.
+I giochi sono un ambito che è stato fortemente influenzato dai progressi nell'IA e nel ML. In questo compito, scrivi un breve articolo su un gioco che ti piace e che è stato influenzato dall'evoluzione dell'IA. Dovrebbe essere un gioco abbastanza vecchio da essere stato influenzato da diversi tipi di sistemi di elaborazione informatica. Un buon esempio è il gioco degli Scacchi o il Go, ma considera anche videogiochi come Pong o Pac-Man. Scrivi un saggio che discuta il passato, il presente e il futuro dell'IA nel gioco.
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Este documento ha sido traducido utilizando servicios de traducción automática basados en IA. Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción profesional por parte de humanos. No nos hacemos responsables de malentendidos o malas interpretaciones que surjan del uso de esta traducción.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si consiglia una traduzione professionale umana. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

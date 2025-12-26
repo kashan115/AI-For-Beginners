@@ -1,68 +1,77 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "b708c9b85b833864c73c6281f1e6b96e",
+  "translation_date": "2025-09-23T12:24:39+00:00",
+  "source_file": "lessons/5-NLP/14-Embeddings/README.md",
+  "language_code": "de"
+}
+-->
 # Einbettungen
 
-## [Vorlesungsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/114)
+## [Quiz vor der Vorlesung](https://ff-quizzes.netlify.app/en/ai/quiz/27)
 
-Beim Training von Klassifikatoren, die auf BoW oder TF/IDF basieren, haben wir mit hochdimensionalen Bag-of-Words-Vektoren mit einer Länge von `vocab_size` gearbeitet und explizit von niedrigdimensionalen positionsbasierten Repräsentationsvektoren in spärliche One-Hot-Repräsentationen umgewandelt. Diese One-Hot-Repräsentation ist jedoch nicht speichereffizient. Darüber hinaus wird jedes Wort unabhängig voneinander behandelt, d.h. One-Hot-kodierte Vektoren drücken keine semantische Ähnlichkeit zwischen Wörtern aus.
+Beim Training von Klassifikatoren basierend auf BoW oder TF/IDF haben wir mit hochdimensionalen Bag-of-Words-Vektoren gearbeitet, deren Länge `vocab_size` entspricht. Dabei haben wir explizit von niedrigdimensionalen Positionsdarstellungsvektoren in spärliche One-Hot-Darstellungen umgewandelt. Diese One-Hot-Darstellung ist jedoch nicht speichereffizient. Außerdem wird jedes Wort unabhängig von den anderen behandelt, d. h. One-Hot-codierte Vektoren drücken keine semantische Ähnlichkeit zwischen Wörtern aus.
 
-Die Idee der **Einbettung** besteht darin, Wörter durch niederdimensionale dichte Vektoren darzustellen, die in gewisser Weise die semantische Bedeutung eines Wortes widerspiegeln. Wir werden später besprechen, wie man sinnvolle Wort-Einbettungen erstellt, aber für den Moment denken wir einfach an Einbettungen als eine Möglichkeit, die Dimensionalität eines Wortvektors zu verringern.
+Die Idee der **Einbettung** besteht darin, Wörter durch niedrigdimensionale dichte Vektoren darzustellen, die irgendwie die semantische Bedeutung eines Wortes widerspiegeln. Später werden wir besprechen, wie man sinnvolle Wort-Einbettungen erstellt, aber vorerst können wir Einbettungen als eine Methode betrachten, die Dimensionalität eines Wortvektors zu reduzieren.
 
-Die Einbettungsschicht würde ein Wort als Eingabe nehmen und einen Ausgabvektor der angegebenen `embedding_size` erzeugen. In gewissem Sinne ähnelt es einer `Linear`-Schicht, aber anstatt einen One-Hot-kodierten Vektor zu verwenden, kann es eine Wortnummer als Eingabe akzeptieren, was es uns ermöglicht, große One-Hot-kodierte Vektoren zu vermeiden.
+Die Einbettungsschicht würde also ein Wort als Eingabe nehmen und einen Ausgabesektor mit einer festgelegten `embedding_size` erzeugen. In gewisser Weise ähnelt sie einer `Linear`-Schicht, aber anstatt einen One-Hot-codierten Vektor zu verwenden, kann sie eine Wortnummer als Eingabe akzeptieren, wodurch wir große One-Hot-codierte Vektoren vermeiden können.
 
-Durch die Verwendung einer Einbettungsschicht als erste Schicht in unserem Klassifikator-Netzwerk können wir von einem Bag-of-Words- zu einem **Einbettungsbeutel**-Modell wechseln, bei dem wir zunächst jedes Wort in unserem Text in die entsprechende Einbettung umwandeln und dann eine aggregierte Funktion über all diese Einbettungen berechnen, wie z.B. `sum`, `average` oder `max`.  
+Durch die Verwendung einer Einbettungsschicht als erste Schicht in unserem Klassifikator-Netzwerk können wir von einem Bag-of-Words-Modell zu einem **Embedding-Bag-Modell** wechseln, bei dem wir zunächst jedes Wort in unserem Text in die entsprechende Einbettung umwandeln und dann eine Aggregatfunktion über alle diese Einbettungen berechnen, wie z. B. `sum`, `average` oder `max`.
 
-![Bild, das einen Einbettungsklassifikator für fünf aufeinanderfolgende Wörter zeigt.](../../../../../translated_images/embedding-classifier-example.b77f021a7ee67eeec8e68bfe11636c5b97d6eaa067515a129bfb1d0034b1ac5b.de.png)
+![Bild zeigt einen Einbettungsklassifikator für fünf Sequenzwörter.](../../../../../translated_images/embedding-classifier-example.b77f021a7ee67eeec8e68bfe11636c5b97d6eaa067515a129bfb1d0034b1ac5b.de.png)
 
 > Bild vom Autor
 
 ## ✍️ Übungen: Einbettungen
 
 Setze dein Lernen in den folgenden Notebooks fort:
-* [Einbettungen mit PyTorch](../../../../../lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb)
-* [Einbettungen TensorFlow](../../../../../lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb)
+* [Einbettungen mit PyTorch](EmbeddingsPyTorch.ipynb)
+* [Einbettungen mit TensorFlow](EmbeddingsTF.ipynb)
 
 ## Semantische Einbettungen: Word2Vec
 
-Während die Einbettungsschicht gelernt hat, Wörter in Vektorrepräsentationen abzubilden, hatte diese Repräsentation nicht unbedingt viel semantische Bedeutung. Es wäre schön, eine Vektorrepräsentation zu lernen, sodass ähnliche Wörter oder Synonyme Vektoren entsprechen, die in Bezug auf eine bestimmte Vektordistanz (z.B. euklidische Distanz) nah beieinander liegen.
+Während die Einbettungsschicht gelernt hat, Wörter in Vektordarstellungen zu überführen, hat diese Darstellung jedoch nicht unbedingt eine semantische Bedeutung. Es wäre wünschenswert, eine Vektordarstellung zu lernen, bei der ähnliche Wörter oder Synonyme Vektoren entsprechen, die in Bezug auf eine Vektordistanz (z. B. euklidische Distanz) nahe beieinander liegen.
 
-Um dies zu erreichen, müssen wir unser Einbettungsmodell auf eine bestimmte Weise auf einer großen Textsammlung vortrainieren. Eine Möglichkeit, semantische Einbettungen zu trainieren, nennt sich [Word2Vec](https://en.wikipedia.org/wiki/Word2vec). Es basiert auf zwei Hauptarchitekturen, die verwendet werden, um eine verteilte Repräsentation von Wörtern zu erzeugen:
+Um dies zu erreichen, müssen wir unser Einbettungsmodell auf einer großen Textsammlung in einer spezifischen Weise vortrainieren. Eine Methode, semantische Einbettungen zu trainieren, nennt sich [Word2Vec](https://en.wikipedia.org/wiki/Word2vec). Es basiert auf zwei Hauptarchitekturen, die verwendet werden, um eine verteilte Darstellung von Wörtern zu erzeugen:
 
- - **Kontinuierlicher Bag-of-Words** (CBoW) — In dieser Architektur trainieren wir das Modell, um ein Wort aus dem umgebenden Kontext vorherzusagen. Gegeben das ngram $(W_{-2},W_{-1},W_0,W_1,W_2)$ besteht das Ziel des Modells darin, $W_0$ aus $(W_{-2},W_{-1},W_1,W_2)$ vorherzusagen.
- - **Kontinuierliches Skip-Gram** ist das Gegenteil von CBoW. Das Modell verwendet das umgebende Fenster von Kontextwörtern, um das aktuelle Wort vorherzusagen.
+ - **Continuous Bag-of-Words** (CBoW) — In dieser Architektur trainieren wir das Modell darauf, ein Wort aus dem umgebenden Kontext vorherzusagen. Gegeben das Ngram $(W_{-2},W_{-1},W_0,W_1,W_2)$, ist das Ziel des Modells, $W_0$ aus $(W_{-2},W_{-1},W_1,W_2)$ vorherzusagen.
+ - **Continuous Skip-Gram** ist das Gegenteil von CBoW. Das Modell verwendet das umgebende Fenster von Kontextwörtern, um das aktuelle Wort vorherzusagen.
 
-CBoW ist schneller, während Skip-Gram langsamer ist, aber eine bessere Darstellung seltener Wörter liefert.
+CBoW ist schneller, während Skip-Gram langsamer ist, aber eine bessere Darstellung von seltenen Wörtern liefert.
 
-![Bild, das sowohl CBoW- als auch Skip-Gram-Algorithmen zur Umwandlung von Wörtern in Vektoren zeigt.](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.de.png)
+![Bild zeigt sowohl CBoW- als auch Skip-Gram-Algorithmen zur Umwandlung von Wörtern in Vektoren.](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.de.png)
 
-> Bild aus [diesem Papier](https://arxiv.org/pdf/1301.3781.pdf)
+> Bild aus [diesem Paper](https://arxiv.org/pdf/1301.3781.pdf)
 
-Vortrainierte Word2Vec-Einbettungen (sowie andere ähnliche Modelle wie GloVe) können auch anstelle der Einbettungsschicht in neuronalen Netzwerken verwendet werden. Allerdings müssen wir uns mit Vokabularen auseinandersetzen, da das Vokabular, das zum Vortrainieren von Word2Vec/GloVe verwendet wird, wahrscheinlich von dem Vokabular in unserem Textkorpus abweicht. Sieh dir die oben genannten Notebooks an, um zu sehen, wie dieses Problem gelöst werden kann.
+Word2Vec vortrainierte Einbettungen (sowie andere ähnliche Modelle wie GloVe) können auch anstelle der Einbettungsschicht in neuronalen Netzwerken verwendet werden. Allerdings müssen wir uns mit Vokabularen auseinandersetzen, da das Vokabular, das zum Vortrainieren von Word2Vec/GloVe verwendet wurde, wahrscheinlich von dem Vokabular in unserem Textkorpus abweicht. Schau dir die oben genannten Notebooks an, um zu sehen, wie dieses Problem gelöst werden kann.
 
 ## Kontextuelle Einbettungen
 
-Eine wesentliche Einschränkung traditioneller vortrainierter Einbettungsrepräsentationen wie Word2Vec ist das Problem der Mehrdeutigkeit von Wörtern. Während vortrainierte Einbettungen einige Bedeutungen von Wörtern im Kontext erfassen können, wird jede mögliche Bedeutung eines Wortes in der gleichen Einbettung kodiert. Dies kann Probleme in nachgelagerten Modellen verursachen, da viele Wörter, wie das Wort 'play', je nach verwendetem Kontext unterschiedliche Bedeutungen haben.
+Eine zentrale Einschränkung traditioneller vortrainierter Einbettungsdarstellungen wie Word2Vec ist das Problem der Mehrdeutigkeit von Wortbedeutungen. Während vortrainierte Einbettungen einige Bedeutungen von Wörtern im Kontext erfassen können, wird jede mögliche Bedeutung eines Wortes in derselben Einbettung kodiert. Dies kann Probleme in nachgelagerten Modellen verursachen, da viele Wörter, wie das Wort 'play', je nach Kontext unterschiedliche Bedeutungen haben.
 
-Zum Beispiel haben die Wörter 'play' in diesen beiden verschiedenen Sätzen eine ganz andere Bedeutung:
+Zum Beispiel hat das Wort 'play' in diesen beiden Sätzen ganz unterschiedliche Bedeutungen:
 
-- Ich ging zu einem **Theaterstück**.
+- Ich war in einem **Theaterstück**.
 - John möchte mit seinen Freunden **spielen**.
 
-Die vortrainierten Einbettungen oben repräsentieren beide Bedeutungen des Wortes 'play' in der gleichen Einbettung. Um diese Einschränkung zu überwinden, müssen wir Einbettungen auf der Grundlage des **Sprachmodells** erstellen, das auf einem großen Textkorpus trainiert wurde und *weiß*, wie Wörter in unterschiedlichen Kontexten zusammengefügt werden können. Die Diskussion über kontextuelle Einbettungen fällt außerhalb des Rahmens dieses Tutorials, aber wir werden später im Kurs darauf zurückkommen, wenn wir über Sprachmodelle sprechen.
+Die oben genannten vortrainierten Einbettungen repräsentieren beide Bedeutungen des Wortes 'play' in derselben Einbettung. Um diese Einschränkung zu überwinden, müssen wir Einbettungen basierend auf dem **Sprachmodell** erstellen, das auf einem großen Textkorpus trainiert wurde und *weiß*, wie Wörter in verschiedenen Kontexten zusammengefügt werden können. Die Diskussion über kontextuelle Einbettungen liegt außerhalb des Umfangs dieses Tutorials, aber wir werden später im Kurs darauf zurückkommen, wenn wir über Sprachmodelle sprechen.
 
 ## Fazit
 
-In dieser Lektion hast du entdeckt, wie man Einbettungsschichten in TensorFlow und Pytorch erstellt und verwendet, um die semantischen Bedeutungen von Wörtern besser widerzuspiegeln.
+In dieser Lektion hast du gelernt, wie man Einbettungsschichten in TensorFlow und PyTorch erstellt und verwendet, um die semantische Bedeutung von Wörtern besser widerzuspiegeln.
 
 ## 🚀 Herausforderung
 
-Word2Vec wurde für einige interessante Anwendungen verwendet, einschließlich der Generierung von Songtexten und Poesie. Schau dir [diesen Artikel](https://www.politetype.com/blog/word2vec-color-poems) an, der erklärt, wie der Autor Word2Vec zur Erstellung von Poesie verwendet hat. Schau dir auch [dieses Video von Dan Shiffmann](https://www.youtube.com/watch?v=LSS_bos_TPI&ab_channel=TheCodingTrain) an, um eine andere Erklärung dieser Technik zu entdecken. Versuche dann, diese Techniken auf deinen eigenen Textkorpus anzuwenden, vielleicht aus Kaggle.
+Word2Vec wurde für einige interessante Anwendungen verwendet, einschließlich der Generierung von Songtexten und Gedichten. Schau dir [diesen Artikel](https://www.politetype.com/blog/word2vec-color-poems) an, der erklärt, wie der Autor Word2Vec verwendet hat, um Gedichte zu generieren. Sieh dir auch [dieses Video von Dan Shiffmann](https://www.youtube.com/watch?v=LSS_bos_TPI&ab_channel=TheCodingTrain) an, um eine andere Erklärung dieser Technik zu entdecken. Versuche dann, diese Techniken auf deinen eigenen Textkorpus anzuwenden, vielleicht aus Kaggle.
 
-## [Nachlese-Quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/214)
+## [Quiz nach der Vorlesung](https://ff-quizzes.netlify.app/en/ai/quiz/28)
 
 ## Überprüfung & Selbststudium
 
-Lies dir dieses Papier über Word2Vec durch: [Effiziente Schätzung von Wortdarstellungen im Vektorraum](https://arxiv.org/pdf/1301.3781.pdf)
+Lies dieses Paper über Word2Vec: [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf)
 
 ## [Aufgabe: Notebooks](assignment.md)
 
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit maschinellen KI-Übersetzungsdiensten übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als die maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+---
+

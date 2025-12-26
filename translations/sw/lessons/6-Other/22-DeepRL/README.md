@@ -1,33 +1,42 @@
-# Djup Förstärkningsinlärning
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "04395657fc01648f8f70484d0e55ab67",
+  "translation_date": "2025-09-23T10:58:17+00:00",
+  "source_file": "lessons/6-Other/22-DeepRL/README.md",
+  "language_code": "sw"
+}
+-->
+# Kujifunza Kuimarisha Kina (Deep Reinforcement Learning)
 
-Förstärkningsinlärning (RL) ses som en av de grundläggande paradigmerna inom maskininlärning, bredvid övervakad inlärning och oövervakad inlärning. Medan vi i övervakad inlärning förlitar oss på dataset med kända utfall, bygger RL på **att lära sig genom att göra**. Till exempel, när vi först ser ett datorspel börjar vi spela, även utan att känna till reglerna, och snart kan vi förbättra våra färdigheter bara genom att spela och justera vårt beteende.
+Kujifunza kuimarisha (Reinforcement Learning - RL) ni mojawapo ya mifumo ya msingi ya kujifunza kwa mashine, sambamba na kujifunza kwa usimamizi (supervised learning) na kujifunza bila usimamizi (unsupervised learning). Wakati katika kujifunza kwa usimamizi tunategemea seti ya data yenye matokeo yanayojulikana, RL inategemea **kujifunza kwa kufanya**. Kwa mfano, tunapoona mchezo wa kompyuta kwa mara ya kwanza, tunaanza kucheza hata bila kujua sheria, na hivi karibuni tunaweza kuboresha ujuzi wetu kupitia mchakato wa kucheza na kurekebisha tabia zetu.
 
-## [För- föreläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/122)
+## [Jaribio la kabla ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/43)
 
-För att utföra RL behöver vi:
+Ili kufanya RL, tunahitaji:
 
-* En **miljö** eller **simulator** som sätter reglerna för spelet. Vi ska kunna köra experimenten i simulatorn och observera resultaten.
-* En **Belöningsfunktion**, som indikerar hur framgångsrikt vårt experiment var. I fallet med att lära sig spela ett datorspel skulle belöningen vara vår slutpoäng.
+* **Mazingira** au **simulator** inayoweka sheria za mchezo. Tunapaswa kuwa na uwezo wa kuendesha majaribio kwenye simulator na kuchunguza matokeo.
+* **Kazi ya Tuzo** (Reward function), ambayo inaonyesha jinsi jaribio letu lilivyofanikiwa. Katika kujifunza kucheza mchezo wa kompyuta, tuzo inaweza kuwa alama yetu ya mwisho.
 
-Baserat på belöningsfunktionen ska vi kunna justera vårt beteende och förbättra våra färdigheter, så att vi nästa gång spelar bättre. Den största skillnaden mellan andra typer av maskininlärning och RL är att vi i RL vanligtvis inte vet om vi vinner eller förlorar förrän vi har avslutat spelet. Därför kan vi inte säga om ett visst drag ensam är bra eller inte - vi får bara en belöning i slutet av spelet.
+Kwa msingi wa kazi ya tuzo, tunapaswa kuwa na uwezo wa kurekebisha tabia zetu na kuboresha ujuzi wetu, ili wakati mwingine tucheze vizuri zaidi. Tofauti kuu kati ya aina nyingine za kujifunza kwa mashine na RL ni kwamba katika RL kwa kawaida hatujui kama tumeshinda au tumeshindwa hadi mchezo umalizike. Kwa hivyo, hatuwezi kusema kama hatua fulani pekee ni nzuri au la - tunapokea tuzo mwishoni mwa mchezo.
 
-Under RL utför vi vanligtvis många experiment. Under varje experiment behöver vi balansera mellan att följa den optimala strategin som vi har lärt oss hittills (**utnyttjande**) och att utforska nya möjliga tillstånd (**utforskning**).
+Wakati wa RL, kwa kawaida tunafanya majaribio mengi. Katika kila jaribio, tunahitaji kusawazisha kati ya kufuata mkakati bora ambao tumejifunza hadi sasa (**exploitation**) na kuchunguza hali mpya zinazowezekana (**exploration**).
 
 ## OpenAI Gym
 
-Ett utmärkt verktyg för RL är [OpenAI Gym](https://gym.openai.com/) - en **simuleringsmiljö**, som kan simulera många olika miljöer, från Atari-spel till fysiken bakom polbalansering. Det är en av de mest populära simuleringsmiljöerna för träning av förstärkningsinlärningsalgoritmer och underhålls av [OpenAI](https://openai.com/).
+Zana bora kwa RL ni [OpenAI Gym](https://gym.openai.com/) - **mazingira ya simulizi**, ambayo inaweza kusimulia mazingira mbalimbali kuanzia michezo ya Atari hadi fizikia ya kusawazisha nguzo. Ni mojawapo ya mazingira maarufu ya simulizi kwa mafunzo ya algoriti za kujifunza kuimarisha, na inadumishwa na [OpenAI](https://openai.com/).
 
-> **Notera**: Du kan se alla miljöer som finns tillgängliga från OpenAI Gym [här](https://gym.openai.com/envs/#classic_control).
+> **Note**: Unaweza kuona mazingira yote yanayopatikana kutoka OpenAI Gym [hapa](https://gym.openai.com/envs/#classic_control).
 
-## CartPole Balansering
+## Kusawazisha CartPole
 
-Du har förmodligen sett moderna balanseringsanordningar som *Segway* eller *Gyroscooters*. De kan automatiskt balansera genom att justera sina hjul som svar på en signal från en accelerometer eller gyroskop. I den här sektionen kommer vi att lära oss hur man löser ett liknande problem - att balansera en stång. Det liknar en situation när en cirkusartist behöver balansera en stång på sin hand - men denna stångbalansering sker endast i 1D.
+Labda umewahi kuona vifaa vya kisasa vya kusawazisha kama *Segway* au *Gyroscooters*. Vifaa hivi vinaweza kusawazisha kiotomatiki kwa kurekebisha magurudumu yao kulingana na ishara kutoka kwa accelerometer au gyroscope. Katika sehemu hii, tutajifunza jinsi ya kutatua tatizo kama hilo - kusawazisha nguzo. Ni sawa na hali ambapo mchezaji wa sarakasi anahitaji kusawazisha nguzo kwenye mkono wake - lakini kusawazisha huku kunafanyika tu katika mwelekeo wa 1D.
 
-En förenklad version av balansering är känd som **CartPole**-problemet. I cartpole-världen har vi en horisontell glidare som kan röra sig åt vänster eller höger, och målet är att balansera en vertikal stång ovanpå glidaren medan den rör sig.
+Toleo rahisi la kusawazisha linajulikana kama tatizo la **CartPole**. Katika ulimwengu wa CartPole, tuna slider ya mlalo inayoweza kusogea kushoto au kulia, na lengo ni kusawazisha nguzo wima juu ya slider inaposogea.
 
-<img alt="en cartpole" src="images/cartpole.png" width="200"/>
+<img alt="a cartpole" src="images/cartpole.png" width="200"/>
 
-För att skapa och använda denna miljö behöver vi ett par rader Python-kod:
+Ili kuunda na kutumia mazingira haya, tunahitaji mistari michache ya msimbo wa Python:
 
 ```python
 import gym
@@ -45,73 +54,73 @@ while not done:
 print(f"Total reward: {total_reward}")
 ```
 
-Varje miljö kan nås på exakt samma sätt:
-* `env.reset` starts a new experiment
-* `env.step` utför ett simuleringssteg. Den tar emot en **åtgärd** från **åtgärdsutrymmet** och returnerar en **observation** (från observationsutrymmet), samt en belöning och en avslutningsflagga.
+Kila mazingira yanaweza kufikiwa kwa njia sawa:
+* `env.reset` huanzisha jaribio jipya
+* `env.step` hufanya hatua ya simulizi. Inapokea **kitendo** kutoka kwa **eneo la vitendo**, na kurudisha **uchunguzi** (kutoka eneo la uchunguzi), pamoja na tuzo na bendera ya kumaliza.
 
-I exemplet ovan utför vi en slumpmässig åtgärd vid varje steg, vilket är anledningen till att experimentets livslängd är mycket kort:
+Katika mfano hapo juu tunafanya kitendo cha nasibu katika kila hatua, ndiyo maana maisha ya jaribio ni mafupi sana:
 
-![icke-balanserande cartpole](../../../../../lessons/6-Other/22-DeepRL/images/cartpole-nobalance.gif)
+![non-balancing cartpole](../../../../../lessons/6-Other/22-DeepRL/images/cartpole-nobalance.gif)
 
-Målet med en RL-algoritm är att träna en modell - den så kallade **policyn** π - som kommer att returnera åtgärden som svar på ett givet tillstånd. Vi kan också betrakta policyn som probabilistisk, t.ex. för något tillstånd *s* och åtgärd *a* kommer den att returnera sannolikheten π(*a*|*s*) att vi bör ta *a* i tillstånd *s*.
+Lengo la algoriti ya RL ni kufundisha mfano - kinachoitwa **sera** &pi; - ambayo itarudisha kitendo kulingana na hali fulani. Tunaweza pia kuzingatia sera kuwa ya uwezekano, kwa mfano, kwa hali yoyote *s* na kitendo *a* itarudisha uwezekano &pi;(*a*|*s*) kwamba tunapaswa kuchukua *a* katika hali *s*.
 
-## Policy Gradient Algoritm
+## Algoriti ya Policy Gradients
 
-Det mest uppenbara sättet att modellera en policy är att skapa ett neuralt nätverk som tar tillstånd som indata och returnerar motsvarande åtgärder (eller snarare sannolikheterna för alla åtgärder). På ett sätt skulle det likna en normal klassificeringsuppgift, med en stor skillnad - vi vet inte i förväg vilka åtgärder vi ska ta vid varje steg.
+Njia ya wazi zaidi ya kuunda sera ni kwa kuunda mtandao wa neva ambao utachukua hali kama pembejeo, na kurudisha vitendo vinavyolingana (au badala yake uwezekano wa vitendo vyote). Kwa namna fulani, itakuwa sawa na kazi ya kawaida ya uainishaji, na tofauti kubwa - hatujui mapema ni vitendo gani tunavyopaswa kuchukua katika kila hatua.
 
-Idén här är att uppskatta dessa sannolikheter. Vi bygger en vektor av **kumulativa belöningar** som visar vår totala belöning vid varje steg av experimentet. Vi tillämpar också **belöningsdiskontering** genom att multiplicera tidigare belöningar med en koefficient γ=0.99, för att minska betydelsen av tidigare belöningar. Sedan förstärker vi de steg längs experimentets väg som ger större belöningar.
+Wazo hapa ni kukadiria uwezekano huo. Tunajenga vekta ya **tuzo zilizokusanywa** inayoonyesha jumla ya tuzo zetu katika kila hatua ya jaribio. Pia tunatumia **upunguzaji wa tuzo** kwa kuzidisha tuzo za awali na mgawo fulani &gamma;=0.99, ili kupunguza umuhimu wa tuzo za awali. Kisha, tunatia nguvu hatua hizo katika njia ya jaribio ambazo huleta tuzo kubwa zaidi.
 
-> Lär dig mer om Policy Gradient-algoritmen och se den i aktion i [exempelnotebooken](../../../../../lessons/6-Other/22-DeepRL/CartPole-RL-TF.ipynb).
+> Jifunze zaidi kuhusu algoriti ya Policy Gradient na uione ikifanya kazi katika [notebook ya mfano](CartPole-RL-TF.ipynb).
 
-## Actor-Critic Algoritm
+## Algoriti ya Actor-Critic
 
-En förbättrad version av Policy Gradients-metoden kallas **Actor-Critic**. Huvudidén bakom den är att det neurala nätverket skulle tränas för att returnera två saker:
+Toleo lililoboreshwa la mbinu ya Policy Gradients linaitwa **Actor-Critic**. Wazo kuu nyuma yake ni kwamba mtandao wa neva utafundishwa kurudisha mambo mawili:
 
-* Policyn, som avgör vilken åtgärd som ska vidtas. Denna del kallas **aktör**
-* Uppskattningen av den totala belöningen vi kan förvänta oss att få i detta tillstånd - denna del kallas **kritiker**.
+* Sera, ambayo huamua ni kitendo gani cha kuchukua. Sehemu hii inaitwa **actor**
+* Makadirio ya jumla ya tuzo tunazoweza kutarajia kupata katika hali hii - sehemu hii inaitwa **critic**.
 
-På ett sätt liknar denna arkitektur en [GAN](../../4-ComputerVision/10-GANs/README.md), där vi har två nätverk som tränas mot varandra. I actor-critic-modellen föreslår aktören den åtgärd vi behöver vidta, och kritikern försöker vara kritisk och uppskatta resultatet. Men vårt mål är att träna dessa nätverk i enhet.
+Kwa namna fulani, usanifu huu unafanana na [GAN](../../4-ComputerVision/10-GANs/README.md), ambapo tuna mitandao miwili inayofundishwa dhidi ya kila mmoja. Katika mfano wa actor-critic, actor inapendekeza kitendo tunachohitaji kuchukua, na critic inajaribu kuwa mkosoaji na kukadiria matokeo. Hata hivyo, lengo letu ni kufundisha mitandao hiyo kwa pamoja.
 
-Eftersom vi känner till både de verkliga kumulativa belöningarna och de resultat som returnerats av kritikern under experimentet, är det relativt enkelt att bygga en förlustfunktion som minimerar skillnaden mellan dem. Det skulle ge oss **kritikerförlust**. Vi kan beräkna **aktörförlust** genom att använda samma metod som i policy gradient-algoritmen.
+Kwa sababu tunajua tuzo halisi zilizokusanywa na matokeo yaliyorejeshwa na critic wakati wa jaribio, ni rahisi kujenga kazi ya hasara ambayo itapunguza tofauti kati yao. Hiyo itatupa **critic loss**. Tunaweza kuhesabu **actor loss** kwa kutumia mbinu sawa na katika algoriti ya policy gradient.
 
-Efter att ha kört en av dessa algoritmer kan vi förvänta oss att vår CartPole beter sig så här:
+Baada ya kuendesha mojawapo ya algoriti hizi, tunaweza kutarajia CartPole yetu itende kama hii:
 
-![en balanserande cartpole](../../../../../lessons/6-Other/22-DeepRL/images/cartpole-balance.gif)
+![a balancing cartpole](../../../../../lessons/6-Other/22-DeepRL/images/cartpole-balance.gif)
 
-## ✍️ Övningar: Policy Gradients och Actor-Critic RL
+## ✍️ Mazoezi: Policy Gradients na Actor-Critic RL
 
-Fortsätt din inlärning i följande notebooks:
+Endelea kujifunza katika notebooks zifuatazo:
 
-* [RL i TensorFlow](../../../../../lessons/6-Other/22-DeepRL/CartPole-RL-TF.ipynb)
-* [RL i PyTorch](../../../../../lessons/6-Other/22-DeepRL/CartPole-RL-PyTorch.ipynb)
+* [RL katika TensorFlow](CartPole-RL-TF.ipynb)
+* [RL katika PyTorch](CartPole-RL-PyTorch.ipynb)
 
-## Andra RL-uppgifter
+## Majukumu Mengine ya RL
 
-Förstärkningsinlärning är idag ett snabbt växande forskningsområde. Några intressanta exempel på förstärkningsinlärning är:
+Kujifunza kuimarisha kwa sasa ni uwanja unaokua kwa kasi wa utafiti. Baadhi ya mifano ya kuvutia ya kujifunza kuimarisha ni:
 
-* Att lära en dator att spela **Atari-spel**. Den utmanande delen av detta problem är att vi inte har ett enkelt tillstånd representerat som en vektor, utan snarare en skärmdump - och vi behöver använda CNN för att konvertera denna skärmbild till en funktionsvektor, eller för att extrahera belöningsinformation. Atari-spel finns tillgängliga i Gym.
-* Att lära en dator att spela brädspel, såsom Schack och Go. Nyligen har toppmoderna program som **Alpha Zero** tränats från grunden av två agenter som spelar mot varandra och förbättras vid varje steg.
-* Inom industrin används RL för att skapa kontrollsystem från simulering. En tjänst som heter [Bonsai](https://azure.microsoft.com/services/project-bonsai/?WT.mc_id=academic-77998-cacaste) är speciellt utformad för det.
+* Kufundisha kompyuta kucheza **Michezo ya Atari**. Sehemu ngumu katika tatizo hili ni kwamba hatuna hali rahisi inayowakilishwa kama vekta, bali ni picha ya skrini - na tunahitaji kutumia CNN kubadilisha picha hii ya skrini kuwa vekta ya sifa, au kutoa taarifa za tuzo. Michezo ya Atari inapatikana katika Gym.
+* Kufundisha kompyuta kucheza michezo ya bodi, kama vile Chess na Go. Hivi karibuni programu za hali ya juu kama **Alpha Zero** zilifundishwa kutoka mwanzo na mawakala wawili wakicheza dhidi ya kila mmoja, na kuboresha katika kila hatua.
+* Katika viwanda, RL inatumika kuunda mifumo ya udhibiti kutoka kwa simulizi. Huduma inayoitwa [Bonsai](https://azure.microsoft.com/services/project-bonsai/?WT.mc_id=academic-77998-cacaste) imeundwa mahsusi kwa ajili ya hilo.
 
-## Slutsats
+## Hitimisho
 
-Vi har nu lärt oss hur man tränar agenter för att uppnå bra resultat genom att bara ge dem en belöningsfunktion som definierar det önskade tillståndet för spelet, och genom att ge dem möjlighet att intelligent utforska sökområdet. Vi har framgångsrikt prövat två algoritmer och uppnått ett bra resultat på en relativt kort tid. Men detta är bara början på din resa in i RL, och du bör definitivt överväga att ta en separat kurs om du vill gräva djupare.
+Sasa tumejifunza jinsi ya kufundisha mawakala kufikia matokeo mazuri kwa kuwapa tu kazi ya tuzo inayofafanua hali inayotakiwa ya mchezo, na kwa kuwapa fursa ya kuchunguza nafasi ya utafutaji kwa akili. Tumefanikiwa kujaribu algoriti mbili, na kufikia matokeo mazuri katika muda mfupi. Hata hivyo, hii ni mwanzo tu wa safari yako katika RL, na unapaswa kuzingatia kuchukua kozi tofauti ikiwa unataka kuchimba zaidi.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Utforska de tillämpningar som listas i avsnittet "Andra RL-uppgifter" och försök att implementera en!
+Chunguza matumizi yaliyoorodheshwa katika sehemu ya 'Majukumu Mengine ya RL' na ujaribu kutekeleza moja!
 
-## [Efter-föreläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/222)
+## [Jaribio la baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/44)
 
-## Granskning & Självstudie
+## Mapitio na Kujisomea
 
-Lär dig mer om klassisk förstärkningsinlärning i vår [Maskininlärning för Nybörjare Läroplan](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/README.md).
+Jifunze zaidi kuhusu kujifunza kuimarisha kwa njia ya kawaida katika [Mtaala wetu wa Kujifunza Mashine kwa Kompyuta](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/README.md).
 
-Titta på [denna fantastiska video](https://www.youtube.com/watch?v=qv6UVOQ0F44) som handlar om hur en dator kan lära sig att spela Super Mario.
+Tazama [video hii nzuri](https://www.youtube.com/watch?v=qv6UVOQ0F44) inayozungumzia jinsi kompyuta inavyoweza kujifunza kucheza Super Mario.
 
-## Uppgift: [Träna en Mountain Car](lab/README.md)
+## Kazi: [Fundisha Gari la Mlima](lab/README.md)
 
-Ditt mål under denna uppgift skulle vara att träna en annan Gym-miljö - [Mountain Car](https://www.gymlibrary.ml/environments/classic_control/mountain_car/).
+Lengo lako wakati wa kazi hii litakuwa kufundisha mazingira tofauti ya Gym - [Mountain Car](https://www.gymlibrary.ml/environments/classic_control/mountain_car/).
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+---
+

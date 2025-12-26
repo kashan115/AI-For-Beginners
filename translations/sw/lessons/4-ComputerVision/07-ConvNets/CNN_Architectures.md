@@ -1,64 +1,73 @@
-# Kända CNN-arkitekturer
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "53faab85adfcebd8c10bcd71dc2fa557",
+  "translation_date": "2025-09-23T10:59:06+00:00",
+  "source_file": "lessons/4-ComputerVision/07-ConvNets/CNN_Architectures.md",
+  "language_code": "sw"
+}
+-->
+# Miundo Maarufu ya CNN
 
 ### VGG-16
 
-VGG-16 är ett nätverk som uppnådde 92,7% noggrannhet i ImageNet top-5 klassificering 2014. Det har följande lagerstruktur:
+VGG-16 ni mtandao uliopata usahihi wa 92.7% katika uainishaji wa ImageNet top-5 mwaka 2014. Una muundo wa tabaka zifuatazo:
 
-![ImageNet Layers](../../../../../translated_images/vgg-16-arch1.d901a5583b3a51baeaab3e768567d921e5d54befa46e1e642616c5458c934028.sw.jpg)
+![Tabaka za ImageNet](../../../../../translated_images/vgg-16-arch1.d901a5583b3a51baeaab3e768567d921e5d54befa46e1e642616c5458c934028.sw.jpg)
 
-Som du kan se följer VGG en traditionell pyramidarkitektur, som är en sekvens av konvolution-poolingslager.
+Kama unavyoona, VGG inafuata muundo wa jadi wa piramidi, ambao ni mfululizo wa tabaka za convolution-pooling.
 
-![ImageNet Pyramid](../../../../../translated_images/vgg-16-arch.64ff2137f50dd49fdaa786e3f3a975b3f22615efd13efb19c5d22f12e01451a1.sw.jpg)
+![Piramidi ya ImageNet](../../../../../translated_images/vgg-16-arch.64ff2137f50dd49fdaa786e3f3a975b3f22615efd13efb19c5d22f12e01451a1.sw.jpg)
 
-> Bild från [Researchgate](https://www.researchgate.net/figure/Vgg16-model-structure-To-get-the-VGG-NIN-model-we-replace-the-2-nd-4-th-6-th-7-th_fig2_335194493)
+> Picha kutoka [Researchgate](https://www.researchgate.net/figure/Vgg16-model-structure-To-get-the-VGG-NIN-model-we-replace-the-2-nd-4-th-6-th-7-th_fig2_335194493)
 
 ### ResNet
 
-ResNet är en familj av modeller som föreslogs av Microsoft Research 2015. Huvudidén med ResNet är att använda **residualblock**:
+ResNet ni familia ya miundo iliyopendekezwa na Microsoft Research mwaka 2015. Wazo kuu la ResNet ni kutumia **residual blocks**:
 
 <img src="images/resnet-block.png" width="300"/>
 
-> Bild från [denna artikel](https://arxiv.org/pdf/1512.03385.pdf)
+> Picha kutoka [karatasi hii](https://arxiv.org/pdf/1512.03385.pdf)
 
-Anledningen till att använda identitetspassering är att få vårt lager att förutsäga **skillnaden** mellan resultatet av ett tidigare lager och utgången av residualblocket - därav namnet *residual*. Dessa block är mycket lättare att träna, och man kan konstruera nätverk med flera hundra av dessa block (de vanligaste varianterna är ResNet-52, ResNet-101 och ResNet-152).
+Sababu ya kutumia njia ya kupitisha utambulisho ni kuruhusu tabaka zetu kutabiri **tofauti** kati ya matokeo ya tabaka ya awali na matokeo ya residual block - hivyo jina *residual*. Bloki hizi ni rahisi zaidi kufundisha, na mtu anaweza kujenga mitandao yenye mamia ya bloki hizi (toleo maarufu zaidi ni ResNet-52, ResNet-101 na ResNet-152).
 
-Du kan också tänka på detta nätverk som kapabelt att justera sin komplexitet efter datasetet. I början, när du börjar träna nätverket, är viktvärdena små, och mestadels av signalen går genom identitetslager. När träningen fortskrider och vikterna blir större, växer betydelsen av nätverksparametrarna, och nätverken justerar sig för att rymma den nödvändiga uttryckskraften för att korrekt klassificera träningsbilder.
+Unaweza pia kufikiria mtandao huu kama unaoweza kurekebisha ugumu wake kulingana na dataset. Mwanzoni, unapoanza kufundisha mtandao, thamani za uzito ni ndogo, na ishara nyingi hupitia tabaka za utambulisho. Kadri mafunzo yanavyoendelea na uzito unavyokuwa mkubwa, umuhimu wa vigezo vya mtandao unakua, na mtandao unajirekebisha ili kukidhi nguvu ya kuelezea inayohitajika kuainisha picha za mafunzo kwa usahihi.
 
 ### Google Inception
 
-Google Inception-arkitekturen tar denna idé ett steg längre och bygger varje nätverkslager som en kombination av flera olika vägar:
+Muundo wa Google Inception unachukua wazo hili hatua moja mbele, na hujenga kila tabaka la mtandao kama mchanganyiko wa njia kadhaa tofauti:
 
 <img src="images/inception.png" width="400"/>
 
-> Bild från [Researchgate](https://www.researchgate.net/figure/Inception-module-with-dimension-reductions-left-and-schema-for-Inception-ResNet-v1_fig2_355547454)
+> Picha kutoka [Researchgate](https://www.researchgate.net/figure/Inception-module-with-dimension-reductions-left-and-schema-for-Inception-ResNet-v1_fig2_355547454)
 
-Här behöver vi betona rollen av 1x1-konvolutioner, eftersom de i början inte verkar meningsfulla. Varför skulle vi behöva köra genom bilden med ett 1x1-filter? Men du måste komma ihåg att konvolutionsfilter också arbetar med flera djupkanaler (ursprungligen - RGB-färger, i efterföljande lager - kanaler för olika filter), och 1x1-konvolution används för att blanda dessa ingångskanaler tillsammans med hjälp av olika träningsbara vikter. Det kan också ses som nedsampling (pooling) över kanalens dimension.
+Hapa, tunahitaji kusisitiza jukumu la convolution za 1x1, kwa sababu mwanzoni hazionekani kuwa na maana. Kwa nini tunahitaji kupitisha picha kwa kichujio cha 1x1? Hata hivyo, unahitaji kukumbuka kwamba vichujio vya convolution pia hufanya kazi na njia kadhaa za kina (awali - rangi za RGB, katika tabaka zinazofuata - njia za vichujio tofauti), na convolution ya 1x1 hutumika kuchanganya njia hizo za pembejeo kwa kutumia uzito tofauti unaoweza kufundishwa. Inaweza pia kuonekana kama kupunguza ukubwa (pooling) juu ya mwelekeo wa njia.
 
-Här är [ett bra blogginlägg](https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578) om ämnet, och [den ursprungliga artikeln](https://arxiv.org/pdf/1312.4400.pdf).
+Hapa kuna [blogu nzuri](https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578) kuhusu mada hii, na [karatasi ya awali](https://arxiv.org/pdf/1312.4400.pdf).
 
 ### MobileNet
 
-MobileNet är en familj av modeller med minskad storlek, lämpliga för mobila enheter. Använd dem om du har begränsade resurser och kan offra lite noggrannhet. Huvudidén bakom dem är den så kallade **djupseparerade konvolutionen**, som tillåter att representera konvolutionsfilter genom en sammansättning av rumsliga konvolutioner och 1x1-konvolution över djupkanaler. Detta minskar avsevärt antalet parametrar, vilket gör nätverket mindre i storlek och också lättare att träna med mindre data.
+MobileNet ni familia ya miundo yenye ukubwa mdogo, inayofaa kwa vifaa vya mkononi. Tumia ikiwa una rasilimali chache, na unaweza kukubali kupoteza usahihi kidogo. Wazo kuu nyuma yake ni kinachoitwa **depthwise separable convolution**, ambacho huruhusu kuwakilisha vichujio vya convolution kwa muundo wa convolution za anga na convolution za 1x1 juu ya njia za kina. Hii inapunguza kwa kiasi kikubwa idadi ya vigezo, na kufanya mtandao kuwa mdogo kwa ukubwa, na pia rahisi kufundisha kwa data kidogo.
 
-Här är [ett bra blogginlägg om MobileNet](https://medium.com/analytics-vidhya/image-classification-with-mobilenet-cc6fbb2cd470).
+Hapa kuna [blogu nzuri kuhusu MobileNet](https://medium.com/analytics-vidhya/image-classification-with-mobilenet-cc6fbb2cd470).
 
-## Slutsats
+## Hitimisho
 
-I denna enhet har du lärt dig det huvudsakliga konceptet bakom datorvisionsneuronätverk - konvolutionella nätverk. Verkliga arkitekturer som driver bildklassificering, objektdetektering och till och med bildgenereringsnätverk är alla baserade på CNN, bara med fler lager och några ytterligare träningsknep.
+Katika sehemu hii, umejifunza dhana kuu nyuma ya mitandao ya neural ya maono ya kompyuta - mitandao ya convolution. Miundo halisi inayowezesha uainishaji wa picha, utambuzi wa vitu, na hata mitandao ya kizazi cha picha yote inategemea CNNs, lakini ikiwa na tabaka zaidi na mbinu za ziada za mafunzo.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-I de medföljande anteckningarna finns det noteringar längst ner om hur man kan uppnå större noggrannhet. Gör några experiment för att se om du kan uppnå högre noggrannhet.
+Katika daftari zinazotolewa, kuna maelezo chini kuhusu jinsi ya kupata usahihi mkubwa zaidi. Fanya majaribio ili kuona kama unaweza kufanikisha usahihi wa juu zaidi.
 
-## [Efterföreläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/207)
+## [Jaribio baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/14)
 
-## Granskning & Självstudie
+## Mapitio na Kujisomea
 
-Även om CNN oftast används för datorvisionsuppgifter, är de generellt bra för att extrahera mönster av fast storlek. Till exempel, om vi hanterar ljud, kan vi också vilja använda CNN för att leta efter specifika mönster i ljudsignalen - i vilket fall filter skulle vara 1-dimensionella (och detta CNN skulle kallas 1D-CNN). Dessutom används ibland 3D-CNN för att extrahera funktioner i flerdimensionellt utrymme, såsom vissa händelser som inträffar på video - CNN kan fånga vissa mönster av funktioner som förändras över tid. Gör en granskning och självstudie om andra uppgifter som kan göras med CNN.
+Ingawa CNNs hutumika mara nyingi kwa kazi za Maono ya Kompyuta, kwa ujumla ni nzuri kwa kutoa mifumo ya ukubwa maalum. Kwa mfano, ikiwa tunashughulika na sauti, tunaweza pia kutaka kutumia CNNs kutafuta mifumo maalum katika ishara ya sauti - ambapo vichujio vitakuwa vya mwelekeo mmoja (na CNN hii itaitwa 1D-CNN). Pia, wakati mwingine 3D-CNN hutumika kutoa vipengele katika nafasi ya mwelekeo mwingi, kama matukio fulani yanayotokea kwenye video - CNN inaweza kunasa mifumo fulani ya mabadiliko ya vipengele kwa muda. Fanya mapitio na kujisomea kuhusu kazi nyingine zinazoweza kufanywa na CNNs.
 
-## [Uppgift](lab/README.md)
+## [Kazi](lab/README.md)
 
-I detta laboratorium är du ansvarig för att klassificera olika katt- och hundraser. Dessa bilder är mer komplexa än MNIST-datasetet och har högre dimensioner, och det finns mer än 10 klasser.
+Katika maabara hii, unakabidhiwa jukumu la kuainisha aina tofauti za paka na mbwa. Picha hizi ni ngumu zaidi kuliko dataset ya MNIST na zina vipimo vya juu, na kuna zaidi ya madarasa 10.
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiserade översättningar kan innehålla fel eller oegentligheter. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller felaktiga tolkningar som uppstår till följd av användningen av denna översättning.
+---
+

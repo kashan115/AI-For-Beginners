@@ -1,34 +1,47 @@
-# Klassificering av Husdjurs Ansikten
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "b70fcf7fcee862990f848c679090943f",
+  "translation_date": "2025-10-03T14:56:44+00:00",
+  "source_file": "lessons/4-ComputerVision/07-ConvNets/lab/README.md",
+  "language_code": "sw"
+}
+-->
+# Uainishaji wa Nyuso za Wanyama Kipenzi
 
-Laborationsuppgift från [AI för Nybörjare Läroplan](https://github.com/microsoft/ai-for-beginners).
+Kazi ya Maabara kutoka [Mtaala wa AI kwa Kompyuta](https://github.com/microsoft/ai-for-beginners).
 
-## Uppgift
+## Kazi
 
-Tänk dig att du behöver utveckla en applikation för en djurförskola för att katalogisera alla husdjur. En av de fantastiska funktionerna i en sådan applikation skulle vara att automatiskt upptäcka rasen från ett fotografi. Detta kan framgångsrikt göras med hjälp av neurala nätverk.
+Fikiria unahitaji kuunda programu kwa ajili ya kituo cha kulelea wanyama kipenzi ili kuorodhesha wanyama wote. Moja ya vipengele bora vya programu kama hiyo itakuwa kugundua aina ya mnyama moja kwa moja kutoka kwenye picha. Hili linaweza kufanikiwa kwa kutumia mitandao ya neva.
 
-Du behöver träna ett konvolutionellt neuralt nätverk för att klassificera olika raser av katter och hundar med hjälp av **Pet Faces** datasetet.
+Unahitaji kufundisha mtandao wa neva wa convolutional ili kuainisha aina tofauti za paka na mbwa kwa kutumia dataset ya **Nyuso za Wanyama Kipenzi**.
 
-## Datasetet
+## Dataset
 
-Vi kommer att använda **Pet Faces** datasetet, som härstammar från [Oxford-IIIT](https://www.robots.ox.ac.uk/~vgg/data/pets/) husdjursdatasetet. Det innehåller 35 olika raser av hundar och katter.
+Tutatumia [Oxford-IIIT Pet Dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/), ambayo ina picha za aina 37 tofauti za mbwa na paka.
 
-![Datasetet vi kommer att hantera](../../../../../../translated_images/data.50b2a9d5484bdbf0f52f5765b381cec9efe2bd296a98f007f90bedb6ac67f2a8.sw.png)
+![Dataset tutakayoshughulikia](../../../../../../translated_images/data.50b2a9d5484bdbf0f52f5765b381cec9efe2bd296a98f007f90bedb6ac67f2a8.sw.png)
 
-För att ladda ner datasetet, använd denna kodsnutt:
+Ili kupakua dataset, tumia kipande hiki cha msimbo:
 
 ```python
-!wget https://mslearntensorflowlp.blob.core.windows.net/data/petfaces.tar.gz
-!tar xfz petfaces.tar.gz
-!rm petfaces.tar.gz
+!wget https://thor.robots.ox.ac.uk/~vgg/data/pets/images.tar.gz
+!tar xfz images.tar.gz
+!rm images.tar.gz
 ```
 
-## Starta Anteckningsbok
+**Kumbuka:** Picha za Oxford-IIIT Pet Dataset zimepangwa kwa jina la faili (mfano, `Abyssinian_1.jpg`, `Bengal_2.jpg`). Notebook inajumuisha msimbo wa kupanga picha hizi katika folda maalum za aina ili kurahisisha uainishaji.
 
-Börja laborationen med att öppna [PetFaces.ipynb](../../../../../../lessons/4-ComputerVision/07-ConvNets/lab/PetFaces.ipynb)
+## Kuanzisha Notebook
 
-## Sammanfattning
+Anza maabara kwa kufungua [PetFaces.ipynb](PetFaces.ipynb)
 
-Du har löst ett relativt komplext problem med bildklassificering från grunden! Det fanns ganska många klasser, och du lyckades fortfarande få en rimlig noggrannhet! Det är också meningsfullt att mäta top-k noggrannhet, eftersom det är lätt att förväxla vissa av klasserna som inte är tydligt olika ens för människor.
+## Mafanikio
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+Umesuluhisha tatizo gumu la uainishaji wa picha kutoka mwanzo! Kulikuwa na madarasa mengi, na bado uliweza kupata usahihi wa kuridhisha! Pia ina maana kupima usahihi wa top-k, kwa sababu ni rahisi kuchanganya baadhi ya madarasa ambayo hata kwa binadamu si rahisi kutofautisha.
+
+---
+
+**Kanusho**:  
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

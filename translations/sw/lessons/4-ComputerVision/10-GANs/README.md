@@ -1,101 +1,110 @@
-# Generativa Motståndsnätverk
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "0ff65b4da07b23697235de2beb2a3c25",
+  "translation_date": "2025-09-23T11:01:45+00:00",
+  "source_file": "lessons/4-ComputerVision/10-GANs/README.md",
+  "language_code": "sw"
+}
+-->
+# Mitandao ya Kizazi ya Kihasama
 
-I den föregående sektionen lärde vi oss om **generativa modeller**: modeller som kan skapa nya bilder som liknar de i träningsdatasetet. VAE var ett bra exempel på en generativ modell.
+Katika sehemu iliyopita, tulijifunza kuhusu **miundo ya kizazi**: miundo inayoweza kuzalisha picha mpya zinazofanana na zile zilizopo kwenye seti ya mafunzo. VAE ilikuwa mfano mzuri wa muundo wa kizazi.
 
-## [Förläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/110)
+## [Maswali ya awali ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/19)
 
-Men om vi försöker skapa något verkligt meningsfullt, som en målning med rimlig upplösning, med VAE, kommer vi att se att träningen inte konvergerar bra. För detta användningsfall bör vi lära oss om en annan arkitektur som är specifikt inriktad på generativa modeller - **Generativa Motståndsnätverk**, eller GANs.
+Hata hivyo, tukijaribu kuzalisha kitu chenye maana zaidi, kama mchoro wa ubora wa juu, kwa kutumia VAE, tutaona kuwa mafunzo hayafanikii vizuri. Kwa matumizi haya, tunapaswa kujifunza kuhusu usanifu mwingine maalum unaolenga miundo ya kizazi - **Mitandao ya Kizazi ya Kihasama**, au GANs.
 
-Huvudidén med en GAN är att ha två neurala nätverk som kommer att tränas mot varandra:
+Wazo kuu la GAN ni kuwa na mitandao miwili ya neva ambayo itafundishwa dhidi ya kila mmoja:
 
 <img src="images/gan_architecture.png" width="70%"/>
 
-> Bild av [Dmitry Soshnikov](http://soshnikov.com)
+> Picha na [Dmitry Soshnikov](http://soshnikov.com)
 
-> ✅ Lite vokabulär:
-> * **Generator** är ett nätverk som tar en slumpmässig vektor och producerar en bild som resultat
-> * **Diskriminator** är ett nätverk som tar en bild och ska avgöra om det är en verklig bild (från träningsdatasetet) eller om den har genererats av en generator. Det är i grunden en bildklassificerare.
+> ✅ Maneno machache ya msamiati:
+> * **Generator** ni mtandao unaochukua vector ya nasibu, na kuzalisha picha kama matokeo.
+> * **Discriminator** ni mtandao unaochukua picha, na unapaswa kusema kama ni picha halisi (kutoka seti ya mafunzo), au ilizalishwa na generator. Kimsingi ni mtambuzi wa picha.
 
-### Diskriminator
+### Discriminator
 
-Arkitekturen för diskriminatorn skiljer sig inte från ett vanligt bildklassificeringsnätverk. I det enklaste fallet kan det vara en fullt ansluten klassificerare, men mest sannolikt kommer det att vara ett [konvolutionellt nätverk](../07-ConvNets/README.md).
+Usanifu wa discriminator hauhitofautiani na mtandao wa kawaida wa uainishaji wa picha. Katika hali rahisi inaweza kuwa uainishaji wa tabaka zilizounganishwa kikamilifu, lakini mara nyingi itakuwa [mtandao wa convolutional](../07-ConvNets/README.md).
 
-> ✅ En GAN baserad på konvolutionella nätverk kallas en [DCGAN](https://arxiv.org/pdf/1511.06434.pdf)
+> ✅ GAN inayotegemea mitandao ya convolutional inaitwa [DCGAN](https://arxiv.org/pdf/1511.06434.pdf)
 
-En CNN-diskriminator består av följande lager: flera konvolutioner+pooling (med minskande spatial storlek) och ett eller flera fullt anslutna lager för att få "funktionsvektor", slutlig binär klassificerare.
+Discriminator ya CNN ina tabaka zifuatazo: convolution+pooling kadhaa (zikiwa na ukubwa wa anga unaopungua) na, tabaka moja au zaidi zilizounganishwa kikamilifu ili kupata "vector ya sifa", uainishaji wa mwisho wa binary.
 
-> ✅ En 'pooling' i detta sammanhang är en teknik som minskar storleken på bilden. "Pooling-lager minskar dimensionerna av data genom att kombinera utgångarna från neuronkluster i ett lager till en enda neuron i nästa lager." - [källa](https://wikipedia.org/wiki/Convolutional_neural_network#Pooling_layers)
+> ✅ 'Pooling' katika muktadha huu ni mbinu inayopunguza ukubwa wa picha. "Tabaka za pooling hupunguza vipimo vya data kwa kuunganisha matokeo ya makundi ya neurons katika tabaka moja kuwa neuron moja katika tabaka inayofuata." - [chanzo](https://wikipedia.org/wiki/Convolutional_neural_network#Pooling_layers)
 
 ### Generator
 
-En generator är något mer komplicerad. Du kan betrakta den som en omvänd diskriminator. Med utgångspunkt från en latent vektor (i stället för en funktionsvektor), har den ett fullt anslutet lager för att omvandla det till den erforderliga storleken/formen, följt av dekonvolutioner+uppskalning. Detta liknar *avkodar* delen av [autoencoder](../09-Autoencoders/README.md).
+Generator ni ngumu kidogo. Unaweza kuichukulia kama discriminator iliyogeuzwa. Kuanzia na vector ya latent (badala ya vector ya sifa), ina tabaka zilizounganishwa kikamilifu ili kuibadilisha kuwa ukubwa/umbo linalohitajika, ikifuatiwa na deconvolution+upscaling. Hii ni sawa na sehemu ya *decoder* ya [autoencoder](../09-Autoencoders/README.md).
 
-> ✅ Eftersom konvolutionslagret implementeras som ett linjärt filter som rör sig över bilden, är dekonvolution i grunden liknande konvolution och kan implementeras med samma lagerlogik.
+> ✅ Kwa sababu tabaka ya convolution inatekelezwa kama kichujio cha mstari kinachopita kwenye picha, deconvolution kimsingi ni sawa na convolution, na inaweza kutekelezwa kwa kutumia mantiki sawa ya tabaka.
 
 <img src="images/gan_arch_detail.png" width="70%"/>
 
-> Bild av [Dmitry Soshnikov](http://soshnikov.com)
+> Picha na [Dmitry Soshnikov](http://soshnikov.com)
 
-### Träning av GAN
+### Mafunzo ya GAN
 
-GANs kallas **motståndsnätverk** eftersom det finns en konstant tävling mellan generatorn och diskriminatorn. Under denna tävling förbättras både generatorn och diskriminatorn, vilket gör att nätverket lär sig att producera bättre och bättre bilder.
+GANs zinaitwa **kihasama** kwa sababu kuna ushindani wa mara kwa mara kati ya generator na discriminator. Wakati wa ushindani huu, generator na discriminator zote zinaboreshwa, hivyo mtandao hujifunza kuzalisha picha bora zaidi.
 
-Träningen sker i två steg:
+Mafunzo hufanyika kwa hatua mbili:
 
-* **Träning av diskriminatorn**. Denna uppgift är ganska rak på sak: vi genererar en batch av bilder med generatorn, märker dem med 0, som står för falsk bild, och tar en batch av bilder från inmatningsdatasetet (med etikett 1, verklig bild). Vi får en viss *diskriminatorförlust* och utför backprop.
-* **Träning av generatorn**. Detta är något mer komplicerat, eftersom vi inte vet det förväntade resultatet för generatorn direkt. Vi tar hela GAN-nätverket bestående av en generator följd av en diskriminator, matar in den med några slumpmässiga vektorer och förväntar oss att resultatet ska vara 1 (som motsvarar verkliga bilder). Vi fryser sedan parametrarna för diskriminatorn (vi vill inte att den ska tränas i detta steg) och utför backprop.
+* **Mafunzo ya discriminator**. Kazi hii ni rahisi: tunazalisha kundi la picha kwa kutumia generator, tukiziwekea lebo 0, ambayo inasimama kwa picha bandia, na kuchukua kundi la picha kutoka seti ya maingizo (zikiwa na lebo 1, picha halisi). Tunapata *discriminator loss*, na kufanya backprop.
+* **Mafunzo ya generator**. Hii ni ngumu kidogo, kwa sababu hatujui matokeo yanayotarajiwa kwa generator moja kwa moja. Tunachukua mtandao mzima wa GAN unaojumuisha generator ikifuatiwa na discriminator, tunailisha na vectors za nasibu, na tunatarajia matokeo kuwa 1 (yanayolingana na picha halisi). Kisha tunagandisha vigezo vya discriminator (hatutaki ifundishwe katika hatua hii), na kufanya backprop.
 
-Under denna process minskar varken generatorns eller diskriminatorns förluster signifikant. I den ideala situationen bör de oscillera, vilket motsvarar att båda nätverken förbättrar sin prestanda.
+Wakati wa mchakato huu, hasara za generator na discriminator hazishuki sana. Katika hali bora, zinapaswa kuzunguka, zikionyesha mitandao yote miwili ikiboresha utendaji wake.
 
-## ✍️ Övningar: GANs
+## ✍️ Mazoezi: GANs
 
-* [GAN Notebook i TensorFlow/Keras](../../../../../lessons/4-ComputerVision/10-GANs/GANTF.ipynb)
-* [GAN Notebook i PyTorch](../../../../../lessons/4-ComputerVision/10-GANs/GANPyTorch.ipynb)
+* [Notebook ya GAN katika TensorFlow/Keras](GANTF.ipynb)
+* [Notebook ya GAN katika PyTorch](GANPyTorch.ipynb)
 
-### Problem med GAN-träning
+### Changamoto za Mafunzo ya GAN
 
-GANs är kända för att vara särskilt svåra att träna. Här är några problem:
+GANs zinajulikana kuwa ngumu sana kufundisha. Hapa kuna changamoto chache:
 
-* **Mode Collapse**. Med denna term menar vi att generatorn lär sig att producera en framgångsrik bild som lurar diskriminatorn, och inte en variation av olika bilder.
-* **Känslighet för hyperparametrar**. Ofta kan du se att en GAN inte konvergerar alls, och plötsligt minskar inlärningshastigheten vilket leder till konvergens.
-* Att hålla en **balans** mellan generatorn och diskriminatorn. I många fall kan diskriminatorförlusten snabbt sjunka till noll, vilket resulterar i att generatorn inte kan tränas vidare. För att övervinna detta kan vi försöka sätta olika inlärningshastigheter för generatorn och diskriminatorn, eller hoppa över träningen av diskriminatorn om förlusten redan är för låg.
-* Träning för **hög upplösning**. Detta problem speglar samma problem som med autoencoders, och utlöses eftersom rekonstruktionen av för många lager i det konvolutionella nätverket leder till artefakter. Detta problem löses vanligtvis med så kallad **progressiv tillväxt**, där först några lager tränas på låguppskattade bilder, och sedan lager "avblockeras" eller läggs till. En annan lösning skulle vara att lägga till extra kopplingar mellan lager och träna flera upplösningar samtidigt - se detta [Multi-Scale Gradient GANs-papper](https://arxiv.org/abs/1903.06048) för detaljer.
+* **Mode Collapse**. Kwa neno hili tunamaanisha kuwa generator inajifunza kuzalisha picha moja yenye mafanikio inayomdanganya discriminator, na si aina mbalimbali za picha tofauti.
+* **Unyeti kwa hyperparameters**. Mara nyingi unaweza kuona kuwa GAN haifanikii kabisa, na kisha ghafla kupungua kwa kiwango cha kujifunza kunasababisha mafanikio.
+* Kuweka **usawa** kati ya generator na discriminator. Katika hali nyingi hasara ya discriminator inaweza kushuka hadi sifuri haraka, ambayo husababisha generator kushindwa kuendelea kujifunza. Ili kushinda hili, tunaweza kujaribu kuweka viwango tofauti vya kujifunza kwa generator na discriminator, au kuruka mafunzo ya discriminator ikiwa hasara tayari ni ndogo sana.
+* Mafunzo kwa **azimio la juu**. Kuonyesha tatizo sawa na autoencoders, tatizo hili linatokea kwa sababu ya kujenga tabaka nyingi za mtandao wa convolutional husababisha artifacts. Tatizo hili kwa kawaida linatatuliwa kwa kinachoitwa **progressive growing**, ambapo tabaka chache za kwanza zinafundishwa kwenye picha za azimio la chini, na kisha tabaka zinafunguliwa au kuongezwa. Suluhisho jingine litakuwa kuongeza miunganisho ya ziada kati ya tabaka na kufundisha maazimio kadhaa kwa wakati mmoja - angalia karatasi hii ya [Multi-Scale Gradient GANs](https://arxiv.org/abs/1903.06048) kwa maelezo zaidi.
 
-## Stilöverföring
+## Uhamishaji wa Mtindo
 
-GANs är ett utmärkt sätt att generera konstnärliga bilder. En annan intressant teknik är så kallad **stilöverföring**, som tar en **innehållsbild** och återtecknar den i en annan stil, genom att applicera filter från **stilbilden**.
+GANs ni njia nzuri ya kuzalisha picha za kisanii. Mbinu nyingine ya kuvutia ni kinachoitwa **uhamishaji wa mtindo**, ambayo inachukua moja **picha ya maudhui**, na kuichora upya kwa mtindo tofauti, ikitumia vichujio kutoka **picha ya mtindo**.
 
-Så här fungerar det:
-* Vi börjar med en slumpmässig brusbild (eller med en innehållsbild, men för att förstå det är det lättare att börja med slumpmässigt brus)
-* Vårt mål är att skapa en bild som ligger nära både innehållsbilden och stilbilden. Detta skulle bestämmas av två förlustfunktioner:
-   - **Innehållsförlust** beräknas baserat på de funktioner som extraherats av CNN vid vissa lager från den aktuella bilden och innehållsbilden
-   - **Stilförlust** beräknas mellan den aktuella bilden och stilbilden på ett smart sätt med hjälp av Gram-matriser (mer detaljer i [exempelnotebooken](../../../../../lessons/4-ComputerVision/10-GANs/StyleTransfer.ipynb))
-* För att göra bilden jämnare och ta bort brus introducerar vi också **Variationsförlust**, som beräknar det genomsnittliga avståndet mellan närliggande pixlar
-* Den huvudsakliga optimeringsloopen justerar den aktuella bilden med hjälp av gradientnedstigning (eller något annat optimeringsalgoritm) för att minimera den totala förlusten, som är en viktad summa av alla tre förluster. 
+Njia inavyofanya kazi ni kama ifuatavyo:
+* Tunaanza na picha ya kelele ya nasibu (au na picha ya maudhui, lakini kwa ajili ya kuelewa ni rahisi kuanza na kelele ya nasibu)
+* Lengo letu litakuwa kuunda picha ambayo itakuwa karibu na picha ya maudhui na picha ya mtindo. Hii itaamuliwa na kazi mbili za hasara:
+   - **Hasara ya maudhui** inahesabiwa kulingana na sifa zilizotolewa na CNN katika tabaka fulani kutoka picha ya sasa na picha ya maudhui.
+   - **Hasara ya mtindo** inahesabiwa kati ya picha ya sasa na picha ya mtindo kwa njia ya busara kwa kutumia matriki za Gram (maelezo zaidi katika [notebook ya mfano](StyleTransfer.ipynb)).
+* Ili kufanya picha iwe laini na kuondoa kelele, tunatambulisha pia **Hasara ya mabadiliko**, ambayo inahesabu umbali wa wastani kati ya pikseli za jirani.
+* Mzunguko mkuu wa uboreshaji unarekebisha picha ya sasa kwa kutumia gradient descent (au algorithm nyingine ya uboreshaji) ili kupunguza hasara ya jumla, ambayo ni jumla ya uzito wa hasara zote tatu.
 
-## ✍️ Exempel: [Stilöverföring](../../../../../lessons/4-ComputerVision/10-GANs/StyleTransfer.ipynb)
+## ✍️ Mfano: [Uhamishaji wa Mtindo](StyleTransfer.ipynb)
 
-## [Efterläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/210)
+## [Maswali ya baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/20)
 
-## Slutsats
+## Hitimisho
 
-I den här lektionen lärde du dig om GANs och hur man tränar dem. Du lärde dig också om de speciella utmaningar som denna typ av neuralt nätverk kan möta, och några strategier för hur man kan övervinna dem.
+Katika somo hili, umejifunza kuhusu GANs na jinsi ya kuzifundisha. Pia umejifunza kuhusu changamoto maalum ambazo aina hii ya Mtandao wa Neva inaweza kukutana nazo, na mikakati ya jinsi ya kuzishinda.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Gå igenom [Stilöverföringsnotebooken](../../../../../lessons/4-ComputerVision/10-GANs/StyleTransfer.ipynb) med dina egna bilder.
+Pitisha [notebook ya Uhamishaji wa Mtindo](StyleTransfer.ipynb) ukitumia picha zako mwenyewe.
 
-## Granskning & Självstudier
+## Mapitio na Kujisomea
 
-För referens, läs mer om GANs i dessa resurser:
+Kwa marejeleo, soma zaidi kuhusu GANs katika rasilimali hizi:
 
-* Marco Pasini, [10 Lektioner Jag Lärde Mig När Jag Tränade GANs i Ett År](https://towardsdatascience.com/10-lessons-i-learned-training-generative-adversarial-networks-gans-for-a-year-c9071159628)
-* [StyleGAN](https://en.wikipedia.org/wiki/StyleGAN), en *de facto* GAN-arkitektur att överväga
-* [Skapa Generativ Konst med GANs på Azure ML](https://soshnikov.com/scienceart/creating-generative-art-using-gan-on-azureml/)
+* Marco Pasini, [Masomo 10 Niliyoyajifunza Kufundisha GANs kwa Mwaka Mmoja](https://towardsdatascience.com/10-lessons-i-learned-training-generative-adversarial-networks-gans-for-a-year-c9071159628)
+* [StyleGAN](https://en.wikipedia.org/wiki/StyleGAN), usanifu wa GAN wa *de facto* wa kuzingatia.
+* [Kuunda Sanaa ya Kizazi kwa kutumia GANs kwenye Azure ML](https://soshnikov.com/scienceart/creating-generative-art-using-gan-on-azureml/)
 
-## Uppgift
+## Kazi
 
-Återbesök en av de två notebookar som är kopplade till denna lektion och träna GAN på dina egna bilder. Vad kan du skapa?
+Rudia moja ya notebook mbili zinazohusiana na somo hili na fundisha tena GAN kwa kutumia picha zako mwenyewe. Unaweza kuunda nini?
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+---
+

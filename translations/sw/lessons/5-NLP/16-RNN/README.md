@@ -1,87 +1,96 @@
-# Återkommande Neurala Nätverk
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "e2273cc150380a5e191903cea858f021",
+  "translation_date": "2025-09-23T11:07:06+00:00",
+  "source_file": "lessons/5-NLP/16-RNN/README.md",
+  "language_code": "sw"
+}
+-->
+# Mitandao ya Neural Inayojirudia
 
-## [För-lecture quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/116)
+## [Jaribio la Kabla ya Somo](https://ff-quizzes.netlify.app/en/ai/quiz/31)
 
-I tidigare avsnitt har vi använt rika semantiska representationer av text och en enkel linjär klassificerare ovanpå inbäddningarna. Vad denna arkitektur gör är att fånga den aggregerade betydelsen av ord i en mening, men den tar inte hänsyn till **ordningen** av orden, eftersom aggregationsoperationen ovanpå inbäddningarna tog bort denna information från den ursprungliga texten. Eftersom dessa modeller inte kan modellera ordning av ord, kan de inte lösa mer komplexa eller tvetydiga uppgifter som textgenerering eller frågesvar.
+Katika sehemu zilizopita, tumekuwa tukitumia uwakilishi wa kisemantiki wa maandishi na mtainishaji rahisi wa mstari juu ya embeddings. Hii inasaidia kunasa maana ya jumla ya maneno katika sentensi, lakini haizingatii **mpangilio** wa maneno, kwa sababu operesheni ya kujumlisha juu ya embeddings huondoa taarifa hii kutoka maandishi ya awali. Kwa kuwa mifano hii haiwezi kuiga mpangilio wa maneno, haiwezi kutatua kazi ngumu au zenye utata kama vile uzalishaji wa maandishi au kujibu maswali.
 
-För att fånga betydelsen av textsekvenser behöver vi använda en annan neurala nätverksarkitektur, som kallas **återkommande neurala nätverk**, eller RNN. I RNN passerar vi vår mening genom nätverket ett symbol i taget, och nätverket producerar ett **tillstånd**, som vi sedan skickar tillbaka till nätverket med nästa symbol.
+Ili kunasa maana ya mlolongo wa maandishi, tunahitaji kutumia usanifu mwingine wa mtandao wa neural, unaoitwa **mtandao wa neural unaojirudia**, au RNN. Katika RNN, tunapitisha sentensi yetu kupitia mtandao neno moja kwa wakati, na mtandao huzalisha hali fulani (**state**), ambayo tunapitisha tena kwenye mtandao pamoja na neno linalofuata.
 
 ![RNN](../../../../../translated_images/rnn.27f5c29c53d727b546ad3961637a267f0fe9ec5ab01f2a26a853c92fcefbb574.sw.png)
 
-> Bild av författaren
+> Picha na mwandishi
 
-Givet inmatningssekvensen av token X<sub>0</sub>,...,X<sub>n</sub>, skapar RNN en sekvens av neurala nätverksblock och tränar denna sekvens end-to-end med hjälp av backpropagation. Varje nätverksblock tar ett par (X<sub>i</sub>,S<sub>i</sub>) som inmatning och producerar S<sub>i+1</sub> som resultat. Det slutliga tillståndet S<sub>n</sub> eller (utgång Y<sub>n</sub>) går in i en linjär klassificerare för att producera resultatet. Alla nätverksblock delar samma vikter och tränas end-to-end med en backpropagation-pass.
+Kwa kuzingatia mlolongo wa pembejeo wa tokeni X<sub>0</sub>,...,X<sub>n</sub>, RNN huunda mlolongo wa vizuizi vya mtandao wa neural, na kufundisha mlolongo huu kutoka mwanzo hadi mwisho kwa kutumia backpropagation. Kila kizuizi cha mtandao huchukua jozi (X<sub>i</sub>,S<sub>i</sub>) kama pembejeo, na huzalisha S<sub>i+1</sub> kama matokeo. Hali ya mwisho S<sub>n</sub> au (matokeo Y<sub>n</sub>) huingia kwenye mtainishaji wa mstari ili kutoa matokeo. Vizuizi vyote vya mtandao vinashiriki uzito sawa, na hufundishwa kutoka mwanzo hadi mwisho kwa kutumia mchakato mmoja wa backpropagation.
 
-Eftersom tillståndsvektorer S<sub>0</sub>,...,S<sub>n</sub> passerar genom nätverket, kan det lära sig de sekventiella beroendena mellan orden. Till exempel, när ordet *not* dyker upp någonstans i sekvensen, kan det lära sig att neka vissa element inom tillståndsvektorn, vilket resulterar i negation.
+Kwa sababu vekta za hali S<sub>0</sub>,...,S<sub>n</sub> zinapitishwa kupitia mtandao, mtandao unaweza kujifunza utegemezi wa mlolongo kati ya maneno. Kwa mfano, neno *not* linapotokea mahali fulani kwenye mlolongo, linaweza kujifunza kukanusha vipengele fulani ndani ya vekta ya hali, na kusababisha kukanusha.
 
-> ✅ Eftersom vikterna för alla RNN-block på bilden ovan är delade, kan samma bild representeras som ett block (till höger) med en återkommande feedback-loop, som skickar utgångstillståndet från nätverket tillbaka till inmatningen.
+> ✅ Kwa kuwa uzito wa vizuizi vyote vya RNN kwenye picha hapo juu vinashirikiana, picha hiyo hiyo inaweza kuwakilishwa kama kizuizi kimoja (kulia) chenye kitanzi cha maoni kinachorudia, ambacho kinapitisha hali ya matokeo ya mtandao kurudi kwenye pembejeo.
 
-## Anatomiska av en RNN Cell
+## Muundo wa Kiini cha RNN
 
-Låt oss se hur en enkel RNN-cell är organiserad. Den tar emot det föregående tillståndet S<sub>i-1</sub> och den aktuella symbolen X<sub>i</sub> som inmatningar, och måste producera utgångstillståndet S<sub>i</sub> (och ibland är vi också intresserade av någon annan utgång Y<sub>i</sub>, som i fallet med generativa nätverk).
+Tuangalie jinsi kiini rahisi cha RNN kinavyopangwa. Kinapokea hali ya awali S<sub>i-1</sub> na ishara ya sasa X<sub>i</sub> kama pembejeo, na kinapaswa kutoa hali ya matokeo S<sub>i</sub> (na, wakati mwingine, tunavutiwa pia na matokeo mengine Y<sub>i</sub>, kama ilivyo kwa mitandao ya kizazi).
 
-En enkel RNN-cell har två viktmatriser inuti: en som transformerar en inmatningssymbol (låt oss kalla den W), och en annan som transformerar ett inmatningstillstånd (H). I det här fallet beräknas nätverkets utgång som σ(W×X<sub>i</sub>+H×S<sub>i-1</sub>+b), där σ är aktiveringsfunktionen och b är ytterligare bias.
+Kiini rahisi cha RNN kina matriki mawili ya uzito ndani yake: moja hubadilisha ishara ya pembejeo (tuiite W), na nyingine hubadilisha hali ya pembejeo (H). Katika hali hii, matokeo ya mtandao huhesabiwa kama &sigma;(W&times;X<sub>i</sub>+H&times;S<sub>i-1</sub>+b), ambapo &sigma; ni kazi ya uanzishaji na b ni upendeleo wa ziada.
 
-<img alt="RNN Cell Anatom" src="images/rnn-anatomy.png" width="50%"/>
+<img alt="RNN Cell Anatomy" src="images/rnn-anatomy.png" width="50%"/>
 
-> Bild av författaren
+> Picha na mwandishi
 
-I många fall passerar inmatningstokens genom inbäddningslagret innan de går in i RNN för att sänka dimensionaliteten. I det här fallet, om dimensionen av inmatningsvektorerna är *emb_size*, och tillståndsvektorn är *hid_size* - storleken på W är *emb_size*×*hid_size*, och storleken på H är *hid_size*×*hid_size*.
+Katika hali nyingi, tokeni za pembejeo hupitishwa kupitia safu ya embedding kabla ya kuingia kwenye RNN ili kupunguza ukubwa wa vipimo. Katika hali hii, ikiwa kipimo cha vekta za pembejeo ni *emb_size*, na vekta ya hali ni *hid_size* - ukubwa wa W ni *emb_size*&times;*hid_size*, na ukubwa wa H ni *hid_size*&times;*hid_size*.
 
-## Lång Korttidsminne (LSTM)
+## Kumbukumbu ya Muda Mrefu na Mfupi (LSTM)
 
-Ett av de största problemen med klassiska RNN:er är det så kallade **försvinnande gradienter** problemet. Eftersom RNN:er tränas end-to-end i en backpropagation-pass har det svårt att sprida fel till de första lagren av nätverket, och därmed kan nätverket inte lära sig relationer mellan avlägsna token. Ett av sätten att undvika detta problem är att införa **explisit tillståndshantering** genom att använda så kallade **portar**. Det finns två välkända arkitekturer av denna typ: **Long Short Term Memory** (LSTM) och **Gated Relay Unit** (GRU).
+Moja ya matatizo makuu ya RNN za kawaida ni tatizo linaloitwa **kupotea kwa gradients**. Kwa sababu RNN hufundishwa kutoka mwanzo hadi mwisho kwa mchakato mmoja wa backpropagation, inapata ugumu wa kueneza makosa hadi kwenye tabaka za mwanzo za mtandao, na hivyo mtandao hauwezi kujifunza uhusiano kati ya tokeni za mbali. Njia moja ya kuepuka tatizo hili ni kuanzisha **usimamizi wa hali wazi** kwa kutumia milango inayoitwa **gates**. Kuna usanifu mbili maarufu wa aina hii: **Kumbukumbu ya Muda Mrefu na Mfupi** (LSTM) na **Kitengo cha Relay Chenye Milango** (GRU).
 
-![Bild som visar ett exempel på en lång korttidsminnescell](../../../../../lessons/5-NLP/16-RNN/images/long-short-term-memory-cell.svg)
+![Picha inayoonyesha mfano wa kiini cha kumbukumbu ya muda mrefu na mfupi](../../../../../lessons/5-NLP/16-RNN/images/long-short-term-memory-cell.svg)
 
-> Bildkälla TBD
+> Chanzo cha picha TBD
 
-LSTM-nätverket är organiserat på ett sätt som liknar RNN, men det finns två tillstånd som passerar från lager till lager: det aktuella tillståndet C och den dolda vektorn H. Vid varje enhet sammanfogas den dolda vektorn H<sub>i</sub> med inmatningen X<sub>i</sub>, och de kontrollerar vad som händer med tillståndet C via **portar**. Varje port är ett neuralt nätverk med sigmoidaktivering (utgång i intervallet [0,1]), vilket kan ses som en bitmask när den multipliceras med tillståndsvektorn. Det finns följande portar (från vänster till höger på bilden ovan):
+Mtandao wa LSTM umeandaliwa kwa namna inayofanana na RNN, lakini kuna hali mbili zinazopitishwa kutoka tabaka moja hadi nyingine: hali halisi C, na vekta iliyofichwa H. Katika kila kitengo, vekta iliyofichwa H<sub>i</sub> inaunganishwa na pembejeo X<sub>i</sub>, na vinadhibiti kinachotokea kwa hali C kupitia **milango**. Kila mlango ni mtandao wa neural wenye uanzishaji wa sigmoid (matokeo katika safu [0,1]), ambao unaweza kufikiriwa kama maski ya biti wakati unazidishwa na vekta ya hali. Kuna milango ifuatayo (kutoka kushoto kwenda kulia kwenye picha hapo juu):
 
-* **Glömskeporten** tar en dold vektor och avgör vilka komponenter av vektorn C vi behöver glömma, och vilka som ska passera.
-* **Inmatningsporten** tar viss information från inmatnings- och dolda vektorer och sätter in den i tillståndet.
-* **Utgångsporten** transformerar tillståndet via ett linjärt lager med *tanh*-aktivering, och väljer sedan några av sina komponenter med hjälp av en dold vektor H<sub>i</sub> för att producera ett nytt tillstånd C<sub>i+1</sub>.
+* **Mlango wa kusahau** huchukua vekta iliyofichwa na kuamua ni vipengele vipi vya vekta C tunahitaji kusahau, na vipi kupitisha.
+* **Mlango wa pembejeo** huchukua taarifa fulani kutoka kwa pembejeo na vekta zilizofichwa na kuingiza kwenye hali.
+* **Mlango wa matokeo** hubadilisha hali kupitia safu ya mstari yenye uanzishaji wa *tanh*, kisha huchagua baadhi ya vipengele vyake kwa kutumia vekta iliyofichwa H<sub>i</sub> ili kutoa hali mpya C<sub>i+1</sub>.
 
-Komponenter av tillståndet C kan ses som vissa flaggor som kan slås på och av. Till exempel, när vi stöter på ett namn *Alice* i sekvensen, kan vi vilja anta att det hänvisar till en kvinnlig karaktär, och höja flaggan i tillståndet att vi har ett kvinnligt substantiv i meningen. När vi vidare stöter på fraserna *and Tom*, kommer vi att höja flaggan att vi har ett plural substantiv. Genom att manipulera tillståndet kan vi på så sätt hålla reda på de grammatiska egenskaperna hos meningsdelar.
+Vipengele vya hali C vinaweza kufikiriwa kama bendera fulani zinazoweza kuwashwa na kuzimwa. Kwa mfano, tunapokutana na jina *Alice* kwenye mlolongo, tunaweza kudhani kuwa linahusu mhusika wa kike, na kuinua bendera katika hali kwamba tuna nomino ya kike kwenye sentensi. Tunapokutana na maneno *and Tom*, tutainua bendera kwamba tuna nomino ya wingi. Hivyo kwa kudhibiti hali tunaweza kufuatilia mali za kisarufi za sehemu za sentensi.
 
-> ✅ En utmärkt resurs för att förstå internals av LSTM är denna fantastiska artikel [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) av Christopher Olah.
+> ✅ Rasilimali bora ya kuelewa undani wa LSTM ni makala hii nzuri [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) ya Christopher Olah.
 
-## Bidirektionella och Flerlager RNN:er
+## RNN za Mwelekeo Mbili na Tabaka Nyingi
 
-Vi har diskuterat återkommande nätverk som fungerar i en riktning, från början av en sekvens till slutet. Det verkar naturligt, eftersom det liknar hur vi läser och lyssnar på tal. Men eftersom vi i många praktiska fall har slumpmässig åtkomst till inmatningssekvensen, kan det vara meningsfullt att köra återkommande beräkningar i båda riktningarna. Sådana nätverk kallas **bidirektionella** RNN:er. När vi hanterar ett bidirektionellt nätverk, behöver vi två dolda tillståndsvektorer, en för varje riktning.
+Tumeelezea mitandao ya kujirudia inayofanya kazi kwa mwelekeo mmoja, kutoka mwanzo wa mlolongo hadi mwisho. Inaonekana kuwa ya kawaida, kwa sababu inafanana na jinsi tunavyosoma na kusikiliza hotuba. Hata hivyo, kwa kuwa katika hali nyingi za vitendo tunaweza kufikia mlolongo wa pembejeo kwa nasibu, inaweza kuwa na maana kuendesha hesabu ya kujirudia kwa mwelekeo wote. Mitandao kama hiyo inaitwa **RNN za mwelekeo mbili**. Tunaposhughulika na mtandao wa mwelekeo mbili, tutahitaji vekta mbili za hali zilizofichwa, moja kwa kila mwelekeo.
 
-Ett återkommande nätverk, antingen en-riktat eller bidirektionellt, fångar vissa mönster inom en sekvens och kan lagra dem i en tillståndsvektor eller skicka dem till utgången. Precis som med konvolutionella nätverk kan vi bygga ett annat återkommande lager ovanpå det första för att fånga högre nivåmönster och bygga från lågnivåmönster som extraherats av det första lagret. Detta leder oss till begreppet **flerlager RNN**, som består av två eller fler återkommande nätverk, där utgången från det föregående lagret skickas till nästa lager som inmatning.
+Mtandao wa kujirudia, iwe wa mwelekeo mmoja au wa mwelekeo mbili, hunasa mifumo fulani ndani ya mlolongo, na inaweza kuihifadhi kwenye vekta ya hali au kuipitisha kwenye matokeo. Kama ilivyo kwa mitandao ya convolutional, tunaweza kujenga safu nyingine ya kujirudia juu ya ile ya kwanza ili kunasa mifumo ya kiwango cha juu na kujenga kutoka kwa mifumo ya kiwango cha chini iliyotolewa na safu ya kwanza. Hii inatupeleka kwenye dhana ya **RNN ya tabaka nyingi** ambayo inajumuisha mitandao miwili au zaidi ya kujirudia, ambapo matokeo ya safu ya awali hupitishwa kwa safu inayofuata kama pembejeo.
 
-![Bild som visar en flerlagers lång-korttidsminnes-RNN](../../../../../translated_images/multi-layer-lstm.dd975e29bb2a59fe58b429db833932d734c81f211cad2783797a9608984acb8c.sw.jpg)
+![Picha inayoonyesha RNN ya tabaka nyingi ya kumbukumbu ya muda mrefu na mfupi](../../../../../translated_images/multi-layer-lstm.dd975e29bb2a59fe58b429db833932d734c81f211cad2783797a9608984acb8c.sw.jpg)
 
-*Bild från [detta underbara inlägg](https://towardsdatascience.com/from-a-lstm-cell-to-a-multilayer-lstm-network-with-pytorch-2899eb5696f3) av Fernando López*
+*Picha kutoka [makala hii nzuri](https://towardsdatascience.com/from-a-lstm-cell-to-a-multilayer-lstm-network-with-pytorch-2899eb5696f3) ya Fernando López*
 
-## ✍️ Övningar: Inbäddningar
+## ✍️ Mazoezi: Embeddings
 
-Fortsätt din inlärning i följande anteckningsböcker:
+Endelea kujifunza katika daftari zifuatazo:
 
-* [RNNs med PyTorch](../../../../../lessons/5-NLP/16-RNN/RNNPyTorch.ipynb)
-* [RNNs med TensorFlow](../../../../../lessons/5-NLP/16-RNN/RNNTF.ipynb)
+* [RNNs na PyTorch](RNNPyTorch.ipynb)
+* [RNNs na TensorFlow](RNNTF.ipynb)
 
-## Slutsats
+## Hitimisho
 
-I denna enhet har vi sett att RNN:er kan användas för sekvensklassificering, men i själva verket kan de hantera många fler uppgifter, såsom textgenerering, maskinöversättning och mer. Vi kommer att överväga dessa uppgifter i nästa enhet.
+Katika kitengo hiki, tumeona kwamba RNN zinaweza kutumika kwa uainishaji wa mlolongo, lakini kwa kweli, zinaweza kushughulikia kazi nyingi zaidi, kama vile uzalishaji wa maandishi, tafsiri ya mashine, na zaidi. Tutazingatia kazi hizo katika kitengo kijacho.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Läs igenom viss litteratur om LSTM och överväg deras tillämpningar:
+Soma fasihi fulani kuhusu LSTM na fikiria matumizi yake:
 
 - [Grid Long Short-Term Memory](https://arxiv.org/pdf/1507.01526v1.pdf)
 - [Show, Attend and Tell: Neural Image Caption
 Generation with Visual Attention](https://arxiv.org/pdf/1502.03044v2.pdf)
 
-## [Post-lecture quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/216)
+## [Jaribio la Baada ya Somo](https://ff-quizzes.netlify.app/en/ai/quiz/32)
 
-## Granskning & Självstudie
+## Mapitio na Kujisomea
 
-- [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) av Christopher Olah.
+- [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) ya Christopher Olah.
 
-## [Uppgift: Anteckningsböcker](assignment.md)
+## [Kazi: Daftari](assignment.md)
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi tar inget ansvar för eventuella missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+---
+

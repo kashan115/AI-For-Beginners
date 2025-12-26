@@ -1,80 +1,89 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "6bbd632dfe6c62e5f66bb51fd78c174a",
+  "translation_date": "2025-09-23T08:37:02+00:00",
+  "source_file": "lessons/6-Other/21-GeneticAlgorithms/README.md",
+  "language_code": "tr"
+}
+-->
 # Genetik Algoritmalar
 
-## [Ders öncesi quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/121)
+## [Ders Öncesi Testi](https://ff-quizzes.netlify.app/en/ai/quiz/41)
 
-**Genetik Algoritmalar** (GA), bir **evrimsel yaklaşım** temelinde yapay zeka (AI) için geliştirilmiş bir yöntemdir; burada bir popülasyonun evrim yöntemleri, belirli bir problem için optimal bir çözüm elde etmek amacıyla kullanılır. İlk olarak 1975 yılında [John Henry Holland](https://wikipedia.org/wiki/John_Henry_Holland) tarafından önerilmiştir.
+**Genetik Algoritmalar** (GA), bir problemin optimal çözümünü elde etmek için bir popülasyonun evrim yöntemlerini kullanan **evrimsel bir yaklaşım**a dayalıdır. 1975 yılında [John Henry Holland](https://wikipedia.org/wiki/John_Henry_Holland) tarafından önerilmiştir.
 
-Genetik Algoritmalar aşağıdaki fikirlere dayanır:
+Genetik Algoritmalar şu fikirlere dayanır:
 
 * Problemin geçerli çözümleri **genler** olarak temsil edilebilir
-* **Çaprazlama** iki çözümü bir araya getirerek yeni bir geçerli çözüm elde etmemizi sağlar
-* **Seçim**, bazı **uygunluk fonksiyonu** kullanarak daha optimal çözümleri seçmek için kullanılır
-* **Mutasyonlar**, optimizasyonu istikrarsızlaştırmak ve yerel minimumdan çıkmamızı sağlamak için tanıtılır
+* **Çaprazlama**, iki çözümü birleştirerek yeni bir geçerli çözüm elde etmemizi sağlar
+* **Seçim**, bazı **uygunluk fonksiyonları** kullanılarak daha optimal çözümleri seçmek için kullanılır
+* **Mutasyonlar**, optimizasyonu istikrarsızlaştırmak ve yerel minimumdan çıkmamızı sağlamak için eklenir
 
 Bir Genetik Algoritma uygulamak istiyorsanız, aşağıdakilere ihtiyacınız var:
 
-* Problemin çözümlerini **genler** g∈Γ kullanarak kodlama yöntemini bulmak
-* Genler kümesi Γ üzerinde **uygunluk fonksiyonu** fit: Γ→**R** tanımlamak. Daha küçük fonksiyon değerleri, daha iyi çözümlerle ilişkilidir.
-* İki geni bir araya getirerek yeni bir geçerli çözüm elde etmek için **çaprazlama** mekanizmasını tanımlamak crossover: Γ<sup>2</sub>→Γ.
-* **Mutasyon** mekanizmasını tanımlamak mutate: Γ→Γ.
+ * Problemin çözümlerini **genler** g&in;&Gamma; kullanarak kodlama yöntemini bulmak
+ * Genler kümesi &Gamma; üzerinde **uygunluk fonksiyonu** fit: &Gamma;&rightarrow;**R** tanımlamak. Daha küçük fonksiyon değerleri daha iyi çözümlere karşılık gelir.
+ * İki geni birleştirerek yeni bir geçerli çözüm elde etmek için **çaprazlama** mekanizmasını tanımlamak crossover: &Gamma;<sup>2</sub>&rightarrow;&Gamma;.
+ * **Mutasyon** mekanizmasını tanımlamak mutate: &Gamma;&rightarrow;&Gamma;.
 
-Birçok durumda, çaprazlama ve mutasyon, genleri sayısal diziler veya bit vektörleri olarak manipüle etmek için oldukça basit algoritmalardır.
+Çoğu durumda, çaprazlama ve mutasyon, genleri sayısal diziler veya bit vektörleri olarak manipüle eden oldukça basit algoritmalardır.
 
-Genetik algoritmanın özel uygulaması duruma göre değişiklik gösterebilir, ancak genel yapı şu şekildedir:
+Genetik algoritmanın belirli bir uygulaması durumdan duruma değişebilir, ancak genel yapı şu şekildedir:
 
-1. Başlangıç popülasyonu G⊂Γ seçin
-2. Bu adımda gerçekleştirilecek işlemlerden birini rastgele seçin: çaprazlama veya mutasyon
+1. Başlangıç popülasyonunu seç G&subset;&Gamma;
+2. Bu adımda gerçekleştirilecek işlemlerden birini rastgele seç: çaprazlama veya mutasyon
 3. **Çaprazlama**:
-   * Rastgele iki gen g<sub>1</sub>, g<sub>2</sub> ∈ G seçin
-   * Çaprazlama g=crossover(g<sub>1</sub>,g<sub>2</sub>) hesaplayın
-   * Eğer fit(g)<fit(g<sub>1</sub>) veya fit(g)<fit(g<sub>2</sub>) ise, popülasyondaki karşılık gelen geni g ile değiştirin.
-4. **Mutasyon** - rastgele bir gen g∈G seçin ve onu mutate(g) ile değiştirin
-5. Yeterince küçük bir fit değeri elde edene kadar veya adım sayısı sınırına ulaşana kadar 2. adımdan tekrarlayın.
+  * Rastgele iki gen seç g<sub>1</sub>, g<sub>2</sub> &in; G
+  * Çaprazlama hesapla g=crossover(g<sub>1</sub>,g<sub>2</sub>)
+  * Eğer fit(g)<fit(g<sub>1</sub>) veya fit(g)<fit(g<sub>2</sub>) ise - popülasyondaki ilgili geni g ile değiştir.
+4. **Mutasyon** - rastgele bir gen seç g&in;G ve onu mutate(g) ile değiştir
+5. fit değerinin yeterince küçük bir değere ulaşmasına veya adım sayısı sınırına ulaşılana kadar 2. adımdan itibaren tekrarla.
 
 ## Tipik Görevler
 
-Genetik Algoritmalar tarafından genellikle çözülen görevler şunlardır:
+Genetik Algoritmalar ile genellikle çözülen görevler şunlardır:
 
-1. Program optimizasyonu
-1. Optimal paketleme
-1. Optimal kesme
-1. Kapsamlı aramanın hızlandırılması
+1. Takvim optimizasyonu
+1. Optimal yerleştirme
+1. Optimal kesim
+1. Kapsamlı aramayı hızlandırma
 
 ## ✍️ Alıştırmalar: Genetik Algoritmalar
 
-Öğreniminizi aşağıdaki defterlerde devam ettirin:
+Aşağıdaki not defterlerinde öğrenmeye devam edin:
 
-Genetik Algoritmaların kullanımına dair iki örnek görmek için [bu deftere](../../../../../lessons/6-Other/21-GeneticAlgorithms/Genetic.ipynb) gidin:
+Genetik Algoritmaların kullanımına dair iki örneği görmek için [bu not defterine](Genetic.ipynb) gidin:
 
-1. Hazine adaletli paylaşımı
+1. Hazineyi adil bölme
 1. 8 Kraliçe Problemi
 
 ## Sonuç
 
-Genetik Algoritmalar, lojistik ve arama problemleri dahil birçok problemi çözmek için kullanılmaktadır. Bu alan, Psikoloji ve Bilgisayar Bilimi konularını birleştiren araştırmalardan ilham almıştır.
+Genetik Algoritmalar, lojistik ve arama problemleri dahil birçok problemi çözmek için kullanılır. Bu alan, Psikoloji ve Bilgisayar Bilimi konularını birleştiren araştırmalardan ilham almıştır.
 
 ## 🚀 Meydan Okuma
 
-"Genetik algoritmalar uygulaması kolaydır, ancak davranışlarını anlamak zordur." [kaynak](https://wikipedia.org/wiki/Genetic_algorithm) Bir Sudoku bulmacasını çözmek gibi bir genetik algoritma uygulaması bulmak için araştırma yapın ve nasıl çalıştığını bir taslak veya akış diyagramı olarak açıklayın.
+"Genetik algoritmaların uygulanması basittir, ancak davranışlarını anlamak zordur." [kaynak](https://wikipedia.org/wiki/Genetic_algorithm) Sudoku bulmacası çözmek gibi bir genetik algoritma uygulaması bulun ve nasıl çalıştığını bir taslak veya akış diyagramı olarak açıklayın.
 
-## [Ders sonrası quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/221)
+## [Ders Sonrası Testi](https://ff-quizzes.netlify.app/en/ai/quiz/42)
 
-## Gözden Geçirme & Kendi Kendine Çalışma
+## Gözden Geçirme ve Kendi Kendine Çalışma
 
-Bilgisayarların genetik algoritmalarla eğitilmiş sinir ağları kullanarak Super Mario oynamayı nasıl öğrenebileceği hakkında konuşan [bu harika videoyu](https://www.youtube.com/watch?v=qv6UVOQ0F44) izleyin. Bilgisayarların böyle oyunlar oynamayı öğrenmesi hakkında daha fazla bilgi edineceğiz [bir sonraki bölümde](../22-DeepRL/README.md).
+Genetik algoritmalarla eğitilmiş sinir ağlarını kullanarak bilgisayarların Super Mario oynamayı nasıl öğrenebileceğini anlatan [bu harika videoyu](https://www.youtube.com/watch?v=qv6UVOQ0F44) izleyin. Bilgisayarların bu tür oyunları oynamayı öğrenmesi hakkında daha fazla bilgi edineceğiz [bir sonraki bölümde](../22-DeepRL/README.md).
 
-## [Ödev: Diophantine Denklemi](../../../../../lessons/6-Other/21-GeneticAlgorithms/Diophantine.ipynb)
+## [Ödev: Diofant Denklemi](Diophantine.ipynb)
 
-Amacınız, tam sayı kökleri olan **Diophantine denklemi** olarak bilinen bir denklemi çözmektir. Örneğin, a+2b+3c+4d=30 denklemini düşünün. Bu denklemi sağlayan tam sayı köklerini bulmanız gerekiyor.
+Amacınız, tam sayı kökleri olan **Diofant denklemini** çözmek. Örneğin, a+2b+3c+4d=30 denklemini düşünün. Bu denklemi sağlayan tam sayı köklerini bulmanız gerekiyor.
 
-*Bu ödev [bu yazıdan](https://habr.com/post/128704/) ilham alınmıştır.*
+*Bu ödev [bu gönderiden](https://habr.com/post/128704/) ilham alınmıştır.*
 
 İpuçları:
 
 1. Köklerin [0;30] aralığında olduğunu düşünebilirsiniz
-1. Bir gen olarak, kök değerleri listesini kullanmayı düşünün
+1. Gen olarak kök değerlerinin listesini kullanmayı düşünün
 
-[Diophantine.ipynb](../../../../../lessons/6-Other/21-GeneticAlgorithms/Diophantine.ipynb) dosyasını başlangıç noktası olarak kullanın.
+Başlangıç noktası olarak [Diophantine.ipynb](Diophantine.ipynb) dosyasını kullanın.
 
-**Açıklama**:  
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlış anlamalar içerebileceğini lütfen dikkate alınız. Belgenin orijinal hali, otorite kaynağı olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanımı sonucu ortaya çıkan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+

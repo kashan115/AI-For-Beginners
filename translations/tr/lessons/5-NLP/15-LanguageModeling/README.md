@@ -1,45 +1,54 @@
-# Dil Modelleme
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "7ba20f54a5bfcd6521018cdfb17c7c57",
+  "translation_date": "2025-09-23T08:45:09+00:00",
+  "source_file": "lessons/5-NLP/15-LanguageModeling/README.md",
+  "language_code": "tr"
+}
+-->
+# Dil Modellemesi
 
-Anlam gömme yöntemleri, Word2Vec ve GloVe gibi, aslında **dil modelleme** için bir ilk adımdır - dilin doğasını bir şekilde *anlayan* (veya *temsil eden*) modeller oluşturmak.
+Word2Vec ve GloVe gibi anlamsal gömmeler aslında **dil modellemesi**ne doğru atılmış ilk adımlardır - dilin doğasını bir şekilde *anlayan* (veya *temsil eden*) modeller oluşturmak.
 
-## [Ders öncesi quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/115)
+## [Ders Öncesi Testi](https://ff-quizzes.netlify.app/en/ai/quiz/29)
 
-Dil modellemenin arkasındaki temel fikir, etiketlenmemiş veri setleri üzerinde denetimsiz bir şekilde eğitim yapmaktır. Bu önemlidir çünkü elimizde büyük miktarda etiketlenmemiş metin bulunmaktadır, oysa etiketlenmiş metin miktarı her zaman etiketleme için harcayabileceğimiz çaba ile sınırlı olacaktır. Genellikle, metindeki **eksik kelimeleri tahmin edebilen** dil modelleri oluşturabiliriz, çünkü metinde rastgele bir kelimeyi maskeleyip bunu bir eğitim örneği olarak kullanmak kolaydır.
+Dil modellemesinin temel fikri, modelleri etiketlenmemiş veri kümeleri üzerinde gözetimsiz bir şekilde eğitmektir. Bu önemlidir çünkü elimizde çok büyük miktarda etiketlenmemiş metin bulunurken, etiketlenmiş metin miktarı her zaman etiketleme için harcayabileceğimiz çaba ile sınırlı olacaktır. Çoğu zaman, metindeki **eksik kelimeleri tahmin edebilen** dil modelleri oluşturabiliriz, çünkü metindeki rastgele bir kelimeyi gizlemek ve bunu bir eğitim örneği olarak kullanmak oldukça kolaydır.
 
-## Gömme Eğitimleri
+## Gömmeleri Eğitmek
 
-Önceki örneklerimizde, önceden eğitilmiş anlam gömmelerini kullandık, ancak bu gömmelerin nasıl eğitilebileceğini görmek ilginçtir. Kullanılabilecek birkaç olası fikir vardır:
+Önceki örneklerimizde önceden eğitilmiş anlamsal gömmeler kullandık, ancak bu gömmelerin nasıl eğitilebileceğini görmek ilginçtir. Kullanılabilecek birkaç fikir vardır:
 
-* **N-Gram** dil modelleme, N önceki token'a bakarak bir token'ı tahmin ettiğimiz durumdur (N-gram)
-* **Sürekli Kelime Torbası** (CBoW), bir token dizisi $W_{-N}$, ..., $W_N$ içindeki ortadaki token $W_0$'ı tahmin ettiğimiz durumdur.
-* **Skip-gram**, ortadaki token $W_0$'dan komşu token'ların {$W_{-N},\dots, W_{-1}, W_1,\dots, W_N$} bir kümesini tahmin ettiğimiz durumdur.
+* **N-Gram** dil modellemesi, burada bir tokeni önceki N tokena bakarak tahmin ederiz (N-gram).
+* **Continuous Bag-of-Words** (CBoW), burada bir token dizisindeki $W_{-N}$, ..., $W_N$ arasında ortadaki token $W_0$'ı tahmin ederiz.
+* **Skip-gram**, burada ortadaki token $W_0$'dan komşu tokenlerin bir setini {$W_{-N},\dots, W_{-1}, W_1,\dots, W_N$} tahmin ederiz.
 
-![kelimeleri vektörlere dönüştürme üzerine makaleden bir resim](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.tr.png)
+![Kelimeyi vektöre dönüştürme algoritmalarına dair makaleden görsel](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.tr.png)
 
-> [bu makaleden](https://arxiv.org/pdf/1301.3781.pdf) alınmıştır.
+> Görsel [bu makaleden](https://arxiv.org/pdf/1301.3781.pdf)
 
-## ✍️ Örnek Not Defterleri: CBoW modelini eğitme
+## ✍️ Örnek Not Defterleri: CBoW Modeli Eğitimi
 
-Aşağıdaki not defterlerinde öğrenmeye devam edin:
+Aşağıdaki not defterlerinde öğreniminize devam edin:
 
-* [TensorFlow ile CBoW Word2Vec Eğitimi](../../../../../lessons/5-NLP/15-LanguageModeling/CBoW-TF.ipynb)
-* [PyTorch ile CBoW Word2Vec Eğitimi](../../../../../lessons/5-NLP/15-LanguageModeling/CBoW-PyTorch.ipynb)
+* [TensorFlow ile CBoW Word2Vec Eğitimi](CBoW-TF.ipynb)
+* [PyTorch ile CBoW Word2Vec Eğitimi](CBoW-PyTorch.ipynb)
 
 ## Sonuç
 
-Önceki derste, kelime gömmelerinin sihir gibi çalıştığını gördük! Artık kelime gömmelerini eğitmenin çok karmaşık bir görev olmadığını biliyoruz ve gerekirse alan spesifik metinler için kendi kelime gömmelerimizi eğitebilmeliyiz.
+Önceki derste kelime gömmelerinin adeta sihir gibi çalıştığını gördük! Şimdi kelime gömmeleri eğitmenin çok karmaşık bir iş olmadığını biliyoruz ve gerekirse alan spesifik metinler için kendi kelime gömmelerimizi eğitebiliriz.
 
-## [Ders sonrası quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/215)
+## [Ders Sonrası Testi](https://ff-quizzes.netlify.app/en/ai/quiz/30)
 
-## Gözden Geçirme & Kendi Kendine Çalışma
+## Gözden Geçirme ve Kendi Kendine Çalışma
 
-* [Dil Modelleme üzerine resmi PyTorch eğitimi](https://pytorch.org/tutorials/beginner/nlp/word_embeddings_tutorial.html).
-* [Word2Vec modelini eğitme üzerine resmi TensorFlow eğitimi](https://www.TensorFlow.org/tutorials/text/word2vec).
-* En yaygın kullanılan gömmeleri birkaç satır kodla eğitmek için **gensim** çerçevesinin kullanımı [bu belgede](https://pytorch.org/tutorials/beginner/nlp/word_embeddings_tutorial.html) açıklanmıştır.
+* [PyTorch'un Resmi Dil Modelleme Eğitimi](https://pytorch.org/tutorials/beginner/nlp/word_embeddings_tutorial.html).
+* [TensorFlow'un Resmi Word2Vec Modeli Eğitimi](https://www.TensorFlow.org/tutorials/text/word2vec).
+* **gensim** çerçevesini kullanarak en yaygın kullanılan gömmeleri birkaç satır kodla eğitmek [bu belgede](https://pytorch.org/tutorials/beginner/nlp/word_embeddings_tutorial.html) açıklanmıştır.
 
-## 🚀 [Görev: Skip-Gram Modelini Eğit](lab/README.md)
+## 🚀 [Görev: Skip-Gram Modeli Eğitimi](lab/README.md)
 
-Laboratuvar çalışmasında, bu dersten aldığınız kodu CBoW yerine skip-gram modelini eğitmek için değiştirmenizi istiyoruz. [Detayları okuyun](lab/README.md)
+Laboratuvarda, bu dersteki kodu değiştirerek CBoW yerine skip-gram modeli eğitmenizi istiyoruz. [Detayları okuyun](lab/README.md)
 
-**Açıklama**:  
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen dikkate alınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+

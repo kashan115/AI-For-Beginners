@@ -1,38 +1,47 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "38a1185ae3d54b180378bbd71ae3ef16",
+  "translation_date": "2025-09-23T08:37:18+00:00",
+  "source_file": "lessons/6-Other/23-MultiagentSystems/README.md",
+  "language_code": "tr"
+}
+-->
 # Çoklu-Ajan Sistemleri
 
-Zeka elde etmenin olası yollarından biri, birçok nispeten basit ajanın birleşik davranışının, sistemin genelinde daha karmaşık (veya zeki) bir davranışa yol açabileceği gerçeğine dayanan **ortaya çıkan** (veya **sinergik**) yaklaşımdır. Teorik olarak, bu, daha düşük seviyedeki sistemlerden uygun bir şekilde bir araya getirildiğinde daha yüksek seviyedeki sistemlerin bir tür ek değer kazandığını belirten [Kollektif Zeka](https://en.wikipedia.org/wiki/Collective_intelligence), [Ortaya Çıkma](https://en.wikipedia.org/wiki/Global_brain) ve [Evrimsel Sibernetik](https://en.wikipedia.org/wiki/Global_brain) ilkelerine dayanmaktadır (buna *metasistem geçişi ilkesi* denir).
+Zekayı elde etmenin olası yollarından biri, **ortaya çıkan** (veya **sinerjik**) yaklaşımdır. Bu yaklaşım, birçok nispeten basit ajanın birleşik davranışının, sistemin bir bütün olarak daha karmaşık (veya zeki) bir davranış sergilemesine yol açabileceği gerçeğine dayanır. Teorik olarak, bu yaklaşım [Kolektif Zeka](https://en.wikipedia.org/wiki/Collective_intelligence), [Emergentizm](https://en.wikipedia.org/wiki/Global_brain) ve [Evrimsel Sibernetik](https://en.wikipedia.org/wiki/Global_brain) ilkelerine dayanır. Bu ilkeler, üst düzey sistemlerin, alt düzey sistemlerin uygun şekilde birleştirilmesiyle bir tür ek değer kazandığını ifade eder (*metasistem geçişi ilkesi* olarak adlandırılır).
 
-## [Ders Öncesi Quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/123)
+## [Ders Öncesi Test](https://ff-quizzes.netlify.app/en/ai/quiz/45)
 
-**Çoklu-Ajan Sistemleri** yönelimi, 1990'larda internetin ve dağıtık sistemlerin büyümesine bir yanıt olarak AI'da ortaya çıkmıştır. Klasik AI ders kitaplarından biri olan [Yapay Zeka: Modern Bir Yaklaşım](https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach), Çoklu-Ajan Sistemleri açısından klasik AI'ya dair bir bakış açısına odaklanmaktadır.
+**Çoklu-Ajan Sistemleri** yönelimi, 1990'larda internetin ve dağıtık sistemlerin büyümesine yanıt olarak yapay zekada ortaya çıkmıştır. Klasik yapay zeka ders kitaplarından biri olan [Artificial Intelligence: A Modern Approach](https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach), klasik yapay zekayı çoklu-ajan sistemleri perspektifinden ele alır.
 
-Çoklu-ajan yaklaşımının merkezinde **Ajan** kavramı yer almaktadır - belirli bir **çevrede** yaşayan, bunu algılayabilen ve buna göre hareket edebilen bir varlık. Bu çok geniş bir tanım olup, ajanın birçok farklı türü ve sınıflandırması olabilir:
+Çoklu-ajan yaklaşımının merkezinde **Ajan** kavramı yer alır. Ajan, bir **çevrede** yaşayan, bu çevreyi algılayabilen ve üzerinde eylemde bulunabilen bir varlıktır. Bu oldukça geniş bir tanımdır ve birçok farklı türde ve sınıfta ajanlar olabilir:
 
 * Akıl yürütme yeteneklerine göre:
-   - **Reaktif** ajanlar genellikle basit istek-cevap türünde bir davranış sergiler
-   - **Deliberatif** ajanlar bir tür mantıksal akıl yürütme ve/veya planlama yetenekleri kullanır
-* Ajanın kodunu çalıştırdığı yere göre:
-   - **Statik** ajanlar, belirli bir ağ düğümünde çalışır
-   - **Mobil** ajanlar, kodlarını ağ düğümleri arasında taşıyabilir
+   - **Tepkisel** ajanlar genellikle basit istek-yanıt türü davranış sergiler
+   - **Düşünsel** ajanlar bir tür mantıksal akıl yürütme ve/veya planlama yetenekleri kullanır
+* Kodun çalıştığı yere göre:
+   - **Statik** ajanlar belirli bir ağ düğümünde çalışır
+   - **Mobil** ajanlar kodlarını ağ düğümleri arasında taşıyabilir
 * Davranışlarına göre:
-   - **Pasif ajanlar** belirli hedeflere sahip değildir. Bu tür ajanlar dışsal uyarıcılara yanıt verebilir, ancak kendileri herhangi bir eylem başlatmaz.
-   - **Aktif ajanlar** belirli hedeflere sahiptir ve bunları takip eder
+   - **Pasif ajanlar** belirli hedeflere sahip değildir. Bu tür ajanlar dış uyaranlara tepki verebilir, ancak kendiliğinden eylem başlatmaz.
+   - **Aktif ajanlar** belirli hedeflere ulaşmaya çalışır
    - **Bilişsel ajanlar** karmaşık planlama ve akıl yürütme içerir
 
 Günümüzde çoklu-ajan sistemleri birçok uygulamada kullanılmaktadır:
 
-* Oyunlarda, birçok NPC (oyuncu olmayan karakter) bir tür AI kullanır ve zeki ajanlar olarak kabul edilebilir
-* Video prodüksiyonunda, kalabalıkları içeren karmaşık 3D sahnelerin işlenmesi genellikle çoklu-ajan simülasyonu kullanılarak yapılır
-* Sistem modellemesinde, karmaşık bir modelin davranışını simüle etmek için çoklu-ajan yaklaşımı kullanılmaktadır. Örneğin, çoklu-ajan yaklaşımı, COVID-19 hastalığının dünya çapında yayılmasını tahmin etmek için başarıyla kullanılmıştır. Benzer bir yaklaşım, şehirdeki trafiği modellemek ve trafik kurallarındaki değişikliklere nasıl tepki verdiğini görmek için kullanılabilir.
-* Karmaşık otomasyon sistemlerinde, her cihaz bağımsız bir ajan olarak hareket edebilir, bu da tüm sistemi daha az monolitik ve daha dayanıklı hale getirir.
+* Oyunlarda, birçok oyuncu olmayan karakter bir tür yapay zeka kullanır ve zeki ajanlar olarak kabul edilebilir.
+* Video prodüksiyonunda, kalabalıkları içeren karmaşık 3D sahnelerin render edilmesi genellikle çoklu-ajan simülasyonu kullanılarak yapılır.
+* Sistem modellemede, karmaşık bir modelin davranışını simüle etmek için çoklu-ajan yaklaşımı kullanılır. Örneğin, çoklu-ajan yaklaşımı COVID-19 hastalığının dünya çapında yayılmasını tahmin etmek için başarıyla kullanılmıştır. Benzer bir yaklaşım, şehirdeki trafiği modellemek ve trafik kurallarındaki değişikliklere nasıl tepki verdiğini görmek için kullanılabilir.
+* Karmaşık otomasyon sistemlerinde, her cihaz bağımsız bir ajan olarak hareket edebilir, bu da tüm sistemi daha az monolitik ve daha sağlam hale getirir.
 
-Çoklu-ajan sistemleri derinlemesine incelemek için fazla zaman harcamayacağız, ancak **Çoklu-Ajan Modelleme** örneğini ele alacağız.
+Çoklu-ajan sistemlerine derinlemesine dalmayacağız, ancak **Çoklu-Ajan Modelleme** örneğini ele alacağız.
 
 ## NetLogo
 
-[NetLogo](https://ccl.northwestern.edu/netlogo/) , [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) programlama dilinin değiştirilmiş bir versiyonuna dayanan çoklu-ajan modelleme ortamıdır. Bu dil, programlama kavramlarını çocuklara öğretmek için geliştirilmiştir ve hareket edebilen ve arkasında iz bırakan **kaplumbağa** adlı bir ajanın kontrolünü sağlar. Bu, karmaşık geometrik figürler oluşturmayı mümkün kılar, bu da bir ajanın davranışını anlamanın çok görsel bir yoludur.
+[NetLogo](https://ccl.northwestern.edu/netlogo/), [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) programlama dilinin değiştirilmiş bir versiyonuna dayanan bir çoklu-ajan modelleme ortamıdır. Bu dil, çocuklara programlama kavramlarını öğretmek için geliştirilmiştir ve **kaplumbağa** adlı bir ajanı kontrol etmenize olanak tanır. Kaplumbağa hareket edebilir ve arkasında bir iz bırakabilir. Bu, bir ajanın davranışını anlamak için oldukça görsel bir yol olan karmaşık geometrik şekiller oluşturmayı sağlar.
 
-NetLogo'da, `create-turtles` komutunu kullanarak birçok kaplumbağa oluşturabiliriz. Daha sonra tüm kaplumbağalara bazı eylemler gerçekleştirmelerini (aşağıdaki örnekte - 10 birim ileri) emredebiliriz:
+NetLogo'da `create-turtles` komutunu kullanarak birçok kaplumbağa oluşturabiliriz. Daha sonra tüm kaplumbağalara bazı eylemler yapmalarını emredebiliriz (aşağıdaki örnekte - 10 birim ileri hareket):
 
 ```
 create-turtles 10
@@ -41,39 +50,39 @@ ask turtles [
 ]
 ```
 
-Elbette, tüm kaplumbağaların aynı şeyi yapması ilginç değildir, bu nedenle `ask` groups of turtles, eg. those who are in the vicinity of a certain point. We can also create turtles of different *breeds* using `breed [cats cat]` command. Here `cat` bir türün adıdır ve farklı komutların netlik açısından farklı biçimler kullandığı için hem tekil hem de çoğul kelimeyi belirtmemiz gerekir.
+Tabii ki, tüm kaplumbağaların aynı şeyi yapması ilginç değildir, bu yüzden belirli bir noktanın yakınındaki kaplumbağalar gibi gruplara `ask` komutuyla emir verebiliriz. Ayrıca `breed [cats cat]` komutunu kullanarak farklı *türlerde* kaplumbağalar oluşturabiliriz. Burada `cat` bir türün adıdır ve hem tekil hem de çoğul kelimeyi belirtmemiz gerekir, çünkü farklı komutlar açıklık için farklı formlar kullanır.
 
-> ✅ NetLogo dilini öğrenmeye girmeyeceğiz - daha fazla bilgi edinmek isterseniz harika [Başlangıç Seviyesi Etkileşimli NetLogo Sözlüğü](https://ccl.northwestern.edu/netlogo/bind/) kaynağını ziyaret edebilirsiniz.
+> ✅ NetLogo dilini öğrenmeye dalmayacağız - ilgileniyorsanız, harika [Beginner's Interactive NetLogo Dictionary](https://ccl.northwestern.edu/netlogo/bind/) kaynağını ziyaret edebilirsiniz.
 
-NetLogo'yu denemek için [indirin](https://ccl.northwestern.edu/netlogo/download.shtml) ve kurun.
+NetLogo'yu [indirip](https://ccl.northwestern.edu/netlogo/download.shtml) kurarak deneyebilirsiniz.
 
 ### Modeller Kütüphanesi
 
-NetLogo'nun harika bir yanı, deneyebileceğiniz çalışan modellerin bulunduğu bir kütüphane içermesidir. **Dosya → Modeller Kütüphanesi** menüsüne gidin ve birçok model kategorisinden birini seçin.
+NetLogo'nun harika bir özelliği, deneyebileceğiniz çalışan modellerin bulunduğu bir kütüphaneye sahip olmasıdır. **File &rightarrow; Models Library** seçeneğine gidin ve birçok model kategorisi arasından seçim yapabilirsiniz.
 
-<img alt="NetLogo Modeller Kütüphanesi" src="images/NetLogo-ModelLib.png" width="60%"/>
+<img alt="NetLogo Models Library" src="images/NetLogo-ModelLib.png" width="60%"/>
 
-> Dmitry Soshnikov tarafından modeller kütüphanesinin ekran görüntüsü
+> Dmitry Soshnikov tarafından modeller kütüphanesi ekran görüntüsü
 
-Bir model açabilirsiniz, örneğin **Biyoloji → Sürüler**.
+Bir modeli açabilirsiniz, örneğin **Biology &rightarrow; Flocking**.
 
 ### Ana İlkeler
 
-Modeli açtıktan sonra, sizi ana NetLogo ekranına alır. İşte sınırlı kaynaklar (ot) göz önünde bulundurulduğunda kurtlar ve koyunların popülasyonunu tanımlayan bir örnek model.
+Modeli açtıktan sonra, ana NetLogo ekranına yönlendirilirsiniz. İşte sınırlı kaynaklar (ot) göz önüne alındığında kurtlar ve koyunların popülasyonunu açıklayan örnek bir model.
 
-![NetLogo Ana Ekranı](../../../../../translated_images/NetLogo-Main.32653711ec1a01b3cab22ec0b148e64193d0b979b055285bef329d5e3d6958c5.tr.png)
+![NetLogo Ana Ekran](../../../../../translated_images/NetLogo-Main.32653711ec1a01b3cab22ec0b148e64193d0b979b055285bef329d5e3d6958c5.tr.png)
 
 > Dmitry Soshnikov tarafından ekran görüntüsü
 
 Bu ekranda şunları görebilirsiniz:
 
-* **Arayüz** bölümü şunları içerir:
+* **Arayüz** bölümü, şunları içerir:
   - Tüm ajanların yaşadığı ana alan
   - Farklı kontroller: düğmeler, kaydırıcılar vb.
-  - Simülasyonun parametrelerini görüntülemek için kullanabileceğiniz grafikler
+  - Simülasyon parametrelerini göstermek için kullanabileceğiniz grafikler
 * **Kod** sekmesi, NetLogo programını yazabileceğiniz editörü içerir
 
-Çoğu durumda, arayüzde simülasyon durumunu başlatan bir **Kurulum** düğmesi ve yürütmeyi başlatan bir **Git** düğmesi bulunur. Bunlar, kodda şu şekilde görünen ilgili işleyiciler tarafından yönetilir:
+Çoğu durumda, arayüzde simülasyon durumunu başlatan bir **Setup** düğmesi ve yürütmeyi başlatan bir **Go** düğmesi bulunur. Bunlar, kodda aşağıdaki gibi görünen ilgili işleyiciler tarafından yönetilir:
 
 ```
 to go [
@@ -81,74 +90,75 @@ to go [
 ]
 ```
 
-NetLogo'nun dünyası aşağıdaki nesnelerden oluşur:
+NetLogo'nun dünyası şu nesnelerden oluşur:
 
-* Alan boyunca hareket edebilen ve bir şeyler yapabilen **Ajanlar** (kaplumbağalar). Ajanları, `ask turtles [...]` syntax, and the code in brackets is executed by all agents in *turtle mode*.
-* **Patches** are square areas of the field, on which agents live. You can refer to all agents on the same patch, or you can change patch colors and some other properties. You can also `ask patches` kullanarak bir şeyler yapmaları için komut verirsiniz.
-* **Gözlemci**, dünyayı kontrol eden benzersiz bir ajandır. Tüm düğme işleyicileri *gözlemci modu* içinde yürütülür.
+* **Ajanlar** (kaplumbağalar), alan boyunca hareket edebilir ve bir şeyler yapabilir. Ajanlara `ask turtles [...]` sözdizimi kullanarak komut verirsiniz ve köşeli parantez içindeki kod, tüm ajanlar tarafından *kaplumbağa modunda* çalıştırılır.
+* **Yamalar**, ajanların yaşadığı alanın kare bölgeleridir. Aynı yamada bulunan tüm ajanlara başvurabilir veya yama renklerini ve diğer bazı özellikleri değiştirebilirsiniz. Ayrıca `ask patches` komutuyla yamalara bir şeyler yaptırabilirsiniz.
+* **Gözlemci**, dünyayı kontrol eden benzersiz bir ajandır. Tüm düğme işleyicileri *gözlemci modunda* çalıştırılır.
 
-> ✅ Çoklu-ajan ortamının güzelliği, kaplumbağa modunda veya yama modunda çalışan kodun, tüm ajanlar tarafından aynı anda paralel olarak yürütülmesidir. Böylece, biraz kod yazarak ve bireysel ajanın davranışını programlayarak, simülasyon sisteminin tamamının karmaşık davranışını oluşturabilirsiniz.
+> ✅ Çoklu-ajan ortamının güzelliği, kaplumbağa modunda veya yama modunda çalışan kodun tüm ajanlar tarafından aynı anda paralel olarak çalıştırılmasıdır. Böylece, az miktarda kod yazarak ve bireysel bir ajanın davranışını programlayarak, simülasyon sisteminin bir bütün olarak karmaşık davranışını oluşturabilirsiniz.
 
-### Sürüleşme
+### Sürü Davranışı
 
-Çoklu-ajan davranışına bir örnek olarak **[Sürüleşme](https://en.wikipedia.org/wiki/Flocking_(behavior))** konusunu ele alalım. Sürüleşme, kuş sürülerinin uçuşuna çok benzeyen karmaşık bir desen oluşturur. Onların uçuşunu izlerken, bir tür kolektif algoritmayı takip ettiklerini veya bir tür *kolektif zeka*ya sahip olduklarını düşünebilirsiniz. Ancak, bu karmaşık davranış, her bireysel ajanın (bu durumda bir *kuş*) sadece kısa bir mesafedeki diğer ajanları gözlemlemesi ve üç basit kurala uyması durumunda ortaya çıkar:
+Çoklu-ajan davranışına bir örnek olarak **[Sürü Davranışı](https://en.wikipedia.org/wiki/Flocking_(behavior))**'nı ele alalım. Sürü davranışı, kuş sürülerinin uçuşuna çok benzeyen karmaşık bir desendir. Onları uçarken izlediğinizde, bir tür kolektif algoritmayı takip ettiklerini veya bir tür *kolektif zekaya* sahip olduklarını düşünebilirsiniz. Ancak, bu karmaşık davranış, her bireysel ajanın (bu durumda bir *kuş*) yalnızca kısa mesafedeki diğer ajanları gözlemlemesi ve üç basit kurala uymasıyla ortaya çıkar:
 
-* **Hizalama** - komşu ajanların ortalama yönüne doğru yönelir
-* **Birliktelik** - komşuların ortalama konumuna doğru yönelmeye çalışır (*uzun menzilli çekim*)
-* **Ayrılma** - diğer kuşlara çok yaklaşınca uzaklaşmaya çalışır (*kısa menzilli itme*)
+* **Hizalanma** - komşu ajanların ortalama yönüne doğru yönelir
+* **Uyum** - komşuların ortalama konumuna doğru yönelmeye çalışır (*uzun mesafeli çekim*)
+* **Ayrılma** - diğer kuşlara çok yaklaştığında uzaklaşmaya çalışır (*kısa mesafeli itme*)
 
-Sürüleşme örneğini çalıştırabilir ve davranışı gözlemleyebilirsiniz. Ayrıca, her kuşun görebildiği mesafeyi tanımlayan *ayrılma derecesi* veya *görüş açısı* gibi parametreleri ayarlayabilirsiniz. Görüş açısını 0'a düşürürseniz, tüm kuşlar kör olur ve sürüleşme durur. Ayrılmayı 0'a düşürürseniz, tüm kuşlar bir düz çizgi halinde toplanır.
+Sürü davranışı örneğini çalıştırabilir ve davranışı gözlemleyebilirsiniz. Ayrıca, her kuşun ne kadar uzağı görebileceğini tanımlayan *görüş mesafesi* veya *ayrılma derecesi* gibi parametreleri ayarlayabilirsiniz. Görüş mesafesini 0'a düşürdüğünüzde, tüm kuşlar kör olur ve sürü davranışı durur. Ayrılmayı 0'a düşürdüğünüzde, tüm kuşlar düz bir çizgide toplanır.
 
-> ✅ **Kod** sekmesine geçin ve sürüleşmenin üç kuralının (hizalama, birliktelik ve ayrılma) kodda nasıl uygulandığını görün. Sadece görüş alanında olan ajanslara nasıl atıfta bulunduğumuza dikkat edin.
+> ✅ **Kod** sekmesine geçin ve sürü davranışının üç kuralının (hizalanma, uyum ve ayrılma) kodda nerede uygulandığını görün. Sadece görüş alanındaki ajanlara nasıl başvurduğumuza dikkat edin.
 
 ### Görülecek Diğer Modeller
 
-Deneyebileceğiniz birkaç ilginç model daha bulunmaktadır:
+Deneyebileceğiniz birkaç ilginç model daha var:
 
-* **Sanat → Havai Fişekler**, bir havai fişeğin bireysel ateş akımlarının kolektif bir davranış olarak nasıl değerlendirilebileceğini gösterir
-* **Sosyal Bilimler → Temel Trafik** ve **Sosyal Bilimler → Trafik Izgarası**, 1D ve 2D Izgara'da trafik modelini gösterir. Simülasyondaki her araç şu kurallara uyar:
-   - Önündeki alan boşsa - hızlanır (belirli bir maksimum hıza kadar)
-   - Önünde bir engel gördüğünde - frene basar (ve sürücünün ne kadar uzaktan görebileceğini ayarlayabilirsiniz)
-* **Sosyal Bilimler → Parti**, insanların bir kokteyl partisinde nasıl gruplandığını gösterir. Hızlı bir şekilde grup mutluluğunu artıran parametre kombinasyonunu bulabilirsiniz.
+* **Art &rightarrow; Fireworks**, bir havai fişeğin bireysel ateş akışlarının kolektif davranışı olarak nasıl düşünülebileceğini gösterir.
+* **Social Science &rightarrow; Traffic Basic** ve **Social Science &rightarrow; Traffic Grid**, trafik ışıklarıyla veya olmadan 1D ve 2D Grid'deki şehir trafiği modelini gösterir. Simülasyondaki her araba şu kuralları takip eder:
+   - Önündeki alan boşsa - hızlan (belirli bir maksimum hıza kadar)
+   - Önündeki engeli görürse - fren yap (ve bir sürücünün ne kadar uzağı görebileceğini ayarlayabilirsiniz)
+* **Social Science &rightarrow; Party**, bir kokteyl partisinde insanların nasıl gruplar oluşturduğunu gösterir. Grubun mutluluğunun en hızlı artışına yol açan parametre kombinasyonunu bulabilirsiniz.
 
-Bu örneklerden de görebileceğiniz gibi, çoklu-ajan simülasyonları, aynı veya benzer mantığı takip eden bireylerden oluşan karmaşık bir sistemin davranışını anlamanın oldukça yararlı bir yolu olabilir. Ayrıca, [NPC'ler](https://en.wikipedia.org/wiki/NPC) gibi sanal ajanları veya 3D animasyonlu dünyalardaki ajanları kontrol etmek için de kullanılabilir.
+Bu örneklerden de görebileceğiniz gibi, çoklu-ajan simülasyonları, aynı veya benzer mantığı takip eden bireylerden oluşan karmaşık bir sistemin davranışını anlamanın oldukça yararlı bir yolu olabilir. Ayrıca bilgisayar oyunlarındaki [NPC'ler](https://en.wikipedia.org/wiki/NPC) gibi sanal ajanları veya 3D animasyonlu dünyalardaki ajanları kontrol etmek için kullanılabilir.
 
-## Deliberatif Ajanlar
+## Düşünsel Ajanlar
 
-Yukarıda tanımlanan ajanlar, çevredeki değişikliklere bir tür algoritma kullanarak yanıt veren çok basit ajandır. Bu nedenle, **reaktif ajanlar** olarak adlandırılırlar. Ancak, bazen ajanlar akıl yürütebilir ve eylemlerini planlayabilir, bu durumda **deliberatif** olarak adlandırılırlar.
+Yukarıda açıklanan ajanlar oldukça basittir ve çevredeki değişikliklere bir tür algoritma kullanarak tepki verir. Bu tür ajanlar **tepkisel ajanlar** olarak adlandırılır. Ancak, bazen ajanlar akıl yürütüp eylemlerini planlayabilir, bu durumda **düşünsel** olarak adlandırılırlar.
 
-Tipik bir örnek, bir insandan bir tatil turu rezervasyonu yapma talimatı alan kişisel bir ajandır. Varsayalım ki internette ona yardımcı olabilecek birçok ajan var. O zaman diğer ajanlarla iletişime geçmeli, hangi uçuşların mevcut olduğunu görmeli, farklı tarihler için otel fiyatlarını kontrol etmeli ve en iyi fiyatı pazarlık etmeye çalışmalıdır. Tatil planı tamamlandığında ve sahibi tarafından onaylandığında, rezervasyon yapmaya devam edebilir.
+Tipik bir örnek, bir insanın tatil turu rezervasyonu yapmak için bir talimat verdiği kişisel bir ajandır. İnternette yaşayan birçok ajan olduğunu varsayalım, bu ajanlar ona yardımcı olabilir. Bu durumda, diğer ajanlarla iletişim kurarak hangi uçuşların mevcut olduğunu, farklı tarihler için otel fiyatlarını öğrenmeli ve en iyi fiyatı müzakere etmeye çalışmalıdır. Tatil planı tamamlandığında ve sahibi tarafından onaylandığında, rezervasyon işlemini gerçekleştirebilir.
 
-Bunu yapabilmek için, ajanların **iletişim kurması** gerekir. Başarılı iletişim için ihtiyaçları olanlar:
+Bunu yapmak için ajanların **iletişim kurması** gerekir. Başarılı iletişim için şunlara ihtiyaç duyarlar:
 
-* Bilgi alışverişi için bazı **standart diller**, [Bilgi Değişim Formatı](https://en.wikipedia.org/wiki/Knowledge_Interchange_Format) (KIF) ve [Bilgi Sorgulama ve Manipülasyon Dili](https://en.wikipedia.org/wiki/Knowledge_Query_and_Manipulation_Language) (KQML) gibi. Bu diller, [Konuşma Eylemi teorisi](https://en.wikipedia.org/wiki/Speech_act) temelinde tasarlanmıştır.
-* Bu diller, farklı **ihale türlerine** dayalı bazı **pazarlık protokollerini** de içermelidir.
-* Aynı kavramlara atıfta bulunabilmeleri için bir **ortak ontoloji** kullanılmalıdır.
-* Farklı ajanların ne yapabileceğini **keşfetme** yolu, yine bir tür ontoloji temelinde olmalıdır.
+* [Knowledge Interchange Format](https://en.wikipedia.org/wiki/Knowledge_Interchange_Format) (KIF) ve [Knowledge Query and Manipulation Language](https://en.wikipedia.org/wiki/Knowledge_Query_and_Manipulation_Language) (KQML) gibi **bilgi alışverişi için standart diller**. Bu diller [Konuşma Eylemi teorisi](https://en.wikipedia.org/wiki/Speech_act) temel alınarak tasarlanmıştır.
+* Bu diller ayrıca farklı **müzayede türlerine** dayalı **müzakere protokollerini** içermelidir.
+* Aynı kavramlara başvurabilmeleri ve anlamlarını bilmeleri için **ortak bir ontoloji** kullanmaları gerekir.
+* Farklı ajanların neler yapabileceğini **keşfetmek** için bir yol, yine bir tür ontolojiye dayalı olmalıdır.
 
-Deliberatif ajanlar, çevredeki değişikliklere yalnızca tepki vermekle kalmadıkları için reaktif ajandan çok daha karmaşıktır; aynı zamanda eylemleri *başlatabilmelidirler*. Deliberatif ajanlar için önerilen mimarilerden biri, Belief-Desire-Intention (BDI) ajanı olarak adlandırılan yapıdır:
+Düşünsel ajanlar, tepkisel ajanlardan çok daha karmaşıktır çünkü sadece çevredeki değişikliklere tepki vermekle kalmaz, aynı zamanda *eylemleri başlatabilmelidir*. Düşünsel ajanlar için önerilen mimarilerden biri, inanç-arzu-niyet (Belief-Desire-Intention, BDI) ajanıdır:
 
-* **İnançlar**, bir ajanın çevresi hakkında bir bilgi seti oluşturur. Bu, bir bilgi tabanı veya ajanın çevredeki belirli bir duruma uygulayabileceği kurallar seti olarak yapılandırılabilir.
-* **İstekler**, bir ajanın ne yapmak istediğini, yani hedeflerini tanımlar. Örneğin, yukarıdaki kişisel asistan ajanın hedefi bir tur rezervasyonu yapmaktır, otel ajanının hedefi ise karı maksimize etmektir.
-* **Niyetler**, bir ajanın hedeflerine ulaşmak için planladığı belirli eylemlerdir. Eylemler tipik olarak çevreyi değiştirir ve diğer ajanlarla iletişim kurar.
+* **İnançlar**, bir ajanın çevresi hakkındaki bilgi setini oluşturur. Bu, bir bilgi tabanı veya bir ajanın çevredeki belirli bir duruma uygulayabileceği kurallar kümesi olarak yapılandırılabilir.
+* **Arzular**, bir ajanın yapmak istediği şeyleri, yani hedeflerini tanımlar. Örneğin, yukarıdaki kişisel asistan ajanın hedefi bir tur rezervasyonu yapmakken, bir otel ajanın hedefi karı maksimize etmektir.
+* **Niyetler**, bir ajanın hedeflerine ulaşmak için planladığı belirli eylemlerdir. Eylemler genellikle çevreyi değiştirir ve diğer ajanlarla iletişim kurmayı sağlar.
 
-Çoklu-ajan sistemleri inşa etmek için [JADE](https://jade.tilab.com/) gibi bazı platformlar mevcuttur. [Bu makale](https://arxiv.org/ftp/arxiv/papers/2007/2007.08961.pdf), çoklu-ajan platformlarının bir incelemesini ve çoklu-ajan sistemlerinin kısa bir tarihini ve farklı kullanım senaryolarını içermektedir.
+Çoklu-ajan sistemleri oluşturmak için kullanılabilecek bazı platformlar mevcuttur, örneğin [JADE](https://jade.tilab.com/). [Bu makale](https://arxiv.org/ftp/arxiv/papers/2007/2007.08961.pdf), çoklu-ajan platformlarının bir incelemesini, çoklu-ajan sistemlerinin kısa bir tarihçesini ve farklı kullanım senaryolarını içermektedir.
 
 ## Sonuç
 
-Çoklu-Ajan sistemleri çok farklı biçimler alabilir ve birçok farklı uygulamada kullanılabilir. Hepsi, bireysel bir ajanın daha basit davranışına odaklanma eğilimindedir ve **sinergik etki** sayesinde genel sistemin daha karmaşık davranışını elde ederler.
+Çoklu-ajan sistemleri çok farklı biçimler alabilir ve birçok farklı uygulamada kullanılabilir. 
+Hepsi bireysel bir ajanın daha basit davranışına odaklanır ve **sinerjik etki** sayesinde genel sistemin daha karmaşık davranışını elde eder.
 
-## 🚀 Zorluk
+## 🚀 Meydan Okuma
 
-Bu dersi gerçek dünyaya taşıyın ve bir problemi çözebilecek bir çoklu-ajan sistemi kavramsallaştırmaya çalışın. Örneğin, bir çoklu-ajan sisteminin bir okul otobüsü rotasını optimize etmek için ne yapması gerekir? Bir fırında nasıl çalışabilir?
+Bu dersi gerçek dünyaya taşıyın ve bir sorunu çözebilecek bir çoklu-ajan sistemi kavramsallaştırmayı deneyin. Örneğin, bir çoklu-ajan sistemi okul servisi güzergahını optimize etmek için ne yapmalıdır? Bir fırında nasıl çalışabilir?
 
-## [Ders Sonrası Quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/223)
+## [Ders Sonrası Test](https://ff-quizzes.netlify.app/en/ai/quiz/46)
 
-## Gözden Geçirme & Kendi Kendine Çalışma
+## İnceleme ve Kendi Kendine Çalışma
 
-Bu tür bir sistemin sanayideki kullanımını gözden geçirin. Üretim veya video oyunu endüstrisi gibi bir alan seçin ve çoklu-ajan sistemlerinin benzersiz sorunları çözmek için nasıl kullanılabileceğini keşfedin.
+Bu tür sistemlerin endüstride kullanımını inceleyin. Üretim veya video oyun endüstrisi gibi bir alan seçin ve çoklu-ajan sistemlerinin benzersiz sorunları nasıl çözebileceğini keşfedin.
 
-## [NetLogo Görevi](assignment.md)
+## [NetLogo Ödevi](assignment.md)
 
-**Açıklama**:  
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilinde otorite kaynağı olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlama için sorumluluk kabul etmiyoruz.
+---
+

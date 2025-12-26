@@ -1,85 +1,93 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "6522312ff835796ca34136a9462fafb2",
+  "translation_date": "2025-09-23T08:46:07+00:00",
+  "source_file": "lessons/5-NLP/19-NER/README.md",
+  "language_code": "tr"
+}
+-->
 # Adlandırılmış Varlık Tanıma
 
-Şimdiye kadar, çoğunlukla tek bir NLP görevine - sınıflandırmaya odaklandık. Ancak, sinir ağları ile gerçekleştirilebilecek başka NLP görevleri de vardır. Bu görevlerden biri **[Adlandırılmış Varlık Tanıma](https://wikipedia.org/wiki/Named-entity_recognition)** (NER) olup, metin içindeki belirli varlıkları tanımakla ilgilidir; bunlar yerler, kişi adları, tarih-saat aralıkları, kimyasal formüller ve benzeri olabilir.
+Şimdiye kadar, çoğunlukla bir NLP görevi olan sınıflandırmaya odaklandık. Ancak, sinir ağlarıyla gerçekleştirilebilecek başka NLP görevleri de vardır. Bu görevlerden biri, metin içinde yer alan belirli varlıkları tanımayı içeren **[Adlandırılmış Varlık Tanıma](https://wikipedia.org/wiki/Named-entity_recognition)** (NER) işlemidir. Bu varlıklar arasında yerler, kişi isimleri, tarih-zaman aralıkları, kimyasal formüller ve daha fazlası bulunabilir.
 
-## [Ders öncesi quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/119)
+## [Ders Öncesi Test](https://ff-quizzes.netlify.app/en/ai/quiz/37)
 
-## NER Kullanım Örneği
+## NER Kullanımına Örnek
 
-Diyelim ki, Amazon Alexa veya Google Asistan'a benzer bir doğal dil sohbet botu geliştirmek istiyorsunuz. Akıllı sohbet botlarının çalışma şekli, kullanıcının ne istediğini *anlamak* için girdi cümlesi üzerinde metin sınıflandırması yapmaktır. Bu sınıflandırmanın sonucu, bir sohbet botunun ne yapması gerektiğini belirleyen **niyet** olarak adlandırılır.
+Diyelim ki Amazon Alexa veya Google Asistan gibi bir doğal dil sohbet botu geliştirmek istiyorsunuz. Akıllı sohbet botlarının çalışma şekli, kullanıcının ne istediğini anlamak için girilen cümle üzerinde metin sınıflandırması yapmaktır. Bu sınıflandırmanın sonucu, sohbet botunun ne yapması gerektiğini belirleyen **niyet** olarak adlandırılır.
 
 <img alt="Bot NER" src="images/bot-ner.png" width="50%"/>
 
-> Yazar tarafından sağlanan görsel
+> Görsel yazar tarafından oluşturulmuştur
 
-Ancak, bir kullanıcı ifadenin bir parçası olarak bazı parametreler verebilir. Örneğin, hava durumu sorduğunda, bir konum veya tarih belirtebilir. Bir bot, bu varlıkları anlamalı ve eylemi gerçekleştirmeden önce parametre alanlarını uygun şekilde doldurmalıdır. İşte NER tam burada devreye giriyor.
+Ancak, kullanıcı cümle içinde bazı parametreler belirtebilir. Örneğin, hava durumu sorarken bir konum veya tarih belirtebilir. Bot, bu varlıkları anlayabilmeli ve işlem yapmadan önce parametre yuvalarını uygun şekilde doldurmalıdır. İşte tam da burada NER devreye girer.
 
-> ✅ Başka bir örnek, [bilimsel tıbbi makaleleri analiz etmek](https://soshnikov.com/science/analyzing-medical-papers-with-azure-and-text-analytics-for-health/) olabilir. Dikkat etmemiz gereken ana şeylerden biri, hastalıklar ve tıbbi maddeler gibi belirli tıbbi terimlerdir. Küçük bir hastalık sayısı muhtemelen alt dize araması kullanılarak çıkarılabilirken, kimyasal bileşikler ve ilaç adları gibi daha karmaşık varlıklar, daha karmaşık bir yaklaşım gerektirir.
+> ✅ Bir diğer örnek, [bilimsel tıbbi makaleleri analiz etmek](https://soshnikov.com/science/analyzing-medical-papers-with-azure-and-text-analytics-for-health/) olabilir. Burada aramamız gereken ana şeyler, hastalıklar ve tıbbi maddeler gibi belirli tıbbi terimlerdir. Az sayıda hastalık muhtemelen alt dize aramasıyla çıkarılabilirken, kimyasal bileşikler ve ilaç isimleri gibi daha karmaşık varlıklar için daha gelişmiş bir yaklaşım gereklidir.
 
-## NER'nin Token Sınıflandırması Olarak
+## NER ve Token Sınıflandırması
 
-NER modelleri esasen **token sınıflandırma modelleridir**, çünkü girdi tokenlerinden her biri için bunun bir varlığa ait olup olmadığını belirlememiz gerekiyor ve eğer aitse - hangi varlık sınıfına ait olduğunu.
+NER modelleri aslında **token sınıflandırma modelleridir**, çünkü her bir giriş tokeni için bu tokenin bir varlığa ait olup olmadığını ve eğer aitse hangi varlık sınıfına ait olduğunu belirlememiz gerekir.
 
-Aşağıdaki makale başlığını düşünün:
+Aşağıdaki makale başlığını ele alalım:
 
-**Triküspit kapak yetmezliği** ve **lityum karbonat** **zehirlenmesi** bir yeni doğan bebekte.
+**Tricuspid kapak yetmezliği** ve **lityum karbonat** **toksisitesi** bir yenidoğan bebekte.
 
 Buradaki varlıklar şunlardır:
 
-* Triküspit kapak yetmezliği bir hastalıktır (`DIS`)
+* Tricuspid kapak yetmezliği bir hastalıktır (`DIS`)
 * Lityum karbonat bir kimyasal maddedir (`CHEM`)
-* Zehirlenme de bir hastalıktır (`DIS`)
+* Toksisite de bir hastalıktır (`DIS`)
 
-Bir varlığın birkaç tokenı kapsayabileceğini unutmayın. Ve, bu durumda olduğu gibi, iki ardışık varlık arasında ayrım yapmamız gerekiyor. Bu nedenle, her varlık için iki sınıf kullanmak yaygındır - birincisi varlığın ilk tokenını belirten (genellikle `B-` ön eki kullanılır, **b**aşlangıç için), diğeri ise bir varlığın devamı (`I-`, **i**ç token için). Ayrıca, tüm **d**iğer tokenları temsil etmek için `O` sınıfını da kullanırız. Bu tür token etiketleme, [BIO etiketleme](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) (veya IOB) olarak adlandırılır. Etiketlendiğinde, başlığımız şu şekilde görünecektir:
+Dikkat edin, bir varlık birden fazla token içerebilir. Ve bu durumda olduğu gibi, ardışık iki varlığı ayırt etmemiz gerekir. Bu nedenle, her varlık için iki sınıf kullanmak yaygındır - biri varlığın ilk tokenini belirtir (genellikle **b**aşlangıç için `B-` ön eki kullanılır) ve diğeri varlığın devamını (`I-`, **i**ç token için) belirtir. Ayrıca, tüm **d**iğer tokenleri temsil etmek için `O` sınıfını kullanırız. Bu tür token etiketleme [BIO etiketleme](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) (veya IOB) olarak adlandırılır. Etiketlendiğinde, başlığımız şu şekilde görünecektir:
 
 Token | Etiket
 ------|-----
-Triküspit | B-DIS
+Tricuspid | B-DIS
 kapak | I-DIS
 yetmezliği | I-DIS
 ve | O
 lityum | B-CHEM
 karbonat | I-CHEM
-zehirlenmesi | B-DIS
+toksisitesi | B-DIS
 bir | O
-yeni | O
-doğan | O
-bebek | O
+yenidoğan | O
+bebekte | O
 . | O
 
-Tokenlar ve sınıflar arasında bire bir karşılık kurmamız gerektiğinden, bu resimden sağdaki **çoktan-çoğa** sinir ağı modelini eğitebiliriz:
+Tokenler ve sınıflar arasında birebir bir ilişki kurmamız gerektiğinden, bu resimden **çoktan-çoka** bir sinir ağı modeli eğitebiliriz:
 
-![Yaygın tekrar eden sinir ağı desenlerini gösteren bir görüntü.](../../../../../translated_images/unreasonable-effectiveness-of-rnn.541ead816778f42dce6c42d8a56c184729aa2378d059b851be4ce12b993033df.tr.jpg)
+![Yaygın tekrarlayan sinir ağı desenlerini gösteren bir görsel.](../../../../../translated_images/unreasonable-effectiveness-of-rnn.541ead816778f42dce6c42d8a56c184729aa2378d059b851be4ce12b993033df.tr.jpg)
 
-> *Görsel [bu blog yazısından](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) [Andrej Karpathy](http://karpathy.github.io/) tarafından alınmıştır. NER token sınıflandırma modelleri, bu resimdeki en sağdaki ağ mimarisine karşılık gelir.*
+> *Görsel, [Andrej Karpathy](http://karpathy.github.io/) tarafından yazılmış [bu blog yazısından](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) alınmıştır. NER token sınıflandırma modelleri, bu resimdeki en sağdaki ağ mimarisine karşılık gelir.*
 
-## NER Modellerinin Eğitimi
+## NER Modellerini Eğitmek
 
-Bir NER modeli esasen bir token sınıflandırma modeli olduğundan, bu görev için zaten aşina olduğumuz RNN'leri kullanabiliriz. Bu durumda, her tekrarlayan ağ bloğu token kimliğini döndürecektir. Aşağıdaki örnek not defteri, token sınıflandırması için LSTM nasıl eğitileceğini göstermektedir.
+Bir NER modeli aslında bir token sınıflandırma modeli olduğundan, bu görev için zaten aşina olduğumuz RNN'leri kullanabiliriz. Bu durumda, tekrarlayan ağın her bloğu token kimliğini döndürecektir. Aşağıdaki örnek defter, token sınıflandırması için LSTM'nin nasıl eğitileceğini göstermektedir.
 
-## ✍️ Örnek Not Defterleri: NER
+## ✍️ Örnek Defterler: NER
 
-Aşağıdaki not defterinde öğreniminize devam edin:
+Aşağıdaki defterde öğrenmeye devam edin:
 
-* [TensorFlow ile NER](../../../../../lessons/5-NLP/19-NER/NER-TF.ipynb)
+* [TensorFlow ile NER](NER-TF.ipynb)
 
 ## Sonuç
 
-Bir NER modeli, **token sınıflandırma modeli**dir, bu da token sınıflandırması yapmak için kullanılabileceği anlamına gelir. Bu, metin içindeki belirli varlıkları tanımaya yardımcı olan oldukça yaygın bir NLP görevidir; bunlar yerler, adlar, tarihler ve daha fazlasını içerir.
+Bir NER modeli, bir **token sınıflandırma modeli**dir, yani token sınıflandırması yapmak için kullanılabilir. Bu, yerler, isimler, tarihler ve daha fazlasını içeren metin içindeki belirli varlıkları tanımaya yardımcı olan çok yaygın bir NLP görevidir.
 
-## 🚀 Zorluk
+## 🚀 Meydan Okuma
 
-Aşağıda bağlantısı verilen ödevi tamamlayarak tıbbi terimler için bir adlandırılmış varlık tanıma modeli eğitin, ardından bunu farklı bir veri setinde deneyin.
+Aşağıda bağlantısı verilen ödevi tamamlayarak tıbbi terimler için bir adlandırılmış varlık tanıma modeli eğitin ve ardından bunu farklı bir veri kümesinde deneyin.
 
-## [Ders sonrası quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/219)
+## [Ders Sonrası Test](https://ff-quizzes.netlify.app/en/ai/quiz/38)
 
-## Gözden Geçirme & Kendi Kendine Çalışma
+## Gözden Geçirme ve Kendi Kendine Çalışma
 
-[Tekrarlayan Sinir Ağlarının Aşırı Etkili Olması](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) başlıklı blogu okuyun ve o makaledeki Daha Fazla Okuma bölümünü takip ederek bilginizi derinleştirin.
+[Recurrent Neural Networks'ün Akıl Almaz Etkinliği](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) blog yazısını okuyun ve bu makaledeki Daha Fazla Okuma bölümünü takip ederek bilginizi derinleştirin.
 
 ## [Ödev](lab/README.md)
 
-Bu dersteki ödevde, bir tıbbi varlık tanıma modeli eğitmeniz gerekecek. Bu derste açıklanan LSTM modelini eğitmeye başlayabilir ve ardından BERT dönüştürücü modelini kullanmaya geçebilirsiniz. Tüm detayları öğrenmek için [talimatları](lab/README.md) okuyun.
+Bu dersin ödevinde, bir tıbbi varlık tanıma modeli eğitmeniz gerekecek. Bu derste açıklanan şekilde bir LSTM modeli eğiterek başlayabilir ve ardından BERT dönüştürücü modelini kullanmaya geçebilirsiniz. Tüm detayları öğrenmek için [talimatları okuyun](lab/README.md).
 
-**Açıklama**:  
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilinde otorite kaynağı olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanılması sonucunda ortaya çıkan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+

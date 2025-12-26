@@ -1,51 +1,62 @@
-# Introduktion till Neurala Nätverk
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "f862a99d88088163df12270e2f2ad6c3",
+  "translation_date": "2025-10-03T12:51:53+00:00",
+  "source_file": "lessons/3-NeuralNetworks/README.md",
+  "language_code": "sw"
+}
+-->
+# Utangulizi wa Mitandao ya Neva
 
-![Sammanfattning av innehållet i Introduktion till Neurala Nätverk i en doodle](../../../../translated_images/ai-neuralnetworks.1c687ae40bc86e834f497844866a26d3e0886650a67a4bbe29442e2f157d3b18.sw.png)
+![Muhtasari wa maudhui ya Utangulizi wa Mitandao ya Neva katika mchoro](../../../../translated_images/ai-neuralnetworks.1c687ae40bc86e834f497844866a26d3e0886650a67a4bbe29442e2f157d3b18.sw.png)
 
-Som vi diskuterade i introduktionen är en av metoderna för att uppnå intelligens att träna en **datormodell** eller en **konstgjord hjärna**. Sedan mitten av 1900-talet har forskare prövat olika matematiska modeller, tills detta område i de senaste åren visat sig vara oerhört framgångsrikt. Sådana matematiska modeller av hjärnan kallas **neurala nätverk**.
+Kama tulivyojadili katika utangulizi, mojawapo ya njia za kufanikisha akili ni kufundisha **mfano wa kompyuta** au **ubongo bandia**. Tangu katikati ya karne ya 20, watafiti walijaribu mifano mbalimbali ya kihisabati, hadi miaka ya hivi karibuni ambapo mwelekeo huu ulionekana kufanikiwa sana. Mifano hii ya kihisabati ya ubongo inaitwa **mitandao ya neva**.
 
-> Ibland kallas neurala nätverk *Artificiella Neurala Nätverk*, ANNs, för att indikera att vi pratar om modeller, inte verkliga nätverk av neuroner.
+> Wakati mwingine mitandao ya neva huitwa *Mitandao ya Neva Bandia*, ANNs, ili kuonyesha kuwa tunazungumzia mifano, si mitandao halisi ya neva.
 
-## Maskininlärning
+## Kujifunza kwa Mashine
 
-Neurala Nätverk är en del av en större disciplin som kallas **Maskininlärning**, vars mål är att använda data för att träna datormodeller som kan lösa problem. Maskininlärning utgör en stor del av Artificiell Intelligens, men vi täcker inte klassisk ML i denna läroplan.
+Mitandao ya Neva ni sehemu ya taaluma kubwa inayoitwa **Kujifunza kwa Mashine**, ambayo inalenga kutumia data kufundisha mifano ya kompyuta inayoweza kutatua matatizo. Kujifunza kwa Mashine ni sehemu kubwa ya Akili Bandia, hata hivyo, hatutashughulikia Kujifunza kwa Mashine kwa njia ya kawaida katika mtaala huu.
 
-> Besök vår separata **[Maskininlärning för Nybörjare](http://github.com/microsoft/ml-for-beginners)** läroplan för att lära dig mer om klassisk Maskininlärning.
+> Tembelea mtaala wetu tofauti wa **[Kujifunza kwa Mashine kwa Kompyuta za Kuanza](http://github.com/microsoft/ml-for-beginners)** ili kujifunza zaidi kuhusu Kujifunza kwa Mashine kwa njia ya kawaida.
 
-Inom Maskininlärning antar vi att vi har en dataset med exempel **X**, och motsvarande utdata **Y**. Exempel är ofta N-dimensionella vektorer som består av **funktioner**, och utdata kallas **etiketter**.
+Katika Kujifunza kwa Mashine, tunadhani kuwa tuna seti fulani ya data ya mifano **X**, na thamani za matokeo zinazolingana **Y**. Mifano mara nyingi ni vekta za N-dimensional zinazojumuisha **vipengele**, na matokeo huitwa **lebo**.
 
-Vi kommer att överväga de två vanligaste problemen inom maskininlärning:
+Tutazingatia matatizo mawili ya kawaida ya kujifunza kwa mashine:
 
-* **Klassificering**, där vi behöver klassificera ett indataobjekt i två eller fler klasser.
-* **Regression**, där vi behöver förutsäga ett numeriskt värde för varje indataexempel.
+* **Uainishaji**, ambapo tunahitaji kuainisha kitu cha ingizo katika madarasa mawili au zaidi.
+* **Urejeshaji**, ambapo tunahitaji kutabiri namba ya nambari kwa kila sampuli ya ingizo.
 
-> När vi representerar indata och utdata som tensorer, är indatauppsättningen en matris av storlek M×N, där M är antalet prover och N är antalet funktioner. Utdataetiketter Y är vektorn av storlek M.
+> Wakati wa kuwakilisha viingizo na matokeo kama tensors, seti ya data ya ingizo ni matriki ya ukubwa M&times;N, ambapo M ni idadi ya sampuli na N ni idadi ya vipengele. Lebo za matokeo Y ni vekta ya ukubwa M.
 
-I denna läroplan kommer vi endast att fokusera på modeller för neurala nätverk.
+Katika mtaala huu, tutazingatia tu mifano ya mitandao ya neva.
 
-## En Modell av en Neuron
+## Mfano wa Neva
 
-Från biologin vet vi att vår hjärna består av nervceller, där varje cell har flera "ingångar" (axon) och en utgång (dendrit). Axon och dendriter kan leda elektriska signaler, och kopplingarna mellan axon och dendriter kan uppvisa olika grader av ledningsförmåga (styrt av neuromediatörer).
+Kutoka kwa biolojia, tunajua kuwa ubongo wetu unajumuisha seli za neva (neuroni), kila moja ikiwa na "viingizo" vingi (dendriti) na "matokeo" moja (aksoni). Dendriti na aksoni zote mbili zinaweza kusafirisha ishara za umeme, na miunganisho kati yao — inayojulikana kama sinapsi — inaweza kuonyesha viwango tofauti vya usafirishaji, ambavyo vinadhibitiwa na nyurotransmita.
 
-![Modell av en Neuron](../../../../translated_images/synapse-wikipedia.ed20a9e4726ea1c6a3ce8fec51c0b9bec6181946dca0fe4e829bc12fa3bacf01.sw.jpg) | ![Modell av en Neuron](../../../../translated_images/artneuron.1a5daa88d20ebe6f5824ddb89fba0bdaaf49f67e8230c1afbec42909df1fc17e.sw.png)
+![Mfano wa Neva](../../../../translated_images/synapse-wikipedia.ed20a9e4726ea1c6a3ce8fec51c0b9bec6181946dca0fe4e829bc12fa3bacf01.sw.jpg) | ![Mfano wa Neva](../../../../translated_images/artneuron.1a5daa88d20ebe6f5824ddb89fba0bdaaf49f67e8230c1afbec42909df1fc17e.sw.png)
 ----|----
-Verklig Neuron *([Bild](https://en.wikipedia.org/wiki/Synapse#/media/File:SynapseSchematic_lines.svg) från Wikipedia)* | Konstgjord Neuron *(Bild av Författaren)*
+Neva Halisi *([Picha](https://en.wikipedia.org/wiki/Synapse#/media/File:SynapseSchematic_lines.svg) kutoka Wikipedia)* | Neva Bandia *(Picha na Mwandishi)*
 
-Således innehåller den enklaste matematiska modellen av en neuron flera ingångar X<sub>1</sub>, ..., X<sub>N</sub> och en utgång Y, samt en serie vikter W<sub>1</sub>, ..., W<sub>N</sub>. En utgång beräknas som:
+Kwa hivyo, mfano rahisi wa kihisabati wa neva una viingizo kadhaa X<sub>1</sub>, ..., X<sub>N</sub> na matokeo Y, na mfululizo wa uzito W<sub>1</sub>, ..., W<sub>N</sub>. Matokeo huhesabiwa kama:
 
-<img src="images/netout.png" alt="Y = f\left(\sum_{i=1}^N X_iW_i\right)" width="131" height="53" align="center"/>
+<img src="../../../../translated_images/netout.1eb15eb76fd767313e067719f400cec4b0e5090239c3e997c29f6789d4c3c263.sw.png" alt="Y = f\left(\sum_{i=1}^N X_iW_i\right)" width="131" height="53" align="center"/>
 
-där f är någon icke-linjär **aktiveringsfunktion**.
+ambapo f ni **kazi ya uanzishaji** isiyo ya mstari.
 
-> Tidiga modeller av neuroner beskrevs i den klassiska artikeln [A logical calculus of the ideas immanent in nervous activity](https://www.cs.cmu.edu/~./epxing/Class/10715/reading/McCulloch.and.Pitts.pdf) av Warren McCullock och Walter Pitts år 1943. Donald Hebb föreslog i sin bok "[The Organization of Behavior: A Neuropsychological Theory](https://books.google.com/books?id=VNetYrB8EBoC)" hur dessa nätverk kan tränas.
+> Mifano ya awali ya neva ilielezewa katika karatasi ya kihistoria [A logical calculus of the ideas immanent in nervous activity](https://www.cs.cmu.edu/~./epxing/Class/10715/reading/McCulloch.and.Pitts.pdf) na Warren McCullock na Walter Pitts mwaka 1943. Donald Hebb katika kitabu chake "[The Organization of Behavior: A Neuropsychological Theory](https://books.google.com/books?id=VNetYrB8EBoC)" alipendekeza jinsi mitandao hiyo inaweza kufundishwa.
 
-## I denna Sektion
+## Katika Sehemu Hii
 
-I denna sektion kommer vi att lära oss om:
-* [Perceptron](03-Perceptron/README.md), en av de tidigaste modellerna för neurala nätverk för tvåklassklassificering
-* [Flerlagersnätverk](04-OwnFramework/README.md) med en kopplad anteckningsbok [hur man bygger vårt eget ramverk](../../../../lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb)
-* [Ramverk för Neurala Nätverk](05-Frameworks/README.md), med dessa anteckningsböcker: [PyTorch](../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb) och [Keras/Tensorflow](../../../../lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)
-* [Överanpassning](../../../../lessons/3-NeuralNetworks/05-Frameworks)
+Katika sehemu hii tutajifunza kuhusu:
+* [Perceptron](03-Perceptron/README.md), mojawapo ya mifano ya awali ya mitandao ya neva kwa uainishaji wa madarasa mawili
+* [Mitandao ya Tabaka Nyingi](04-OwnFramework/README.md) na daftari lililoambatanishwa [jinsi ya kujenga mfumo wetu wenyewe](04-OwnFramework/OwnFramework.ipynb)
+* [Mifumo ya Mitandao ya Neva](05-Frameworks/README.md), na madaftari haya: [PyTorch](05-Frameworks/IntroPyTorch.ipynb) na [Keras/Tensorflow](05-Frameworks/IntroKerasTF.ipynb)
+* [Kuzidisha Mafunzo](../../../../lessons/3-NeuralNetworks/05-Frameworks)
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiska översättningar kan innehålla fel eller inkonsekvenser. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+---
+
+**Kanusho**:  
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

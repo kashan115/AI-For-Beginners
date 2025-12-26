@@ -1,85 +1,94 @@
-# Kännedomsigenkänning
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "6522312ff835796ca34136a9462fafb2",
+  "translation_date": "2025-09-23T11:06:45+00:00",
+  "source_file": "lessons/5-NLP/19-NER/README.md",
+  "language_code": "sw"
+}
+-->
+# Utambuzi wa Viumbe Vilivyotajwa
 
-Hittills har vi mest fokuserat på en NLP-uppgift - klassificering. Det finns dock även andra NLP-uppgifter som kan utföras med neurala nätverk. En av dessa uppgifter är **[Kännedomsigenkänning](https://wikipedia.org/wiki/Named-entity_recognition)** (NER), som handlar om att känna igen specifika enheter inom text, såsom platser, personnamn, datum- och tidsintervall, kemiska formler och så vidare.
+Hadi sasa, tumekuwa tukijikita zaidi kwenye kazi moja ya NLP - uainishaji. Hata hivyo, kuna kazi nyingine za NLP ambazo zinaweza kufanikishwa kwa kutumia mitandao ya neva. Mojawapo ya kazi hizo ni **[Utambuzi wa Viumbe Vilivyotajwa](https://wikipedia.org/wiki/Named-entity_recognition)** (NER), ambayo inahusika na kutambua viumbe maalum ndani ya maandishi, kama vile maeneo, majina ya watu, vipindi vya tarehe na muda, fomula za kemikali, na kadhalika.
 
-## [Förläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/119)
+## [Maswali ya awali ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/37)
 
-## Exempel på att använda NER
+## Mfano wa Kutumia NER
 
-Anta att du vill utveckla en naturlig språk-chattbot, liknande Amazon Alexa eller Google Assistant. Sättet som intelligenta chattbotar fungerar på är att *förstå* vad användaren vill genom att göra textklassificering på den inmatade meningen. Resultatet av denna klassificering kallas **avsikt**, vilket avgör vad en chattbot ska göra.
+Tuseme unataka kuunda roboti ya mazungumzo ya lugha asilia, sawa na Amazon Alexa au Google Assistant. Njia ambayo roboti za mazungumzo za akili hufanya kazi ni *kuelewa* kile mtumiaji anataka kwa kufanya uainishaji wa maandishi kwenye sentensi ya pembejeo. Matokeo ya uainishaji huu ni kile kinachoitwa **nia**, ambayo huamua roboti ya mazungumzo inapaswa kufanya nini.
 
 <img alt="Bot NER" src="images/bot-ner.png" width="50%"/>
 
-> Bild av författaren
+> Picha na mwandishi
 
-Men en användare kan ange vissa parametrar som en del av frasen. Till exempel, när hon frågar efter vädret, kan hon specificera en plats eller ett datum. En bot bör kunna förstå dessa enheter och fylla i parameterplatserna i enlighet med detta innan den utför åtgärden. Det är precis här som NER kommer in.
+Hata hivyo, mtumiaji anaweza kutoa vigezo fulani kama sehemu ya sentensi. Kwa mfano, anapouliza kuhusu hali ya hewa, anaweza kutaja eneo au tarehe. Roboti inapaswa kuelewa viumbe hivyo, na kujaza nafasi za vigezo ipasavyo kabla ya kutekeleza kitendo. Hapa ndipo NER inahusika.
 
-> ✅ Ett annat exempel skulle vara [analys av vetenskapliga medicinska artiklar](https://soshnikov.com/science/analyzing-medical-papers-with-azure-and-text-analytics-for-health/). En av de viktigaste sakerna vi behöver leta efter är specifika medicinska termer, såsom sjukdomar och medicinska ämnen. Medan ett litet antal sjukdomar troligen kan extraheras med hjälp av delsträngsökning, behöver mer komplexa enheter, såsom kemiska föreningar och medicinernamn, en mer komplex metod.
+> ✅ Mfano mwingine ungekuwa [kuchambua makala za kisayansi za matibabu](https://soshnikov.com/science/analyzing-medical-papers-with-azure-and-text-analytics-for-health/). Mojawapo ya mambo makuu tunayotakiwa kutafuta ni istilahi maalum za matibabu, kama vile magonjwa na vitu vya matibabu. Ingawa idadi ndogo ya magonjwa inaweza kutolewa kwa kutumia utafutaji wa sehemu ya maandishi, viumbe changamano zaidi, kama vile misombo ya kemikali na majina ya dawa, vinahitaji mbinu ngumu zaidi.
 
-## NER som tokenklassificering
+## NER kama Uainishaji wa Tokeni
 
-NER-modeller är i grunden **tokenklassificeringsmodeller**, eftersom vi för varje inmatad token måste avgöra om den tillhör en enhet eller inte, och om den gör det - till vilken enhetsklass.
+Mifano ya NER kimsingi ni **mifano ya uainishaji wa tokeni**, kwa sababu kwa kila tokeni ya pembejeo tunahitaji kuamua ikiwa inahusiana na kiumbe au la, na ikiwa inahusiana - ni darasa gani la kiumbe.
 
-Överväg följande artikelrubrik:
+Fikiria kichwa cha makala kifuatacho:
 
-**Trikuspidalventilinsufficiens** och **litiumkarbonat** **toxicitet** hos ett nyfött barn.
+**Tricuspid valve regurgitation** na **lithium carbonate** **toxicity** kwa mtoto mchanga.
 
-Enheterna här är:
+Viumbe hapa ni:
 
-* Trikuspidalventilinsufficiens är en sjukdom (`DIS`)
-* Litiumkarbonat är ett kemiskt ämne (`CHEM`)
-* Toxicitet är också en sjukdom (`DIS`)
+* Tricuspid valve regurgitation ni ugonjwa (`DIS`)
+* Lithium carbonate ni dutu ya kemikali (`CHEM`)
+* Toxicity pia ni ugonjwa (`DIS`)
 
-Observera att en enhet kan sträcka sig över flera tokens. Och, som i detta fall, behöver vi särskilja mellan två på varandra följande enheter. Därför är det vanligt att använda två klasser för varje enhet - en som specificerar den första token av enheten (ofta används `B-` prefixet, för **b**örjan), och en annan - fortsättningen av en enhet (`I-`, för **i**nner token). Vi använder också `O` som en klass för att representera alla **o**tra tokens. Sådan tokenmärkning kallas [BIO-märkning](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) (eller IOB). När den är märkt ser vår rubrik ut så här:
+Kumbuka kwamba kiumbe kimoja kinaweza kuhusisha tokeni kadhaa. Na, kama ilivyo katika kesi hii, tunahitaji kutofautisha kati ya viumbe viwili vinavyofuatana. Kwa hivyo, ni kawaida kutumia madarasa mawili kwa kila kiumbe - moja inayotaja tokeni ya kwanza ya kiumbe (mara nyingi kiambishi awali `B-` hutumika, kwa **mwanzo**), na nyingine - kuendelea kwa kiumbe (`I-`, kwa **ndani ya tokeni**). Tunatumia pia `O` kama darasa kuwakilisha tokeni zote **nyingine**. Uwekaji wa tokeni kama huu unaitwa [BIO tagging](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) (au IOB). Baada ya kuwekwa tagi, kichwa chetu kitaonekana kama hiki:
 
-Token | Tag
-------|-----
-Trikuspidal | B-DIS
-ventil | I-DIS
-insufficiens | I-DIS
-och | O
-litium | B-CHEM
-karbonat | I-CHEM
-toxicitet | B-DIS
-hos | O
-ett | O
-nyfött | O
-barn | O
+Tokeni | Tagi
+-------|-----
+Tricuspid | B-DIS
+valve | I-DIS
+regurgitation | I-DIS
+and | O
+lithium | B-CHEM
+carbonate | I-CHEM
+toxicity | B-DIS
+in | O
+a | O
+newborn | O
+infant | O
 . | O
 
-Eftersom vi behöver bygga en en-till-en-koppling mellan tokens och klasser, kan vi träna en högra **många-till-många** neurala nätverksmodell från denna bild:
+Kwa kuwa tunahitaji kujenga uhusiano wa moja kwa moja kati ya tokeni na madarasa, tunaweza kufundisha mfano wa mtandao wa neva wa **wengi-kwa-wengi** kutoka kwenye picha hii:
 
-![Bild som visar vanliga mönster för återkommande neurala nätverk.](../../../../../translated_images/unreasonable-effectiveness-of-rnn.541ead816778f42dce6c42d8a56c184729aa2378d059b851be4ce12b993033df.sw.jpg)
+![Picha inayoonyesha mifumo ya kawaida ya mitandao ya neva ya kurudia.](../../../../../translated_images/unreasonable-effectiveness-of-rnn.541ead816778f42dce6c42d8a56c184729aa2378d059b851be4ce12b993033df.sw.jpg)
 
-> *Bild från [detta blogginlägg](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) av [Andrej Karpathy](http://karpathy.github.io/). NER-tokenklassificeringsmodeller motsvarar den högra nätverksarkitekturen på denna bild.*
+> *Picha kutoka [blogu hii](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) na [Andrej Karpathy](http://karpathy.github.io/). Mifano ya uainishaji wa tokeni ya NER inahusiana na usanifu wa mtandao wa kulia kabisa kwenye picha hii.*
 
-## Träning av NER-modeller
+## Kufundisha Mifano ya NER
 
-Eftersom en NER-modell i grunden är en tokenklassificeringsmodell, kan vi använda RNN:er som vi redan är bekanta med för denna uppgift. I det här fallet kommer varje block av det återkommande nätverket att returnera token-ID. Det följande exempelnotebooket visar hur man tränar LSTM för tokenklassificering.
+Kwa kuwa mfano wa NER kimsingi ni mfano wa uainishaji wa tokeni, tunaweza kutumia RNNs ambazo tayari tunazifahamu kwa kazi hii. Katika kesi hii, kila kizuizi cha mtandao wa kurudia kitarudisha kitambulisho cha tokeni. Notibuku ifuatayo inaonyesha jinsi ya kufundisha LSTM kwa uainishaji wa tokeni.
 
-## ✍️ Exempelnotebookar: NER
+## ✍️ Notibuku za Mfano: NER
 
-Fortsätt ditt lärande i följande notebook:
+Endelea kujifunza katika notibuku ifuatayo:
 
-* [NER med TensorFlow](../../../../../lessons/5-NLP/19-NER/NER-TF.ipynb)
+* [NER na TensorFlow](NER-TF.ipynb)
 
-## Slutsats
+## Hitimisho
 
-En NER-modell är en **tokenklassificeringsmodell**, vilket innebär att den kan användas för att utföra tokenklassificering. Detta är en mycket vanlig uppgift inom NLP, som hjälper till att känna igen specifika enheter inom text inklusive platser, namn, datum och mer.
+Mfano wa NER ni **mfano wa uainishaji wa tokeni**, ambayo ina maana kwamba unaweza kutumika kufanya uainishaji wa tokeni. Hii ni kazi ya kawaida sana katika NLP, ikisaidia kutambua viumbe maalum ndani ya maandishi ikiwa ni pamoja na maeneo, majina, tarehe, na zaidi.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Slutför uppgiften som länkas nedan för att träna en modell för kännedomsigenkänning av medicinska termer, och prova sedan på en annan dataset.
+Kamilisha kazi iliyounganishwa hapa chini ili kufundisha mfano wa utambuzi wa viumbe vya matibabu, kisha ujaribu kwenye seti ya data tofauti.
 
-## [Efterläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/219)
+## [Maswali ya baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/38)
 
-## Granskning & Självstudie
+## Mapitio na Kujisomea
 
-Läs igenom bloggen [Den orimliga effektiviteten av återkommande neurala nätverk](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) och följ med i avsnittet Fördjupad läsning i den artikeln för att fördjupa din kunskap.
+Soma kupitia blogu [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) na fuata sehemu ya Kusoma Zaidi katika makala hiyo ili kuongeza maarifa yako.
 
-## [Uppgift](lab/README.md)
+## [Kazi](lab/README.md)
 
-I uppgiften för denna lektion kommer du att behöva träna en modell för medicinsk enhetsigenkänning. Du kan börja med att träna en LSTM-modell som beskrivs i denna lektion, och fortsätta med att använda BERT-transformermodellen. Läs [instruktionerna](lab/README.md) för att få alla detaljer.
+Katika kazi ya somo hili, utalazimika kufundisha mfano wa utambuzi wa viumbe vya matibabu. Unaweza kuanza kwa kufundisha mfano wa LSTM kama ilivyoelezwa katika somo hili, na kuendelea na kutumia mfano wa BERT transformer. Soma [maelekezo](lab/README.md) ili kupata maelezo yote.
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiserade översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår på grund av användningen av denna översättning.
+---
+

@@ -1,100 +1,109 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "1b8d9e1b3a6f1daa864b1ff3dfc3076d",
+  "translation_date": "2025-09-23T08:40:20+00:00",
+  "source_file": "lessons/4-ComputerVision/09-Autoencoders/README.md",
+  "language_code": "tr"
+}
+-->
 # Otomatik Kodlayıcılar
 
-CNN'leri eğitirken, karşılaştığımız sorunlardan biri çok fazla etiketli veriye ihtiyaç duymamızdır. Görüntü sınıflandırması durumunda, görüntüleri farklı sınıflara ayırmamız gerekir ki bu da manuel bir çabadır.
+CNN'leri eğitirken karşılaşılan sorunlardan biri, çok fazla etiketlenmiş veriye ihtiyaç duymamızdır. Görüntü sınıflandırma durumunda, görüntüleri farklı sınıflara ayırmamız gerekir ve bu manuel bir çabadır.
 
-## [Ön ders sınavı](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/109)
+## [Ders Öncesi Test](https://ff-quizzes.netlify.app/en/ai/quiz/17)
 
-Ancak, CNN özellik çıkarıcılarını eğitmek için ham (etiketsiz) verileri kullanmak isteyebiliriz ki buna **kendinden denetimli öğrenme** denir. Etiketler yerine, eğitim görüntülerini hem ağ girişi hem de çıkışı olarak kullanacağız. **Otomatik kodlayıcı**nın ana fikri, girdi görüntüsünü bazı **gizli alanlara** (genellikle daha küçük boyutlu bir vektör) dönüştüren bir **kodlayıcı ağı**na sahip olmamızdır; ardından orijinal görüntüyü yeniden oluşturmayı amaçlayan **çözücü ağı** gelir.
+Ancak, CNN özellik çıkarıcılarını eğitmek için ham (etiketlenmemiş) veriyi kullanmak isteyebiliriz, bu yönteme **kendinden denetimli öğrenme** denir. Etiketler yerine, eğitim görüntülerini hem ağ girişi hem de çıkışı olarak kullanacağız. **Otomatik kodlayıcı** fikrinin temelinde, bir **kodlayıcı ağ** ile giriş görüntüsünü bir **gizli uzaya** (genellikle daha küçük boyutlu bir vektör) dönüştürmek ve ardından **kod çözücü ağ** ile orijinal görüntüyü yeniden oluşturmak yer alır.
 
-> ✅ Bir [otomatik kodlayıcı](https://wikipedia.org/wiki/Autoencoder), "etiketsiz verilerin verimli kodlamalarını öğrenmek için kullanılan bir tür yapay sinir ağıdır."
+> ✅ Bir [otomatik kodlayıcı](https://wikipedia.org/wiki/Autoencoder), "etiketlenmemiş verilerin verimli kodlamalarını öğrenmek için kullanılan bir tür yapay sinir ağıdır."
 
-Otomatik kodlayıcıyı, orijinal görüntüden mümkün olduğunca fazla bilgiyi yakalamak için eğittiğimiz için, ağ girdi görüntülerinin anlamını yakalamak için en iyi **gömülü alanı** bulmaya çalışır.
+Otomatik kodlayıcıyı, orijinal görüntüden mümkün olduğunca fazla bilgi yakalamak ve doğru bir şekilde yeniden oluşturmak için eğittiğimizden, ağ en iyi **gömülü temsili** bulmaya çalışır.
 
-![Otomatik Kodlayıcı Diyagramı](../../../../../translated_images/autoencoder_schema.5e6fc9ad98a5eb6197f3513cf3baf4dfbe1389a6ae74daebda64de9f1c99f142.tr.jpg)
+![Otomatik Kodlayıcı Şeması](../../../../../translated_images/autoencoder_schema.5e6fc9ad98a5eb6197f3513cf3baf4dfbe1389a6ae74daebda64de9f1c99f142.tr.jpg)
 
-> Görsel [Keras blogu](https://blog.keras.io/building-autoencoders-in-keras.html) kaynağındandır.
+> Görsel [Keras blogundan](https://blog.keras.io/building-autoencoders-in-keras.html)
 
 ## Otomatik Kodlayıcıların Kullanım Senaryoları
 
-Orijinal görüntüleri yeniden oluşturmanın kendi başına faydalı görünmemesi bir yana, otomatik kodlayıcıların özellikle yararlı olduğu birkaç senaryo vardır:
+Orijinal görüntüleri yeniden oluşturmak kendi başına çok faydalı görünmese de, otomatik kodlayıcıların özellikle faydalı olduğu birkaç senaryo vardır:
 
-* **Görüntülerin boyutunu düşürmek için görselleştirme** veya **görüntü gömülü alanları eğitimi**. Genellikle otomatik kodlayıcılar, PCA'dan daha iyi sonuçlar verir çünkü görüntülerin mekansal doğasını ve hiyerarşik özelliklerini dikkate alır.
-* **Gürültü azaltma**, yani görüntüden gürültüyü kaldırma. Çünkü gürültü birçok gereksiz bilgi taşır, otomatik kodlayıcı bunu nispeten küçük gizli alana sığdıramaz ve dolayısıyla yalnızca görüntünün önemli kısmını yakalar. Gürültü gidericileri eğitirken, orijinal görüntülerle başlarız ve otomatik kodlayıcı için girdi olarak yapay olarak eklenmiş gürültü içeren görüntüleri kullanırız.
-* **Süper çözünürlük**, görüntü çözünürlüğünü artırma. Yüksek çözünürlüklü görüntülerle başlarız ve daha düşük çözünürlüklü görüntüyü otomatik kodlayıcı girişi olarak kullanırız.
-* **Üretken modeller**. Otomatik kodlayıcıyı eğittikten sonra, çözücü kısmı rastgele gizli vektörlerden yeni nesneler oluşturmak için kullanılabilir.
+* **Görüntülerin boyutunu düşürmek için görselleştirme** veya **görüntü gömülü temsilleri eğitmek**. Genellikle otomatik kodlayıcılar PCA'dan daha iyi sonuçlar verir, çünkü görüntülerin mekansal doğasını ve hiyerarşik özelliklerini dikkate alır.
+* **Gürültü giderme**, yani görüntüden gürültüyü kaldırma. Gürültü çok fazla gereksiz bilgi taşıdığı için, otomatik kodlayıcı bunu nispeten küçük gizli uzaya sığdıramaz ve bu nedenle yalnızca görüntünün önemli kısmını yakalar. Gürültü gidericileri eğitirken, orijinal görüntülerle başlarız ve otomatik kodlayıcıya giriş olarak yapay olarak eklenmiş gürültü içeren görüntüleri kullanırız.
+* **Süper çözünürlük**, görüntü çözünürlüğünü artırma. Yüksek çözünürlüklü görüntülerle başlarız ve düşük çözünürlüklü görüntüyü otomatik kodlayıcıya giriş olarak kullanırız.
+* **Üretici modeller**. Otomatik kodlayıcıyı eğittikten sonra, kod çözücü kısmı rastgele gizli vektörlerden başlayarak yeni nesneler oluşturmak için kullanılabilir.
 
 ## Varyasyonel Otomatik Kodlayıcılar (VAE)
 
-Geleneksel otomatik kodlayıcılar, girdi verilerinin boyutunu bir şekilde azaltarak, girdi görüntülerinin önemli özelliklerini belirler. Ancak, gizli vektörler genellikle pek anlam ifade etmez. Başka bir deyişle, MNIST veri setini örnek alırsak, farklı gizli vektörlerin hangi rakamlara karşılık geldiğini bulmak kolay bir iş değildir, çünkü yakın gizli vektörler aynı rakamlara karşılık gelmeyebilir.
+Geleneksel otomatik kodlayıcılar, giriş verisinin boyutunu bir şekilde azaltır ve giriş görüntülerinin önemli özelliklerini belirler. Ancak, gizli vektörler genellikle çok anlamlı değildir. Örneğin, MNIST veri setini ele alırsak, farklı gizli vektörlerin hangi rakamlara karşılık geldiğini anlamak kolay değildir, çünkü yakın gizli vektörler mutlaka aynı rakamlara karşılık gelmez.
 
-Diğer yandan, *üretken* modelleri eğitmek için gizli alanı anlamak daha iyidir. Bu fikir bizi **varyasyonel otomatik kodlayıcı** (VAE) kavramına götürür.
+Öte yandan, *üretici* modelleri eğitmek için gizli uzay hakkında bir anlayışa sahip olmak daha iyidir. Bu fikir bizi **varyasyonel otomatik kodlayıcıya** (VAE) götürür.
 
-VAE, gizli parametrelerin *istatistiksel dağılımını* tahmin etmeyi öğrenen bir otomatik kodlayıcıdır, buna **gizli dağılım** denir. Örneğin, gizli vektörlerin belirli bir ortalama z<sub>mean</sub> ve standart sapma z<sub>sigma</sub> ile normal dağılıma sahip olmasını isteyebiliriz (hem ortalama hem de standart sapma belirli bir boyut d'ye sahip vektörlerdir). VAE'deki kodlayıcı bu parametreleri tahmin etmeyi öğrenir ve ardından çözücü, nesneyi yeniden oluşturmak için bu dağılımdan rastgele bir vektör alır.
+VAE, gizli parametrelerin *istatistiksel dağılımını* tahmin etmeyi öğrenen bir otomatik kodlayıcıdır, buna **gizli dağılım** denir. Örneğin, gizli vektörlerin z<sub>mean</sub> ve z<sub>sigma</sub> (her ikisi de belirli bir boyut d'ye sahip vektörlerdir) ile normal olarak dağıtılmasını isteyebiliriz. VAE'deki kodlayıcı bu parametreleri tahmin etmeyi öğrenir ve ardından kod çözücü, bu dağılımdan rastgele bir vektör alarak nesneyi yeniden oluşturur.
 
 Özetlemek gerekirse:
 
-* Girdi vektöründen `z_mean` ve `z_log_sigma` tahmin ediyoruz (standart sapmayı tahmin etmek yerine, onun logaritmasını tahmin ediyoruz)
-* Dağılımdan N(z<sub>mean</sub>,exp(z<sub>log_sigma</sub>)) dağılımından bir vektör `sample` örnekliyoruz
-* Çözücü, `sample`'yi girdi vektörü olarak kullanarak orijinal görüntüyü çözmeye çalışır
+ * Giriş vektöründen `z_mean` ve `z_log_sigma` tahmin edilir (standart sapmanın kendisini tahmin etmek yerine, logaritması tahmin edilir)
+ * N(z<sub>mean</sub>,exp(z<sub>log\_sigma</sub>)) dağılımından `sample` adlı bir vektör örneklenir
+ * Kod çözücü, `sample` vektörünü giriş olarak kullanarak orijinal görüntüyü çözmeye çalışır
 
  <img src="images/vae.png" width="50%">
 
-> Görsel [bu blog yazısından](https://ijdykeman.github.io/ml/2016/12/21/cvae.html) Isaak Dykeman'a aittir.
+> Görsel [bu blog yazısından](https://ijdykeman.github.io/ml/2016/12/21/cvae.html) Isaak Dykeman tarafından
 
 Varyasyonel otomatik kodlayıcılar, iki bölümden oluşan karmaşık bir kayıp fonksiyonu kullanır:
 
-* **Yeniden yapılandırma kaybı**, yeniden oluşturulan bir görüntünün hedefe ne kadar yakın olduğunu gösteren kayıp fonksiyonudur (Bu, Ortalama Kare Hatası veya MSE olabilir). Bu, normal otomatik kodlayıcılardaki kayıp fonksiyonu ile aynıdır.
-* **KL kaybı**, gizli değişken dağılımlarının normal dağılıma yakın kalmasını sağlar. Bu, iki istatistiksel dağılımın ne kadar benzer olduğunu tahmin etmek için kullanılan [Kullback-Leibler sapması](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained) kavramına dayanır.
+* **Yeniden yapılandırma kaybı**, yeniden yapılandırılmış bir görüntünün hedefe ne kadar yakın olduğunu gösteren kayıp fonksiyonudur (örneğin Ortalama Kare Hata veya MSE olabilir). Bu, normal otomatik kodlayıcılardaki kayıp fonksiyonuyla aynıdır.
+* **KL kaybı**, gizli değişken dağılımlarının normal dağılıma yakın kalmasını sağlar. Bu, iki istatistiksel dağılımın ne kadar benzer olduğunu tahmin etmek için kullanılan bir metrik olan [Kullback-Leibler sapması](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained) temel alınarak hesaplanır.
 
-VAE'lerin önemli bir avantajı, yeni görüntüler oluşturmayı nispeten kolaylaştırmalarıdır çünkü gizli vektörleri örneklemek için hangi dağılımdan yararlanacağımızı biliyoruz. Örneğin, MNIST üzerinde 2D gizli vektörle VAE eğitimi yaptığımızda, farklı rakamlar elde etmek için gizli vektörün bileşenlerini değiştirebiliriz:
+VAE'lerin önemli bir avantajı, yeni görüntüleri nispeten kolay bir şekilde oluşturabilmemize olanak tanımasıdır, çünkü gizli vektörlerin örnekleneceği dağılımı biliriz. Örneğin, MNIST üzerinde 2D gizli vektörle VAE eğitirsek, gizli vektörün bileşenlerini değiştirerek farklı rakamlar elde edebiliriz:
 
 <img alt="vaemnist" src="images/vaemnist.png" width="50%"/>
 
-> Görsel [Dmitry Soshnikov](http://soshnikov.com) tarafından sağlanmıştır.
+> Görsel [Dmitry Soshnikov](http://soshnikov.com) tarafından
 
-Gizli parametre alanının farklı kısımlarından gizli vektörler almaya başladığımızda, görüntülerin birbirine nasıl karıştığını gözlemleyin. Bu alanı 2D olarak da görselleştirebiliriz:
+Gizli parametre uzayının farklı bölümlerinden gizli vektörler almaya başladıkça, görüntülerin birbirine nasıl karıştığını gözlemleyin. Bu uzayı ayrıca 2D olarak görselleştirebiliriz:
 
 <img alt="vaemnist cluster" src="images/vaemnist-diag.png" width="50%"/> 
 
-> Görsel [Dmitry Soshnikov](http://soshnikov.com) tarafından sağlanmıştır.
+> Görsel [Dmitry Soshnikov](http://soshnikov.com) tarafından
 
-## ✍️ Alıştırmalar: Otomatik Kodlayıcılar
+## ✍️ Egzersizler: Otomatik Kodlayıcılar
 
-Otomatik kodlayıcılar hakkında daha fazla bilgi edinmek için ilgili not defterlerini inceleyin:
+Otomatik kodlayıcılar hakkında daha fazla bilgi edinmek için şu ilgili not defterlerini inceleyin:
 
-* [TensorFlow'da Otomatik Kodlayıcılar](../../../../../lessons/4-ComputerVision/09-Autoencoders/AutoencodersTF.ipynb)
-* [PyTorch'ta Otomatik Kodlayıcılar](../../../../../lessons/4-ComputerVision/09-Autoencoders/AutoEncodersPyTorch.ipynb)
+* [TensorFlow'da Otomatik Kodlayıcılar](AutoencodersTF.ipynb)
+* [PyTorch'ta Otomatik Kodlayıcılar](AutoEncodersPyTorch.ipynb)
 
 ## Otomatik Kodlayıcıların Özellikleri
 
-* **Veri Spesifik** - yalnızca eğitildikleri görüntü türleriyle iyi çalışırlar. Örneğin, çiçekler üzerinde süper çözünürlük ağı eğitirsek, portreler üzerinde iyi çalışmaz. Bunun nedeni, ağın eğitim veri setinden öğrenilen özelliklerden ince detaylar alarak daha yüksek çözünürlüklü görüntü üretebilmesidir.
-* **Kaybı** - yeniden oluşturulan görüntü, orijinal görüntüyle aynı değildir. Kayıp doğası, eğitim sırasında kullanılan *kayıp fonksiyonu* tarafından tanımlanır.
-* **Etiketsiz veriler** üzerinde çalışır.
+* **Veriye Özgü** - yalnızca eğitildikleri görüntü türleriyle iyi çalışırlar. Örneğin, bir süper çözünürlük ağı çiçekler üzerinde eğitilirse, portrelerde iyi çalışmaz. Bunun nedeni, ağın daha yüksek çözünürlüklü görüntü üretebilmesi için eğitim veri setinden öğrenilen özelliklerden ince detaylar almasıdır.
+* **Kayıplı** - yeniden yapılandırılmış görüntü, orijinal görüntüyle aynı değildir. Kaybın doğası, eğitim sırasında kullanılan *kayıp fonksiyonu* ile tanımlanır.
+* **Etiketlenmemiş veri** üzerinde çalışır.
 
-## [Ders sonrası sınav](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/209)
+## [Ders Sonrası Test](https://ff-quizzes.netlify.app/en/ai/quiz/18)
 
 ## Sonuç
 
-Bu derste, AI bilimcisine sunulan çeşitli otomatik kodlayıcı türlerini öğrendiniz. Onları nasıl inşa edeceğinizi ve görüntüleri nasıl yeniden oluşturmak için kullanacağınızı öğrendiniz. Ayrıca VAE'yi ve yeni görüntüler oluşturmak için nasıl kullanacağınızı öğrendiniz.
+Bu derste, bir AI bilim insanının kullanabileceği çeşitli otomatik kodlayıcı türlerini öğrendiniz. Bunları nasıl oluşturacağınızı ve görüntüleri yeniden yapılandırmak için nasıl kullanacağınızı öğrendiniz. Ayrıca VAE'yi ve yeni görüntüler oluşturmak için nasıl kullanılacağını öğrendiniz.
 
 ## 🚀 Meydan Okuma
 
-Bu derste, otomatik kodlayıcıların görüntüler için nasıl kullanıldığını öğrendiniz. Ancak müzik için de kullanılabilirler! Otomatik kodlayıcıları müziği yeniden yapılandırmayı öğrenmek için kullanan Magenta projesinin [MusicVAE](https://magenta.tensorflow.org/music-vae) projesine göz atın. Ne yaratabileceğinizi görmek için bu kütüphane ile bazı [deneyler](https://colab.research.google.com/github/magenta/magenta-demos/blob/master/colab-notebooks/Multitrack_MusicVAE.ipynb) yapın.
+Bu derste, otomatik kodlayıcıları görüntüler için kullanmayı öğrendiniz. Ancak, müzik için de kullanılabilirler! Magenta projesinin [MusicVAE](https://magenta.tensorflow.org/music-vae) projesine göz atın; bu proje, müziği yeniden yapılandırmayı öğrenmek için otomatik kodlayıcıları kullanır. Bu kütüphane ile bazı [deneyler](https://colab.research.google.com/github/magenta/magenta-demos/blob/master/colab-notebooks/Multitrack_MusicVAE.ipynb) yaparak neler yaratabileceğinizi görün.
 
-## [Ders sonrası sınav](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/208)
+## [Ders Sonrası Test](https://ff-quizzes.netlify.app/en/ai/quiz/16)
 
-## Gözden Geçirme & Kendi Kendine Çalışma
+## İnceleme ve Kendi Kendine Çalışma
 
-Otomatik kodlayıcılar hakkında daha fazla bilgi için bu kaynakları okuyun:
+Referans için, otomatik kodlayıcılar hakkında daha fazla bilgi edinmek için şu kaynakları okuyun:
 
-* [Keras'da Otomatik Kodlayıcılar İnşası](https://blog.keras.io/building-autoencoders-in-keras.html)
+* [Keras'ta Otomatik Kodlayıcılar Oluşturma](https://blog.keras.io/building-autoencoders-in-keras.html)
 * [NeuroHive'daki Blog Yazısı](https://neurohive.io/ru/osnovy-data-science/variacionnyj-avtojenkoder-vae/)
 * [Varyasyonel Otomatik Kodlayıcılar Açıklaması](https://kvfrans.com/variational-autoencoders-explained/)
 * [Koşullu Varyasyonel Otomatik Kodlayıcılar](https://ijdykeman.github.io/ml/2016/12/21/cvae.html)
 
-## Görev
+## Ödev
 
-[TensorFlow kullanan bu not defterinin](../../../../../lessons/4-ComputerVision/09-Autoencoders/AutoEncodersTF.ipynb) sonunda bir 'görev' bulacaksınız - bunu ödev olarak kullanın.
+[TensorFlow kullanılarak hazırlanan bu not defterinin](AutoencodersTF.ipynb) sonunda bir 'görev' bulacaksınız - bunu ödeviniz olarak kullanın.
 
-**Açıklama**:  
-Bu belge, makine tabanlı AI çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlış anlamalar içerebileceğini lütfen dikkate alın. Orijinal belge, kendi dilinde otorite kaynağı olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanımı sonucu ortaya çıkan yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+---
+

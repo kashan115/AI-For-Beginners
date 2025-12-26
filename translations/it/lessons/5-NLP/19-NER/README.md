@@ -1,85 +1,95 @@
-# Reconocimiento de Entidades Nombradas
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "6522312ff835796ca34136a9462fafb2",
+  "translation_date": "2025-09-23T08:35:38+00:00",
+  "source_file": "lessons/5-NLP/19-NER/README.md",
+  "language_code": "it"
+}
+-->
+# Riconoscimento delle Entità Nominate
 
-Hasta ahora, hemos estado concentrándonos principalmente en una tarea de NLP: la clasificación. Sin embargo, también existen otras tareas de NLP que se pueden llevar a cabo con redes neuronales. Una de esas tareas es el **[Reconocimiento de Entidades Nombradas](https://wikipedia.org/wiki/Named-entity_recognition)** (NER), que se ocupa de reconocer entidades específicas dentro del texto, como lugares, nombres de personas, intervalos de fecha y hora, fórmulas químicas, entre otros.
+Fino ad ora ci siamo concentrati principalmente su un compito di NLP - la classificazione. Tuttavia, ci sono anche altri compiti di NLP che possono essere affrontati con reti neurali. Uno di questi è il **[Riconoscimento delle Entità Nominate](https://wikipedia.org/wiki/Named-entity_recognition)** (NER), che si occupa di riconoscere entità specifiche all'interno di un testo, come luoghi, nomi di persone, intervalli di date e orari, formule chimiche e così via.
 
-## [Cuestionario previo a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/119)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/37)
 
-## Ejemplo de Uso de NER
+## Esempio di Utilizzo del NER
 
-Supongamos que deseas desarrollar un chatbot de lenguaje natural, similar a Amazon Alexa o Google Assistant. La forma en que funcionan los chatbots inteligentes es *entendiendo* lo que el usuario quiere al realizar una clasificación de texto en la frase de entrada. El resultado de esta clasificación es lo que se llama **intención**, que determina lo que debe hacer un chatbot.
+Supponiamo che tu voglia sviluppare un chatbot di linguaggio naturale, simile ad Amazon Alexa o Google Assistant. Il modo in cui funzionano i chatbot intelligenti è *comprendere* ciò che l'utente desidera facendo una classificazione del testo sulla frase di input. Il risultato di questa classificazione è il cosiddetto **intent**, che determina cosa dovrebbe fare il chatbot.
 
 <img alt="Bot NER" src="images/bot-ner.png" width="50%"/>
 
-> Imagen del autor
+> Immagine dell'autore
 
-Sin embargo, un usuario puede proporcionar algunos parámetros como parte de la frase. Por ejemplo, al preguntar por el clima, puede especificar una ubicación o una fecha. Un bot debería ser capaz de entender esas entidades y llenar los espacios de parámetros correspondientes antes de realizar la acción. Aquí es exactamente donde entra en juego el NER.
+Tuttavia, un utente potrebbe fornire alcuni parametri come parte della frase. Ad esempio, quando chiede informazioni sul meteo, potrebbe specificare una località o una data. Un bot dovrebbe essere in grado di comprendere queste entità e riempire gli slot dei parametri di conseguenza prima di eseguire l'azione. Ed è proprio qui che entra in gioco il NER.
 
-> ✅ Otro ejemplo sería [analizar artículos científicos médicos](https://soshnikov.com/science/analyzing-medical-papers-with-azure-and-text-analytics-for-health/). Una de las principales cosas que necesitamos buscar son términos médicos específicos, como enfermedades y sustancias médicas. Si bien un pequeño número de enfermedades probablemente se puede extraer utilizando búsqueda de subcadenas, entidades más complejas, como compuestos químicos y nombres de medicamentos, requieren un enfoque más complicado.
+> ✅ Un altro esempio potrebbe essere [l'analisi di articoli scientifici medici](https://soshnikov.com/science/analyzing-medical-papers-with-azure-and-text-analytics-for-health/). Una delle principali cose da cercare sono termini medici specifici, come malattie e sostanze mediche. Mentre un piccolo numero di malattie può probabilmente essere estratto utilizzando la ricerca per sottostringhe, entità più complesse, come composti chimici e nomi di farmaci, richiedono un approccio più sofisticato.
 
-## NER como Clasificación de Tokens
+## NER come Classificazione dei Token
 
-Los modelos de NER son esencialmente **modelos de clasificación de tokens**, porque para cada uno de los tokens de entrada necesitamos decidir si pertenece a una entidad o no, y si lo hace, a qué clase de entidad.
+I modelli NER sono essenzialmente **modelli di classificazione dei token**, perché per ciascuno dei token di input dobbiamo decidere se appartiene a un'entità o meno, e se sì - a quale classe di entità.
 
-Considera el siguiente título de un artículo:
+Considera il seguente titolo di un articolo:
 
-**Regurgitación de la válvula tricúspide** y **toxicidad de carbonato de litio** en un recién nacido.
+**Rigurgito della valvola tricuspide** e **carbonato di litio** **tossicità** in un neonato.
 
-Las entidades aquí son:
+Le entità qui sono:
 
-* Regurgitación de la válvula tricúspide es una enfermedad (`DIS`)
-* Carbonato de litio es una sustancia química (`CHEM`)
-* Toxicidad también es una enfermedad (`DIS`)
+* Rigurgito della valvola tricuspide è una malattia (`DIS`)
+* Carbonato di litio è una sostanza chimica (`CHEM`)
+* Tossicità è anch'essa una malattia (`DIS`)
 
-Observa que una entidad puede abarcar varios tokens. Y, como en este caso, necesitamos distinguir entre dos entidades consecutivas. Por lo tanto, es común usar dos clases para cada entidad: una que especifica el primer token de la entidad (a menudo se utiliza el prefijo `B-`, para **b**eginning), y otra - la continuación de una entidad (`I-`, para **i**nner token). También usamos `O` como una clase para representar todos los **o**tros tokens. Este etiquetado de tokens se llama [etiquetado BIO](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) (o IOB). Cuando se etiqueta, nuestro título se verá así:
+Nota che un'entità può estendersi su più token. E, come in questo caso, dobbiamo distinguere tra due entità consecutive. Pertanto, è comune utilizzare due classi per ogni entità - una che specifica il primo token dell'entità (spesso si usa il prefisso `B-`, per **inizio**), e un'altra - la continuazione di un'entità (`I-`, per **interno**). Usiamo anche `O` come classe per rappresentare tutti gli altri token. Questo tipo di tagging dei token è chiamato [BIO tagging](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) (o IOB). Quando taggato, il nostro titolo apparirà così:
 
-Token | Etiqueta
+Token | Tag
 ------|-----
-Tricuspid | B-DIS
-valve | I-DIS
-regurgitation | I-DIS
-and | O
-lithium | B-CHEM
-carbonate | I-CHEM
-toxicity | B-DIS
+Rigurgito | B-DIS
+della | I-DIS
+valvola | I-DIS
+tricuspide | I-DIS
+e | O
+carbonato | B-CHEM
+di | I-CHEM
+litio | I-CHEM
+tossicità | B-DIS
 in | O
-a | O
-newborn | O
-infant | O
+un | O
+neonato | O
 . | O
 
-Dado que necesitamos construir una correspondencia uno a uno entre tokens y clases, podemos entrenar un modelo de red neuronal **muchos a muchos** a partir de esta imagen:
+Poiché dobbiamo costruire una corrispondenza uno-a-uno tra token e classi, possiamo allenare un modello neurale **molti-a-molti** come mostrato in questa immagine:
 
-![Imagen que muestra patrones comunes de redes neuronales recurrentes.](../../../../../translated_images/unreasonable-effectiveness-of-rnn.541ead816778f42dce6c42d8a56c184729aa2378d059b851be4ce12b993033df.it.jpg)
+![Immagine che mostra i modelli comuni di reti neurali ricorrenti.](../../../../../translated_images/unreasonable-effectiveness-of-rnn.541ead816778f42dce6c42d8a56c184729aa2378d059b851be4ce12b993033df.it.jpg)
 
-> *Imagen de [esta entrada de blog](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) de [Andrej Karpathy](http://karpathy.github.io/). Los modelos de clasificación de tokens NER corresponden a la arquitectura de red más a la derecha en esta imagen.*
+> *Immagine tratta da [questo post sul blog](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) di [Andrej Karpathy](http://karpathy.github.io/). I modelli di classificazione dei token NER corrispondono all'architettura di rete più a destra in questa immagine.*
 
-## Entrenamiento de Modelos NER
+## Allenamento dei modelli NER
 
-Dado que un modelo de NER es esencialmente un modelo de clasificación de tokens, podemos utilizar RNNs con los que ya estamos familiarizados para esta tarea. En este caso, cada bloque de la red recurrente devolverá el ID del token. El siguiente cuaderno de ejemplo muestra cómo entrenar un LSTM para la clasificación de tokens.
+Poiché un modello NER è essenzialmente un modello di classificazione dei token, possiamo utilizzare le RNN che già conosciamo per questo compito. In questo caso, ogni blocco della rete ricorrente restituirà l'ID del token. Il seguente notebook di esempio mostra come allenare un LSTM per la classificazione dei token.
 
-## ✍️ Cuadernos de Ejemplo: NER
+## ✍️ Notebook di Esempio: NER
 
-Continúa tu aprendizaje en el siguiente cuaderno:
+Continua il tuo apprendimento nel seguente notebook:
 
-* [NER con TensorFlow](../../../../../lessons/5-NLP/19-NER/NER-TF.ipynb)
+* [NER con TensorFlow](NER-TF.ipynb)
 
-## Conclusión
+## Conclusione
 
-Un modelo de NER es un **modelo de clasificación de tokens**, lo que significa que puede ser utilizado para realizar clasificación de tokens. Esta es una tarea muy común en NLP, ayudando a reconocer entidades específicas dentro del texto, incluyendo lugares, nombres, fechas y más.
+Un modello NER è un **modello di classificazione dei token**, il che significa che può essere utilizzato per eseguire la classificazione dei token. Questo è un compito molto comune in NLP, utile per riconoscere entità specifiche all'interno di un testo, inclusi luoghi, nomi, date e altro.
 
-## 🚀 Desafío
+## 🚀 Sfida
 
-Completa la tarea vinculada a continuación para entrenar un modelo de reconocimiento de entidades nombradas para términos médicos, y luego pruébalo en un conjunto de datos diferente.
+Completa l'esercizio collegato qui sotto per allenare un modello di riconoscimento delle entità nominate per termini medici, quindi prova a utilizzarlo su un dataset diverso.
 
-## [Cuestionario posterior a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/219)
+## [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/38)
 
-## Revisión y Autoestudio
+## Revisione & Studio Autonomo
 
-Lee el blog [La Efectividad Irrazonable de las Redes Neuronales Recurrentes](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) y sigue la sección de Lectura Adicional en ese artículo para profundizar tu conocimiento.
+Leggi il blog [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) e segui la sezione di Ulteriori Letture in quell'articolo per approfondire la tua conoscenza.
 
-## [Tarea](lab/README.md)
+## [Esercizio](lab/README.md)
 
-En la tarea para esta lección, tendrás que entrenar un modelo de reconocimiento de entidades médicas. Puedes comenzar entrenando un modelo LSTM como se describe en esta lección y luego proceder a utilizar el modelo transformador BERT. Lee [las instrucciones](lab/README.md) para obtener todos los detalles.
+Nell'esercizio di questa lezione, dovrai allenare un modello di riconoscimento delle entità mediche. Puoi iniziare con l'allenamento di un modello LSTM come descritto in questa lezione, e procedere con l'utilizzo del modello transformer BERT. Leggi [le istruzioni](lab/README.md) per ottenere tutti i dettagli.
 
-**Disclaimer**:  
-Este documento ha sido traducido utilizando servicios de traducción automática basados en IA. Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o malas interpretaciones que surjan del uso de esta traducción.
+---
+

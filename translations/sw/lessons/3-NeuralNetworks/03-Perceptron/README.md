@@ -1,52 +1,61 @@
-# Introduktion till Neurala Nätverk: Perceptron
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "c34cbba802058b6fa267e1a294d4e510",
+  "translation_date": "2025-09-23T11:04:25+00:00",
+  "source_file": "lessons/3-NeuralNetworks/03-Perceptron/README.md",
+  "language_code": "sw"
+}
+-->
+# Utangulizi wa Mitandao ya Neva: Perceptron
 
-## [För-lärare quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/103)
+## [Jaribio la awali ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/5)
 
-Ett av de första försöken att implementera något liknande ett modernt neuralt nätverk gjordes av Frank Rosenblatt från Cornell Aeronautical Laboratory år 1957. Det var en hårdvaruimplementation kallad "Mark-1", designad för att känna igen primitiva geometriska figurer, såsom trianglar, fyrkanter och cirklar.
+Moja ya majaribio ya kwanza ya kutekeleza kitu kinachofanana na mtandao wa neva wa kisasa yalifanywa na Frank Rosenblatt kutoka Cornell Aeronautical Laboratory mwaka 1957. Ilikuwa ni utekelezaji wa vifaa vilivyoitwa "Mark-1", iliyoundwa kutambua maumbo ya kijiometri rahisi, kama vile pembetatu, mraba, na duara.
 
 |      |      |
 |--------------|-----------|
 |<img src='images/Rosenblatt-wikipedia.jpg' alt='Frank Rosenblatt'/> | <img src='images/Mark_I_perceptron_wikipedia.jpg' alt='The Mark 1 Perceptron' />|
 
-> Bilder [från Wikipedia](https://en.wikipedia.org/wiki/Perceptron)
+> Picha [kutoka Wikipedia](https://en.wikipedia.org/wiki/Perceptron)
 
-En ingångsbild representerades av en 20x20 fotocell-array, så det neurala nätverket hade 400 ingångar och en binär utgång. Ett enkelt nätverk innehöll en neuron, även kallad en **tröskellogik-enhet**. Vikterna i det neurala nätverket fungerade som potentiometrar som krävde manuell justering under träningsfasen.
+Picha ya pembejeo iliwakilishwa na safu ya seli za picha 20x20, hivyo mtandao wa neva ulikuwa na pembejeo 400 na moja ya matokeo ya binary. Mtandao rahisi ulikuwa na neuron moja, pia inayoitwa **threshold logic unit**. Uzito wa mtandao wa neva ulifanya kazi kama potentiometers ambazo zilihitaji kurekebishwa kwa mikono wakati wa awamu ya mafunzo.
 
-> ✅ En potentiometer är en enhet som låter användaren justera motståndet i en krets.
+> ✅ Potentiometer ni kifaa kinachoruhusu mtumiaji kurekebisha upinzani wa mzunguko.
 
-> The New York Times skrev om perceptron vid den tiden: *embryot av en elektronisk dator som [marinen] förväntar sig kommer att kunna gå, prata, se, skriva, reproducera sig själv och vara medveten om sin existens.*
+> New York Times iliandika kuhusu perceptron wakati huo: *kiinitete cha kompyuta ya kielektroniki ambayo [Jeshi la Majini] linatarajia itaweza kutembea, kuzungumza, kuona, kuandika, kujizalisha yenyewe na kufahamu uwepo wake.*
 
-## Perceptronmodell
+## Mfano wa Perceptron
 
-Anta att vi har N egenskaper i vår modell, i vilket fall ingångsvektorn skulle vara en vektor av storlek N. En perceptron är en **binär klassificerings**modell, dvs. den kan särskilja mellan två klasser av ingångsdata. Vi antar att för varje ingångsvektor x skulle utgången av vår perceptron vara antingen +1 eller -1, beroende på klassen. Utgången beräknas med hjälp av formeln:
+Tuseme tuna vipengele N katika mfano wetu, ambapo vector ya pembejeo itakuwa vector ya ukubwa N. Perceptron ni mfano wa **uainishaji wa binary**, yaani inaweza kutofautisha kati ya madarasa mawili ya data ya pembejeo. Tutadhani kwamba kwa kila vector ya pembejeo x, matokeo ya perceptron yetu yatakuwa aidha +1 au -1, kulingana na darasa. Matokeo yatakokotolewa kwa kutumia fomula:
 
 y(x) = f(w<sup>T</sup>x)
 
-där f är en stegaktiveringsfunktion
+ambapo f ni kazi ya hatua ya uanzishaji
 
 <!-- img src="http://www.sciweavers.org/tex2img.php?eq=f%28x%29%20%3D%20%5Cbegin%7Bcases%7D%0A%20%20%20%20%20%20%20%20%20%2B1%20%26%20x%20%5Cgeq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20-1%20%26%20x%20%3C%200%0A%20%20%20%20%20%20%20%5Cend%7Bcases%7D%20%5C%5C%0A&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="f(x) = \begin{cases} +1 & x \geq 0 \\ -1 & x < 0 \end{cases} \\" width="154" height="50" / -->
 <img src="images/activation-func.png"/>
 
-## Träning av Perceptron
+## Mafunzo ya Perceptron
 
-För att träna en perceptron behöver vi hitta en viktvektor w som klassificerar de flesta värdena korrekt, dvs. ger den minsta **felet**. Detta fel E definieras av **perceptron-kriteriet** på följande sätt:
+Ili kufundisha perceptron tunahitaji kupata vector ya uzito w ambayo inatofautisha kwa usahihi data nyingi, yaani inasababisha **kosa** ndogo zaidi. Kosa hili E linafafanuliwa na **kigezo cha perceptron** kwa njia ifuatayo:
 
-E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
+E(w) = -&sum;w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
-där:
+ambapo:
 
-* summan tas över de träningsdata punkterna i som resulterar i felaktig klassificering
-* x<sub>i</sub> är ingångsdata, och t<sub>i</sub> är antingen -1 eller +1 för negativa och positiva exempel respektive.
+* jumla inachukuliwa kwa pointi za data za mafunzo i ambazo zinasababisha uainishaji usio sahihi
+* x<sub>i</sub> ni data ya pembejeo, na t<sub>i</sub> ni aidha -1 au +1 kwa mifano hasi na chanya ipasavyo.
 
-Detta kriterium betraktas som en funktion av vikterna w, och vi behöver minimera det. Ofta används en metod som kallas **gradientnedstigning**, där vi börjar med några initiala vikter w<sup>(0)</sup>, och sedan uppdaterar vikterna vid varje steg enligt formeln:
+Kigezo hiki kinachukuliwa kama kazi ya uzito w, na tunahitaji kuipunguza. Mara nyingi, njia inayoitwa **gradient descent** hutumika, ambapo tunaanza na uzito wa awali w<sup>(0)</sup>, na kisha katika kila hatua tunasasisha uzito kulingana na fomula:
 
-w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
+w<sup>(t+1)</sup> = w<sup>(t)</sup> - &eta;&nabla;E(w)
 
-Här är η den så kallade **inlärningshastigheten**, och ∇E(w) betecknar **gradienten** av E. Efter att vi har beräknat gradienten får vi
+Hapa &eta; ni kinachoitwa **kiwango cha kujifunza**, na &nabla;E(w) inaonyesha **gradient** ya E. Baada ya kukokotoa gradient, tunapata:
 
-w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
+w<sup>(t+1)</sup> = w<sup>(t)</sup> + &sum;&eta;x<sub>i</sub>t<sub>i</sub>
 
-Algoritmen i Python ser ut så här:
+Algoriti katika Python inaonekana kama hii:
 
 ```python
 def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
@@ -68,29 +77,29 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
     return weights
 ```
 
-## Slutsats
+## Hitimisho
 
-I denna lektion har du lärt dig om en perceptron, som är en binär klassificeringsmodell, och hur man tränar den med hjälp av en viktvektor.
+Katika somo hili, umejifunza kuhusu perceptron, ambayo ni mfano wa uainishaji wa binary, na jinsi ya kuifundisha kwa kutumia vector ya uzito.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Om du vill försöka bygga din egen perceptron, prova [detta labb på Microsoft Learn](https://docs.microsoft.com/en-us/azure/machine-learning/component-reference/two-class-averaged-perceptron?WT.mc_id=academic-77998-cacaste) som använder [Azure ML designer](https://docs.microsoft.com/en-us/azure/machine-learning/concept-designer?WT.mc_id=academic-77998-cacaste).
+Ikiwa ungependa kujaribu kujenga perceptron yako mwenyewe, jaribu [maabara hii kwenye Microsoft Learn](https://docs.microsoft.com/en-us/azure/machine-learning/component-reference/two-class-averaged-perceptron?WT.mc_id=academic-77998-cacaste) ambayo inatumia [Azure ML designer](https://docs.microsoft.com/en-us/azure/machine-learning/concept-designer?WT.mc_id=academic-77998-cacaste).
 
-## [Efter-lärare quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/203)
+## [Jaribio la baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/6)
 
-## Granskning & Självstudie
+## Mapitio na Kujisomea
 
-För att se hur vi kan använda perceptron för att lösa ett leksaksproblem såväl som verkliga problem, och för att fortsätta lära oss - gå till [Perceptron](../../../../../lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb) anteckningsbok.
+Ili kuona jinsi tunavyoweza kutumia perceptron kutatua tatizo la mfano pamoja na matatizo ya maisha halisi, na kuendelea kujifunza - nenda kwenye daftari la [Perceptron](Perceptron.ipynb).
 
-Här är en intressant [artikel om perceptrons](https://towardsdatascience.com/what-is-a-perceptron-basics-of-neural-networks-c4cfea20c590
-) också.
+Hapa kuna [makala ya kuvutia kuhusu perceptrons](https://towardsdatascience.com/what-is-a-perceptron-basics-of-neural-networks-c4cfea20c590
+) pia.
 
-## [Uppgift](lab/README.md)
+## [Kazi ya Nyumbani](lab/README.md)
 
-I denna lektion har vi implementerat en perceptron för en binär klassificeringsuppgift, och vi har använt den för att klassificera mellan två handskrivna siffror. I detta labb ombeds du att helt lösa problemet med sifferklassificering, dvs. att avgöra vilken siffra som mest sannolikt motsvarar en given bild.
+Katika somo hili, tumetekeleza perceptron kwa kazi ya uainishaji wa binary, na tumeitumia kutofautisha kati ya tarakimu mbili za maandishi ya mkono. Katika maabara hii, unahitajika kutatua tatizo la uainishaji wa tarakimu kikamilifu, yaani kuamua ni tarakimu gani inayowezekana kuendana na picha fulani.
 
-* [Instruktioner](lab/README.md)
-* [Anteckningsbok](../../../../../lessons/3-NeuralNetworks/03-Perceptron/lab/PerceptronMultiClass.ipynb)
+* [Maelekezo](lab/README.md)
+* [Daftari](lab/PerceptronMultiClass.ipynb)
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+---
+

@@ -1,63 +1,74 @@
-# 物体検出
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "d76a7eda28de5210c8b1ba50a6216c69",
+  "translation_date": "2025-09-23T13:08:04+00:00",
+  "source_file": "lessons/4-ComputerVision/11-ObjectDetection/README.md",
+  "language_code": "ja"
+}
+-->
+# オブジェクト検出
 
-これまで扱ってきた画像分類モデルは、画像を入力としてクラス「数字」のようなカテゴリ結果を出力しました。しかし、多くの場合、単に画像に物体が描かれていることを知るだけでなく、それらの正確な位置を特定できるようにしたいのです。これがまさに**物体検出**の目的です。
+これまで扱ってきた画像分類モデルは、画像を入力として受け取り、MNIST問題の「数字」クラスのようなカテゴリカルな結果を出力していました。しかし、多くの場合、画像に物体が写っていることを知るだけでなく、その正確な位置を特定したいと考えます。それがまさに**オブジェクト検出**の目的です。
 
-## [プレ講義クイズ](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/111)
+## [事前クイズ](https://ff-quizzes.netlify.app/en/ai/quiz/21)
 
-![物体検出](../../../../../translated_images/Screen_Shot_2016-11-17_at_11.14.54_AM.b4bb3769353287be1b905373ed9c858102c054b16e4595c76ec3f7bba0feb549.ja.png)
+![オブジェクト検出](../../../../../translated_images/Screen_Shot_2016-11-17_at_11.14.54_AM.b4bb3769353287be1b905373ed9c858102c054b16e4595c76ec3f7bba0feb549.ja.png)
 
-> 画像出典：[YOLO v2 ウェブサイト](https://pjreddie.com/darknet/yolov2/)
+> 画像出典: [YOLO v2 ウェブサイト](https://pjreddie.com/darknet/yolov2/)
 
-## 物体検出へのナイーブなアプローチ
+## オブジェクト検出の単純なアプローチ
 
-もし、画像の中に猫を見つけたいと仮定すると、非常にナイーブな物体検出のアプローチは以下のようになります。
+例えば、画像内の猫を見つけたいと仮定します。非常に単純なオブジェクト検出のアプローチは以下のようになります：
 
-1. 画像をいくつかのタイルに分割する
+1. 画像を複数のタイルに分割する
 2. 各タイルに対して画像分類を実行する
-3. 十分に高い活性化を示すタイルは、問題の物体を含むと見なされます。
+3. 十分に高い活性化を示したタイルを、対象の物体を含むとみなす
 
-![ナイーブな物体検出](../../../../../translated_images/naive-detection.e7f1ba220ccd08c68a2ea8e06a7ed75c3fcc738c2372f9e00b7f4299a8659c01.ja.png)
+![単純なオブジェクト検出](../../../../../translated_images/naive-detection.e7f1ba220ccd08c68a2ea8e06a7ed75c3fcc738c2372f9e00b7f4299a8659c01.ja.png)
 
-> *画像出典：[演習ノートブック](../../../../../lessons/4-ComputerVision/11-ObjectDetection/ObjectDetection-TF.ipynb)*
+> *画像出典: [演習ノートブック](ObjectDetection-TF.ipynb)*
 
-しかし、このアプローチは理想から遠く、アルゴリズムが物体のバウンディングボックスを非常に不正確に特定することしかできません。より正確な位置を得るためには、バウンディングボックスの座標を予測するための何らかの**回帰**を実行する必要があり、そのためには特定のデータセットが必要です。
+しかし、この方法では物体の境界ボックスを非常に不正確にしか特定できません。より正確な位置を特定するには、**回帰**を使用して境界ボックスの座標を予測する必要があります。そのためには特定のデータセットが必要です。
 
-## 物体検出のための回帰
+## オブジェクト検出のための回帰
 
-[このブログ記事](https://towardsdatascience.com/object-detection-with-neural-networks-a4e2c46b4491)は、形状検出の優れた入門を提供しています。
+[このブログ記事](https://towardsdatascience.com/object-detection-with-neural-networks-a4e2c46b4491)では、形状検出についての優しい導入が紹介されています。
 
-## 物体検出のためのデータセット
+## オブジェクト検出用データセット
 
-このタスクに関連するデータセットには以下のものがあります。
+以下のようなデータセットに出会うことがあるかもしれません：
 
 * [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/) - 20クラス
-* [COCO](http://cocodataset.org/#home) - 文脈における一般的な物体。80クラス、バウンディングボックスおよびセグメンテーションマスク
+* [COCO](http://cocodataset.org/#home) - コンテキスト内の一般的な物体。80クラス、境界ボックスとセグメンテーションマスクを含む
 
 ![COCO](../../../../../translated_images/coco-examples.71bc60380fa6cceb7caad48bd09e35b6028caabd363aa04fee89c414e0870e86.ja.jpg)
 
-## 物体検出のメトリクス
+## オブジェクト検出の評価指標
 
-### IoU（Intersection over Union）
+### Intersection over Union (IoU)
 
-画像分類の場合、アルゴリズムのパフォーマンスを測定するのは簡単ですが、物体検出ではクラスの正確さと推測されたバウンディングボックスの位置の精度の両方を測定する必要があります。後者には、いわゆる**IoU（Intersection over Union）**を使用し、2つのボックス（または2つの任意の領域）がどれだけ重なっているかを測定します。
+画像分類ではアルゴリズムの性能を測定するのは簡単ですが、オブジェクト検出ではクラスの正確性だけでなく、推定された境界ボックスの位置の精度も測定する必要があります。そのために使用されるのが**Intersection over Union** (IoU)です。これは、2つのボックス（または任意の領域）がどれだけ重なっているかを測定します。
 
 ![IoU](../../../../../translated_images/iou_equation.9a4751d40fff4e119ecd0a7bcca4e71ab1dc83e0d4f2a0d66ff0859736f593cf.ja.png)
 
-> *図2：[この優れたIoUに関するブログ記事](https://pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/)から*
+> *図2 出典: [IoUに関する優れたブログ記事](https://pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/)*
 
-アイデアはシンプルです - 2つの図形の交差部分の面積を、その和の面積で割ります。2つの同一の領域では、IoUは1になり、完全に離れた領域では0になります。それ以外の場合は0から1の間で変動します。通常、IoUが特定の値を超えるバウンディングボックスのみを考慮します。
+アイデアはシンプルです。2つの図形の交差部分の面積を、それらの結合部分の面積で割ります。2つの領域が完全に一致している場合、IoUは1になります。一方、完全に分離している場合は0になります。それ以外の場合は0から1の間で変動します。通常、IoUが一定値以上の境界ボックスのみを考慮します。
 
-### 平均精度
+### 平均精度 (Average Precision)
 
-特定の物体クラス$C$がどれだけ認識されているかを測定したいとしましょう。それを測定するために、**平均精度**メトリクスを使用します。これは以下のように計算されます。
+特定のクラスの物体 $C$ がどれだけ正確に認識されるかを測定したいとします。そのために**平均精度** (Average Precision) 指標を使用します。計算方法は以下の通りです：
 
-1. 精度-再現率曲線が、検出しきい値（0から1まで）に依存する精度を示すことを考慮します。
-2. しきい値に応じて、画像内で検出される物体の数が増減し、精度と再現率の異なる値が得られます。
-3. 曲線はこのようになります：
+1. 精度-再現率曲線を考慮し、検出閾値（0から1まで）に応じた精度を示します。
+2. 閾値に応じて、画像内で検出される物体の数や精度・再現率の値が変わります。
+3. 曲線は以下のようになります：
 
-> *画像出典：[NeuroWorkshop](http://github.com/shwars/NeuroWorkshop)*
+<img src="https://github.com/shwars/NeuroWorkshop/raw/master/images/ObjDetectionPrecisionRecall.png"/>
 
-与えられたクラス$C$の平均精度は、この曲線の下の面積です。より正確には、再現率軸は通常10部分に分けられ、精度はすべてのポイントで平均されます：
+> *画像出典: [NeuroWorkshop](http://github.com/shwars/NeuroWorkshop)*
+
+特定のクラス $C$ の平均精度は、この曲線の下の面積です。具体的には、再現率軸を通常10分割し、精度をそれぞれの点で平均化します：
 
 $$
 AP = {1\over11}\sum_{i=0}^{10}\mbox{Precision}(\mbox{Recall}={i\over10})
@@ -65,32 +76,34 @@ $$
 
 ### APとIoU
 
-IoUが特定の値を超える検出のみを考慮します。たとえば、PASCAL VOCデータセットでは通常$\mbox{IoU Threshold} = 0.5$が想定されており、COCOでは異なる$\mbox{IoU Threshold}$の値でAPが測定されます。 
+IoUが一定値以上の検出のみを考慮します。例えば、PASCAL VOCデータセットでは通常$\mbox{IoU Threshold} = 0.5$が使用されます。一方、COCOでは異なる$\mbox{IoU Threshold}$値でAPが測定されます。
 
-> *画像出典：[NeuroWorkshop](http://github.com/shwars/NeuroWorkshop)*
+<img src="https://github.com/shwars/NeuroWorkshop/raw/master/images/ObjDetectionPrecisionRecallIoU.png"/>
+
+> *画像出典: [NeuroWorkshop](http://github.com/shwars/NeuroWorkshop)*
 
 ### 平均平均精度 - mAP
 
-物体検出の主なメトリクスは**平均平均精度**、または**mAP**と呼ばれています。これは、すべての物体クラスにわたる平均精度の値であり、時には$\mbox{IoU Threshold}$にわたっても平均されます。より詳細には、**mAP**を計算するプロセスは[このブログ記事](https://medium.com/@timothycarlen/understanding-the-map-evaluation-metric-for-object-detection-a07fe6962cf3)で説明されており、[こちらにはコードサンプルがあります](https://gist.github.com/tarlen5/008809c3decf19313de216b9208f3734)。
+オブジェクト検出の主な評価指標は**平均平均精度** (Mean Average Precision, mAP) と呼ばれます。これは、すべての物体クラスにわたる平均精度の値であり、場合によっては$\mbox{IoU Threshold}$も含めて平均化されます。**mAP**の計算プロセスについては、[このブログ記事](https://medium.com/@timothycarlen/understanding-the-map-evaluation-metric-for-object-detection-a07fe6962cf3)や[コードサンプル付きの説明](https://gist.github.com/tarlen5/008809c3decf19313de216b9208f3734)で詳しく解説されています。
 
-## 異なる物体検出アプローチ
+## オブジェクト検出の異なるアプローチ
 
-物体検出アルゴリズムには大きく分けて2つのクラスがあります。
+オブジェクト検出アルゴリズムには大きく分けて2つの種類があります：
 
-* **領域提案ネットワーク**（R-CNN、Fast R-CNN、Faster R-CNN）。主なアイデアは、**関心領域**（ROI）を生成し、それらの上でCNNを実行して最大の活性化を探すことです。これはナイーブなアプローチに少し似ていますが、ROIはより巧妙な方法で生成されます。このような方法の主な欠点の1つは、画像上でCNN分類器を多くのパスで実行する必要があるため遅いことです。
-* **一回のパス**（YOLO、SSD、RetinaNet）メソッド。これらのアーキテクチャでは、ネットワークを設計して、クラスとROIの両方を一度のパスで予測します。
+* **領域提案ネットワーク** (Region Proposal Networks) (R-CNN, Fast R-CNN, Faster R-CNN)。主なアイデアは、**関心領域** (ROI) を生成し、それに対してCNNを実行して最大活性化を探すことです。この方法は単純なアプローチに似ていますが、ROIがより賢く生成される点が異なります。この方法の主な欠点は、画像に対してCNN分類器を何度も実行する必要があるため、速度が遅いことです。
+* **ワンパス** (YOLO, SSD, RetinaNet) メソッド。これらのアーキテクチャでは、クラスとROIを一度のパスで予測するようにネットワークを設計します。
 
 ### R-CNN: 領域ベースのCNN
 
-[R-CNN](http://islab.ulsan.ac.kr/files/announcement/513/rcnn_pami.pdf)は、[Selective Search](http://www.huppelen.nl/publications/selectiveSearchDraft.pdf)を使用してROI領域の階層構造を生成し、それをCNN特徴抽出器とSVM分類器に通して物体クラスを特定し、線形回帰を使用して*バウンディングボックス*の座標を決定します。[公式論文](https://arxiv.org/pdf/1506.01497v1.pdf)
+[R-CNN](http://islab.ulsan.ac.kr/files/announcement/513/rcnn_pami.pdf)は、[Selective Search](http://www.huppelen.nl/publications/selectiveSearchDraft.pdf) を使用してROI領域の階層構造を生成します。それらはCNN特徴抽出器とSVM分類器を通じて物体クラスを決定し、線形回帰を使用して*境界ボックス*の座標を決定します。[公式論文](https://arxiv.org/pdf/1506.01497v1.pdf)
 
 ![RCNN](../../../../../translated_images/rcnn1.cae407020dfb1d1fb572656e44f75cd6c512cc220591c116c506652c10e47f26.ja.png)
 
-> *画像出典：van de Sande et al. ICCV’11*
+> *画像出典: van de Sande et al. ICCV’11*
 
 ![RCNN-1](../../../../../translated_images/rcnn2.2d9530bb83516484ec65b250c22dbf37d3d23244f32864ebcb91d98fe7c3112c.ja.png)
 
-> *画像出典：[このブログ](https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e)*
+> *画像出典: [このブログ](https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e)*
 
 ### F-RCNN - Fast R-CNN
 
@@ -98,76 +111,77 @@ IoUが特定の値を超える検出のみを考慮します。たとえば、PA
 
 ![FRCNN](../../../../../translated_images/f-rcnn.3cda6d9bb41888754037d2d9763e2298a96de5d9bc2a21db3147357aa5da9b1a.ja.png)
 
-> 画像出典：[公式論文](https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Girshick_Fast_R-CNN_ICCV_2015_paper.pdf)、[arXiv](https://arxiv.org/pdf/1504.08083.pdf)、2015年
+> 画像出典: [公式論文](https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Girshick_Fast_R-CNN_ICCV_2015_paper.pdf), [arXiv](https://arxiv.org/pdf/1504.08083.pdf), 2015
 
 ### Faster R-CNN
 
-このアプローチの主なアイデアは、ニューラルネットワークを使用してROIを予測することです - いわゆる*領域提案ネットワーク*。[論文](https://arxiv.org/pdf/1506.01497.pdf)、2016年
+このアプローチの主なアイデアは、ROIを予測するためにニューラルネットワークを使用することです。これを*領域提案ネットワーク* (Region Proposal Network) と呼びます。[論文](https://arxiv.org/pdf/1506.01497.pdf), 2016
 
 ![FasterRCNN](../../../../../translated_images/faster-rcnn.8d46c099b87ef30ab2ea26dbc4bdd85b974a57ba8eb526f65dc4cd0a4711de30.ja.png)
 
-> 画像出典：[公式論文](https://arxiv.org/pdf/1506.01497.pdf)
+> 画像出典: [公式論文](https://arxiv.org/pdf/1506.01497.pdf)
 
 ### R-FCN: 領域ベースの完全畳み込みネットワーク
 
-このアルゴリズムはFaster R-CNNよりもさらに高速です。主なアイデアは次の通りです。
+このアルゴリズムはFaster R-CNNよりもさらに高速です。主なアイデアは以下の通りです：
 
-1. ResNet-101を使用して特徴を抽出します
-2. 特徴は**位置感受性スコアマップ**によって処理されます。$C$クラスの各物体は$k\times k$領域に分割され、物体の部分を予測するように訓練されます。
-3. $k\times k$領域の各部分について、すべてのネットワークが物体クラスに投票し、最大の投票を得た物体クラスが選択されます。
+1. ResNet-101を使用して特徴を抽出
+1. 特徴は**位置感知スコアマップ**で処理されます。$C$クラスの各物体は$k\times k$領域に分割され、物体の部分を予測するように学習します。
+1. $k\times k$領域の各部分について、すべてのネットワークが物体クラスに投票し、最大票を得た物体クラスが選択されます。
 
 ![r-fcn image](../../../../../translated_images/r-fcn.13eb88158b99a3da50fa2787a6be5cb310d47f0e9655cc93a1090dc7aab338d1.ja.png)
 
-> 画像出典：[公式論文](https://arxiv.org/abs/1605.06409)
+> 画像出典: [公式論文](https://arxiv.org/abs/1605.06409)
 
 ### YOLO - You Only Look Once
 
-YOLOはリアルタイムの一回のパスアルゴリズムです。主なアイデアは次の通りです。
+YOLOはリアルタイムのワンパスアルゴリズムです。主なアイデアは以下の通りです：
 
-* 画像を$S\times S$領域に分割します
-* 各領域に対して、**CNN**が$n$個の可能な物体、*バウンディングボックス*の座標、および*信頼度*=*確率* * IoUを予測します。
+ * 画像を$S\times S$領域に分割
+ * 各領域について、**CNN**が$n$個の可能な物体、*境界ボックス*の座標、*信頼度*=*確率* * IoUを予測
 
-![YOLO](../../../../../translated_images/yolo.a2648ec82ee8bb4ea27537677adb482fd4b733ca1705c561b6a24a85102dced5.ja.png)
-> 画像は[公式論文](https://arxiv.org/abs/1506.02640)からのものです。
+ ![YOLO](../../../../../translated_images/yolo.a2648ec82ee8bb4ea27537677adb482fd4b733ca1705c561b6a24a85102dced5.ja.png)
+
+> 画像出典: [公式論文](https://arxiv.org/abs/1506.02640)
 
 ### その他のアルゴリズム
 
 * RetinaNet: [公式論文](https://arxiv.org/abs/1708.02002)
-   - [TorchvisionによるPyTorch実装](https://pytorch.org/vision/stable/_modules/torchvision/models/detection/retinanet.html)
-   - [Keras実装](https://github.com/fizyr/keras-retinanet)
-   - Kerasサンプルの[RetinaNetによる物体検出](https://keras.io/examples/vision/retinanet/)
+   - [PyTorchのTorchvisionによる実装](https://pytorch.org/vision/stable/_modules/torchvision/models/detection/retinanet.html)
+   - [Kerasによる実装](https://github.com/fizyr/keras-retinanet)
+   - [Keras SamplesでのRetinaNetによるオブジェクト検出](https://keras.io/examples/vision/retinanet/)
 * SSD (Single Shot Detector): [公式論文](https://arxiv.org/abs/1512.02325)
 
-## ✍️ 演習: 物体検出
+## ✍️ 演習: オブジェクト検出
 
-以下のノートブックで学習を続けましょう：
+以下のノートブックで学習を続けてください：
 
-[ObjectDetection.ipynb](../../../../../lessons/4-ComputerVision/11-ObjectDetection/ObjectDetection.ipynb)
+[ObjectDetection.ipynb](ObjectDetection.ipynb)
 
 ## 結論
 
-このレッスンでは、物体検出が達成できるさまざまな方法を駆け足で紹介しました！
+このレッスンでは、オブジェクト検出を達成するさまざまな方法について一通り学びました！
 
 ## 🚀 チャレンジ
 
-これらのYOLOに関する記事やノートブックを読んで、自分で試してみてください。
+以下の記事やノートブックを読み、YOLOを試してみてください：
 
-* YOLOについて説明した[良いブログ記事](https://www.analyticsvidhya.com/blog/2018/12/practical-guide-object-detection-yolo-framewor-python/)
+* [YOLOについての良いブログ記事](https://www.analyticsvidhya.com/blog/2018/12/practical-guide-object-detection-yolo-framewor-python/)
  * [公式サイト](https://pjreddie.com/darknet/yolo/)
- * Yolo: [Keras実装](https://github.com/experiencor/keras-yolo2)、[ステップバイステップノートブック](https://github.com/experiencor/basic-yolo-keras/blob/master/Yolo%20Step-by-Step.ipynb)
- * Yolo v2: [Keras実装](https://github.com/experiencor/keras-yolo2)、[ステップバイステップノートブック](https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb)
+ * Yolo: [Kerasによる実装](https://github.com/experiencor/keras-yolo2), [ステップバイステップノートブック](https://github.com/experiencor/basic-yolo-keras/blob/master/Yolo%20Step-by-Step.ipynb)
+ * Yolo v2: [Kerasによる実装](https://github.com/experiencor/keras-yolo2), [ステップバイステップノートブック](https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb)
 
-## [講義後のクイズ](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/211)
+## [事後クイズ](https://ff-quizzes.netlify.app/en/ai/quiz/22)
 
-## レビュー & 自習
+## 復習と自己学習
 
-* Nikhil Sardanaによる[物体検出](https://tjmachinelearning.com/lectures/1718/obj/)
-* [物体検出アルゴリズムの良い比較](https://lilianweng.github.io/lil-log/2018/12/27/object-detection-part-4.html)
-* [物体検出のための深層学習アルゴリズムのレビュー](https://medium.com/comet-app/review-of-deep-learning-algorithms-for-object-detection-c1f3d437b852)
-* [基本的な物体検出アルゴリズムのステップバイステップの紹介](https://www.analyticsvidhya.com/blog/2018/10/a-step-by-step-introduction-to-the-basic-object-detection-algorithms-part-1/)
-* [物体検出のためのPythonにおけるFaster R-CNNの実装](https://www.analyticsvidhya.com/blog/2018/11/implementation-faster-r-cnn-python-object-detection/)
+* [オブジェクト検出](https://tjmachinelearning.com/lectures/1718/obj/) by Nikhil Sardana
+* [オブジェクト検出アルゴリズムの良い比較](https://lilianweng.github.io/lil-log/2018/12/27/object-detection-part-4.html)
+* [オブジェクト検出のための深層学習アルゴリズムのレビュー](https://medium.com/comet-app/review-of-deep-learning-algorithms-for-object-detection-c1f3d437b852)
+* [基本的なオブジェクト検出アルゴリズムへのステップバイステップの導入](https://www.analyticsvidhya.com/blog/2018/10/a-step-by-step-introduction-to-the-basic-object-detection-algorithms-part-1/)
+* [PythonでのFaster R-CNNの実装によるオブジェクト検出](https://www.analyticsvidhya.com/blog/2018/11/implementation-faster-r-cnn-python-object-detection/)
 
-## [課題: 物体検出](lab/README.md)
+## [課題: オブジェクト検出](lab/README.md)
 
-**免責事項**:  
-この文書は、機械ベースのAI翻訳サービスを使用して翻訳されました。正確性を追求していますが、自動翻訳にはエラーや不正確さが含まれる可能性があることをご理解ください。原文はその言語での権威ある情報源と見なされるべきです。重要な情報については、専門の人間翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈については、当社は責任を負いません。
+---
+

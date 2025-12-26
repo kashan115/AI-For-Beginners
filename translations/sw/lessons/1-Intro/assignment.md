@@ -1,6 +1,19 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "a334df77a82aaaf2a29c77065d3e481e",
+  "translation_date": "2025-11-18T21:55:40+00:00",
+  "source_file": "lessons/1-Intro/assignment.md",
+  "language_code": "sw"
+}
+-->
 # Game Jam
 
-Spel är ett område som har påverkats kraftigt av utvecklingen inom AI och ML. I denna uppgift, skriv ett kort papper om ett spel som du gillar och som har påverkats av AI:s evolution. Det bör vara ett tillräckligt gammalt spel för att ha påverkats av flera typer av databehandlingssystem. Ett bra exempel är Schack eller Go, men ta även en titt på videospel som pong eller Pac-Man. Skriv en uppsats som diskuterar spelets förflutna, nutid och AI:s framtid.
+Michezo ni eneo ambalo limeathiriwa sana na maendeleo ya AI na ML. Katika kazi hii, andika karatasi fupi kuhusu mchezo unaoupenda ambao umeathiriwa na mabadiliko ya AI. Unapaswa kuwa mchezo wa zamani wa kutosha kuathiriwa na aina kadhaa za mifumo ya usindikaji wa kompyuta. Mfano mzuri ni Chess au Go, lakini pia angalia michezo ya video kama pong au Pac-Man. Andika insha inayojadili historia ya mchezo huo, hali yake ya sasa, na mustakabali wake wa AI.
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiska översättningar kan innehålla fel eller oegentligheter. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi tar inget ansvar för eventuella missförstånd eller feltolkningar som uppstår från användningen av denna översättning.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kanusho**:  
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

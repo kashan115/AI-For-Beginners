@@ -1,107 +1,116 @@
-# Kunskapsrepresentation och Expert System
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "7d097f7fda9166ead615e4c34552381b",
+  "translation_date": "2025-09-23T11:02:09+00:00",
+  "source_file": "lessons/2-Symbolic/README.md",
+  "language_code": "sw"
+}
+-->
+# Uwakilishi wa Maarifa na Mifumo ya Wataalamu
 
-![Sammanfattning av Symbolisk AI-innehåll](../../../../translated_images/ai-symbolic.715a30cb610411a6964d2e2f23f24364cb338a07cb4844c1f97084d366e586c3.sw.png)
+![Muhtasari wa maudhui ya AI ya Kimaandishi](../../../../translated_images/ai-symbolic.715a30cb610411a6964d2e2f23f24364cb338a07cb4844c1f97084d366e586c3.sw.png)
 
-> Sketchnote av [Tomomi Imura](https://twitter.com/girlie_mac)
+> Sketchnote na [Tomomi Imura](https://twitter.com/girlie_mac)
 
-Jakten på artificiell intelligens baseras på en strävan efter kunskap, för att förstå världen på ett sätt som liknar hur människor gör. Men hur går man tillväga för att uppnå detta?
+Utafiti wa akili bandia unategemea kutafuta maarifa, ili kuelewa dunia kwa njia sawa na binadamu. Lakini unaweza kufanya hivyo vipi?
 
-## [Förläsningsquiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/102)
+## [Jaribio la awali la somo](https://ff-quizzes.netlify.app/en/ai/quiz/3)
 
-I AI:s tidiga dagar var den topp-ner-ansatsen för att skapa intelligenta system (diskuterad i den föregående lektionen) populär. Idén var att extrahera kunskap från människor till en maskinläsbar form och sedan använda den för att automatiskt lösa problem. Denna metod baserades på två stora idéer:
+Katika siku za mwanzo za AI, mbinu ya juu-chini ya kuunda mifumo yenye akili (ilijadiliwa katika somo lililopita) ilikuwa maarufu. Wazo lilikuwa ni kutoa maarifa kutoka kwa watu na kuyafanya yaweze kusomeka na mashine, kisha kuyatumia kutatua matatizo kiotomatiki. Mbinu hii ilitegemea mawazo mawili makubwa:
 
-* Kunskapsrepresentation
-* Resonemang
+* Uwakilishi wa Maarifa
+* Utoaji wa Sababu
 
-## Kunskapsrepresentation
+## Uwakilishi wa Maarifa
 
-Ett av de viktiga koncepten inom Symbolisk AI är **kunskap**. Det är viktigt att särskilja kunskap från *information* eller *data*. Till exempel kan man säga att böcker innehåller kunskap, eftersom man kan studera böcker och bli expert. Vad böcker innehåller kallas faktiskt *data*, och genom att läsa böcker och integrera dessa data i vår världsmodell omvandlar vi dessa data till kunskap.
+Moja ya dhana muhimu katika AI ya Kimaandishi ni **maarifa**. Ni muhimu kutofautisha maarifa na *taarifa* au *data*. Kwa mfano, mtu anaweza kusema kwamba vitabu vina maarifa, kwa sababu mtu anaweza kusoma vitabu na kuwa mtaalamu. Hata hivyo, kile ambacho vitabu vina ni kinachoitwa *data*, na kwa kusoma vitabu na kuunganisha data hii katika mfano wetu wa dunia tunabadilisha data hii kuwa maarifa.
 
-> ✅ **Kunskap** är något som finns i vårt huvud och representerar vår förståelse av världen. Den erhålls genom en aktiv **inlärnings**process, som integrerar bitar av information som vi får in i vår aktiva modell av världen.
+> ✅ **Maarifa** ni kitu kilicho ndani ya akili zetu na kinawakilisha uelewa wetu wa dunia. Yanapatikana kupitia mchakato wa **kujifunza** kwa bidii, ambao unajumuisha vipande vya taarifa tunazopokea katika mfano wetu wa dunia.
 
-Ofta definierar vi inte strikt kunskap, utan vi kopplar den till andra relaterade koncept med hjälp av [DIKW-pyramiden](https://en.wikipedia.org/wiki/DIKW_pyramid). Den innehåller följande koncept:
+Mara nyingi, hatufafanui maarifa kwa ukali, lakini tunayalinganisha na dhana nyingine zinazohusiana kwa kutumia [Piramidi ya DIKW](https://en.wikipedia.org/wiki/DIKW_pyramid). Inajumuisha dhana zifuatazo:
 
-* **Data** är något som representeras i fysiska medier, såsom skriven text eller talade ord. Data existerar oberoende av människor och kan överföras mellan personer.
-* **Information** är hur vi tolkar data i vårt huvud. Till exempel, när vi hör ordet *dator*, har vi en viss förståelse av vad det är.
-* **Kunskap** är information som integreras i vår världsmodell. Till exempel, när vi väl har lärt oss vad en dator är, börjar vi få idéer om hur den fungerar, hur mycket den kostar och vad den kan användas till. Detta nätverk av relaterade koncept formar vår kunskap.
-* **Visdom** är ytterligare en nivå av vår förståelse av världen, och den representerar *meta-kunskap*, dvs. en viss uppfattning om hur och när kunskapen bör användas.
+* **Data** ni kitu kinachowakilishwa katika vyombo vya kimwili, kama maandishi yaliyoandikwa au maneno yaliyotamkwa. Data ipo bila kujali uwepo wa binadamu na inaweza kupitishwa kati ya watu.
+* **Taarifa** ni jinsi tunavyotafsiri data katika akili zetu. Kwa mfano, tunaposikia neno *kompyuta*, tunakuwa na uelewa fulani wa kile ilivyo.
+* **Maarifa** ni taarifa inayojumuishwa katika mfano wetu wa dunia. Kwa mfano, mara tu tunapojifunza kompyuta ni nini, tunaanza kuwa na mawazo kuhusu jinsi inavyofanya kazi, gharama yake, na matumizi yake. Mtandao huu wa dhana zinazohusiana huunda maarifa yetu.
+* **Hekima** ni kiwango kingine cha uelewa wetu wa dunia, na inawakilisha *maarifa ya meta*, yaani, dhana fulani kuhusu jinsi na wakati maarifa yanapaswa kutumika.
 
 <img src="images/DIKW_Pyramid.png" width="30%"/>
 
-*Bild [från Wikipedia](https://commons.wikimedia.org/w/index.php?curid=37705247), av Longlivetheux - Eget arbete, CC BY-SA 4.0*
+*Picha [kutoka Wikipedia](https://commons.wikimedia.org/w/index.php?curid=37705247), Na Longlivetheux - Kazi ya mwenyewe, CC BY-SA 4.0*
 
-Således är problemet med **kunskapsrepresentation** att hitta ett effektivt sätt att representera kunskap inuti en dator i form av data, för att göra den automatiskt användbar. Detta kan ses som ett spektrum:
+Kwa hivyo, tatizo la **uwakilishi wa maarifa** ni kutafuta njia bora ya kuwakilisha maarifa ndani ya kompyuta kwa njia ya data, ili yaweze kutumika kiotomatiki. Hili linaweza kuonekana kama wigo:
 
-![Kunskapsrepresentationsspektrum](../../../../translated_images/knowledge-spectrum.b60df631852c0217e941485b79c9eee40ebd574f15f18609cec5758fcb384bf3.sw.png)
+![Wigo wa uwakilishi wa maarifa](../../../../translated_images/knowledge-spectrum.b60df631852c0217e941485b79c9eee40ebd574f15f18609cec5758fcb384bf3.sw.png)
 
-> Bild av [Dmitry Soshnikov](http://soshnikov.com)
+> Picha na [Dmitry Soshnikov](http://soshnikov.com)
 
-* Till vänster finns mycket enkla typer av kunskapsrepresentationer som kan användas effektivt av datorer. Den enklaste är algoritmisk, när kunskap representeras av ett datorprogram. Detta är dock inte det bästa sättet att representera kunskap, eftersom det inte är flexibelt. Kunskap i vårt huvud är ofta icke-algoritmisk.
-* Till höger finns representationer såsom naturlig text. Det är den mest kraftfulla, men kan inte användas för automatisk resonemang.
+* Kushoto, kuna aina rahisi sana za uwakilishi wa maarifa ambazo zinaweza kutumika kwa ufanisi na kompyuta. Rahisi zaidi ni ya kialgorithimu, ambapo maarifa yanawakilishwa na programu ya kompyuta. Hata hivyo, hii si njia bora ya kuwakilisha maarifa, kwa sababu si rahisi kubadilika. Maarifa ndani ya akili zetu mara nyingi si ya kialgorithimu.
+* Kulia, kuna uwakilishi kama maandishi ya asili. Ni yenye nguvu zaidi, lakini haiwezi kutumika kwa utoaji wa sababu kiotomatiki.
 
-> ✅ Tänk en minut på hur du representerar kunskap i ditt huvud och omvandlar den till anteckningar. Finns det ett särskilt format som fungerar bra för dig för att underlätta retention?
+> ✅ Fikiria kwa dakika moja jinsi unavyowakilisha maarifa katika akili yako na kuyabadilisha kuwa maelezo. Je, kuna muundo fulani unaokufaa kusaidia kukumbuka?
 
-## Klassificering av datorers kunskapsrepresentationer
+## Uainishaji wa Uwakilishi wa Maarifa ya Kompyuta
 
-Vi kan klassificera olika metoder för kunskapsrepresentation i datorer i följande kategorier:
+Tunaweza kuainisha mbinu tofauti za uwakilishi wa maarifa ya kompyuta katika makundi yafuatayo:
 
-* **Nätverksrepresentationer** baseras på det faktum att vi har ett nätverk av relaterade koncept i vårt huvud. Vi kan försöka återskapa samma nätverk som en graf inuti en dator - ett så kallat **semantiskt nätverk**.
+* **Uwakilishi wa mtandao** unategemea ukweli kwamba tuna mtandao wa dhana zinazohusiana ndani ya akili zetu. Tunaweza kujaribu kuunda mtandao huo kama grafu ndani ya kompyuta - mtandao wa **semantic**.
 
-1. **Objekt-Attribut-Värde-trippel** eller **attribut-värde-par**. Eftersom en graf kan representeras inuti en dator som en lista av noder och kanter, kan vi representera ett semantiskt nätverk med en lista av trippel, som innehåller objekt, attribut och värden. Till exempel bygger vi följande trippel om programmeringsspråk:
+1. **Triplets za Kitu-Sifa-Thamani** au **jozi za sifa-thamani**. Kwa kuwa grafu inaweza kuwakilishwa ndani ya kompyuta kama orodha ya nodi na kingo, tunaweza kuwakilisha mtandao wa semantic kwa orodha ya triplets, zinazojumuisha vitu, sifa, na thamani. Kwa mfano, tunajenga triplets zifuatazo kuhusu lugha za programu:
 
-Objekt | Attribut | Värde
--------|-----------|------
-Python | är | Otypad-Språk
-Python | uppfunnen-av | Guido van Rossum
-Python | block-syntax | indentering
-Otypad-Språk | har inte | typdefinitioner
+Kitu | Sifa | Thamani
+-----|------|--------
+Python | ni | Lugha Isiyo na Aina
+Python | ilivumbuliwa-na | Guido van Rossum
+Python | syntax ya block | indentation
+Lugha Isiyo na Aina | haina | ufafanuzi wa aina
 
-> ✅ Tänk på hur trippel kan användas för att representera andra typer av kunskap.
+> ✅ Fikiria jinsi triplets zinavyoweza kutumika kuwakilisha aina nyingine za maarifa.
 
-2. **Hierarkiska representationer** betonar det faktum att vi ofta skapar en hierarki av objekt i vårt huvud. Till exempel vet vi att en kanariefågel är en fågel, och alla fåglar har vingar. Vi har också en viss uppfattning om vilken färg en kanariefågel vanligtvis har, och vad deras flyghastighet är.
+2. **Uwakilishi wa kihierarkia** unasisitiza ukweli kwamba mara nyingi tunaunda hierarkia ya vitu ndani ya akili zetu. Kwa mfano, tunajua kwamba kanari ni ndege, na ndege wote wana mabawa. Pia tuna wazo fulani kuhusu rangi ya kawaida ya kanari, na kasi yao ya kuruka.
 
-   - **Ramrepresentation** baseras på att representera varje objekt eller klass av objekt som en **ram** som innehåller **platser**. Platser har möjliga standardvärden, värdebegränsningar eller lagrade procedurer som kan anropas för att få värdet av en plats. Alla ramar bildar en hierarki liknande en objektshierarki i objektorienterade programmeringsspråk.
-   - **Scenarier** är en speciell typ av ramar som representerar komplexa situationer som kan utvecklas över tid.
+   - **Uwakilishi wa fremu** unategemea kuwakilisha kila kitu au darasa la vitu kama **fremu** inayojumuisha **slots**. Slots zinaweza kuwa na thamani za default, vizuizi vya thamani, au taratibu zilizohifadhiwa ambazo zinaweza kuitwa ili kupata thamani ya slot. Fremu zote zinaunda hierarkia sawa na hierarkia ya vitu katika lugha za programu za msingi wa vitu.
+   - **Matukio** ni aina maalum ya fremu zinazowakilisha hali ngumu zinazoweza kutokea kwa muda.
 
 **Python**
 
-Plats | Värde | Standardvärde | Intervall |
------|-------|---------------|----------|
-Namn | Python | | |
-Är-En | Otypad-Språk | | |
-Variabelnamn | | CamelCase | |
-Programlängd | | | 5-5000 rader |
-Blocksyntax | Indent | | |
+Slot | Thamani | Thamani ya Default | Kipindi |
+-----|--------|--------------------|---------|
+Jina | Python | | |
+Ni-A | Lugha Isiyo na Aina | | |
+Kesi ya Kigezo | | CamelCase | |
+Urefu wa Programu | | | mistari 5-5000 |
+Syntax ya Block | Indent | | |
 
-3. **Procedurala representationer** baseras på att representera kunskap genom en lista av åtgärder som kan utföras när ett visst villkor inträffar.
-   - Produktionsregler är om-så uttalanden som tillåter oss att dra slutsatser. Till exempel kan en läkare ha en regel som säger att **OM** en patient har hög feber **ELLER** hög nivå av C-reaktivt protein i blodprovet **SÅ** har han en inflammation. När vi stöter på ett av villkoren kan vi dra en slutsats om inflammation, och sedan använda den i vidare resonemang.
-   - Algoritmer kan betraktas som en annan form av procedural representation, även om de nästan aldrig används direkt i kunskapsbaserade system.
+3. **Uwakilishi wa kiutaratibu** unategemea kuwakilisha maarifa kwa orodha ya vitendo vinavyoweza kutekelezwa wakati hali fulani inatokea.
+   - Sheria za uzalishaji ni kauli za ikiwa-basi zinazoturuhusu kutoa hitimisho. Kwa mfano, daktari anaweza kuwa na sheria inayosema kwamba **IWAPO** mgonjwa ana homa kali **AU** kiwango cha juu cha protini ya C-reactive katika kipimo cha damu **BASI** ana uvimbe. Mara tu tunapokutana na mojawapo ya hali hizo, tunaweza kutoa hitimisho kuhusu uvimbe, kisha kuitumia katika utoaji wa sababu zaidi.
+   - Algorithimu zinaweza kuzingatiwa kama aina nyingine ya uwakilishi wa kiutaratibu, ingawa karibu hazitumiki moja kwa moja katika mifumo inayotegemea maarifa.
 
-4. **Logik** föreslogs ursprungligen av Aristoteles som ett sätt att representera universell mänsklig kunskap.
-   - Predikatlogik som en matematisk teori är för rik för att vara beräkningsbar, därför används normalt en delmängd av den, såsom Horn-klausuler som används i Prolog.
-   - Beskrivande logik är en familj av logiska system som används för att representera och resonera om hierarkier av objekt i distribuerade kunskapsrepresentationer som *semantiskt web*.
+4. **Mantiki** ilipendekezwa awali na Aristotle kama njia ya kuwakilisha maarifa ya binadamu ya ulimwengu.
+   - Mantiki ya Prediketi kama nadharia ya hisabati ni tajiri sana kiasi kwamba haiwezi kuhesabiwa, kwa hivyo subset fulani ya hiyo kawaida hutumiwa, kama vile Horn clauses zinazotumiwa katika Prolog.
+   - Mantiki ya Maelezo ni familia ya mifumo ya kimantiki inayotumika kuwakilisha na kutoa sababu kuhusu hierarkia za vitu na uwakilishi wa maarifa uliosambazwa kama *semantic web*.
 
-## Expert System
+## Mifumo ya Wataalamu
 
-En av de tidiga framgångarna för symbolisk AI var så kallade **expertsystem** - datorsystem som var designade för att agera som en expert inom ett begränsat problemområde. De baserades på en **kunskapsbas** som extraherades från en eller flera mänskliga experter, och de innehöll en **slutledningsmotor** som utförde resonemang ovanpå den.
+Moja ya mafanikio ya awali ya AI ya kimaandishi yalikuwa mifumo ya **wataalamu** - mifumo ya kompyuta iliyoundwa kufanya kazi kama mtaalamu katika eneo fulani la tatizo. Ilitegemea **hifadhidata ya maarifa** iliyotolewa kutoka kwa mtaalamu mmoja au zaidi wa binadamu, na ilikuwa na **injini ya utoaji wa sababu** iliyofanya utoaji wa sababu juu yake.
 
-![Mänsklig Arkitektur](../../../../translated_images/arch-human.5d4d35f1bba3ab1cdfda96af2f10b89574eb31e9796d0e3011cd9beda1c35112.sw.png) | ![Kunskapsbaserat System](../../../../translated_images/arch-kbs.3ec5c150b09fa8dadc2beb0931a4983c9e2b03913a89eebcc103b5bb841b0212.sw.png)
+![Muundo wa Binadamu](../../../../translated_images/arch-human.5d4d35f1bba3ab1cdfda96af2f10b89574eb31e9796d0e3011cd9beda1c35112.sw.png) | ![Mfumo Unaotegemea Maarifa](../../../../translated_images/arch-kbs.3ec5c150b09fa8dadc2beb0931a4983c9e2b03913a89eebcc103b5bb841b0212.sw.png)
 ---------------------------------------------|------------------------------------------------
-Förenklad struktur av ett mänskligt neuralt system | Arkitektur av ett kunskapsbaserat system
+Muundo rahisi wa mfumo wa neva wa binadamu | Muundo wa mfumo unaotegemea maarifa
 
-Expertsystem byggs som det mänskliga resonemangssystemet, som innehåller **korttidsminne** och **långtidsminne**. På liknande sätt särskiljer vi i kunskapsbaserade system följande komponenter:
+Mifumo ya wataalamu imejengwa kama mfumo wa utoaji wa sababu wa binadamu, ambao una **kumbukumbu ya muda mfupi** na **kumbukumbu ya muda mrefu**. Vivyo hivyo, katika mifumo inayotegemea maarifa tunatofautisha vipengele vifuatavyo:
 
-* **Problemminne**: innehåller kunskap om det problem som för närvarande löses, dvs. temperaturen eller blodtrycket hos en patient, om han har inflammation eller inte, etc. Denna kunskap kallas också **statisk kunskap**, eftersom den innehåller en ögonblicksbild av vad vi för närvarande vet om problemet - det så kallade *problemstatus*.
-* **Kunskapsbas**: representerar långsiktig kunskap om ett problemområde. Den extraheras manuellt från mänskliga experter och förändras inte från konsultation till konsultation. Eftersom den tillåter oss att navigera från ett problemstatus till ett annat, kallas den också **dynamisk kunskap**.
-* **Slutledningsmotor**: orkestrerar hela processen av sökning i problemstatusens rum, ställer frågor till användaren när det är nödvändigt. Den är också ansvarig för att hitta rätt regler som ska tillämpas på varje status.
+* **Kumbukumbu ya tatizo**: ina maarifa kuhusu tatizo linalosuluhishwa kwa sasa, yaani, joto au shinikizo la damu la mgonjwa, ikiwa ana uvimbe au la, nk. Maarifa haya pia huitwa **maarifa tuli**, kwa sababu yanajumuisha picha ya kile tunachojua kwa sasa kuhusu tatizo - hali ya tatizo.
+* **Hifadhidata ya maarifa**: inawakilisha maarifa ya muda mrefu kuhusu eneo la tatizo. Inatolewa kwa mikono kutoka kwa wataalamu wa binadamu, na haibadiliki kutoka ushauri mmoja hadi mwingine. Kwa sababu inaturuhusu kuvinjari kutoka hali moja ya tatizo hadi nyingine, pia inaitwa **maarifa yenye nguvu**.
+* **Injini ya utoaji wa sababu**: inaendesha mchakato mzima wa kutafuta katika nafasi ya hali ya tatizo, kuuliza maswali kwa mtumiaji inapohitajika. Pia inawajibika kwa kutafuta sheria sahihi za kutumika kwa kila hali.
 
-Som ett exempel, låt oss överväga följande expertsystem för att bestämma ett djur baserat på dess fysiska egenskaper:
+Kwa mfano, hebu tuchunguze mfumo wa wataalamu wa kuamua mnyama kulingana na sifa zake za kimwili:
 
-![AND-OR Träd](../../../../translated_images/AND-OR-Tree.5592d2c70187f283703c8e9c0d69d6a786eb370f4ace67f9a7aae5ada3d260b0.sw.png)
+![Mti wa AND-OR](../../../../translated_images/AND-OR-Tree.5592d2c70187f283703c8e9c0d69d6a786eb370f4ace67f9a7aae5ada3d260b0.sw.png)
 
-> Bild av [Dmitry Soshnikov](http://soshnikov.com)
+> Picha na [Dmitry Soshnikov](http://soshnikov.com)
 
-Detta diagram kallas ett **AND-OR-träd**, och det är en grafisk representation av en uppsättning produktionsregler. Att rita ett träd är användbart i början av kunskapsutvinning från experten. För att representera kunskapen inuti datorn är det mer bekvämt att använda regler:
+Mchoro huu unaitwa **mti wa AND-OR**, na ni uwakilishi wa kielelezo wa seti ya sheria za uzalishaji. Kuchora mti ni muhimu mwanzoni mwa kutoa maarifa kutoka kwa mtaalamu. Ili kuwakilisha maarifa ndani ya kompyuta ni rahisi zaidi kutumia sheria:
 
 ```
 IF the animal eats meat
@@ -112,59 +121,59 @@ OR (animal has sharp teeth
 THEN the animal is a carnivore
 ```
 
-Du kan märka att varje villkor på vänster sida av regeln och åtgärden i grunden är objekt-attribut-värde (OAV) trippel. **Arbetsminnet** innehåller uppsättningen av OAV-trippel som motsvarar det problem som för närvarande löses. En **regelmotor** letar efter regler vars villkor är uppfyllda och tillämpar dem, vilket lägger till en annan trippel till arbetsminnet.
+Unaweza kugundua kwamba kila hali upande wa kushoto wa sheria na kitendo ni kimsingi triplets za kitu-sifa-thamani (OAV). **Kumbukumbu ya kazi** ina seti ya triplets za OAV zinazolingana na tatizo linalosuluhishwa kwa sasa. **Injini ya sheria** hutafuta sheria ambazo hali yake imetimizwa na kuzitumia, ikiongeza triplet nyingine kwenye kumbukumbu ya kazi.
 
-> ✅ Rita ditt eget AND-OR-träd om ett ämne du gillar!
+> ✅ Andika mti wako wa AND-OR kuhusu mada unayoipenda!
 
-### Framåt vs. Bakåt Slutledning
+### Utoaji wa Sababu wa Mbele vs. Nyuma
 
-Processen som beskrivs ovan kallas **framåt slutledning**. Den börjar med viss initial data om problemet som finns i arbetsminnet, och utför sedan följande resonemangsslinga:
+Mchakato ulioelezwa hapo juu unaitwa **utoaji wa sababu wa mbele**. Unaanzia na data fulani ya awali kuhusu tatizo inayopatikana katika kumbukumbu ya kazi, kisha inatekeleza mzunguko wa utoaji wa sababu kama ifuatavyo:
 
-1. Om det målattributet finns i arbetsminnet - stoppa och ge resultatet
-2. Leta efter alla regler vars villkor för närvarande är uppfyllda - erhåll **konfliktuppsättning** av regler.
-3. Utför **konfliktlösning** - välj en regel som ska utföras i detta steg. Det kan finnas olika strategier för konfliktlösning:
-   - Välj den första tillämpliga regeln i kunskapsbasen
-   - Välj en slumpmässig regel
-   - Välj en *mer specifik* regel, dvs. den som uppfyller flest villkor på "vänster sida" (LHS)
-4. Tillämpa vald regel och sätt in en ny kunskapsbit i problemstatus
-5. Upprepa från steg 1.
+1. Ikiwa sifa lengwa ipo katika kumbukumbu ya kazi - simama na toa matokeo
+2. Tafuta sheria zote ambazo hali yake imetimizwa kwa sasa - pata **seti ya migogoro** ya sheria.
+3. Fanya **utatuzi wa migogoro** - chagua sheria moja ambayo itatekelezwa katika hatua hii. Kunaweza kuwa na mikakati tofauti ya utatuzi wa migogoro:
+   - Chagua sheria ya kwanza inayotumika katika hifadhidata ya maarifa
+   - Chagua sheria ya nasibu
+   - Chagua sheria *maalum zaidi*, yaani, ile inayokidhi hali nyingi zaidi upande wa "kushoto" (LHS)
+4. Tumia sheria iliyochaguliwa na ingiza kipande kipya cha maarifa katika hali ya tatizo
+5. Rudia kutoka hatua ya 1.
 
-Men i vissa fall kanske vi vill börja med en tom kunskap om problemet och ställa frågor som hjälper oss att nå en slutsats. Till exempel, när vi gör medicinska diagnoser, utför vi vanligtvis inte alla medicinska analyser i förväg innan vi börjar diagnostisera patienten. Vi vill hellre utföra analyser när ett beslut behöver fattas.
+Hata hivyo, katika baadhi ya hali tunaweza kutaka kuanza na maarifa yasiyo kamili kuhusu tatizo, na kuuliza maswali ambayo yatatusaidia kufikia hitimisho. Kwa mfano, wakati wa kufanya uchunguzi wa matibabu, kwa kawaida hatufanyi uchambuzi wote wa matibabu mapema kabla ya kuanza kumchunguza mgonjwa. Badala yake, tunataka kufanya uchambuzi wakati uamuzi unahitaji kufanywa.
 
-Denna process kan modelleras med hjälp av **bakåt slutledning**. Den drivs av **målet** - det attributvärde som vi letar efter:
+Mchakato huu unaweza kuigwa kwa kutumia **utoaji wa sababu wa nyuma**. Unachochewa na **lengo** - thamani ya sifa tunayotafuta:
 
-1. Välj alla regler som kan ge oss värdet av ett mål (dvs. med målet på RHS ("höger sida")) - en konfliktuppsättning
-1. Om det inte finns några regler för detta attribut, eller det finns en regel som säger att vi ska fråga användaren om värdet - fråga efter det, annars:
-1. Använd konfliktlösningsstrategin för att välja en regel som vi kommer att använda som *hypotes* - vi kommer att försöka bevisa den
-1. Återkommande upprepa processen för alla attribut i LHS av regeln, och försöka bevisa dem som mål
-1. Om processen misslyckas vid något tillfälle - använd en annan regel i steg 3.
+1. Chagua sheria zote zinazoweza kutupa thamani ya lengo (yaani, na lengo upande wa RHS ("upande wa kulia")) - seti ya migogoro
+1. Ikiwa hakuna sheria kwa sifa hii, au kuna sheria inayosema kwamba tunapaswa kuuliza thamani kutoka kwa mtumiaji - uliza, vinginevyo:
+1. Tumia mkakati wa utatuzi wa migogoro kuchagua sheria moja ambayo tutatumia kama *dhanio* - tutajaribu kuithibitisha
+1. Rudia mchakato kwa sifa zote katika LHS ya sheria, tukijaribu kuzithibitisha kama malengo
+1. Ikiwa wakati wowote mchakato unashindwa - tumia sheria nyingine katika hatua ya 3.
 
-> ✅ I vilka situationer är framåt slutledning mer lämplig? Hur är det med bakåt slutledning?
+> ✅ Katika hali gani utoaji wa sababu wa mbele unafaa zaidi? Na vipi kuhusu utoaji wa sababu wa nyuma?
 
-### Implementera Expertsystem
+### Kutekeleza Mifumo ya Wataalamu
 
-Expertsystem kan implementeras med hjälp av olika verktyg:
+Mifumo ya wataalamu inaweza kutekelezwa kwa kutumia zana tofauti:
 
-* Programmera dem direkt i något hög nivå programmeringsspråk. Detta är inte den bästa idén, eftersom den främsta fördelen med ett kunskapsbaserat system är att kunskapen är separerad från slutsatserna, och potentiellt bör en problemområdesexpert kunna skriva regler utan att förstå detaljerna i slutledningsprocessen.
-* Använda **expertsystemskal**, dvs. ett system som är specifikt utformat för att fyllas med kunskap med hjälp av något kunskapsrepresentationsspråk.
+* Kuiandika moja kwa moja katika lugha ya programu ya kiwango cha juu. Hili si wazo bora, kwa sababu faida kuu ya mfumo unaotegemea maarifa ni kwamba maarifa yanatenganishwa na utoaji wa sababu, na mtaalamu wa eneo la tatizo anapaswa kuwa na uwezo wa kuandika sheria bila kuelewa maelezo ya mchakato wa utoaji wa sababu.
+* Kutumia **ganda la mifumo ya wataalamu**, yaani, mfumo ulioundwa mahsusi kujazwa na maarifa kwa kutumia lugha fulani ya uwakilishi wa maarifa.
 
-## ✍️ Övning: Djur Slutledning
+## ✍️ Zoezi: Utoaji wa Sababu wa Wanyama
 
-Se [Animals.ipynb](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/2-Symbolic/Animals.ipynb) för ett exempel på att implementera framåt och bakåt slutledning i ett expertsystem.
+Tazama [Animals.ipynb](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/2-Symbolic/Animals.ipynb) kwa mfano wa kutekeleza mfumo wa wataalamu wa utoaji wa sababu wa mbele na wa nyuma.
 
-> **Obs**: Detta exempel är ganska enkelt och ger bara en uppfattning om hur ett expertsystem ser ut. När du börjar skapa ett sådant system kommer du bara att märka något *intelligent* beteende från det när du når ett visst antal regler, omkring 200+. Vid en viss punkt blir reglerna för komplexa för att hålla dem alla i minnet, och vid denna punkt kan du börja undra varför ett system fattar vissa beslut. Men den viktiga egenskapen hos kunskapsbaserade system är att du alltid kan *förklara* exakt hur något av besluten fattades.
+> **Note**: Mfano huu ni rahisi sana, na unatoa tu wazo la jinsi mfumo wa wataalamu unavyoonekana. Mara tu unapoanza kuunda mfumo kama huo, utaona tabia fulani ya *kiakili* kutoka kwake mara tu unapofikia idadi fulani ya sheria, karibu 200+. Wakati fulani, sheria zinakuwa ngumu sana kiasi kwamba huwezi kuzihifadhi zote akilini, na wakati huo unaweza kuanza kujiuliza kwa nini mfumo unafanya maamuzi fulani. Hata hivyo, sifa muhimu ya mifumo inayotegemea maarifa ni kwamba unaweza kila wakati *kufafanua* jinsi maamuzi yoyote yalivyofanywa.
 
-## Ontologier och det Semantiska Webben
+## Ontolojia na Mtandao wa Semantic
 
-I slutet av 1900-talet fanns det en initiativ för att använda kunskapsrepresentation för att annotera internetresurser, så att det skulle vara möjligt att hitta resurser som motsvarar mycket specifika frågor. Denna rörelse kallades **Semantiskt Web**, och den förlitade sig på flera koncept:
+Mwisho wa karne ya 20 kulikuwa na mpango wa kutumia uwakilishi wa maarifa kuandika rasilimali za mtandao, ili iwezekane kupata rasilimali zinazolingana na maswali maalum sana. Harakati hii ilitwa **Mtandao wa Semantic**, na ilitegemea dhana kadhaa:
 
-- En speciell kunskapsrepresentation baserad på **[beskrivningslogik](https://en.wikipedia.org/wiki/Description_logic)** (DL). Den liknar ramkunskapsrepresentation, eftersom den bygger en hierarki av objekt med egenskaper, men den har formell logisk semantik och slutsats. Det finns en hel familj av DL som balanserar mellan uttryckbarhet och algoritmisk komplexitet av slutsatser.
-- Distribuerad kunskapsrepresentation, där alla koncept representeras av en global URI-identifierare, vilket gör det möjligt att skapa kunskapshierarkier som sträcker sig över internet.
-- En familj av XML-baserade språk för kunskapsbeskrivning: RDF (Resource Description Framework), RDFS (RDF Schema), OWL (Ontology Web Language).
+- Uwakilishi maalum wa maarifa unaotegemea **[mantiki ya maelezo](https://en.wikipedia.org/wiki/Description_logic)** (DL). Inafanana na uwakilishi wa maarifa ya fremu, kwa sababu inajenga hierarkia ya vitu vyenye mali, lakini ina mantiki rasmi ya kimantiki na utoaji wa sababu. Kuna familia nzima ya DLs ambazo zinapima kati ya uelekezaji na ugumu wa kialgorithimu wa utoaji wa sababu.
+- Uwakilishi wa maarifa uliosambazwa, ambapo dhana zote zinawakilishwa na kitambulisho cha URI cha kimataifa, na kufanya iwezekane kuunda hierarkia za maarifa zinazovuka mtandao.
+- Familia ya lugha zinazotumia XML kwa maelezo ya maarifa: RDF (Resource Description Framework), RDFS (RDF Schema), OWL (Ontology Web Language).
 
-Ett kärnkoncept i det semantiska webben är konceptet **Ontologi**. Det hänvisar till en explicit specifikation av ett problemområde med hjälp av någon formell kunskapsrepresentation. Den enklaste ontologin kan vara enbart en hierarki av objekt i ett problemområde, men mer komplexa ontologier kommer att inkludera regler som kan användas för slutsats.
+Dhana kuu katika Mtandao wa Semantiki ni dhana ya **Ontology**. Inahusu maelezo ya wazi ya eneo la tatizo kwa kutumia uwakilishi rasmi wa maarifa. Ontolojia rahisi inaweza kuwa tu hierarkia ya vitu katika eneo la tatizo, lakini ontolojia ngumu zaidi zitajumuisha sheria zinazoweza kutumika kwa hitimisho.
 
-I det semantiska webben baseras alla representationer på trippel. Varje objekt och varje relation identifieras unikt av URI. Till exempel, om vi vill ange att denna AI-läroplan har utvecklats av Dmitry Soshnikov den 1 januari 2022 - här är trippeln vi kan använda:
+Katika mtandao wa semantiki, uwakilishi wote unategemea tripleti. Kila kitu na kila uhusiano hutambulishwa kipekee na URI. Kwa mfano, ikiwa tunataka kusema ukweli kwamba Mtaala huu wa AI umetengenezwa na Dmitry Soshnikov mnamo Januari 1, 2022 - hapa kuna tripleti tunazoweza kutumia:
 
 <img src="images/triplet.png" width="30%"/>
 
@@ -173,17 +182,71 @@ http://github.com/microsoft/ai-for-beginners http://www.example.com/terms/creati
 http://github.com/microsoft/ai-for-beginners http://purl.org/dc/elements/1.1/creator http://soshnikov.com
 ```
 
-> ✅ Här `http://www.example.com/terms/creation-date` and `http://purl.org/dc/elements/1.1/creator` är några välkända och allmänt accepterade URIs för att uttrycka koncepten *skapare* och *skapelsedatum*.
+> ✅ Hapa `http://www.example.com/terms/creation-date` na `http://purl.org/dc/elements/1.1/creator` ni URI zinazojulikana na kukubalika kimataifa kuelezea dhana za *muundaji* na *tarehe ya uundaji*.
 
-I ett mer komplext fall, om vi vill definiera en lista av skapare, kan vi använda några datakonstruktioner definierade i RDF.
+Katika hali ngumu zaidi, ikiwa tunataka kufafanua orodha ya waundaji, tunaweza kutumia miundo ya data iliyofafanuliwa katika RDF.
 
 <img src="images/triplet-complex.png" width="40%"/>
 
-> Diagrammen ovan av [Dmitry Soshnikov](http://soshnikov.com)
+> Michoro hapo juu na [Dmitry Soshnikov](http://soshnikov.com)
 
-Framstegen för att bygga det semantiska webben har på något sätt bromsats av framgången för sökmotorer och tekniker för naturlig språkbehandling, som gör det möjligt att extrahera strukturerad data från text. Men inom vissa områden finns det fortfarande betydande ansträngningar för att upprätthålla ontologier och kunskapsbaser. Några projekt värda att nämna:
+Maendeleo ya kujenga Mtandao wa Semantiki yalicheleweshwa kwa kiasi fulani na mafanikio ya injini za utafutaji na mbinu za usindikaji wa lugha asilia, ambazo huruhusu uchimbaji wa data iliyopangwa kutoka kwa maandishi. Hata hivyo, katika baadhi ya maeneo bado kuna juhudi kubwa za kudumisha ontolojia na hifadhidata za maarifa. Miradi michache inayostahili kutajwa:
 
-* [WikiData](https://wikidata.org/) är en samling maskinläsbara kunskapsbaser kopplade till Wikipedia. Det mesta av datan utvinns från Wikipedia *InfoBoxes*, delar av strukturerat innehåll inom Wikipedia-sidor. Du kan [fråga](https://query.wikidata.org/) wikidata i SPARQL, ett specialiserat frågespråk för det semantiska webben. Här är ett exempel på en fråga som visar de mest populära ö
+* [WikiData](https://wikidata.org/) ni mkusanyiko wa hifadhidata za maarifa zinazoweza kusomeka na mashine zinazohusiana na Wikipedia. Data nyingi hutolewa kutoka kwa *InfoBoxes* za Wikipedia, vipande vya maudhui yaliyopangwa ndani ya kurasa za Wikipedia. Unaweza [kuuliza](https://query.wikidata.org/) wikidata kwa kutumia SPARQL, lugha maalum ya maswali kwa Mtandao wa Semantiki. Hapa kuna mfano wa swali linaloonyesha rangi za macho maarufu zaidi miongoni mwa binadamu:
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår på grund av användningen av denna översättning.
+```sparql
+#defaultView:BubbleChart
+SELECT ?eyeColorLabel (COUNT(?human) AS ?count)
+WHERE
+{
+  ?human wdt:P31 wd:Q5.       # human instance-of homo sapiens
+  ?human wdt:P1340 ?eyeColor. # human eye-color ?eyeColor
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+GROUP BY ?eyeColorLabel
+```
+
+* [DBpedia](https://www.dbpedia.org/) ni juhudi nyingine inayofanana na WikiData.
+
+> ✅ Ikiwa unataka kujaribu kujenga ontolojia zako mwenyewe, au kufungua zilizopo, kuna mhariri mzuri wa ontolojia wa kuona unaoitwa [Protégé](https://protege.stanford.edu/). Pakua, au uitumie mtandaoni.
+
+<img src="images/protege.png" width="70%"/>
+
+*Mhariri wa Web Protégé ukiwa wazi na ontolojia ya Familia ya Romanov. Picha na Dmitry Soshnikov*
+
+## ✍️ Zoezi: Ontolojia ya Familia
+
+Tazama [FamilyOntology.ipynb](https://github.com/Ezana135/AI-For-Beginners/blob/main/lessons/2-Symbolic/FamilyOntology.ipynb) kwa mfano wa kutumia mbinu za Mtandao wa Semantiki kufikiri kuhusu mahusiano ya kifamilia. Tutachukua mti wa familia unaowakilishwa katika muundo wa kawaida wa GEDCOM na ontolojia ya mahusiano ya kifamilia na kujenga grafu ya mahusiano yote ya kifamilia kwa seti fulani ya watu.
+
+## Microsoft Concept Graph
+
+Katika hali nyingi, ontolojia huundwa kwa uangalifu kwa mkono. Hata hivyo, inawezekana pia **kuchimba** ontolojia kutoka kwa data isiyo na muundo, kwa mfano, kutoka kwa maandishi ya lugha asilia.
+
+Jaribio moja kama hilo lilifanywa na Microsoft Research, na kusababisha [Microsoft Concept Graph](https://blogs.microsoft.com/ai/microsoft-researchers-release-graph-that-helps-machines-conceptualize/?WT.mc_id=academic-77998-cacaste).
+
+Ni mkusanyiko mkubwa wa vyombo vilivyowekwa pamoja kwa kutumia uhusiano wa urithi wa `is-a`. Inaruhusu kujibu maswali kama "Microsoft ni nini?" - jibu likiwa kitu kama "kampuni kwa uwezekano wa 0.87, na chapa kwa uwezekano wa 0.75".
+
+Grafu inapatikana ama kama REST API, au kama faili kubwa inayoweza kupakuliwa ya maandishi inayoorodhesha jozi zote za vyombo.
+
+## ✍️ Zoezi: Grafu ya Dhana
+
+Jaribu daftari la [MSConceptGraph.ipynb](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/2-Symbolic/MSConceptGraph.ipynb) ili kuona jinsi tunavyoweza kutumia Microsoft Concept Graph kuainisha makala za habari katika kategoria kadhaa.
+
+## Hitimisho
+
+Siku hizi, AI mara nyingi huchukuliwa kuwa sawa na *Machine Learning* au *Neural Networks*. Hata hivyo, binadamu pia huonyesha uwezo wa kufikiri kwa wazi, jambo ambalo kwa sasa halishughulikiwi na mitandao ya neva. Katika miradi halisi ya dunia, kufikiri kwa wazi bado hutumika kutekeleza kazi zinazohitaji maelezo, au uwezo wa kubadilisha tabia ya mfumo kwa njia inayodhibitiwa.
+
+## 🚀 Changamoto
+
+Katika daftari la Ontolojia ya Familia linalohusiana na somo hili, kuna fursa ya kujaribu mahusiano mengine ya kifamilia. Jaribu kugundua miunganisho mipya kati ya watu katika mti wa familia.
+
+## [Jaribio baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/4)
+
+## Mapitio & Kujisomea
+
+Fanya utafiti kwenye mtandao ili kugundua maeneo ambapo binadamu wamejaribu kupima na kuweka maarifa katika mfumo. Angalia Taxonomy ya Bloom, na rudi nyuma kihistoria ili kujifunza jinsi binadamu walivyojaribu kuelewa dunia yao. Chunguza kazi ya Linnaeus ya kuunda mfumo wa viumbe, na angalia jinsi Dmitri Mendeleev alivyounda njia ya kuelezea na kuainisha vipengele vya kemikali. Je, unaweza kupata mifano mingine ya kuvutia?
+
+**Kazi**: [Jenga Ontolojia](assignment.md)
+
+---
+

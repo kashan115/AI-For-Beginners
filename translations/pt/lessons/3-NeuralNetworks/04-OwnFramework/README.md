@@ -1,89 +1,98 @@
-# Introdução às Redes Neurais. Perceptron Multicamadas
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "789d6c3fb6fc7948a470b33078a5983a",
+  "translation_date": "2025-09-23T13:45:03+00:00",
+  "source_file": "lessons/3-NeuralNetworks/04-OwnFramework/README.md",
+  "language_code": "pt"
+}
+-->
+# Introdução às Redes Neuronais. Perceptrão Multicamadas
 
-Na seção anterior, você aprendeu sobre o modelo de rede neural mais simples - o perceptron de uma camada, um modelo de classificação linear de duas classes.
+Na secção anterior, aprendeste sobre o modelo mais simples de rede neuronal - o perceptrão de uma camada, um modelo linear de classificação de duas classes.
 
-Nesta seção, vamos expandir esse modelo para um framework mais flexível, permitindo que possamos:
+Nesta secção, vamos expandir este modelo para um framework mais flexível, permitindo-nos:
 
-* realizar **classificação multi-classe** além da classificação de duas classes
-* resolver **problemas de regressão** além da classificação
+* realizar **classificação de múltiplas classes** além de duas classes
+* resolver **problemas de regressão** além de classificação
 * separar classes que não são linearmente separáveis
 
-Também desenvolveremos nosso próprio framework modular em Python que nos permitirá construir diferentes arquiteturas de redes neurais.
+Também iremos desenvolver o nosso próprio framework modular em Python, que nos permitirá construir diferentes arquiteturas de redes neuronais.
 
-## [Quiz pré-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/104)
+## [Questionário pré-aula](https://ff-quizzes.netlify.app/en/ai/quiz/7)
 
-## Formalização do Aprendizado de Máquina
+## Formalização de Aprendizagem Automática
 
-Vamos começar formalizando o problema do Aprendizado de Máquina. Suponha que temos um conjunto de dados de treinamento **X** com rótulos **Y**, e precisamos construir um modelo *f* que fará as previsões mais precisas. A qualidade das previsões é medida pela **Função de Perda** ℒ. As seguintes funções de perda são frequentemente utilizadas:
+Vamos começar por formalizar o problema de Aprendizagem Automática. Suponhamos que temos um conjunto de dados de treino **X** com etiquetas **Y**, e precisamos construir um modelo *f* que faça previsões o mais precisas possível. A qualidade das previsões é medida pela **função de perda** &lagran;. As seguintes funções de perda são frequentemente utilizadas:
 
-* Para problemas de regressão, quando precisamos prever um número, podemos usar o **erro absoluto** ∑<sub>i</sub>|f(x<sup>(i)</sup>)-y<sup>(i)</sup>|, ou o **erro quadrático** ∑<sub>i</sub>(f(x<sup>(i)</sup>)-y<sup>(i)</sup>)<sup>2</sup>
-* Para classificação, usamos a **perda 0-1** (que é essencialmente a mesma que a **acurácia** do modelo), ou a **perda logística**.
+* Para problemas de regressão, quando precisamos prever um número, podemos usar **erro absoluto** &sum;<sub>i</sub>|f(x<sup>(i)</sup>)-y<sup>(i)</sup>|, ou **erro quadrático** &sum;<sub>i</sub>(f(x<sup>(i)</sup>)-y<sup>(i)</sup>)<sup>2</sup>
+* Para classificação, usamos **perda 0-1** (que é essencialmente o mesmo que **precisão** do modelo), ou **perda logística**.
 
-Para o perceptron de uma camada, a função *f* foi definida como uma função linear *f(x)=wx+b* (aqui *w* é a matriz de pesos, *x* é o vetor de características de entrada, e *b* é o vetor de viés). Para diferentes arquiteturas de redes neurais, essa função pode assumir uma forma mais complexa.
+Para o perceptrão de uma camada, a função *f* foi definida como uma função linear *f(x)=wx+b* (aqui *w* é a matriz de pesos, *x* é o vetor de características de entrada, e *b* é o vetor de bias). Para diferentes arquiteturas de redes neuronais, esta função pode assumir uma forma mais complexa.
 
-> No caso da classificação, muitas vezes é desejável obter probabilidades das classes correspondentes como saída da rede. Para converter números arbitrários em probabilidades (por exemplo, para normalizar a saída), frequentemente usamos a função **softmax** σ, e a função *f* se torna *f(x)=σ(wx+b)*
+> No caso de classificação, é frequentemente desejável obter probabilidades das classes correspondentes como saída da rede. Para converter números arbitrários em probabilidades (por exemplo, para normalizar a saída), usamos frequentemente a função **softmax** &sigma;, e a função *f* torna-se *f(x)=&sigma;(wx+b)*
 
-Na definição de *f* acima, *w* e *b* são chamados de **parâmetros** θ=⟨*w,b*⟩. Dado o conjunto de dados ⟨**X**,**Y**⟩, podemos calcular um erro geral em todo o conjunto de dados como uma função dos parâmetros θ.
+Na definição de *f* acima, *w* e *b* são chamados **parâmetros** &theta;=⟨*w,b*⟩. Dado o conjunto de dados ⟨**X**,**Y**⟩, podemos calcular um erro geral em todo o conjunto de dados como uma função dos parâmetros &theta;.
 
-> ✅ **O objetivo do treinamento da rede neural é minimizar o erro variando os parâmetros θ**
+> ✅ **O objetivo do treino de redes neuronais é minimizar o erro variando os parâmetros &theta;**
 
 ## Otimização por Gradiente Descendente
 
-Há um método bem conhecido de otimização de funções chamado **gradiente descendente**. A ideia é que podemos calcular uma derivada (no caso multi-dimensional chamada **gradiente**) da função de perda em relação aos parâmetros, e variar os parâmetros de tal forma que o erro diminua. Isso pode ser formalizado da seguinte maneira:
+Existe um método bem conhecido de otimização de funções chamado **gradiente descendente**. A ideia é que podemos calcular uma derivada (no caso multidimensional chamada **gradiente**) da função de perda em relação aos parâmetros, e variar os parâmetros de forma que o erro diminua. Isto pode ser formalizado da seguinte forma:
 
-* Inicialize os parâmetros com alguns valores aleatórios w<sup>(0)</sup>, b<sup>(0)</sup>
-* Repita o seguinte passo várias vezes:
-    - w<sup>(i+1)</sup> = w<sup>(i)</sup>-η∂ℒ/∂w
-    - b<sup>(i+1)</sup> = b<sup>(i)</sup>-η∂ℒ/∂b
+* Inicializar os parâmetros com alguns valores aleatórios w<sup>(0)</sup>, b<sup>(0)</sup>
+* Repetir o seguinte passo várias vezes:
+    - w<sup>(i+1)</sup> = w<sup>(i)</sup>-&eta;&part;&lagran;/&part;w
+    - b<sup>(i+1)</sup> = b<sup>(i)</sup>-&eta;&part;&lagran;/&part;b
 
-Durante o treinamento, os passos de otimização devem ser calculados considerando todo o conjunto de dados (lembre-se que a perda é calculada como uma soma em todas as amostras de treinamento). No entanto, na prática, pegamos pequenas porções do conjunto de dados chamadas **minibatches**, e calculamos gradientes com base em um subconjunto de dados. Como o subconjunto é escolhido aleatoriamente a cada vez, esse método é chamado de **gradiente descendente estocástico** (SGD).
+Durante o treino, os passos de otimização devem ser calculados considerando todo o conjunto de dados (lembra-te que a perda é calculada como uma soma através de todas as amostras de treino). No entanto, na prática, usamos pequenas porções do conjunto de dados chamadas **minibatches**, e calculamos os gradientes com base num subconjunto de dados. Como o subconjunto é escolhido aleatoriamente cada vez, tal método é chamado **gradiente descendente estocástico** (SGD).
 
-## Perceptrons Multicamadas e Retropropagação
+## Perceptrões Multicamadas e Retropropagação
 
-A rede de uma camada, como vimos acima, é capaz de classificar classes linearmente separáveis. Para construir um modelo mais rico, podemos combinar várias camadas da rede. Matematicamente, isso significaria que a função *f* teria uma forma mais complexa e seria computada em várias etapas:
+A rede de uma camada, como vimos acima, é capaz de classificar classes linearmente separáveis. Para construir um modelo mais rico, podemos combinar várias camadas da rede. Matematicamente, isso significaria que a função *f* teria uma forma mais complexa e seria calculada em vários passos:
 * z<sub>1</sub>=w<sub>1</sub>x+b<sub>1</sub>
-* z<sub>2</sub>=w<sub>2</sub>α(z<sub>1</sub>)+b<sub>2</sub>
-* f = σ(z<sub>2</sub>)
+* z<sub>2</sub>=w<sub>2</sub>&alpha;(z<sub>1</sub>)+b<sub>2</sub>
+* f = &sigma;(z<sub>2</sub>)
 
-Aqui, α é uma **função de ativação não linear**, σ é uma função softmax, e os parâmetros θ=<*w<sub>1</sub>,b<sub>1</sub>,w<sub>2</sub>,b<sub>2</sub>*>.
+Aqui, &alpha; é uma **função de ativação não linear**, &sigma; é uma função softmax, e os parâmetros &theta;=<*w<sub>1</sub>,b<sub>1</sub>,w<sub>2</sub>,b<sub>2</sub>*>.
 
-O algoritmo de gradiente descendente permaneceria o mesmo, mas seria mais difícil calcular os gradientes. Dada a regra da diferenciação em cadeia, podemos calcular as derivadas como:
+O algoritmo de gradiente descendente permaneceria o mesmo, mas seria mais difícil calcular os gradientes. Dado o princípio da regra da cadeia de diferenciação, podemos calcular as derivadas como:
 
-* ∂ℒ/∂w<sub>2</sub> = (∂ℒ/∂σ)(∂σ/∂z<sub>2</sub>)(∂z<sub>2</sub>/∂w<sub>2</sub>)
-* ∂ℒ/∂w<sub>1</sub> = (∂ℒ/∂σ)(∂σ/∂z<sub>2</sub>)(∂z<sub>2</sub>/∂α)(∂α/∂z<sub>1</sub>)(∂z<sub>1</sub>/∂w<sub>1</sub>)
+* &part;&lagran;/&part;w<sub>2</sub> = (&part;&lagran;/&part;&sigma;)(&part;&sigma;/&part;z<sub>2</sub>)(&part;z<sub>2</sub>/&part;w<sub>2</sub>)
+* &part;&lagran;/&part;w<sub>1</sub> = (&part;&lagran;/&part;&sigma;)(&part;&sigma;/&part;z<sub>2</sub>)(&part;z<sub>2</sub>/&part;&alpha;)(&part;&alpha;/&part;z<sub>1</sub>)(&part;z<sub>1</sub>/&part;w<sub>1</sub>)
 
-> ✅ A regra da diferenciação em cadeia é usada para calcular as derivadas da função de perda em relação aos parâmetros.
+> ✅ A regra da cadeia de diferenciação é usada para calcular as derivadas da função de perda em relação aos parâmetros.
 
-Note que a parte mais à esquerda de todas essas expressões é a mesma, e assim podemos efetivamente calcular as derivadas começando pela função de perda e indo "para trás" através do gráfico computacional. Assim, o método de treinamento de um perceptron multicamadas é chamado de **retropropagação**, ou 'backprop'.
+Nota que a parte mais à esquerda de todas essas expressões é a mesma, e assim podemos calcular eficazmente as derivadas começando pela função de perda e indo "para trás" através do gráfico computacional. Assim, o método de treino de um perceptrão multicamadas é chamado **retropropagação**, ou 'backprop'.
 
-<img alt="gráfico de computação" src="images/ComputeGraphGrad.png"/>
+<img alt="compute graph" src="images/ComputeGraphGrad.png"/>
 
 > TODO: citação da imagem
 
-> ✅ Vamos abordar a retropropagação com muito mais detalhes em nosso exemplo de notebook.
+> ✅ Vamos abordar a retropropagação com muito mais detalhe no nosso exemplo em notebook.  
 
 ## Conclusão
 
-Nesta lição, construímos nossa própria biblioteca de rede neural e a utilizamos para uma tarefa simples de classificação bidimensional.
+Nesta aula, construímos a nossa própria biblioteca de redes neuronais e utilizámo-la para uma tarefa simples de classificação bidimensional.
 
 ## 🚀 Desafio
 
-No notebook acompanhante, você implementará seu próprio framework para construir e treinar perceptrons multicamadas. Você poderá ver em detalhes como as redes neurais modernas operam.
+No notebook que acompanha, vais implementar o teu próprio framework para construir e treinar perceptrões multicamadas. Vais poder ver em detalhe como funcionam as redes neuronais modernas.
 
-Prossiga para o notebook [OwnFramework](../../../../../lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb) e trabalhe nele.
+Segue para o notebook [OwnFramework](OwnFramework.ipynb) e trabalha nele.
 
-## [Quiz pós-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/204)
+## [Questionário pós-aula](https://ff-quizzes.netlify.app/en/ai/quiz/8)
 
-## Revisão e Autoestudo
+## Revisão e Estudo Autónomo
 
-A retropropagação é um algoritmo comum usado em IA e ML, vale a pena estudar [com mais detalhes](https://wikipedia.org/wiki/Backpropagation)
+A retropropagação é um algoritmo comum usado em IA e ML, vale a pena estudar [em mais detalhe](https://wikipedia.org/wiki/Backpropagation)
 
 ## [Tarefa](lab/README.md)
 
-Neste laboratório, você deve usar o framework que construiu nesta lição para resolver a classificação de dígitos manuscritos do MNIST.
+Neste laboratório, és convidado a usar o framework que construíste nesta aula para resolver a classificação de dígitos manuscritos MNIST.
 
 * [Instruções](lab/README.md)
-* [Notebook](../../../../../lessons/3-NeuralNetworks/04-OwnFramework/lab/MyFW_MNIST.ipynb)
+* [Notebook](lab/MyFW_MNIST.ipynb)
 
-**Isenção de responsabilidade**:  
-Este documento foi traduzido utilizando serviços de tradução automática baseados em IA. Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações errôneas decorrentes do uso desta tradução.
+---
+

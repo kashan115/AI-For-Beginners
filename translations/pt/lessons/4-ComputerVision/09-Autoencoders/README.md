@@ -1,100 +1,109 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "1b8d9e1b3a6f1daa864b1ff3dfc3076d",
+  "translation_date": "2025-09-23T13:41:50+00:00",
+  "source_file": "lessons/4-ComputerVision/09-Autoencoders/README.md",
+  "language_code": "pt"
+}
+-->
 # Autoencoders
 
-Ao treinar CNNs, um dos problemas é que precisamos de muitos dados rotulados. No caso da classificação de imagens, precisamos separar as imagens em diferentes classes, o que é um esforço manual.
+Ao treinar redes neuronais convolucionais (CNNs), um dos problemas é que precisamos de muitos dados etiquetados. No caso da classificação de imagens, é necessário separar as imagens em diferentes classes, o que exige esforço manual.
 
-## [Quiz pré-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/109)
+## [Questionário pré-aula](https://ff-quizzes.netlify.app/en/ai/quiz/17)
 
-No entanto, podemos querer usar dados brutos (não rotulados) para treinar extratores de características CNN, o que é chamado de **aprendizado auto-supervisionado**. Em vez de rótulos, usaremos imagens de treinamento como entrada e saída da rede. A ideia principal do **autoencoder** é que teremos uma **rede de codificação** que converte a imagem de entrada em algum **espaço latente** (normalmente é apenas um vetor de um tamanho menor), e então a **rede de decodificação**, cujo objetivo seria reconstruir a imagem original.
+No entanto, podemos querer usar dados brutos (não etiquetados) para treinar extratores de características de CNN, o que é chamado de **aprendizagem auto-supervisionada**. Em vez de etiquetas, utilizamos as imagens de treino como entrada e saída da rede. A ideia principal de um **autoencoder** é que teremos uma **rede codificadora** que converte a imagem de entrada num **espaço latente** (normalmente é apenas um vetor de tamanho reduzido), e uma **rede descodificadora**, cujo objetivo será reconstruir a imagem original.
 
-> ✅ Um [autoencoder](https://wikipedia.org/wiki/Autoencoder) é "um tipo de rede neural artificial usada para aprender codificações eficientes de dados não rotulados."
+> ✅ Um [autoencoder](https://wikipedia.org/wiki/Autoencoder) é "um tipo de rede neuronal artificial usada para aprender codificações eficientes de dados não etiquetados."
 
-Como estamos treinando um autoencoder para capturar o máximo de informações da imagem original possível para uma reconstrução precisa, a rede tenta encontrar a melhor **incorporação** das imagens de entrada para capturar o significado.
+Como estamos a treinar um autoencoder para capturar o máximo de informação possível da imagem original para uma reconstrução precisa, a rede tenta encontrar a melhor **representação** das imagens de entrada para captar o seu significado.
 
-![Diagrama do AutoEncoder](../../../../../translated_images/autoencoder_schema.5e6fc9ad98a5eb6197f3513cf3baf4dfbe1389a6ae74daebda64de9f1c99f142.pt.jpg)
+![Diagrama de Autoencoder](../../../../../translated_images/autoencoder_schema.5e6fc9ad98a5eb6197f3513cf3baf4dfbe1389a6ae74daebda64de9f1c99f142.pt.jpg)
 
-> Imagem do [blog Keras](https://blog.keras.io/building-autoencoders-in-keras.html)
+> Imagem retirada do [blog da Keras](https://blog.keras.io/building-autoencoders-in-keras.html)
 
 ## Cenários para usar Autoencoders
 
-Embora reconstruir imagens originais não pareça útil por si só, existem alguns cenários onde os autoencoders são especialmente úteis:
+Embora a reconstrução de imagens originais possa não parecer útil por si só, existem alguns cenários em que os autoencoders são especialmente úteis:
 
-* **Redução da dimensão das imagens para visualização** ou **treinamento de incorporações de imagem**. Normalmente, os autoencoders apresentam resultados melhores do que PCA, pois levam em consideração a natureza espacial das imagens e características hierárquicas.
-* **Remoção de ruído**, ou seja, eliminar ruído da imagem. Como o ruído carrega muitas informações inúteis, o autoencoder não consegue ajustá-lo todo em um espaço latente relativamente pequeno e, assim, captura apenas a parte importante da imagem. Ao treinar denoisers, começamos com imagens originais e usamos imagens com ruído adicionado artificialmente como entrada para o autoencoder.
-* **Super-resolução**, aumentando a resolução da imagem. Começamos com imagens de alta resolução e usamos a imagem de baixa resolução como entrada do autoencoder.
-* **Modelos generativos**. Uma vez que treinamos o autoencoder, a parte do decodificador pode ser usada para criar novos objetos a partir de vetores latentes aleatórios.
+* **Redução da dimensão de imagens para visualização** ou **treino de representações de imagens**. Normalmente, os autoencoders produzem melhores resultados do que a PCA, porque consideram a natureza espacial das imagens e as características hierárquicas.
+* **Remoção de ruído**, ou seja, eliminar o ruído da imagem. Como o ruído contém muita informação inútil, o autoencoder não consegue encaixar tudo no espaço latente relativamente pequeno, capturando apenas a parte importante da imagem. Ao treinar removedores de ruído, começamos com imagens originais e usamos imagens com ruído artificialmente adicionado como entrada para o autoencoder.
+* **Super-resolução**, ou seja, aumentar a resolução da imagem. Começamos com imagens de alta resolução e usamos imagens de resolução mais baixa como entrada para o autoencoder.
+* **Modelos generativos**. Depois de treinar o autoencoder, a parte descodificadora pode ser usada para criar novos objetos a partir de vetores latentes aleatórios.
 
 ## Autoencoders Variacionais (VAE)
 
-Autoencoders tradicionais reduzem a dimensão dos dados de entrada de alguma forma, identificando as características importantes das imagens de entrada. No entanto, vetores latentes muitas vezes não fazem muito sentido. Em outras palavras, tomando o conjunto de dados MNIST como exemplo, descobrir quais dígitos correspondem a diferentes vetores latentes não é uma tarefa fácil, porque vetores latentes próximos não necessariamente correspondem aos mesmos dígitos.
+Os autoencoders tradicionais reduzem a dimensão dos dados de entrada de alguma forma, identificando as características importantes das imagens de entrada. No entanto, os vetores latentes muitas vezes não fazem muito sentido. Por outras palavras, usando o conjunto de dados MNIST como exemplo, identificar quais dígitos correspondem a diferentes vetores latentes não é uma tarefa fácil, porque vetores latentes próximos não correspondem necessariamente aos mesmos dígitos.
 
-Por outro lado, para treinar modelos *generativos*, é melhor ter algum entendimento do espaço latente. Essa ideia nos leva ao **autoencoder variacional** (VAE).
+Por outro lado, para treinar modelos *generativos*, é melhor ter algum entendimento do espaço latente. Esta ideia leva-nos ao **autoencoder variacional** (VAE).
 
-VAE é o autoencoder que aprende a prever a *distribuição estatística* dos parâmetros latentes, chamada de **distribuição latente**. Por exemplo, podemos querer que os vetores latentes sejam distribuídos normalmente com uma média z<sub>mean</sub> e desvio padrão z<sub>sigma</sub> (tanto a média quanto o desvio padrão são vetores de alguma dimensionalidade d). O codificador no VAE aprende a prever esses parâmetros, e então o decodificador pega um vetor aleatório dessa distribuição para reconstruir o objeto.
+O VAE é um autoencoder que aprende a prever a *distribuição estatística* dos parâmetros latentes, chamada de **distribuição latente**. Por exemplo, podemos querer que os vetores latentes sejam distribuídos normalmente com uma média z<sub>mean</sub> e um desvio padrão z<sub>sigma</sub> (tanto a média quanto o desvio padrão são vetores de alguma dimensionalidade d). O codificador no VAE aprende a prever esses parâmetros, e o descodificador utiliza um vetor aleatório dessa distribuição para reconstruir o objeto.
 
-Para resumir:
+Resumindo:
 
- * A partir do vetor de entrada, prevemos `z_mean` e `z_log_sigma` (em vez de prever o desvio padrão em si, prevemos seu logaritmo)
+ * A partir do vetor de entrada, prevemos `z_mean` e `z_log_sigma` (em vez de prever o desvio padrão diretamente, prevemos o seu logaritmo)
  * Amostramos um vetor `sample` da distribuição N(z<sub>mean</sub>,exp(z<sub>log\_sigma</sub>))
- * O decodificador tenta decodificar a imagem original usando `sample` como vetor de entrada
+ * O descodificador tenta reconstruir a imagem original usando `sample` como vetor de entrada
 
  <img src="images/vae.png" width="50%">
 
-> Imagem do [este post no blog](https://ijdykeman.github.io/ml/2016/12/21/cvae.html) de Isaak Dykeman
+> Imagem retirada deste [artigo](https://ijdykeman.github.io/ml/2016/12/21/cvae.html) por Isaak Dykeman
 
-Autoencoders variacionais usam uma função de perda complexa que consiste em duas partes:
+Os autoencoders variacionais utilizam uma função de perda complexa composta por duas partes:
 
-* **Perda de reconstrução** é a função de perda que mostra quão próxima uma imagem reconstruída está do alvo (pode ser o Erro Quadrático Médio, ou MSE). É a mesma função de perda que em autoencoders normais.
-* **Perda KL**, que garante que as distribuições das variáveis latentes permaneçam próximas à distribuição normal. É baseada na noção de [divergência de Kullback-Leibler](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained) - uma métrica para estimar quão semelhantes são duas distribuições estatísticas.
+* **Perda de reconstrução**, que é a função de perda que indica quão próxima a imagem reconstruída está do alvo (pode ser o Erro Quadrático Médio, ou MSE). É a mesma função de perda usada em autoencoders normais.
+* **Perda KL**, que garante que as distribuições das variáveis latentes permaneçam próximas da distribuição normal. Baseia-se no conceito de [divergência de Kullback-Leibler](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained) - uma métrica para estimar a semelhança entre duas distribuições estatísticas.
 
-Uma vantagem importante dos VAEs é que eles nos permitem gerar novas imagens relativamente facilmente, porque sabemos de qual distribuição amostrar vetores latentes. Por exemplo, se treinarmos um VAE com vetor latente 2D no MNIST, podemos então variar os componentes do vetor latente para obter diferentes dígitos:
+Uma vantagem importante dos VAEs é que permitem gerar novas imagens de forma relativamente fácil, porque sabemos de qual distribuição amostrar os vetores latentes. Por exemplo, se treinarmos um VAE com um vetor latente 2D no MNIST, podemos variar os componentes do vetor latente para obter diferentes dígitos:
 
 <img alt="vaemnist" src="images/vaemnist.png" width="50%"/>
 
-> Imagem de [Dmitry Soshnikov](http://soshnikov.com)
+> Imagem por [Dmitry Soshnikov](http://soshnikov.com)
 
-Observe como as imagens se misturam umas às outras, à medida que começamos a obter vetores latentes de diferentes porções do espaço de parâmetros latentes. Também podemos visualizar esse espaço em 2D:
+Observe como as imagens se fundem umas nas outras, à medida que começamos a obter vetores latentes de diferentes partes do espaço de parâmetros latentes. Também podemos visualizar este espaço em 2D:
 
-<img alt="cluster vaemnist" src="images/vaemnist-diag.png" width="50%"/> 
+<img alt="vaemnist cluster" src="images/vaemnist-diag.png" width="50%"/> 
 
-> Imagem de [Dmitry Soshnikov](http://soshnikov.com)
+> Imagem por [Dmitry Soshnikov](http://soshnikov.com)
 
 ## ✍️ Exercícios: Autoencoders
 
-Saiba mais sobre autoencoders nestes cadernos correspondentes:
+Saiba mais sobre autoencoders nestes notebooks correspondentes:
 
-* [Autoencoders em TensorFlow](../../../../../lessons/4-ComputerVision/09-Autoencoders/AutoencodersTF.ipynb)
-* [Autoencoders em PyTorch](../../../../../lessons/4-ComputerVision/09-Autoencoders/AutoEncodersPyTorch.ipynb)
+* [Autoencoders em TensorFlow](AutoencodersTF.ipynb)
+* [Autoencoders em PyTorch](AutoEncodersPyTorch.ipynb)
 
 ## Propriedades dos Autoencoders
 
-* **Específico para dados** - eles funcionam bem apenas com o tipo de imagens para as quais foram treinados. Por exemplo, se treinarmos uma rede de super-resolução em flores, ela não funcionará bem em retratos. Isso ocorre porque a rede pode produzir uma imagem de maior resolução ao captar detalhes finos das características aprendidas a partir do conjunto de dados de treinamento.
-* **Com perdas** - a imagem reconstruída não é a mesma que a imagem original. A natureza da perda é definida pela *função de perda* usada durante o treinamento.
-* Funciona com **dados não rotulados**.
+* **Específicos aos Dados** - funcionam bem apenas com o tipo de imagens em que foram treinados. Por exemplo, se treinarmos uma rede de super-resolução em flores, ela não funcionará bem em retratos. Isto acontece porque a rede pode produzir imagens de maior resolução ao extrair detalhes finos das características aprendidas no conjunto de dados de treino.
+* **Com perdas** - a imagem reconstruída não é exatamente igual à imagem original. A natureza da perda é definida pela *função de perda* usada durante o treino.
+* Funciona com **dados não etiquetados**
 
-## [Quiz pós-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/209)
+## [Questionário pós-aula](https://ff-quizzes.netlify.app/en/ai/quiz/18)
 
 ## Conclusão
 
-Nesta lição, você aprendeu sobre os vários tipos de autoencoders disponíveis para o cientista de IA. Você aprendeu como construí-los e como usá-los para reconstruir imagens. Você também aprendeu sobre o VAE e como usá-lo para gerar novas imagens.
+Nesta lição, aprendeste sobre os vários tipos de autoencoders disponíveis para o cientista de IA. Aprendeste como construí-los e como usá-los para reconstruir imagens. Também aprendeste sobre o VAE e como usá-lo para gerar novas imagens.
 
 ## 🚀 Desafio
 
-Nesta lição, você aprendeu sobre o uso de autoencoders para imagens. Mas eles também podem ser usados para música! Confira o projeto [MusicVAE](https://magenta.tensorflow.org/music-vae) do projeto Magenta, que usa autoencoders para aprender a reconstruir música. Faça alguns [experimentos](https://colab.research.google.com/github/magenta/magenta-demos/blob/master/colab-notebooks/Multitrack_MusicVAE.ipynb) com esta biblioteca para ver o que você pode criar.
+Nesta lição, aprendeste sobre o uso de autoencoders para imagens. Mas eles também podem ser usados para música! Explora o projeto [MusicVAE](https://magenta.tensorflow.org/music-vae) do Magenta, que utiliza autoencoders para aprender a reconstruir música. Faz algumas [experiências](https://colab.research.google.com/github/magenta/magenta-demos/blob/master/colab-notebooks/Multitrack_MusicVAE.ipynb) com esta biblioteca para ver o que consegues criar.
 
-## [Quiz pós-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/208)
+## [Questionário pós-aula](https://ff-quizzes.netlify.app/en/ai/quiz/16)
 
-## Revisão & Autoestudo
+## Revisão e Autoestudo
 
-Para referência, leia mais sobre autoencoders nestes recursos:
+Para referência, lê mais sobre autoencoders nestes recursos:
 
 * [Construindo Autoencoders em Keras](https://blog.keras.io/building-autoencoders-in-keras.html)
-* [Post no blog sobre NeuroHive](https://neurohive.io/ru/osnovy-data-science/variacionnyj-avtojenkoder-vae/)
+* [Artigo no NeuroHive](https://neurohive.io/ru/osnovy-data-science/variacionnyj-avtojenkoder-vae/)
 * [Autoencoders Variacionais Explicados](https://kvfrans.com/variational-autoencoders-explained/)
 * [Autoencoders Variacionais Condicionais](https://ijdykeman.github.io/ml/2016/12/21/cvae.html)
 
 ## Tarefa
 
-No final de [este caderno usando TensorFlow](../../../../../lessons/4-ComputerVision/09-Autoencoders/AutoencodersTF.ipynb), você encontrará uma 'tarefa' - use isso como sua tarefa.
+No final deste [notebook usando TensorFlow](AutoencodersTF.ipynb), encontrarás uma 'tarefa' - usa-a como tua tarefa.
 
-**Isenção de responsabilidade**:  
-Este documento foi traduzido utilizando serviços de tradução automática baseados em IA. Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em sua língua nativa deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional por um humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas decorrentes do uso desta tradução.
+---
+

@@ -1,68 +1,77 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "b708c9b85b833864c73c6281f1e6b96e",
+  "translation_date": "2025-09-23T08:36:23+00:00",
+  "source_file": "lessons/5-NLP/14-Embeddings/README.md",
+  "language_code": "it"
+}
+-->
 # Embeddings
 
-## [Pre-lecture quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/114)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/27)
 
-Cuando entrenamos clasificadores basados en BoW o TF/IDF, trabajamos con vectores de bolsa de palabras de alta dimensión con una longitud de `vocab_size`, y estábamos convirtiendo explícitamente vectores de representación posicional de baja dimensión en una representación dispersa de one-hot. Sin embargo, esta representación one-hot no es eficiente en términos de memoria. Además, cada palabra se trata de manera independiente, es decir, los vectores codificados one-hot no expresan ninguna similitud semántica entre las palabras.
+Quando si allenano classificatori basati su BoW o TF/IDF, abbiamo lavorato su vettori bag-of-words ad alta dimensionalità con lunghezza `vocab_size`, e stavamo esplicitamente convertendo da vettori di rappresentazione posizionale a bassa dimensionalità in rappresentazioni sparse one-hot. Tuttavia, questa rappresentazione one-hot non è efficiente in termini di memoria. Inoltre, ogni parola viene trattata indipendentemente dalle altre, ovvero i vettori codificati one-hot non esprimono alcuna somiglianza semantica tra le parole.
 
-La idea de **embedding** es representar palabras mediante vectores densos de menor dimensión, que de alguna manera reflejan el significado semántico de una palabra. Más adelante discutiremos cómo construir embeddings significativos, pero por ahora pensemos en los embeddings como una forma de reducir la dimensionalidad de un vector de palabras.
+L'idea di **embedding** è rappresentare le parole con vettori densi a bassa dimensionalità, che in qualche modo riflettano il significato semantico di una parola. Più avanti discuteremo come costruire embedding di parole significativi, ma per ora pensiamo agli embedding come a un modo per ridurre la dimensionalità di un vettore di parole.
 
-Así que, la capa de embedding tomaría una palabra como entrada y produciría un vector de salida de tamaño especificado `embedding_size`. En cierto sentido, es muy similar a una capa `Linear`, pero en lugar de tomar un vector codificado one-hot, podrá tomar un número de palabra como entrada, lo que nos permite evitar la creación de grandes vectores codificados one-hot.
+Quindi, il livello di embedding prenderebbe una parola come input e produrrebbe un vettore di output di dimensione specificata `embedding_size`. In un certo senso, è molto simile a un livello `Linear`, ma invece di prendere un vettore codificato one-hot, sarà in grado di prendere un numero di parola come input, permettendoci di evitare di creare grandi vettori codificati one-hot.
 
-Al usar una capa de embedding como primera capa en nuestra red de clasificador, podemos cambiar de un modelo de bolsa de palabras a un modelo de **embedding bag**, donde primero convertimos cada palabra en nuestro texto en su correspondiente embedding y luego calculamos alguna función agregada sobre todos esos embeddings, como `sum`, `average` o `max`.
+Utilizzando un livello di embedding come primo livello nella nostra rete di classificazione, possiamo passare da un modello bag-of-words a un modello **embedding bag**, dove prima convertiamo ogni parola nel nostro testo nel corrispondente embedding, e poi calcoliamo una funzione aggregata su tutti questi embedding, come `sum`, `average` o `max`.  
 
-![Imagen que muestra un clasificador de embedding para cinco palabras en secuencia.](../../../../../translated_images/embedding-classifier-example.b77f021a7ee67eeec8e68bfe11636c5b97d6eaa067515a129bfb1d0034b1ac5b.it.png)
+![Immagine che mostra un classificatore embedding per cinque parole di una sequenza.](../../../../../translated_images/embedding-classifier-example.b77f021a7ee67eeec8e68bfe11636c5b97d6eaa067515a129bfb1d0034b1ac5b.it.png)
 
-> Imagen del autor
+> Immagine dell'autore
 
-## ✍️ Ejercicios: Embeddings
+## ✍️ Esercizi: Embeddings
 
-Continúa tu aprendizaje en los siguientes cuadernos:
-* [Embeddings con PyTorch](../../../../../lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb)
-* [Embeddings TensorFlow](../../../../../lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb)
+Continua il tuo apprendimento nei seguenti notebook:
+* [Embeddings con PyTorch](EmbeddingsPyTorch.ipynb)
+* [Embeddings con TensorFlow](EmbeddingsTF.ipynb)
 
-## Embeddings Semánticos: Word2Vec
+## Embeddings Semantici: Word2Vec
 
-Mientras que la capa de embedding aprendió a mapear palabras a representaciones vectoriales, esta representación no necesariamente tenía mucho significado semántico. Sería ideal aprender una representación vectorial de tal manera que palabras similares o sinónimos correspondan a vectores que están cerca unos de otros en términos de alguna distancia vectorial (por ejemplo, distancia euclidiana).
+Sebbene il livello di embedding abbia imparato a mappare le parole in rappresentazioni vettoriali, questa rappresentazione non necessariamente ha un significato semantico. Sarebbe utile imparare una rappresentazione vettoriale tale che parole simili o sinonimi corrispondano a vettori vicini tra loro in termini di una certa distanza vettoriale (ad esempio, distanza euclidea).
 
-Para lograrlo, necesitamos preentrenar nuestro modelo de embedding en una gran colección de texto de una manera específica. Una forma de entrenar embeddings semánticos se llama [Word2Vec](https://en.wikipedia.org/wiki/Word2vec). Se basa en dos arquitecturas principales que se utilizan para producir una representación distribuida de palabras:
+Per fare ciò, dobbiamo pre-addestrare il nostro modello di embedding su una grande raccolta di testi in un modo specifico. Un metodo per allenare embedding semantici si chiama [Word2Vec](https://en.wikipedia.org/wiki/Word2vec). Si basa su due principali architetture utilizzate per produrre una rappresentazione distribuita delle parole:
 
- - **Bolsa de palabras continua** (CBoW) — en esta arquitectura, entrenamos el modelo para predecir una palabra a partir del contexto circundante. Dado el ngrama $(W_{-2},W_{-1},W_0,W_1,W_2)$, el objetivo del modelo es predecir $W_0$ a partir de $(W_{-2},W_{-1},W_1,W_2)$.
- - **Skip-gram continuo** es lo opuesto a CBoW. El modelo utiliza una ventana de palabras de contexto circundante para predecir la palabra actual.
+ - **Continuous bag-of-words** (CBoW) — in questa architettura, alleniamo il modello a prevedere una parola dal contesto circostante. Dato l'ngram $(W_{-2},W_{-1},W_0,W_1,W_2)$, l'obiettivo del modello è prevedere $W_0$ da $(W_{-2},W_{-1},W_1,W_2)$.
+ - **Continuous skip-gram** è l'opposto di CBoW. Il modello utilizza la finestra di contesto circostante per prevedere la parola corrente.
 
-CBoW es más rápido, mientras que skip-gram es más lento, pero hace un mejor trabajo representando palabras poco frecuentes.
+CBoW è più veloce, mentre skip-gram è più lento, ma rappresenta meglio le parole meno frequenti.
 
-![Imagen que muestra ambos algoritmos CBoW y Skip-Gram para convertir palabras en vectores.](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.it.png)
+![Immagine che mostra gli algoritmi CBoW e Skip-Gram per convertire parole in vettori.](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.it.png)
 
-> Imagen de [este artículo](https://arxiv.org/pdf/1301.3781.pdf)
+> Immagine tratta da [questo articolo](https://arxiv.org/pdf/1301.3781.pdf)
 
-Los embeddings preentrenados de Word2Vec (así como otros modelos similares, como GloVe) también se pueden usar en lugar de la capa de embedding en redes neuronales. Sin embargo, necesitamos lidiar con los vocabularios, porque el vocabulario utilizado para preentrenar Word2Vec/GloVe probablemente difiera del vocabulario en nuestro corpus de texto. Echa un vistazo a los cuadernos anteriores para ver cómo se puede resolver este problema.
+Gli embedding pre-addestrati di Word2Vec (così come altri modelli simili, come GloVe) possono anche essere utilizzati al posto del livello di embedding nelle reti neurali. Tuttavia, dobbiamo gestire i vocabolari, poiché il vocabolario utilizzato per pre-addestrare Word2Vec/GloVe probabilmente differisce dal vocabolario nel nostro corpus di testo. Dai un'occhiata ai notebook sopra per vedere come risolvere questo problema.
 
-## Embeddings Contextuales
+## Embeddings Contestuali
 
-Una limitación clave de las representaciones de embedding preentrenadas tradicionales como Word2Vec es el problema de la desambiguación del sentido de la palabra. Aunque los embeddings preentrenados pueden capturar parte del significado de las palabras en contexto, cada posible significado de una palabra se codifica en el mismo embedding. Esto puede causar problemas en modelos posteriores, ya que muchas palabras, como la palabra 'play', tienen diferentes significados dependiendo del contexto en el que se utilizan.
+Una limitazione chiave delle rappresentazioni di embedding pre-addestrate tradizionali come Word2Vec è il problema della disambiguazione del senso delle parole. Sebbene gli embedding pre-addestrati possano catturare parte del significato delle parole nel contesto, ogni possibile significato di una parola è codificato nello stesso embedding. Questo può causare problemi nei modelli a valle, poiché molte parole, come la parola 'play', hanno significati diversi a seconda del contesto in cui vengono utilizzate.
 
-Por ejemplo, la palabra 'play' en estas dos oraciones diferentes tiene un significado bastante distinto:
+Ad esempio, la parola 'play' in queste due frasi ha significati piuttosto diversi:
 
-- Fui a una **obra** en el teatro.
-- John quiere **jugar** con sus amigos.
+- Sono andato a vedere una **commedia** a teatro.
+- John vuole **giocare** con i suoi amici.
 
-Los embeddings preentrenados anteriores representan ambos significados de la palabra 'play' en el mismo embedding. Para superar esta limitación, necesitamos construir embeddings basados en un **modelo de lenguaje**, que se entrena en un gran corpus de texto y *sabe* cómo se pueden combinar las palabras en diferentes contextos. Discutir los embeddings contextuales está fuera del alcance de este tutorial, pero volveremos a ellos al hablar sobre modelos de lenguaje más adelante en el curso.
+Gli embedding pre-addestrati sopra rappresentano entrambi i significati della parola 'play' nello stesso embedding. Per superare questa limitazione, dobbiamo costruire embedding basati sul **modello linguistico**, che è addestrato su un grande corpus di testo e *sa* come le parole possono essere messe insieme in contesti diversi. Discutere gli embedding contestuali è fuori dal campo di questo tutorial, ma torneremo su di essi quando parleremo di modelli linguistici più avanti nel corso.
 
-## Conclusión
+## Conclusione
 
-En esta lección, descubriste cómo construir y usar capas de embedding en TensorFlow y Pytorch para reflejar mejor los significados semánticos de las palabras.
+In questa lezione, hai scoperto come costruire e utilizzare livelli di embedding in TensorFlow e Pytorch per riflettere meglio i significati semantici delle parole.
 
-## 🚀 Desafío
+## 🚀 Sfida
 
-Word2Vec se ha utilizado para algunas aplicaciones interesantes, incluyendo la generación de letras de canciones y poesía. Echa un vistazo a [este artículo](https://www.politetype.com/blog/word2vec-color-poems) que explica cómo el autor utilizó Word2Vec para generar poesía. También mira [este video de Dan Shiffmann](https://www.youtube.com/watch?v=LSS_bos_TPI&ab_channel=TheCodingTrain) para descubrir una explicación diferente de esta técnica. Luego intenta aplicar estas técnicas a tu propio corpus de texto, quizás obtenido de Kaggle.
+Word2Vec è stato utilizzato per alcune applicazioni interessanti, tra cui la generazione di testi di canzoni e poesie. Dai un'occhiata a [questo articolo](https://www.politetype.com/blog/word2vec-color-poems) che spiega come l'autore ha utilizzato Word2Vec per generare poesie. Guarda anche [questo video di Dan Shiffmann](https://www.youtube.com/watch?v=LSS_bos_TPI&ab_channel=TheCodingTrain) per scoprire una spiegazione diversa di questa tecnica. Poi prova ad applicare queste tecniche al tuo corpus di testo, magari preso da Kaggle.
 
-## [Post-lecture quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/214)
+## [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/28)
 
-## Revisión y Autoestudio
+## Revisione & Studio Autonomo
 
-Lee este artículo sobre Word2Vec: [Estimación Eficiente de Representaciones de Palabras en Espacio Vectorial](https://arxiv.org/pdf/1301.3781.pdf)
+Leggi questo articolo su Word2Vec: [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf)
 
-## [Asignación: Cuadernos](assignment.md)
+## [Compito: Notebook](assignment.md)
 
-**Disclaimer**:  
-This document has been translated using machine-based AI translation services. While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+---
+

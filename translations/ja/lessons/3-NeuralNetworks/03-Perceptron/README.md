@@ -1,52 +1,61 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "c34cbba802058b6fa267e1a294d4e510",
+  "translation_date": "2025-09-23T13:12:40+00:00",
+  "source_file": "lessons/3-NeuralNetworks/03-Perceptron/README.md",
+  "language_code": "ja"
+}
+-->
 # ニューラルネットワーク入門: パーセプトロン
 
-## [講義前クイズ](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/103)
+## [講義前クイズ](https://ff-quizzes.netlify.app/en/ai/quiz/5)
 
-現代のニューラルネットワークに類似したものを実装する最初の試みの一つは、1957年にコーネル航空宇宙研究所のフランク・ローゼンブラットによって行われました。これは「Mark-1」と呼ばれるハードウェア実装で、三角形、四角形、円などの原始的な幾何学的図形を認識するために設計されました。
+現代のニューラルネットワークに似たものを初めて実装しようとした試みは、1957年にコーネル航空研究所のフランク・ローゼンブラットによって行われました。それは「Mark-1」と呼ばれるハードウェア実装で、三角形、四角形、円などの原始的な幾何学的図形を認識するよう設計されていました。
 
 |      |      |
 |--------------|-----------|
 |<img src='images/Rosenblatt-wikipedia.jpg' alt='フランク・ローゼンブラット'/> | <img src='images/Mark_I_perceptron_wikipedia.jpg' alt='Mark 1 パーセプトロン' />|
 
-> 画像は [ウィキペディア](https://en.wikipedia.org/wiki/Perceptron) より引用
+> 画像は[Wikipedia](https://en.wikipedia.org/wiki/Perceptron)より
 
-入力画像は20x20のフォトセルアレイによって表現され、ニューラルネットワークは400の入力と1つのバイナリ出力を持っていました。シンプルなネットワークには1つのニューロン、つまり**しきい値論理ユニット**が含まれていました。ニューラルネットワークの重みは、学習フェーズ中に手動で調整する必要があるポテンショメータのように機能しました。
+入力画像は20x20のフォトセル配列で表され、ニューラルネットワークには400の入力と1つの二値出力がありました。単純なネットワークは1つのニューロン、つまり**閾値論理ユニット**を含んでいました。ニューラルネットワークの重みはポテンショメータのように機能し、トレーニングフェーズ中に手動で調整する必要がありました。
 
-> ✅ ポテンショメータは、回路の抵抗を調整することを可能にするデバイスです。
+> ✅ ポテンショメータは、回路の抵抗を調整できる装置です。
 
-> ニューヨークタイムズは当時パーセプトロンについて次のように書きました: *[海軍]が期待する電子コンピュータの胚で、歩き、話し、見え、書き、自らを再生し、その存在を意識することができる。*
+> 当時のニューヨーク・タイムズはパーセプトロンについて次のように書いています: *海軍が期待する電子コンピュータの胚であり、それは歩き、話し、見て、書き、自己複製し、自分の存在を意識することができるようになるだろう。*
 
 ## パーセプトロンモデル
 
-モデルにNの特徴があると仮定すると、入力ベクトルはサイズNのベクトルになります。パーセプトロンは**バイナリ分類**モデルであり、つまり2つのクラスの入力データを区別することができます。各入力ベクトルxに対して、パーセプトロンの出力はクラスに応じて+1または-1であると仮定します。出力は次の式を使って計算されます。
+モデルにN個の特徴があると仮定すると、入力ベクトルはサイズNのベクトルになります。パーセプトロンは**二値分類**モデルであり、入力データの2つのクラスを区別することができます。各入力ベクトルxに対して、パーセプトロンの出力はクラスに応じて+1または-1になります。出力は次の式で計算されます:
 
 y(x) = f(w<sup>T</sup>x)
 
-ここで、fはステップ活性化関数です。
+ここでfはステップ活性化関数です。
 
 <!-- img src="http://www.sciweavers.org/tex2img.php?eq=f%28x%29%20%3D%20%5Cbegin%7Bcases%7D%0A%20%20%20%20%20%20%20%20%20%2B1%20%26%20x%20%5Cgeq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20-1%20%26%20x%20%3C%200%0A%20%20%20%20%20%20%20%5Cend%7Bcases%7D%20%5C%5C%0A&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="f(x) = \begin{cases} +1 & x \geq 0 \\ -1 & x < 0 \end{cases} \\" width="154" height="50" / -->
 <img src="images/activation-func.png"/>
 
-## パーセプトロンの訓練
+## パーセプトロンのトレーニング
 
-パーセプトロンを訓練するには、ほとんどの値を正しく分類する重みベクトルwを見つける必要があります。つまり、最小の**誤差**を生じさせる必要があります。この誤差Eは、次のように**パーセプトロン基準**によって定義されます。
+パーセプトロンをトレーニングするには、ほとんどの値を正しく分類する重みベクトルwを見つける必要があります。つまり、**誤差**を最小化する必要があります。この誤差Eは、**パーセプトロン基準**によって次のように定義されます:
 
-E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
+E(w) = -&sum;w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
 ここで:
 
-* 合計は誤分類を引き起こすトレーニングデータポイントiに対して取られます
-* x<sub>i</sub>は入力データで、t<sub>i</sub>は負の例に対して-1、正の例に対して+1です。
+* 和は誤分類を引き起こすトレーニングデータポイントiに対して取られます。
+* x<sub>i</sub>は入力データであり、t<sub>i</sub>は負の例と正の例に応じてそれぞれ-1または+1です。
 
-この基準は重みwの関数と見なされ、最小化する必要があります。多くの場合、**勾配降下法**と呼ばれる手法が使用され、初期重みw<sup>(0)</sup>から始めて、各ステップで次の式に従って重みを更新します。
+この基準は重みwの関数とみなされ、これを最小化する必要があります。しばしば**勾配降下法**と呼ばれる方法が使用されます。この方法では、初期重みw<sup>(0)</sup>から始め、各ステップで次の式に従って重みを更新します:
 
-w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
+w<sup>(t+1)</sup> = w<sup>(t)</sup> - &eta;&nabla;E(w)
 
-ここでηは**学習率**と呼ばれ、∇E(w)はEの**勾配**を示します。勾配を計算した後、次のようになります。
+ここで&eta;は**学習率**と呼ばれ、&nabla;E(w)はEの**勾配**を表します。勾配を計算した後、次の式になります:
 
-w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
+w<sup>(t+1)</sup> = w<sup>(t)</sup> + &sum;&eta;x<sub>i</sub>t<sub>i</sub>
 
-Pythonでのアルゴリズムは次のようになります。
+Pythonでのアルゴリズムは次のようになります:
 
 ```python
 def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
@@ -70,26 +79,26 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
 
 ## 結論
 
-このレッスンでは、バイナリ分類モデルであるパーセプトロンについて学び、重みベクトルを使用してそれを訓練する方法について学びました。
+このレッスンでは、二値分類モデルであるパーセプトロンについて学び、重みベクトルを使用してトレーニングする方法を学びました。
 
 ## 🚀 チャレンジ
 
-自分自身のパーセプトロンを構築してみたい場合は、[Microsoft Learnのこのラボ](https://docs.microsoft.com/en-us/azure/machine-learning/component-reference/two-class-averaged-perceptron?WT.mc_id=academic-77998-cacaste)を試してみてください。これは[Azure MLデザイナー](https://docs.microsoft.com/en-us/azure/machine-learning/concept-designer?WT.mc_id=academic-77998-cacaste)を使用しています。
+自分でパーセプトロンを構築してみたい場合は、[Microsoft Learnのこのラボ](https://docs.microsoft.com/en-us/azure/machine-learning/component-reference/two-class-averaged-perceptron?WT.mc_id=academic-77998-cacaste)を試してみてください。このラボでは[Azure MLデザイナー](https://docs.microsoft.com/en-us/azure/machine-learning/concept-designer?WT.mc_id=academic-77998-cacaste)を使用します。
 
-## [講義後クイズ](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/203)
+## [講義後クイズ](https://ff-quizzes.netlify.app/en/ai/quiz/6)
 
 ## 復習と自己学習
 
-パーセプトロンを使っておもちゃの問題や実際の問題を解決する方法を学び続けるには、[Perceptron](../../../../../lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb)ノートブックに進んでください。
+パーセプトロンを使用しておもちゃの問題や実際の問題を解決する方法を確認し、学習を続けるには、[Perceptron](Perceptron.ipynb)ノートブックに進んでください。
 
-また、興味深い[パーセプトロンに関する記事](https://towardsdatascience.com/what-is-a-perceptron-basics-of-neural-networks-c4cfea20c590)もあります。
+こちらも興味深い[パーセプトロンに関する記事](https://towardsdatascience.com/what-is-a-perceptron-basics-of-neural-networks-c4cfea20c590)です。
 
 ## [課題](lab/README.md)
 
-このレッスンでは、バイナリ分類タスクのためにパーセプトロンを実装し、2つの手書き数字を分類するために使用しました。このラボでは、与えられた画像に最も関連する数字を特定するという形で、数字分類の問題を完全に解決するよう求められます。
+このレッスンでは、二値分類タスクのためのパーセプトロンを実装し、2つの手書き数字を分類するために使用しました。このラボでは、数字分類の問題を完全に解決することが求められます。つまり、与えられた画像に最も対応する数字を特定する必要があります。
 
 * [指示](lab/README.md)
-* [ノートブック](../../../../../lessons/3-NeuralNetworks/03-Perceptron/lab/PerceptronMultiClass.ipynb)
+* [ノートブック](lab/PerceptronMultiClass.ipynb)
 
-**免責事項**:  
-この文書は、機械ベースのAI翻訳サービスを使用して翻訳されています。正確性を追求していますが、自動翻訳にはエラーや不正確さが含まれる可能性があることにご留意ください。原文のネイティブ言語の文書が権威ある情報源と見なされるべきです。重要な情報については、専門の人間翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当社は一切の責任を負いません。
+---
+

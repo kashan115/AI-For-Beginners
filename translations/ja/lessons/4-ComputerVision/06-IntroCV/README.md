@@ -1,31 +1,40 @@
-# コンピュータビジョン入門
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "feeca98225cb420afc89415f24f63d92",
+  "translation_date": "2025-09-23T13:07:28+00:00",
+  "source_file": "lessons/4-ComputerVision/06-IntroCV/README.md",
+  "language_code": "ja"
+}
+-->
+# コンピュータビジョンの概要
 
-[コンピュータビジョン](https://wikipedia.org/wiki/Computer_vision)は、コンピュータがデジタル画像を高レベルで理解できるようにすることを目的とした分野です。これは非常に広い定義であり、*理解*は多くの異なる意味を持つことができます。例えば、画像内の物体を見つけること（**物体検出**）、何が起こっているかを理解すること（**イベント検出**）、画像をテキストで説明すること、またはシーンを3Dで再構築することなどが含まれます。また、人間の画像に関連する特別なタスクもあります。例えば、年齢や感情の推定、顔の検出と識別、3Dポーズ推定などです。
+[コンピュータビジョン](https://wikipedia.org/wiki/Computer_vision)は、コンピュータがデジタル画像を高レベルで理解できるようにすることを目的とした分野です。この定義は非常に広範であり、*理解*には多くの意味が含まれます。例えば、画像内の物体を見つける（**物体検出**）、何が起きているかを理解する（**イベント検出**）、画像をテキストで説明する、または3Dでシーンを再構築することなどです。さらに、人間の画像に関連する特別なタスクもあります。例えば、年齢や感情の推定、顔の検出と識別、3Dポーズ推定などです。
 
-## [講義前クイズ](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/106)
+## [講義前のクイズ](https://ff-quizzes.netlify.app/en/ai/quiz/11)
 
-コンピュータビジョンの最も簡単なタスクの一つは**画像分類**です。
+コンピュータビジョンの最も基本的なタスクの一つは**画像分類**です。
 
-コンピュータビジョンは、しばしばAIの一分野と考えられています。現在、コンピュータビジョンのタスクのほとんどはニューラルネットワークを使用して解決されています。このセクションでは、コンピュータビジョンに使用される特別なタイプのニューラルネットワークである[畳み込みニューラルネットワーク](../07-ConvNets/README.md)について詳しく学んでいきます。
+コンピュータビジョンはしばしばAIの一分野と見なされます。現在では、ほとんどのコンピュータビジョンのタスクはニューラルネットワークを使用して解決されています。このセクションでは、コンピュータビジョンに使用される特別なタイプのニューラルネットワークである[畳み込みニューラルネットワーク](../07-ConvNets/README.md)について学びます。
 
-しかし、画像をニューラルネットワークに渡す前に、多くの場合、画像を強化するためにいくつかのアルゴリズム的手法を使用することが理にかなっています。
+ただし、画像をニューラルネットワークに渡す前に、多くの場合、アルゴリズム的な手法を使用して画像を改善することが理にかなっています。
 
 画像処理に利用できるPythonライブラリはいくつかあります：
 
-* **[imageio](https://imageio.readthedocs.io/en/stable/)** は、さまざまな画像フォーマットの読み書きに使用できます。また、動画フレームを画像に変換するための便利なツールであるffmpegもサポートしています。
-* **[Pillow](https://pillow.readthedocs.io/en/stable/index.html)**（PILとしても知られています）は、もう少し強力で、モーフィングやパレット調整などの画像操作もサポートしています。
-* **[OpenCV](https://opencv.org/)** は、C++で書かれた強力な画像処理ライブラリで、画像処理の*事実上の*標準となっています。便利なPythonインターフェースもあります。
-* **[dlib](http://dlib.net/)** は、多くの機械学習アルゴリズムを実装したC++ライブラリで、コンピュータビジョンアルゴリズムのいくつかも含まれています。Pythonインターフェースもあり、顔や顔のランドマーク検出などの難しいタスクにも使用できます。
+* **[imageio](https://imageio.readthedocs.io/en/stable/)** は、さまざまな画像フォーマットの読み書きに使用できます。また、ffmpegをサポートしており、ビデオフレームを画像に変換する便利なツールです。
+* **[Pillow](https://pillow.readthedocs.io/en/stable/index.html)**（PILとしても知られる）は、より強力で、モーフィングやパレット調整などの画像操作もサポートしています。
+* **[OpenCV](https://opencv.org/)** はC++で書かれた強力な画像処理ライブラリで、画像処理の*事実上の標準*となっています。Pythonインターフェースも便利です。
+* **[dlib](http://dlib.net/)** は、多くの機械学習アルゴリズムを実装したC++ライブラリで、コンピュータビジョンアルゴリズムも含まれています。Pythonインターフェースもあり、顔や顔のランドマーク検出などの難しいタスクに使用できます。
 
 ## OpenCV
 
-[OpenCV](https://opencv.org/)は、画像処理の*事実上の*標準と見なされています。多くの便利なアルゴリズムがC++で実装されています。PythonからもOpenCVを呼び出すことができます。
+[OpenCV](https://opencv.org/)は画像処理の*事実上の標準*とされています。C++で実装された多くの便利なアルゴリズムが含まれています。PythonからもOpenCVを呼び出すことができます。
 
-OpenCVを学ぶのに良い場所は[このLearn OpenCVコース](https://learnopencv.com/getting-started-with-opencv/)です。私たちのカリキュラムでは、OpenCVを学ぶことが目的ではなく、どのように使用できるかのいくつかの例を示すことが目標です。
+OpenCVを学ぶのに良い場所は[このLearn OpenCVコース](https://learnopencv.com/getting-started-with-opencv/)です。このカリキュラムでは、OpenCVを学ぶことが目的ではなく、使用例とその方法を示すことが目的です。
 
 ### 画像の読み込み
 
-Pythonでは、画像をNumPy配列で便利に表現できます。例えば、320x200ピクセルのグレースケール画像は200x320の配列に格納され、同じ寸法のカラ―画像は200x320x3の形状を持ちます（3つのカラーチャンネル用）。画像を読み込むには、次のコードを使用できます：
+Pythonでは画像をNumPy配列で便利に表現できます。例えば、320x200ピクセルのグレースケール画像は200x320の配列に保存され、同じサイズのカラー画像は200x320x3（3つのカラーチャンネル）という形状になります。画像を読み込むには、以下のコードを使用します：
 
 ```python
 import cv2
@@ -35,78 +44,78 @@ im = cv2.imread('image.jpeg')
 plt.imshow(im)
 ```
 
-伝統的に、OpenCVはカラ―画像にBGR（青-緑-赤）エンコーディングを使用していますが、他のPythonツールはより伝統的なRGB（赤-緑-青）を使用します。画像を正しく表示するためには、NumPy配列内の次元を入れ替えるか、OpenCVの関数を呼び出してRGBカラースペースに変換する必要があります：
+伝統的に、OpenCVはカラー画像にBGR（青-緑-赤）エンコーディングを使用しますが、Pythonの他のツールはより一般的なRGB（赤-緑-青）を使用します。画像を正しく表示するには、NumPy配列の次元を入れ替えるか、OpenCV関数を呼び出してRGBカラースペースに変換する必要があります：
 
 ```python
 im = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)
 ```
 
-同じ `cvtColor` function can be used to perform other color space transformations such as converting an image to grayscale or to the HSV (Hue-Saturation-Value) color space.
+同じ`cvtColor`関数を使用して、画像をグレースケールやHSV（色相-彩度-明度）カラースペースに変換することもできます。
 
-You can also use OpenCV to load video frame-by-frame - an example is given in the exercise [OpenCV Notebook](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb).
+OpenCVを使用してビデオをフレームごとに読み込むことも可能です。例は[OpenCV Notebook](OpenCV.ipynb)の演習で示されています。
 
-### Image Processing
+### 画像処理
 
-Before feeding an image to a neural network, you may want to apply several pre-processing steps. OpenCV can do many things, including:
+画像をニューラルネットワークに渡す前に、いくつかの前処理ステップを適用することが望ましい場合があります。OpenCVは以下のような多くのことが可能です：
 
-* **Resizing** the image using `im = cv2.resize(im, (320,200),interpolation=cv2.INTER_LANCZOS)`
-* **Blurring** the image using `im = cv2.medianBlur(im,3)` or `im = cv2.GaussianBlur(im, (3,3), 0)`
-* Changing the **brightness and contrast** of the image can be done by NumPy array manipulations, as described [in this Stackoverflow note](https://stackoverflow.com/questions/39308030/how-do-i-increase-the-contrast-of-an-image-in-python-opencv).
-* Using [thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) by calling `cv2.threshold`/`cv2.adaptiveThreshold` 関数は、明るさやコントラストを調整するよりも好まれることがよくあります。
+* `im = cv2.resize(im, (320,200),interpolation=cv2.INTER_LANCZOS)`を使用して画像を**リサイズ**する
+* `im = cv2.medianBlur(im,3)`または`im = cv2.GaussianBlur(im, (3,3), 0)`を使用して画像を**ぼかす**
+* 画像の**明るさとコントラスト**を変更するには、NumPy配列操作を使用します。[このStackoverflowのノート](https://stackoverflow.com/questions/39308030/how-do-i-increase-the-contrast-of-an-image-in-python-opencv)で説明されています。
+* `cv2.threshold`/`cv2.adaptiveThreshold`関数を呼び出して[閾値処理](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html)を使用することは、明るさやコントラストを調整するよりも好ましい場合があります。
 * 画像にさまざまな[変換](https://docs.opencv.org/4.5.5/da/d6e/tutorial_py_geometric_transformations.html)を適用する：
-    - **[アフィン変換](https://docs.opencv.org/4.5.5/d4/d61/tutorial_warp_affine.html)** は、画像に回転、リサイズ、歪みを組み合わせる必要があり、画像内の3点のソースとデスティネーションの位置を知っている場合に便利です。アフィン変換は平行線を平行に保ちます。
-    - **[透視変換](https://medium.com/analytics-vidhya/opencv-perspective-transformation-9edffefb2143)** は、画像内の4点のソースとデスティネーションの位置を知っている場合に便利です。たとえば、スマートフォンカメラで角度をつけて長方形の文書の写真を撮り、その文書自体の長方形の画像を作成したい場合などです。
-* **[光学フロー](https://docs.opencv.org/4.5.5/d4/dee/tutorial_optical_flow.html)** を使用して画像内の動きを理解すること。
+    - **[アフィン変換](https://docs.opencv.org/4.5.5/d4/d61/tutorial_warp_affine.html)** は、画像の回転、リサイズ、傾きを組み合わせる必要があり、画像内の3点のソースと目的地の位置が分かっている場合に便利です。アフィン変換は平行線を平行に保ちます。
+    - **[透視変換](https://medium.com/analytics-vidhya/opencv-perspective-transformation-9edffefb2143)** は、画像内の4点のソースと目的地の位置が分かっている場合に便利です。例えば、スマートフォンのカメラで角度をつけて長方形の文書を撮影し、その文書自体の長方形画像を作成したい場合などです。
+* **[オプティカルフロー](https://docs.opencv.org/4.5.5/d4/dee/tutorial_optical_flow.html)** を使用して画像内の動きを理解する。
 
 ## コンピュータビジョンの使用例
 
-私たちの[OpenCVノートブック](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)では、コンピュータビジョンが特定のタスクを実行するためにどのように使用できるかのいくつかの例を示します：
+[OpenCV Notebook](OpenCV.ipynb)では、コンピュータビジョンを使用して特定のタスクを実行する例をいくつか示しています：
 
-* **点字本の写真の前処理**。私たちは、しきい値処理、特徴検出、透視変換、NumPy操作を使用して、ニューラルネットワークによるさらなる分類のために個々の点字記号を分離する方法に焦点を当てています。
+* **点字本の写真の前処理**。閾値処理、特徴検出、透視変換、NumPy操作を使用して、個々の点字記号を分離し、ニューラルネットワークによる分類に備える方法に焦点を当てています。
 
-![Braille Image](../../../../../translated_images/braille.341962ff76b1bd7044409371d3de09ced5028132aef97344ea4b7468c1208126.ja.jpeg) | ![Braille Image Pre-processed](../../../../../translated_images/braille-result.46530fea020b03c76aac532d7d6eeef7f6fb35b55b1001cd21627907dabef3ed.ja.png) | ![Braille Symbols](../../../../../translated_images/braille-symbols.0159185ab69d533909dc4d7d26a1971b51401c6a80eb3a5584f250ea880af88b.ja.png)
+![点字画像](../../../../../translated_images/braille.341962ff76b1bd7044409371d3de09ced5028132aef97344ea4b7468c1208126.ja.jpeg) | ![前処理された点字画像](../../../../../translated_images/braille-result.46530fea020b03c76aac532d7d6eeef7f6fb35b55b1001cd21627907dabef3ed.ja.png) | ![点字記号](../../../../../translated_images/braille-symbols.0159185ab69d533909dc4d7d26a1971b51401c6a80eb3a5584f250ea880af88b.ja.png)
 ----|-----|-----
 
-> 画像は[OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)からのものです。
+> 画像は[OpenCV.ipynb](OpenCV.ipynb)から引用
 
-* **フレーム差を使用した動画の動きの検出**。カメラが固定されている場合、カメラフィードからのフレームはお互いに非常に似ているはずです。フレームは配列として表されるため、2つの連続するフレームの配列を単純に引き算することで、ピクセルの差分が得られます。静止フレームではこの差分は低く、画像に substantial な動きがあると高くなります。
+* **フレーム差分を使用したビデオ内の動きの検出**。カメラが固定されている場合、カメラフィードのフレームは互いに非常に似ているはずです。フレームが配列として表現されているため、2つの連続するフレームの配列を引き算するだけでピクセル差分が得られます。静的なフレームでは差分は低く、画像内に大きな動きがあると差分が高くなります。
 
-![Image of video frames and frame differences](../../../../../translated_images/frame-difference.706f805491a0883c938e16447bf5eb2f7d69e812c7f743cbe7d7c7645168f81f.ja.png)
+![ビデオフレームとフレーム差分の画像](../../../../../translated_images/frame-difference.706f805491a0883c938e16447bf5eb2f7d69e812c7f743cbe7d7c7645168f81f.ja.png)
 
-> 画像は[OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)からのものです。
+> 画像は[OpenCV.ipynb](OpenCV.ipynb)から引用
 
-* **光学フローを使用した動きの検出**。[光学フロー](https://docs.opencv.org/3.4/d4/dee/tutorial_optical_flow.html)を使用すると、動画フレーム上の個々のピクセルがどのように動くかを理解できます。光学フローには2つのタイプがあります：
+* **オプティカルフローを使用した動きの検出**。[オプティカルフロー](https://docs.opencv.org/3.4/d4/dee/tutorial_optical_flow.html)を使用すると、ビデオフレーム上の個々のピクセルがどのように移動するかを理解できます。オプティカルフローには2種類あります：
 
-   - **密な光学フロー**は、各ピクセルがどこに移動しているかを示すベクトルフィールドを計算します。
-   - **疎な光学フロー**は、画像内のいくつかの特徴（例えば、エッジ）を取り、それらの軌跡をフレームからフレームへと構築することに基づいています。
+   - **密なオプティカルフロー**は、各ピクセルがどこに移動しているかを示すベクトルフィールドを計算します。
+   - **疎なオプティカルフロー**は、画像内の特徴的な部分（例：エッジ）を取り、それらのフレーム間の軌跡を構築します。
 
-![Image of Optical Flow](../../../../../translated_images/optical.1f4a94464579a83a10784f3c07fe7228514714b96782edf50e70ccd59d2d8c4f.ja.png)
+![オプティカルフローの画像](../../../../../translated_images/optical.1f4a94464579a83a10784f3c07fe7228514714b96782edf50e70ccd59d2d8c4f.ja.png)
 
-> 画像は[OpenCV.ipynb](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)からのものです。
+> 画像は[OpenCV.ipynb](OpenCV.ipynb)から引用
 
-## ✍️ 例ノートブック：OpenCV [OpenCVを実際に試してみる](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)
+## ✍️ 実例ノートブック: OpenCV [OpenCV in Actionを試す](OpenCV.ipynb)
 
-[OpenCVノートブック](../../../../../lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)を探求して、OpenCVを使った実験を行いましょう。
+[OpenCV Notebook](OpenCV.ipynb)を探索して、OpenCVを使った実験をしてみましょう。
 
 ## 結論
 
-時には、動きの検出や指先の検出といった比較的複雑なタスクが純粋にコンピュータビジョンによって解決できることがあります。そのため、コンピュータビジョンの基本的な技術や、OpenCVのようなライブラリができることを知っておくことは非常に役立ちます。
+動きの検出や指先の検出など、比較的複雑なタスクがコンピュータビジョンだけで解決できる場合があります。そのため、コンピュータビジョンの基本的な技術やOpenCVのようなライブラリが何をできるかを知っておくことは非常に役立ちます。
 
 ## 🚀 チャレンジ
 
-AIショーの[このビデオ](https://docs.microsoft.com/shows/ai-show/ai-show--2021-opencv-ai-competition--grand-prize-winners--cortic-tigers--episode-32?WT.mc_id=academic-77998-cacaste)を見て、Cortic Tigersプロジェクトについて学び、ロボットを通じてコンピュータビジョンタスクを民主化するためのブロックベースのソリューションをどのように構築したかを学んでください。この分野に新しい学習者を迎え入れるのを助ける他のプロジェクトについて調査してみてください。
+AIショーの[このビデオ](https://docs.microsoft.com/shows/ai-show/ai-show--2021-opencv-ai-competition--grand-prize-winners--cortic-tigers--episode-32?WT.mc_id=academic-77998-cacaste)を視聴して、Cortic Tigersプロジェクトについて学び、彼らがロボットを通じてコンピュータビジョンタスクを民主化するブロックベースのソリューションをどのように構築したかを確認してください。この分野への新しい学習者を導入する他のプロジェクトについても調査してみてください。
 
-## [講義後クイズ](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/206)
+## [講義後のクイズ](https://ff-quizzes.netlify.app/en/ai/quiz/12)
 
 ## レビューと自己学習
 
-光学フローについては、[この素晴らしいチュートリアル](https://learnopencv.com/optical-flow-in-opencv/)でさらに学んでください。
+[この素晴らしいチュートリアル](https://learnopencv.com/optical-flow-in-opencv/)でオプティカルフローについてさらに学びましょう。
 
 ## [課題](lab/README.md)
 
-このラボでは、シンプルなジェスチャーでビデオを撮影し、光学フローを使用して上下左右の動きを抽出することが目標です。
+このラボでは、簡単なジェスチャーを含むビデオを撮影し、オプティカルフローを使用して上下左右の動きを抽出することを目指します。
 
-<img src="images/palm-movement.png" width="30%" alt="Palm Movement Frame"/>
+<img src="images/palm-movement.png" width="30%" alt="手の動きフレーム"/>
 
-**免責事項**:  
-この文書は、機械ベースのAI翻訳サービスを使用して翻訳されています。正確性を追求していますが、自動翻訳には誤りや不正確さが含まれる可能性があることをご承知おきください。元の文書は、その母国語での権威ある情報源と見なされるべきです。重要な情報については、専門の人間翻訳を推奨します。この翻訳の使用から生じる誤解や誤訳について、当社は責任を負いません。
+---
+

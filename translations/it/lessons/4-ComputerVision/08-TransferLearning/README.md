@@ -1,80 +1,90 @@
-# Redes Neurais Pré-treinadas e Aprendizado por Transferência
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "178c0b5ee5395733eb18aec51e71a0a9",
+  "translation_date": "2025-09-23T08:28:42+00:00",
+  "source_file": "lessons/4-ComputerVision/08-TransferLearning/README.md",
+  "language_code": "it"
+}
+-->
+# Reti Pre-addestrate e Transfer Learning
 
-Treinar CNNs pode levar muito tempo, e uma grande quantidade de dados é necessária para essa tarefa. No entanto, muito do tempo é gasto aprendendo os melhores filtros de baixo nível que uma rede pode usar para extrair padrões de imagens. Surge uma pergunta natural: podemos usar uma rede neural treinada em um conjunto de dados e adaptá-la para classificar diferentes imagens sem precisar de um processo completo de treinamento?
+Addestrare le CNN può richiedere molto tempo e una grande quantità di dati. Tuttavia, gran parte del tempo viene speso per imparare i migliori filtri di basso livello che una rete può utilizzare per estrarre schemi dalle immagini. Sorge una domanda naturale: possiamo utilizzare una rete neurale addestrata su un dataset e adattarla per classificare immagini diverse senza dover eseguire un processo di addestramento completo?
 
-## [Quiz pré-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/108)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/15)
 
-Essa abordagem é chamada de **aprendizado por transferência**, porque transferimos algum conhecimento de um modelo de rede neural para outro. No aprendizado por transferência, normalmente começamos com um modelo pré-treinado, que foi treinado em um grande conjunto de dados de imagens, como o **ImageNet**. Esses modelos já conseguem extrair diferentes características de imagens genéricas, e em muitos casos, simplesmente construir um classificador em cima dessas características extraídas pode resultar em um bom desempenho.
+Questo approccio si chiama **transfer learning**, perché trasferiamo alcune conoscenze da un modello di rete neurale a un altro. Nel transfer learning, di solito si parte da un modello pre-addestrato, che è stato addestrato su un grande dataset di immagini, come **ImageNet**. Questi modelli sono già in grado di estrarre diverse caratteristiche da immagini generiche, e in molti casi costruire semplicemente un classificatore sopra queste caratteristiche estratte può portare a buoni risultati.
 
-> ✅ Aprendizado por Transferência é um termo que você encontra em outros campos acadêmicos, como Educação. Refere-se ao processo de levar conhecimento de um domínio e aplicá-lo a outro.
+> ✅ Il Transfer Learning è un termine che si trova anche in altri campi accademici, come l'Educazione. Si riferisce al processo di trasferire conoscenze da un dominio e applicarle a un altro.
 
-## Modelos Pré-treinados como Extratores de Recursos
+## Modelli Pre-addestrati come Estrattori di Caratteristiche
 
-As redes convolucionais que discutimos na seção anterior continham várias camadas, cada uma delas destinada a extrair algumas características da imagem, começando por combinações de pixels de baixo nível (como linhas ou traços horizontais/verticais), até combinações de características de nível mais alto, correspondendo a coisas como o olho de uma chama. Se treinarmos uma CNN em um conjunto de dados suficientemente grande de imagens genéricas e diversas, a rede deve aprender a extrair essas características comuns.
+Le reti convoluzionali di cui abbiamo parlato nella sezione precedente contengono un certo numero di livelli, ciascuno dei quali è progettato per estrarre caratteristiche dall'immagine, partendo da combinazioni di pixel di basso livello (come linee orizzontali/verticali o tratti), fino a combinazioni di caratteristiche di livello superiore, corrispondenti a elementi come un occhio o una fiamma. Se addestriamo una CNN su un dataset sufficientemente grande di immagini generiche e diversificate, la rete dovrebbe imparare a estrarre queste caratteristiche comuni.
 
-Tanto o Keras quanto o PyTorch contêm funções para carregar facilmente os pesos de redes neurais pré-treinadas para algumas arquiteturas comuns, a maioria das quais foi treinada em imagens do ImageNet. Os mais utilizados estão descritos na página de [Arquiteturas de CNN](../07-ConvNets/CNN_Architectures.md) da aula anterior. Em particular, você pode considerar usar uma das seguintes:
+Sia Keras che PyTorch contengono funzioni per caricare facilmente i pesi di reti neurali pre-addestrate per alcune architetture comuni, la maggior parte delle quali è stata addestrata su immagini di ImageNet. Le più utilizzate sono descritte nella pagina [Architetture CNN](../07-ConvNets/CNN_Architectures.md) della lezione precedente. In particolare, potresti considerare di utilizzare una delle seguenti:
 
-* **VGG-16/VGG-19**, que são modelos relativamente simples, mas ainda oferecem boa precisão. Muitas vezes, usar o VGG como uma primeira tentativa é uma boa escolha para ver como o aprendizado por transferência funciona.
-* **ResNet** é uma família de modelos proposta pela Microsoft Research em 2015. Eles têm mais camadas e, portanto, consomem mais recursos.
-* **MobileNet** é uma família de modelos com tamanho reduzido, adequada para dispositivos móveis. Use-os se você tiver poucos recursos e puder sacrificar um pouco de precisão.
+* **VGG-16/VGG-19**, che sono modelli relativamente semplici ma che offrono comunque una buona accuratezza. Spesso utilizzare VGG come primo tentativo è una buona scelta per vedere come funziona il transfer learning.
+* **ResNet**, una famiglia di modelli proposta da Microsoft Research nel 2015. Hanno più livelli e quindi richiedono più risorse.
+* **MobileNet**, una famiglia di modelli con dimensioni ridotte, adatti per dispositivi mobili. Usali se hai risorse limitate e puoi sacrificare un po' di accuratezza.
 
-Aqui estão exemplos de características extraídas de uma imagem de um gato pela rede VGG-16:
+Ecco alcune caratteristiche estratte da un'immagine di un gatto dalla rete VGG-16:
 
-![Características extraídas pela VGG-16](../../../../../translated_images/features.6291f9c7ba3a0b951af88fc9864632b9115365410765680680d30c927dd67354.it.png)
+![Caratteristiche estratte da VGG-16](../../../../../translated_images/features.6291f9c7ba3a0b951af88fc9864632b9115365410765680680d30c927dd67354.it.png)
 
-## Conjunto de Dados de Gatos vs. Cachorros
+## Dataset Gatti vs. Cani
 
-Neste exemplo, usaremos um conjunto de dados de [Gatos e Cachorros](https://www.microsoft.com/download/details.aspx?id=54765&WT.mc_id=academic-77998-cacaste), que é muito próximo de um cenário real de classificação de imagens.
+In questo esempio, utilizzeremo un dataset di [Gatti e Cani](https://www.microsoft.com/download/details.aspx?id=54765&WT.mc_id=academic-77998-cacaste), che è molto vicino a uno scenario reale di classificazione di immagini.
 
-## ✍️ Exercício: Aprendizado por Transferência
+## ✍️ Esercizio: Transfer Learning
 
-Vamos ver o aprendizado por transferência em ação nos cadernos correspondentes:
+Vediamo il transfer learning in azione nei notebook corrispondenti:
 
-* [Aprendizado por Transferência - PyTorch](../../../../../lessons/4-ComputerVision/08-TransferLearning/TransferLearningPyTorch.ipynb)
-* [Aprendizado por Transferência - TensorFlow](../../../../../lessons/4-ComputerVision/08-TransferLearning/TransferLearningTF.ipynb)
+* [Transfer Learning - PyTorch](TransferLearningPyTorch.ipynb)
+* [Transfer Learning - TensorFlow](TransferLearningTF.ipynb)
 
-## Visualizando o Gato Adversarial
+## Visualizzare il Gatto Avversario
 
-Uma rede neural pré-treinada contém diferentes padrões dentro de seu *cérebro*, incluindo noções de **gato ideal** (assim como cachorro ideal, zebra ideal, etc.). Seria interessante de alguma forma **visualizar essa imagem**. No entanto, isso não é simples, pois os padrões estão espalhados por todo o peso da rede e também organizados em uma estrutura hierárquica.
+Una rete neurale pre-addestrata contiene diversi schemi all'interno del suo *cervello*, inclusi concetti di **gatto ideale** (così come cane ideale, zebra ideale, ecc.). Sarebbe interessante in qualche modo **visualizzare questa immagine**. Tuttavia, non è semplice, perché gli schemi sono distribuiti in tutti i pesi della rete e organizzati in una struttura gerarchica.
 
-Uma abordagem que podemos adotar é começar com uma imagem aleatória e, em seguida, tentar usar a técnica de **otimização por gradiente** para ajustar essa imagem de tal forma que a rede comece a pensar que é um gato.
+Un approccio che possiamo adottare è partire da un'immagine casuale e poi cercare di utilizzare la tecnica di **ottimizzazione con discesa del gradiente** per modificare quell'immagine in modo tale che la rete inizi a pensare che sia un gatto.
 
-![Loop de Otimização de Imagem](../../../../../translated_images/ideal-cat-loop.999fbb8ff306e044f997032f4eef9152b453e6a990e449bbfb107de2493cc37e.it.png)
+![Ciclo di Ottimizzazione dell'Immagine](../../../../../translated_images/ideal-cat-loop.999fbb8ff306e044f997032f4eef9152b453e6a990e449bbfb107de2493cc37e.it.png)
 
-No entanto, se fizermos isso, receberemos algo muito semelhante a um ruído aleatório. Isso ocorre porque *existem muitas maneiras de fazer a rede pensar que a imagem de entrada é um gato*, incluindo algumas que não fazem sentido visualmente. Embora essas imagens contenham muitos padrões típicos de um gato, não há nada que as restrinja a serem visualmente distintas.
+Tuttavia, se facciamo questo, otterremo qualcosa di molto simile a un rumore casuale. Questo perché *ci sono molti modi per far pensare alla rete che l'immagine di input sia un gatto*, inclusi alcuni che non hanno senso visivamente. Sebbene queste immagini contengano molti schemi tipici di un gatto, non c'è nulla che le vincoli a essere visivamente distintive.
 
-Para melhorar o resultado, podemos adicionar outro termo à função de perda, que é chamado de **perda de variação**. É uma métrica que mostra quão semelhantes são os pixels vizinhos da imagem. Minimizar a perda de variação torna a imagem mais suave e elimina o ruído, revelando assim padrões visualmente mais atraentes. Aqui está um exemplo de tais imagens "ideais", que são classificadas como gato e como zebra com alta probabilidade:
+Per migliorare il risultato, possiamo aggiungere un altro termine alla funzione di perdita, chiamato **variation loss**. È una metrica che mostra quanto sono simili i pixel vicini dell'immagine. Minimizzare la variation loss rende l'immagine più liscia e elimina il rumore, rivelando così schemi più visivamente piacevoli. Ecco un esempio di queste immagini "ideali", classificate come gatto e zebra con alta probabilità:
 
-![Gato Ideal](../../../../../translated_images/ideal-cat.203dd4597643d6b0bd73038b87f9c0464322725e3a06ab145d25d4a861c70592.it.png) | ![Zebra Ideal](../../../../../translated_images/ideal-zebra.7f70e8b54ee15a7a314000bb5df38a6cfe086ea04d60df4d3ef313d046b98a2b.it.png)
+![Gatto Ideale](../../../../../translated_images/ideal-cat.203dd4597643d6b0bd73038b87f9c0464322725e3a06ab145d25d4a861c70592.it.png) | ![Zebra Ideale](../../../../../translated_images/ideal-zebra.7f70e8b54ee15a7a314000bb5df38a6cfe086ea04d60df4d3ef313d046b98a2b.it.png)
 -----|-----
- *Gato Ideal* | *Zebra Ideal*
+ *Gatto Ideale* | *Zebra Ideale*
 
-Uma abordagem semelhante pode ser usada para realizar os chamados **ataques adversariais** em uma rede neural. Suponha que queremos enganar uma rede neural e fazer um cachorro parecer um gato. Se pegarmos a imagem de um cachorro, que é reconhecida por uma rede como um cachorro, podemos então ajustá-la um pouco usando a otimização por gradiente, até que a rede comece a classificá-la como um gato:
+Un approccio simile può essere utilizzato per eseguire i cosiddetti **attacchi avversari** su una rete neurale. Supponiamo di voler ingannare una rete neurale e far sembrare un cane un gatto. Se prendiamo l'immagine di un cane, che è riconosciuta dalla rete come un cane, possiamo modificarla leggermente utilizzando l'ottimizzazione con discesa del gradiente, fino a quando la rete inizia a classificarla come un gatto:
 
-![Imagem de um Cachorro](../../../../../translated_images/original-dog.8f68a67d2fe0911f33041c0f7fce8aa4ea919f9d3917ec4b468298522aeb6356.it.png) | ![Imagem de um cachorro classificado como gato](../../../../../translated_images/adversarial-dog.d9fc7773b0142b89752539bfbf884118de845b3851c5162146ea0b8809fc820f.it.png)
+![Immagine di un Cane](../../../../../translated_images/original-dog.8f68a67d2fe0911f33041c0f7fce8aa4ea919f9d3917ec4b468298522aeb6356.it.png) | ![Immagine di un cane classificata come gatto](../../../../../translated_images/adversarial-dog.d9fc7773b0142b89752539bfbf884118de845b3851c5162146ea0b8809fc820f.it.png)
 -----|-----
-*Imagem original de um cachorro* | *Imagem de um cachorro classificado como gato*
+*Immagine originale di un cane* | *Immagine di un cane classificata come gatto*
 
-Veja o código para reproduzir os resultados acima no seguinte caderno:
+Consulta il codice per riprodurre i risultati sopra nel seguente notebook:
 
-* [Gato Ideal e Adversarial - TensorFlow](../../../../../lessons/4-ComputerVision/08-TransferLearning/AdversarialCat_TF.ipynb)
-## Conclusão
+* [Gatto Ideale e Avversario - TensorFlow](AdversarialCat_TF.ipynb)
 
-Usando o aprendizado por transferência, você consegue montar rapidamente um classificador para uma tarefa de classificação de objetos personalizados e alcançar alta precisão. Você pode ver que tarefas mais complexas que estamos resolvendo agora exigem maior poder computacional e não podem ser facilmente resolvidas na CPU. Na próxima unidade, tentaremos usar uma implementação mais leve para treinar o mesmo modelo usando recursos computacionais menores, o que resulta em uma precisão apenas ligeiramente inferior.
+## Conclusione
 
-## 🚀 Desafio
+Utilizzando il transfer learning, puoi rapidamente mettere insieme un classificatore per un compito di classificazione di oggetti personalizzato e ottenere un'alta accuratezza. Puoi vedere che i compiti più complessi che stiamo risolvendo ora richiedono una maggiore potenza computazionale e non possono essere facilmente risolti sulla CPU. Nell'unità successiva, proveremo a utilizzare un'implementazione più leggera per addestrare lo stesso modello utilizzando risorse computazionali inferiori, con una riduzione minima dell'accuratezza.
 
-Nos cadernos acompanhados, há notas no final sobre como o conhecimento transferido funciona melhor com dados de treinamento um tanto semelhantes (um novo tipo de animal, talvez). Faça algumas experimentações com tipos de imagens completamente novos para ver quão bem ou mal seus modelos de conhecimento transferido se comportam.
+## 🚀 Sfida
 
-## [Quiz pós-aula](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/208)
+Nei notebook allegati, ci sono note in fondo su come il trasferimento di conoscenze funzioni meglio con dati di addestramento relativamente simili (ad esempio, un nuovo tipo di animale). Fai qualche esperimento con tipi di immagini completamente nuovi per vedere quanto bene o male funzionano i tuoi modelli di trasferimento di conoscenze.
 
-## Revisão e Autoestudo
+## [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/16)
 
-Leia [TrainingTricks.md](TrainingTricks.md) para aprofundar seu conhecimento sobre algumas outras maneiras de treinar seus modelos.
+## Revisione e Studio Autonomo
 
-## [Tarefa](lab/README.md)
+Leggi [TrainingTricks.md](TrainingTricks.md) per approfondire la tua conoscenza di altri modi per addestrare i tuoi modelli.
 
-Neste laboratório, usaremos um conjunto de dados de pets da [Oxford-IIIT](https://www.robots.ox.ac.uk/~vgg/data/pets/) com 35 raças de gatos e cachorros, e construiremos um classificador de aprendizado por transferência.
+## [Compito](lab/README.md)
 
-**Disclaimer**:  
-This document has been translated using machine-based AI translation services. While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+In questo laboratorio, utilizzeremo il dataset reale [Oxford-IIIT](https://www.robots.ox.ac.uk/~vgg/data/pets/) di animali domestici con 35 razze di gatti e cani, e costruiremo un classificatore di transfer learning.
+
+---
+

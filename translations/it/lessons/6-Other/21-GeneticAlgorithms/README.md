@@ -1,80 +1,89 @@
-# Algoritmos Genéticos
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "6bbd632dfe6c62e5f66bb51fd78c174a",
+  "translation_date": "2025-09-23T08:26:43+00:00",
+  "source_file": "lessons/6-Other/21-GeneticAlgorithms/README.md",
+  "language_code": "it"
+}
+-->
+# Algoritmi Genetici
 
-## [Cuestionario previo a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/121)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/41)
 
-Los **Algoritmos Genéticos** (GA) se basan en un **enfoque evolutivo** para la IA, en el que se utilizan métodos de evolución de una población para obtener una solución óptima a un problema dado. Fueron propuestos en 1975 por [John Henry Holland](https://wikipedia.org/wiki/John_Henry_Holland).
+Gli **Algoritmi Genetici** (GA) si basano su un **approccio evolutivo** all'IA, in cui vengono utilizzati metodi di evoluzione di una popolazione per ottenere una soluzione ottimale per un determinato problema. Furono proposti nel 1975 da [John Henry Holland](https://wikipedia.org/wiki/John_Henry_Holland).
 
-Los Algoritmos Genéticos se fundamentan en las siguientes ideas:
+Gli Algoritmi Genetici si basano sulle seguenti idee:
 
-* Las soluciones válidas al problema pueden ser representadas como **genes**
-* El **crossover** nos permite combinar dos soluciones para obtener una nueva solución válida
-* La **selección** se utiliza para elegir soluciones más óptimas utilizando alguna **función de aptitud**
-* Se introducen **mutaciones** para desestabilizar la optimización y sacarnos del mínimo local
+* Le soluzioni valide al problema possono essere rappresentate come **geni**
+* Il **crossover** ci permette di combinare due soluzioni per ottenere una nuova soluzione valida
+* La **selezione** viene utilizzata per scegliere le soluzioni più ottimali usando una **funzione di fitness**
+* Le **mutazioni** vengono introdotte per destabilizzare l'ottimizzazione e uscire da un minimo locale
 
-Si deseas implementar un Algoritmo Genético, necesitas lo siguiente:
+Se vuoi implementare un Algoritmo Genetico, hai bisogno di quanto segue:
 
- * Encontrar un método para codificar nuestras soluciones al problema usando **genes** g∈Γ
- * En el conjunto de genes Γ necesitamos definir una **función de aptitud** fit: Γ→**R**. Los valores más pequeños de la función corresponden a mejores soluciones.
- * Definir un mecanismo de **crossover** para combinar dos genes y obtener una nueva solución válida crossover: Γ<sup>2</sub>→Γ.
- * Definir un mecanismo de **mutación** mutate: Γ→Γ.
+ * Trovare un metodo per codificare le soluzioni del problema usando **geni** g&in;&Gamma;
+ * Sul set di geni &Gamma; è necessario definire una **funzione di fitness** fit: &Gamma;&rightarrow;**R**. Valori più piccoli della funzione corrispondono a soluzioni migliori.
+ * Definire un meccanismo di **crossover** per combinare due geni e ottenere una nuova soluzione valida crossover: &Gamma;<sup>2</sub>&rightarrow;&Gamma;.
+ * Definire un meccanismo di **mutazione** mutate: &Gamma;&rightarrow;&Gamma;.
 
-En muchos casos, el crossover y la mutación son algoritmos bastante simples para manipular genes como secuencias numéricas o vectores de bits.
+In molti casi, il crossover e la mutazione sono algoritmi piuttosto semplici per manipolare geni come sequenze numeriche o vettori di bit.
 
-La implementación específica de un algoritmo genético puede variar de un caso a otro, pero la estructura general es la siguiente:
+L'implementazione specifica di un algoritmo genetico può variare da caso a caso, ma la struttura generale è la seguente:
 
-1. Seleccionar una población inicial G⊂Γ
-2. Seleccionar aleatoriamente una de las operaciones que se realizarán en este paso: crossover o mutación
+1. Selezionare una popolazione iniziale G&subset;&Gamma;
+2. Selezionare casualmente una delle operazioni che verranno eseguite in questo passaggio: crossover o mutazione
 3. **Crossover**:
-  * Seleccionar aleatoriamente dos genes g<sub>1</sub>, g<sub>2</sub> ∈ G
-  * Calcular el crossover g=crossover(g<sub>1</sub>,g<sub>2</sub>)
-  * Si fit(g)<fit(g<sub>1</sub>) o fit(g)<fit(g<sub>2</sub>) - reemplazar el gen correspondiente en la población por g.
-4. **Mutación** - seleccionar un gen aleatorio g∈G y reemplazarlo por mutate(g)
-5. Repetir desde el paso 2, hasta que obtengamos un valor de fit suficientemente pequeño, o hasta que se alcance el límite en el número de pasos.
+  * Selezionare casualmente due geni g<sub>1</sub>, g<sub>2</sub> &in; G
+  * Calcolare il crossover g=crossover(g<sub>1</sub>,g<sub>2</sub>)
+  * Se fit(g)<fit(g<sub>1</sub>) o fit(g)<fit(g<sub>2</sub>) - sostituire il gene corrispondente nella popolazione con g.
+4. **Mutazione** - selezionare un gene casuale g&in;G e sostituirlo con mutate(g)
+5. Ripetere dal passaggio 2, fino a ottenere un valore sufficientemente piccolo di fit, o fino a raggiungere il limite sul numero di passaggi.
 
-## Tareas Típicas
+## Compiti Tipici
 
-Las tareas que típicamente se resuelven con Algoritmos Genéticos incluyen:
+I compiti tipicamente risolti dagli Algoritmi Genetici includono:
 
-1. Optimización de horarios
-1. Empaque óptimo
-1. Corte óptimo
-1. Aceleración de búsqueda exhaustiva
+1. Ottimizzazione dei programmi
+1. Impacchettamento ottimale
+1. Taglio ottimale
+1. Accelerazione della ricerca esaustiva
 
-## ✍️ Ejercicios: Algoritmos Genéticos
+## ✍️ Esercizi: Algoritmi Genetici
 
-Continúa tu aprendizaje en los siguientes cuadernos:
+Continua il tuo apprendimento nei seguenti notebook:
 
-Ve a [este cuaderno](../../../../../lessons/6-Other/21-GeneticAlgorithms/Genetic.ipynb) para ver dos ejemplos de uso de Algoritmos Genéticos:
+Vai a [questo notebook](Genetic.ipynb) per vedere due esempi di utilizzo degli Algoritmi Genetici:
 
-1. División justa del tesoro
-1. Problema de las 8 reinas
+1. Divisione equa del tesoro
+1. Problema delle 8 Regine
 
-## Conclusión
+## Conclusione
 
-Los Algoritmos Genéticos se utilizan para resolver muchos problemas, incluidos problemas de logística y búsqueda. Este campo se inspira en investigaciones que fusionaron temas de Psicología y Ciencias de la Computación.
+Gli Algoritmi Genetici vengono utilizzati per risolvere molti problemi, inclusi problemi di logistica e ricerca. Il campo è ispirato da ricerche che hanno unito argomenti di Psicologia e Informatica.
 
-## 🚀 Desafío
+## 🚀 Sfida
 
-"Los algoritmos genéticos son simples de implementar, pero su comportamiento es difícil de entender." [fuente](https://wikipedia.org/wiki/Genetic_algorithm) Realiza una investigación para encontrar una implementación de un algoritmo genético, como la resolución de un rompecabezas de Sudoku, y explica cómo funciona en un esquema o diagrama de flujo.
+"Gli algoritmi genetici sono semplici da implementare, ma il loro comportamento è difficile da comprendere." [fonte](https://wikipedia.org/wiki/Genetic_algorithm) Fai una ricerca per trovare un'implementazione di un algoritmo genetico, come la risoluzione di un puzzle Sudoku, e spiega come funziona attraverso uno schema o un diagramma di flusso.
 
-## [Cuestionario posterior a la clase](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/221)
+## [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ai/quiz/42)
 
-## Revisión y Autoestudio
+## Revisione & Studio Autonomo
 
-Mira [este gran video](https://www.youtube.com/watch?v=qv6UVOQ0F44) que habla sobre cómo una computadora puede aprender a jugar Super Mario utilizando redes neuronales entrenadas por algoritmos genéticos. Aprenderemos más sobre cómo las computadoras aprenden a jugar juegos como ese [en la próxima sección](../22-DeepRL/README.md).
+Guarda [questo fantastico video](https://www.youtube.com/watch?v=qv6UVOQ0F44) che parla di come un computer può imparare a giocare a Super Mario usando reti neurali addestrate con algoritmi genetici. Impareremo di più su come i computer imparano a giocare a giochi simili [nella prossima sezione](../22-DeepRL/README.md).
 
-## [Tarea: Ecuación Diofántica](../../../../../lessons/6-Other/21-GeneticAlgorithms/Diophantine.ipynb)
+## [Compito: Equazione Diofantea](Diophantine.ipynb)
 
-Tu objetivo es resolver la llamada **ecuación diofántica** - una ecuación con raíces enteras. Por ejemplo, considera la ecuación a+2b+3c+4d=30. Necesitas encontrar las raíces enteras que satisfacen esta ecuación.
+Il tuo obiettivo è risolvere la cosiddetta **equazione diofantea** - un'equazione con radici intere. Ad esempio, considera l'equazione a+2b+3c+4d=30. Devi trovare le radici intere che soddisfano questa equazione.
 
-*Esta tarea está inspirada en [esta publicación](https://habr.com/post/128704/).*
+*Questo compito è ispirato da [questo post](https://habr.com/post/128704/).*
 
-Sugerencias:
+Suggerimenti:
 
-1. Puedes considerar que las raíces están en el intervalo [0;30]
-1. Como gen, considera usar la lista de valores de raíz
+1. Puoi considerare le radici nell'intervallo [0;30]
+1. Come gene, considera l'utilizzo della lista dei valori delle radici
 
-Usa [Diophantine.ipynb](../../../../../lessons/6-Other/21-GeneticAlgorithms/Diophantine.ipynb) como punto de partida.
+Usa [Diophantine.ipynb](Diophantine.ipynb) come punto di partenza.
 
-**Disclaimer**: 
-Este documento ha sido traducido utilizando servicios de traducción automática basados en IA. Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción profesional por parte de un humano. No nos hacemos responsables de malentendidos o malas interpretaciones que surjan del uso de esta traducción.
+---
+

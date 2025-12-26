@@ -1,68 +1,77 @@
-# Inbäddningar
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "b708c9b85b833864c73c6281f1e6b96e",
+  "translation_date": "2025-09-23T11:07:35+00:00",
+  "source_file": "lessons/5-NLP/14-Embeddings/README.md",
+  "language_code": "sw"
+}
+-->
+# Embeddings
 
-## [För-lektion quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/114)
+## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ai/quiz/27)
 
-När vi tränade klassificerare baserade på BoW eller TF/IDF, arbetade vi med högdimensionella bag-of-words-vektorer med längd `vocab_size`, och vi konverterade uttryckligen från lågdimensionella positionsrepresentationsvektorer till glesa en-hot-representationer. Denna en-hot-representation är dock inte minneseffektiv. Dessutom behandlas varje ord oberoende av varandra, dvs. en-hot-kodade vektorer uttrycker ingen semantisk likhet mellan orden.
+Tulipokuwa tunafundisha classifiers kwa kutumia BoW au TF/IDF, tulikuwa tunafanya kazi na vectors za maneno zenye vipimo vingi (high-dimensional) zenye urefu `vocab_size`, na tulikuwa tunabadilisha vectors za uwakilishi wa nafasi (positional representation) zenye vipimo vichache kuwa uwakilishi wa sparse one-hot. Hata hivyo, uwakilishi huu wa one-hot si wa ufanisi wa kumbukumbu. Zaidi ya hayo, kila neno linachukuliwa kuwa huru kutoka kwa mengine, yaani vectors za one-hot hazionyeshi uhusiano wa kimaana kati ya maneno.
 
-Idén med **inbäddning** är att representera ord med lägre dimensionella täta vektorer, som på något sätt återspeglar det semantiska betydelsen av ett ord. Vi kommer senare att diskutera hur man bygger meningsfulla ordinbäddningar, men för nu kan vi tänka på inbäddningar som ett sätt att sänka dimensionaliteten av en ordvektor.
+Wazo la **embedding** ni kuwakilisha maneno kwa vectors zenye vipimo vichache na zenye density, ambazo kwa namna fulani zinaonyesha maana ya neno. Tutajadili baadaye jinsi ya kujenga embeddings za maneno zenye maana, lakini kwa sasa wazo ni kufikiria embeddings kama njia ya kupunguza vipimo vya vector ya neno.
 
-Så inbäddningslagret skulle ta ett ord som indata och producera en utdata-vektor av specificerad `embedding_size`. På ett sätt är det mycket likt ett `Linear`-lager, men istället för att ta en en-hot-kodad vektor, kan det ta ett ordnummer som indata, vilket gör att vi kan undvika att skapa stora en-hot-kodade vektorer.
+Kwa hivyo, safu ya embedding itachukua neno kama ingizo, na kutoa vector ya matokeo yenye `embedding_size` maalum. Kwa namna fulani, ni sawa na safu ya `Linear`, lakini badala ya kuchukua vector ya one-hot, itaweza kuchukua namba ya neno kama ingizo, ikituwezesha kuepuka kuunda vectors kubwa za one-hot.
 
-Genom att använda ett inbäddningslager som det första lagret i vårt klassificeringsnätverk kan vi växla från en bag-of-words till **inbäddningsbag**-modell, där vi först konverterar varje ord i vår text till motsvarande inbäddning och sedan beräknar en viss aggregatfunktion över alla dessa inbäddningar, såsom `sum`, `average` eller `max`.
+Kwa kutumia safu ya embedding kama safu ya kwanza katika mtandao wetu wa classifier, tunaweza kubadilisha kutoka bag-of-words kwenda kwenye **embedding bag** model, ambapo tunabadilisha kila neno katika maandishi yetu kuwa embedding inayolingana, kisha tunahesabu kazi ya jumla juu ya embeddings hizo zote, kama vile `sum`, `average` au `max`.  
 
-![Bild som visar en inbäddningsklassificerare för fem sekvensord.](../../../../../translated_images/embedding-classifier-example.b77f021a7ee67eeec8e68bfe11636c5b97d6eaa067515a129bfb1d0034b1ac5b.sw.png)
+![Picha inayoonyesha classifier ya embedding kwa maneno matano ya mfululizo.](../../../../../translated_images/embedding-classifier-example.b77f021a7ee67eeec8e68bfe11636c5b97d6eaa067515a129bfb1d0034b1ac5b.sw.png)
 
-> Bild av författaren
+> Picha na mwandishi
 
-## ✍️ Övningar: Inbäddningar
+## ✍️ Mazoezi: Embeddings
 
-Fortsätt ditt lärande i följande anteckningsblock:
-* [Inbäddningar med PyTorch](../../../../../lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb)
-* [Inbäddningar TensorFlow](../../../../../lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb)
+Endelea kujifunza katika daftari zifuatazo:
+* [Embeddings with PyTorch](EmbeddingsPyTorch.ipynb)
+* [Embeddings TensorFlow](EmbeddingsTF.ipynb)
 
-## Semantiska Inbäddningar: Word2Vec
+## Semantic Embeddings: Word2Vec
 
-Medan inbäddningslagret lärde sig att kartlägga ord till vektorrepresentation, hade denna representation dock inte nödvändigtvis mycket semantisk betydelse. Det skulle vara bra att lära sig en vektorrepresentation så att liknande ord eller synonymer motsvarar vektorer som ligger nära varandra i termer av viss vektordistans (t.ex. euklidisk distans).
+Ingawa safu ya embedding ilijifunza kuwakilisha maneno kwa vectors, uwakilishi huu haukuwa na maana ya kimaana sana. Ingekuwa vizuri kujifunza uwakilishi wa vector ambapo maneno yanayofanana au visawe vinahusiana na vectors zilizo karibu kwa umbali wa vector fulani (mfano, umbali wa Euclidean).
 
-För att göra detta behöver vi förtränar vår inbäddningsmodell på en stor samling text på ett specifikt sätt. Ett sätt att träna semantiska inbäddningar kallas [Word2Vec](https://en.wikipedia.org/wiki/Word2vec). Det baseras på två huvudarkitekturer som används för att producera en distribuerad representation av ord:
+Ili kufanya hivyo, tunahitaji kufundisha awali (pre-train) mfano wetu wa embedding kwenye mkusanyiko mkubwa wa maandishi kwa njia maalum. Njia moja ya kufundisha semantic embeddings inaitwa [Word2Vec](https://en.wikipedia.org/wiki/Word2vec). Inategemea miundo miwili mikuu inayotumika kuzalisha uwakilishi wa maneno uliosambazwa:
 
- - **Kontinuerlig bag-of-words** (CBoW) — i denna arkitektur tränar vi modellen för att förutsäga ett ord från omgivande kontext. Givet ngram $(W_{-2},W_{-1},W_0,W_1,W_2)$, är målet för modellen att förutsäga $W_0$ från $(W_{-2},W_{-1},W_1,W_2)$.
- - **Kontinuerlig skip-gram** är motsatsen till CBoW. Modellen använder omgivande fönster av kontextord för att förutsäga det aktuella ordet.
+ - **Continuous bag-of-words** (CBoW) — katika muundo huu, tunafundisha mfano kutabiri neno kutoka kwa muktadha wa karibu. Tukizingatia ngram $(W_{-2},W_{-1},W_0,W_1,W_2)$, lengo la mfano ni kutabiri $W_0$ kutoka $(W_{-2},W_{-1},W_1,W_2)$.
+ - **Continuous skip-gram** ni kinyume cha CBoW. Mfano hutumia dirisha la muktadha wa maneno ya karibu kutabiri neno la sasa.
 
-CBoW är snabbare, medan skip-gram är långsammare, men gör ett bättre jobb med att representera sällsynta ord.
+CBoW ni ya haraka, wakati skip-gram ni ya polepole, lakini inafanya kazi bora ya kuwakilisha maneno yasiyo ya kawaida.
 
-![Bild som visar både CBoW och Skip-Gram-algoritmer för att konvertera ord till vektorer.](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.sw.png)
+![Picha inayoonyesha CBoW na Skip-Gram algorithms za kubadilisha maneno kuwa vectors.](../../../../../translated_images/example-algorithms-for-converting-words-to-vectors.fbe9207a726922f6f0f5de66427e8a6eda63809356114e28fb1fa5f4a83ebda7.sw.png)
 
-> Bild från [denna artikel](https://arxiv.org/pdf/1301.3781.pdf)
+> Picha kutoka [karatasi hii](https://arxiv.org/pdf/1301.3781.pdf)
 
-Word2Vec förtränade inbäddningar (såväl som andra liknande modeller, såsom GloVe) kan också användas istället för inbäddningslagret i neurala nätverk. Men vi behöver hantera vokabulär, eftersom vokabulären som används för att förträna Word2Vec/GloVe sannolikt skiljer sig från vokabulären i vår textkorpus. Titta på ovanstående anteckningsblock för att se hur detta problem kan lösas.
+Embeddings za Word2Vec zilizofundishwa awali (pamoja na mifano mingine kama GloVe) zinaweza pia kutumika badala ya safu ya embedding katika mitandao ya neural. Hata hivyo, tunahitaji kushughulikia misamiati, kwa sababu msamiati uliotumika kufundisha awali Word2Vec/GloVe huenda ukatofautiana na msamiati katika maandishi yetu. Angalia daftari zilizo juu ili kuona jinsi tatizo hili linaweza kutatuliwa.
 
-## Kontextuella Inbäddningar
+## Contextual Embeddings
 
-En viktig begränsning av traditionella förtränade inbäddningsrepresentationer som Word2Vec är problemet med ordsensdisambiguering. Medan förtränade inbäddningar kan fånga en del av betydelsen av ord i kontext, kodas varje möjlig betydelse av ett ord in i samma inbäddning. Detta kan orsaka problem i nedströmsmodeller, eftersom många ord, såsom ordet 'play', har olika betydelser beroende på den kontext de används i.
+Kikwazo kimoja kikuu cha uwakilishi wa embeddings zilizofundishwa awali kama Word2Vec ni tatizo la kutofautisha maana ya neno. Ingawa embeddings zilizofundishwa awali zinaweza kunasa baadhi ya maana ya maneno katika muktadha, kila maana inayowezekana ya neno huwakilishwa katika embedding moja. Hii inaweza kusababisha matatizo katika mifano ya baadaye, kwa kuwa maneno mengi kama 'play' yana maana tofauti kulingana na muktadha yanayotumika.
 
-Till exempel har ordet 'play' i dessa två olika meningar ganska olika betydelser:
+Kwa mfano, neno 'play' katika sentensi hizi mbili lina maana tofauti kabisa:
 
-- Jag gick på en **teater**.
-- John vill **leka** med sina vänner.
+- Nilikwenda kwenye **play** katika ukumbi wa michezo.
+- John anataka **play** na marafiki zake.
 
-De förtränade inbäddningarna ovan representerar båda dessa betydelser av ordet 'play' i samma inbäddning. För att övervinna denna begränsning behöver vi bygga inbäddningar baserade på **språkmodellen**, som tränas på en stor textkorpus och *vet* hur ord kan sättas ihop i olika kontexter. Att diskutera kontextuella inbäddningar ligger utanför ramen för denna handledning, men vi kommer att återkomma till dem när vi pratar om språkmodeller senare i kursen.
+Embeddings zilizofundishwa awali zinawakilisha maana zote mbili za neno 'play' katika embedding moja. Ili kushinda kikwazo hiki, tunahitaji kujenga embeddings kulingana na **language model**, ambayo imefundishwa kwenye mkusanyiko mkubwa wa maandishi, na *inajua* jinsi maneno yanavyoweza kuwekwa pamoja katika muktadha tofauti. Kujadili contextual embeddings ni nje ya mada ya mafunzo haya, lakini tutarudi kwao wakati wa kuzungumzia language models baadaye katika kozi.
 
-## Slutsats
+## Hitimisho
 
-I denna lektion upptäckte du hur man bygger och använder inbäddningslager i TensorFlow och Pytorch för att bättre återspegla de semantiska betydelserna av ord.
+Katika somo hili, umejifunza jinsi ya kujenga na kutumia safu za embedding katika TensorFlow na Pytorch ili kuonyesha vyema maana ya kimaana ya maneno.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Word2Vec har använts för några intressanta tillämpningar, inklusive att generera låttexter och poesi. Ta en titt på [denna artikel](https://www.politetype.com/blog/word2vec-color-poems) som går igenom hur författaren använde Word2Vec för att generera poesi. Titta också på [denna video av Dan Shiffmann](https://www.youtube.com/watch?v=LSS_bos_TPI&ab_channel=TheCodingTrain) för att upptäcka en annan förklaring av denna teknik. Försök sedan att tillämpa dessa tekniker på din egen textkorpus, kanske hämtad från Kaggle.
+Word2Vec imetumika kwa matumizi ya kuvutia, ikiwa ni pamoja na kutengeneza mashairi na nyimbo. Angalia [makala hii](https://www.politetype.com/blog/word2vec-color-poems) ambayo inaelezea jinsi mwandishi alitumia Word2Vec kutengeneza mashairi. Tazama [video hii na Dan Shiffmann](https://www.youtube.com/watch?v=LSS_bos_TPI&ab_channel=TheCodingTrain) pia ili kugundua maelezo tofauti ya mbinu hii. Kisha jaribu kutumia mbinu hizi kwenye mkusanyiko wako wa maandishi, labda kutoka Kaggle.
 
-## [Efter-lektion quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/214)
+## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ai/quiz/28)
 
-## Granskning & Självstudie
+## Tathmini & Kujisomea
 
-Läs igenom denna artikel om Word2Vec: [Effektiv uppskattning av ordrepresentationer i vektorutrymme](https://arxiv.org/pdf/1301.3781.pdf)
+Soma karatasi hii kuhusu Word2Vec: [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf)
 
-## [Uppgift: Anteckningsblock](assignment.md)
+## [Assignment: Notebooks](assignment.md)
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, vänligen var medveten om att automatiska översättningar kan innehålla fel eller oegentligheter. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller felaktiga tolkningar som uppstår till följd av användningen av denna översättning.
+---
+

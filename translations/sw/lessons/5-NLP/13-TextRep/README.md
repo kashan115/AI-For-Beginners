@@ -1,76 +1,85 @@
-# Att Representera Text som Tensors
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "dbd3f73e4139f030ecb2e20387d70fee",
+  "translation_date": "2025-09-23T11:07:54+00:00",
+  "source_file": "lessons/5-NLP/13-TextRep/README.md",
+  "language_code": "sw"
+}
+-->
+# Kuwakilisha Maandishi kama Tensors
 
-## [För-lektionens quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/113)
+## [Jaribio la kabla ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/25)
 
-## Textklassificering
+## Uainishaji wa Maandishi
 
-Under den första delen av denna sektion kommer vi att fokusera på uppgiften **textklassificering**. Vi kommer att använda [AG News](https://www.kaggle.com/amananandrai/ag-news-classification-dataset) dataset, som innehåller nyhetsartiklar som följande:
+Katika sehemu ya kwanza ya somo hili, tutazingatia kazi ya **uainishaji wa maandishi**. Tutatumia Dataset ya [AG News](https://www.kaggle.com/amananandrai/ag-news-classification-dataset), ambayo ina makala za habari kama ifuatavyo:
 
-* Kategori: Sci/Tech
-* Titel: Ky. Företag Vinner Bidrag för att Studera Peptider (AP)
-* Innehåll: AP - Ett företag grundat av en kemiforskare vid University of Louisville vann ett bidrag för att utveckla...
+* Kategoria: Sayansi/Technolojia  
+* Kichwa: Kampuni ya Ky. Yashinda Ruzuku ya Kuchunguza Peptidi (AP)  
+* Mwili: AP - Kampuni iliyoanzishwa na mtafiti wa kemia katika Chuo Kikuu cha Louisville ilishinda ruzuku ya kuendeleza...  
 
-Vårt mål kommer att vara att klassificera nyhetsartikeln i en av kategorierna baserat på texten.
+Lengo letu litakuwa kuainisha kipengele cha habari katika mojawapo ya kategoria kulingana na maandishi.
 
-## Representera text
+## Kuwakilisha Maandishi
 
-Om vi vill lösa uppgifter inom Natural Language Processing (NLP) med neurala nätverk, behöver vi ett sätt att representera text som tensors. Datorer representerar redan texttecken som siffror som mappas till typsnitt på din skärm med hjälp av kodningar som ASCII eller UTF-8.
+Ikiwa tunataka kutatua kazi za Usindikaji wa Lugha Asilia (NLP) kwa kutumia mitandao ya neva, tunahitaji njia ya kuwakilisha maandishi kama tensors. Kompyuta tayari zinawakilisha herufi za maandishi kama namba zinazolingana na fonti kwenye skrini yako kwa kutumia encodings kama ASCII au UTF-8.
 
-<img alt="Bild som visar diagram som mappar ett tecken till en ASCII- och binär representation" src="images/ascii-character-map.png" width="50%"/>
+<img alt="Picha inayoonyesha mchoro wa kuonyesha ramani ya herufi kwa uwakilishi wa ASCII na binary" src="images/ascii-character-map.png" width="50%"/>
 
-> [Bildkälla](https://www.seobility.net/en/wiki/ASCII)
+> [Chanzo cha Picha](https://www.seobility.net/en/wiki/ASCII)
 
-Som människor förstår vi vad varje bokstav **representerar**, och hur alla tecken samverkar för att bilda orden i en mening. Datorer har dock inte en sådan förståelse av sig själva, och det neurala nätverket måste lära sig betydelsen under träningen.
+Kwa binadamu, tunaelewa kile kila herufi **inawakilisha**, na jinsi herufi zote zinavyoungana kuunda maneno ya sentensi. Hata hivyo, kompyuta zenyewe hazina uelewa kama huo, na mtandao wa neva lazima ujifunze maana wakati wa mafunzo.
 
-Därför kan vi använda olika metoder när vi representerar text:
+Kwa hivyo, tunaweza kutumia mbinu tofauti tunapowakilisha maandishi:
 
-* **Tecken-nivå representation**, när vi representerar text genom att behandla varje tecken som en siffra. Givet att vi har *C* olika tecken i vår textkorpus, skulle ordet *Hello* representeras av en 5x*C* tensor. Varje bokstav skulle motsvara en tensor kolumn i one-hot encoding.
-* **Ord-nivå representation**, där vi skapar ett **ordförråd** av alla ord i vår text, och sedan representerar orden med one-hot encoding. Denna metod är på något sätt bättre, eftersom varje bokstav i sig själv inte har mycket mening, och genom att använda högre semantiska begrepp - ord - förenklar vi uppgiften för det neurala nätverket. Men givet den stora storleken på ordförrådet måste vi hantera högdimensionella glesa tensors.
+* **Uwakilishi wa kiwango cha herufi**, ambapo tunawakilisha maandishi kwa kutibu kila herufi kama namba. Kwa kuwa tuna *C* herufi tofauti katika maandishi yetu, neno *Hello* lingewakilishwa na tensor ya 5x*C*. Kila herufi ingelingana na safu ya tensor katika one-hot encoding.  
+* **Uwakilishi wa kiwango cha neno**, ambapo tunaunda **msamiati** wa maneno yote katika maandishi yetu, na kisha kuwakilisha maneno kwa kutumia one-hot encoding. Mbinu hii ni bora kidogo, kwa sababu kila herufi yenyewe haina maana kubwa, na kwa hivyo kwa kutumia dhana za juu za kisemantiki - maneno - tunarahisisha kazi kwa mtandao wa neva. Hata hivyo, kwa ukubwa mkubwa wa kamusi, tunahitaji kushughulikia tensors za juu-dimensionali zilizo sparse.
 
-Oavsett representationen måste vi först konvertera texten till en sekvens av **tokens**, där en token kan vara antingen ett tecken, ett ord eller ibland till och med en del av ett ord. Sedan konverterar vi token till en siffra, vanligtvis med hjälp av **ordförråd**, och denna siffra kan matas in i ett neuralt nätverk med one-hot encoding.
+Bila kujali uwakilishi, tunahitaji kwanza kubadilisha maandishi kuwa mlolongo wa **tokens**, token moja ikiwa ni herufi, neno, au wakati mwingine hata sehemu ya neno. Kisha, tunabadilisha token kuwa namba, kwa kawaida kwa kutumia **msamiati**, na namba hii inaweza kulishwa kwenye mtandao wa neva kwa kutumia one-hot encoding.
 
 ## N-Grams
 
-I naturligt språk kan den exakta betydelsen av ord endast bestämmas i kontext. Till exempel är betydelserna av *neural network* och *fishing network* helt olika. Ett av sätten att ta hänsyn till detta är att bygga vår modell på ordpar och betrakta ordpar som separata ordförrådstokens. På så sätt kommer meningen *I like to go fishing* att representeras av följande sekvens av tokens: *I like*, *like to*, *to go*, *go fishing*. Problemet med detta tillvägagångssätt är att ordförrådets storlek växer betydligt, och kombinationer som *go fishing* och *go shopping* representeras av olika tokens, som inte delar någon semantisk likhet trots att de har samma verb.
+Katika lugha asilia, maana halisi ya maneno inaweza tu kuamuliwa katika muktadha. Kwa mfano, maana za *neural network* na *fishing network* ni tofauti kabisa. Njia mojawapo ya kuzingatia hili ni kujenga modeli yetu kwa jozi za maneno, na kuzingatia jozi za maneno kama tokens tofauti za msamiati. Kwa njia hii, sentensi *I like to go fishing* itawakilishwa na mlolongo wa tokens: *I like*, *like to*, *to go*, *go fishing*. Tatizo la mbinu hii ni kwamba ukubwa wa kamusi unakua kwa kiasi kikubwa, na mchanganyiko kama *go fishing* na *go shopping* huwakilishwa na tokens tofauti, ambazo hazishiriki uhusiano wowote wa kisemantiki licha ya kitenzi sawa.  
 
-I vissa fall kan vi överväga att använda tri-grams -- kombinationer av tre ord -- också. Således kallas denna metod ofta för **n-grams**. Det är också meningsfullt att använda n-grams med tecken-nivå representation, i vilket fall n-grams ungefär motsvarar olika stavelser.
+Katika baadhi ya matukio, tunaweza kuzingatia kutumia tri-grams -- mchanganyiko wa maneno matatu -- pia. Kwa hivyo mbinu hii mara nyingi huitwa **n-grams**. Pia, ina mantiki kutumia n-grams na uwakilishi wa kiwango cha herufi, ambapo n-grams zitakaribia kuwakilisha silabi tofauti.
 
-## Bag-of-Words och TF/IDF
+## Bag-of-Words na TF/IDF
 
-När vi löser uppgifter som textklassificering, behöver vi kunna representera text med en fast storlek vektor, som vi kommer att använda som ingång till den slutliga täta klassificeraren. Ett av de enklaste sätten att göra detta är att kombinera alla individuella ordrepresentationer, t.ex. genom att addera dem. Om vi lägger till one-hot encodings av varje ord, kommer vi att få en frekvensvektor som visar hur många gånger varje ord förekommer i texten. En sådan representation av text kallas **bag of words** (BoW).
+Tunapokuwa tunatatua kazi kama uainishaji wa maandishi, tunahitaji kuwakilisha maandishi kwa vector ya ukubwa wa kudumu, ambayo tutatumia kama ingizo kwa classifier ya mwisho yenye dense. Njia rahisi zaidi ya kufanya hivyo ni kuunganisha uwakilishi wa maneno ya mtu binafsi, kwa mfano kwa kuyaongeza. Ikiwa tunaongeza one-hot encodings za kila neno, tutapata vector ya frequencies, inayoonyesha mara ngapi kila neno linatokea ndani ya maandishi. Uwakilishi wa maandishi kama huu unaitwa **bag of words** (BoW).
 
 <img src="images/bow.png" width="90%"/>
 
-> Bild av författaren
+> Picha na mwandishi
 
-En BoW representerar i grunden vilka ord som förekommer i texten och i vilka mängder, vilket faktiskt kan vara en bra indikation på vad texten handlar om. Till exempel är en nyhetsartikel om politik sannolikt att innehålla ord som *president* och *land*, medan en vetenskaplig publikation skulle ha något som *collider*, *discovered*, etc. Således kan ordens frekvenser i många fall vara en bra indikator på textens innehåll.
+BoW kimsingi inaonyesha ni maneno gani yanatokea katika maandishi na kwa idadi gani, ambayo inaweza kuwa kiashiria kizuri cha kile maandishi yanahusu. Kwa mfano, makala ya habari kuhusu siasa ina uwezekano wa kuwa na maneno kama *rais* na *nchi*, wakati chapisho la kisayansi linaweza kuwa na maneno kama *collider*, *discovered*, nk. Kwa hivyo, frequencies za maneno zinaweza mara nyingi kuwa kiashiria kizuri cha maudhui ya maandishi.
 
-Problemet med BoW är att vissa vanliga ord, som *and*, *is*, etc. förekommer i de flesta texter och har de högsta frekvenserna, vilket döljer de ord som verkligen är viktiga. Vi kan sänka vikten av dessa ord genom att ta hänsyn till frekvensen med vilken ord förekommer i hela dokumentkollektionen. Detta är den huvudsakliga idén bakom TF/IDF-metoden, som täcks mer detaljerat i anteckningarna kopplade till denna lektion.
+Tatizo la BoW ni kwamba maneno fulani ya kawaida, kama *and*, *is*, nk. yanatokea katika maandishi mengi, na yana frequencies za juu zaidi, yakificha maneno ambayo ni muhimu kweli. Tunaweza kupunguza umuhimu wa maneno hayo kwa kuzingatia frequency ambayo maneno yanatokea katika mkusanyiko mzima wa nyaraka. Hii ndiyo wazo kuu nyuma ya mbinu ya TF/IDF, ambayo imeelezewa kwa undani zaidi katika vitabu vya mazoezi vilivyoshikamana na somo hili.
 
-Men ingen av dessa metoder kan helt ta hänsyn till **semantiken** i texten. Vi behöver mer kraftfulla modeller av neurala nätverk för att göra detta, vilket vi kommer att diskutera senare i denna sektion.
+Hata hivyo, hakuna mojawapo ya mbinu hizi zinazoweza kuzingatia kikamilifu **semantiki** ya maandishi. Tunahitaji modeli za mitandao ya neva zenye nguvu zaidi kufanya hivyo, ambazo tutajadili baadaye katika sehemu hii.
 
-## ✍️ Övningar: Textrepresentation
+## ✍️ Mazoezi: Uwakilishi wa Maandishi
 
-Fortsätt din inlärning i följande anteckningar:
+Endelea kujifunza katika vitabu vya mazoezi vifuatavyo:
 
-* [Textrepresentation med PyTorch](../../../../../lessons/5-NLP/13-TextRep/TextRepresentationPyTorch.ipynb)
-* [Textrepresentation med TensorFlow](../../../../../lessons/5-NLP/13-TextRep/TextRepresentationTF.ipynb)
+* [Uwakilishi wa Maandishi na PyTorch](TextRepresentationPyTorch.ipynb)  
+* [Uwakilishi wa Maandishi na TensorFlow](TextRepresentationTF.ipynb)  
 
-## Slutsats
+## Hitimisho
 
-Hittills har vi studerat tekniker som kan tilldela frekvensvikt till olika ord. De kan dock inte representera mening eller ordning. Som den berömda lingvisten J. R. Firth sa 1935, "Den fullständiga betydelsen av ett ord är alltid kontextuell, och ingen studie av betydelse bortom kontext kan tas på allvar." Vi kommer senare i kursen att lära oss hur man fångar kontextuell information från text genom språkmodellering.
+Hadi sasa, tumejifunza mbinu zinazoweza kuongeza uzito wa frequency kwa maneno tofauti. Hata hivyo, hazina uwezo wa kuwakilisha maana au mpangilio. Kama mwanaisimu maarufu J. R. Firth alivyosema mwaka 1935, "Maana kamili ya neno daima ni ya muktadha, na hakuna utafiti wa maana bila muktadha unaoweza kuchukuliwa kwa uzito." Tutajifunza baadaye katika kozi jinsi ya kunasa taarifa za muktadha kutoka kwa maandishi kwa kutumia modeli za lugha.
 
-## 🚀 Utmaning
+## 🚀 Changamoto
 
-Försök med några andra övningar som använder bag-of-words och olika datamodeller. Du kanske inspireras av denna [tävling på Kaggle](https://www.kaggle.com/competitions/word2vec-nlp-tutorial/overview/part-1-for-beginners-bag-of-words)
+Jaribu mazoezi mengine kwa kutumia bag-of-words na modeli tofauti za data. Unaweza kupata msukumo kutoka kwa [shindano hili kwenye Kaggle](https://www.kaggle.com/competitions/word2vec-nlp-tutorial/overview/part-1-for-beginners-bag-of-words)
 
-## [Efter-lektionens quiz](https://red-field-0a6ddfd03.1.azurestaticapps.net/quiz/213)
+## [Jaribio la baada ya somo](https://ff-quizzes.netlify.app/en/ai/quiz/26)
 
-## Granskning & Självstudie
+## Mapitio na Kujifunza Binafsi
 
-Öva dina färdigheter med textembedding och bag-of-words tekniker på [Microsoft Learn](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste)
+Fanya mazoezi ya ujuzi wako kwa kutumia embeddings za maandishi na mbinu za bag-of-words kwenye [Microsoft Learn](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste)
 
-## [Uppgift: Anteckningar](assignment.md)
+## [Kazi: Vitabu vya mazoezi](assignment.md)
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av maskinbaserade AI-översättningstjänster. Även om vi strävar efter noggrannhet, var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+---
+
