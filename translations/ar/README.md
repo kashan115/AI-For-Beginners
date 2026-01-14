@@ -1,163 +1,173 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "37ee7f47d982b98152785f96eefd5ffc",
-  "translation_date": "2025-12-21T10:32:00+00:00",
+  "original_hash": "0dc6311637b811abb415a936669d7e76",
+  "translation_date": "2026-01-05T14:38:59+00:00",
   "source_file": "README.md",
   "language_code": "ar"
 }
 -->
 [![ترخيص GitHub](https://img.shields.io/github/license/microsoft/AI-For-Beginners.svg)](https://github.com/microsoft/AI-For-Beginners/blob/main/LICENSE)
-[![مساهمو GitHub](https://img.shields.io/github/contributors/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/graphs/contributors/)
+[![المساهمون في GitHub](https://img.shields.io/github/contributors/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/graphs/contributors/)
 [![قضايا GitHub](https://img.shields.io/github/issues/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/issues/)
-[![طلبات سحب GitHub](https://img.shields.io/github/issues-pr/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/pulls/)
-[![طلبات السحب مرحب بها](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![طلبات السحب في GitHub](https://img.shields.io/github/issues-pr/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/pulls/)
+[![الطلبات مرحب بها](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-[![المتابعون على GitHub](https://img.shields.io/github/watchers/microsoft/AI-For-Beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/AI-For-Beginners/watchers/)
-[![تشعبات GitHub](https://img.shields.io/github/forks/microsoft/AI-For-Beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/AI-For-Beginners/network/)
-[![نجوم GitHub](https://img.shields.io/github/stars/microsoft/AI-For-Beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/AI-For-Beginners/stargazers/)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/microsoft/ai-for-beginners/HEAD)
-[![Gitter](https://badges.gitter.im/Microsoft/ai-for-beginners.svg)](https://gitter.im/Microsoft/ai-for-beginners?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![المراقبون في GitHub](https://img.shields.io/github/watchers/microsoft/AI-For-Beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/AI-For-Beginners/watchers/)
+[![التفرعات في GitHub](https://img.shields.io/github/forks/microsoft/AI-For-Beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/AI-For-Beginners/network/)
+[![النجوم في GitHub](https://img.shields.io/github/stars/microsoft/AI-For-Beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/AI-For-Beginners/stargazers/)
+[![بايندر](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/microsoft/ai-for-beginners/HEAD)
+[![جيتر](https://badges.gitter.im/Microsoft/ai-for-beginners.svg)](https://gitter.im/Microsoft/ai-for-beginners?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-[![خادم Microsoft Foundry على Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![خادم ديسكورد Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 # الذكاء الاصطناعي للمبتدئين - منهج دراسي
 
-|![مخطط مرسوم بواسطة @girlie_mac https://twitter.com/girlie_mac](../../translated_images/ai-overview.0857791951d19500d0ef8b803d77110c738dcafc52306e6d68724742cd4af167.ar.png)|
+|![مذكرة رسمية بواسطة @girlie_mac https://twitter.com/girlie_mac](../../translated_images/ai-overview.0857791951d19500.ar.png)|
 |:---:|
-| AI For Beginners - _مخطط مرسوم بواسطة [@girlie_mac](https://twitter.com/girlie_mac)_ |
+| الذكاء الاصطناعي للمبتدئين - _مذكرة رسمية بواسطة [@girlie_mac](https://twitter.com/girlie_mac)_ |
 
-استكشف عالم **الذكاء الاصطناعي** (AI) من خلال منهجنا الدراسي الممتد على 12 أسبوعًا ويتكون من 24 درسًا! يشمل المنهج دروسًا عملية، واختبارات، ومختبرات. المنهج مناسب للمبتدئين ويغطي أدوات مثل TensorFlow و PyTorch، بالإضافة إلى أخلاقيات الذكاء الاصطناعي
+استكشف عالم **الذكاء الاصطناعي** مع منهجنا الدراسي الممتد 12 أسبوعًا، والمكوّن من 24 درسًا! يشمل دروسًا عملية، واختبارات، ومختبرات. المنهج مناسب للمبتدئين ويغطي أدوات مثل TensorFlow وPyTorch، بالإضافة إلى أخلاقيات الذكاء الاصطناعي.
 
 ### 🌐 دعم متعدد اللغات
 
-#### مدعوم عبر إجراء GitHub (مؤتمت ومحدّث دائمًا)
+#### مدعوم عبر GitHub Action (آلي ودائم التحديث)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[العربية](./README.md) | [البنغالية](../bn/README.md) | [البلغارية](../bg/README.md) | [البورمية (ميانمار)](../my/README.md) | [الصينية (المبسطة)](../zh/README.md) | [الصينية (التقليدية، هونغ كونغ)](../hk/README.md) | [الصينية (التقليدية، ماكاو)](../mo/README.md) | [الصينية (التقليدية، تايوان)](../tw/README.md) | [الكرواتية](../hr/README.md) | [التشيكية](../cs/README.md) | [الدانمركية](../da/README.md) | [الهولندية](../nl/README.md) | [الإستونية](../et/README.md) | [الفنلندية](../fi/README.md) | [الفرنسية](../fr/README.md) | [الألمانية](../de/README.md) | [اليونانية](../el/README.md) | [العبرية](../he/README.md) | [الهندية](../hi/README.md) | [الهنغارية](../hu/README.md) | [الإندونيسية](../id/README.md) | [الإيطالية](../it/README.md) | [اليابانية](../ja/README.md) | [الكانندية](../kn/README.md) | [الكورية](../ko/README.md) | [الليتوانية](../lt/README.md) | [الملايوية](../ms/README.md) | [المالايالامية](../ml/README.md) | [الماراثية](../mr/README.md) | [النيبالية](../ne/README.md) | [بيجن النيجيرية](../pcm/README.md) | [النرويجية](../no/README.md) | [الفارسية (الفارسية)](../fa/README.md) | [البولندية](../pl/README.md) | [البرتغالية (البرازيل)](../br/README.md) | [البرتغالية (البرتغال)](../pt/README.md) | [البنجابية (غورموخي)](../pa/README.md) | [الرومانية](../ro/README.md) | [الروسية](../ru/README.md) | [الصربية (السيريلية)](../sr/README.md) | [السلوفاكية](../sk/README.md) | [السلوفينية](../sl/README.md) | [الإسبانية](../es/README.md) | [السواحيلية](../sw/README.md) | [السويدية](../sv/README.md) | [التاغالوغ (الفلبينية)](../tl/README.md) | [التاميلية](../ta/README.md) | [التيلجو](../te/README.md) | [التايلاندية](../th/README.md) | [التركية](../tr/README.md) | [الأوكرانية](../uk/README.md) | [الأردية](../ur/README.md) | [الفيتنامية](../vi/README.md)
+[العربية](./README.md) | [البنغالية](../bn/README.md) | [البلغارية](../bg/README.md) | [البورمية (ميانمار)](../my/README.md) | [الصينية (المبسطة)](../zh/README.md) | [الصينية (التقليدية، هونغ كونغ)](../hk/README.md) | [الصينية (التقليدية، ماكاو)](../mo/README.md) | [الصينية (التقليدية، تايوان)](../tw/README.md) | [الكرواتية](../hr/README.md) | [التشيكية](../cs/README.md) | [الدنماركية](../da/README.md) | [الهولندية](../nl/README.md) | [الإستونية](../et/README.md) | [الفنلندية](../fi/README.md) | [الفرنسية](../fr/README.md) | [الألمانية](../de/README.md) | [اليونانية](../el/README.md) | [العبرية](../he/README.md) | [الهندية](../hi/README.md) | [الهنغارية](../hu/README.md) | [الإندونيسية](../id/README.md) | [الإيطالية](../it/README.md) | [اليابانية](../ja/README.md) | [الكانادا](../kn/README.md) | [الكورية](../ko/README.md) | [اللتوانية](../lt/README.md) | [الماليزية](../ms/README.md) | [المالايالامية](../ml/README.md) | [الماراثية](../mr/README.md) | [النيبالية](../ne/README.md) | [النيجيرية بيدجن](../pcm/README.md) | [النرويجية](../no/README.md) | [الفارسية (الإنجليزية)](../fa/README.md) | [البولندية](../pl/README.md) | [البرتغالية (البرازيل)](../br/README.md) | [البرتغالية (البرتغال)](../pt/README.md) | [البنجابية (جيرموخي)](../pa/README.md) | [الرومانية](../ro/README.md) | [الروسية](../ru/README.md) | [الصربية (السيريلية)](../sr/README.md) | [السلوفاكية](../sk/README.md) | [السلوفينية](../sl/README.md) | [الإسبانية](../es/README.md) | [السواحلية](../sw/README.md) | [السويدية](../sv/README.md) | [التاغالوغ (الفلبينية)](../tl/README.md) | [التاميلية](../ta/README.md) | [التيلغو](../te/README.md) | [التايلاندية](../th/README.md) | [التركية](../tr/README.md) | [الأوكرانية](../uk/README.md) | [الأردية](../ur/README.md) | [الفيتنامية](../vi/README.md)
+
+> **هل تفضل الاستنساخ محليًا؟**
+
+> يحتوي هذا المستودع على أكثر من 50 ترجمة للغات تزيد بشكل كبير من حجم التنزيل. للاستنساخ بدون الترجمات، استخدم السحب الانتقائي:
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/AI-For-Beginners.git
+> cd AI-For-Beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> هذا يمنحك كل ما تحتاجه لإكمال الدورة بتنزيل أسرع بكثير.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-**إذا رغبت في إضافة لغات ترجمة أخرى، فاللغات المدعومة مذكورة [هنا](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**إذا كنت ترغب في دعم لغات ترجمة إضافية، فهي مدرجة [هنا](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## انضم إلى المجتمع
-[![خادم Microsoft Foundry على Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![خادم ديسكورد Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-## ما الذي ستتعلمه
+## ما ستتعلمه
 
 **[خريطة ذهنية للدورة](http://soshnikov.com/courses/ai-for-beginners/mindmap.html)**
 
 في هذا المنهج، ستتعلم:
 
-* نهجًا مختلفة للذكاء الاصطناعي، بما في ذلك النهج الرمزي "القديم الجيد" مع **تمثيل المعرفة** والاستدلال ([GOFAI](https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence)).
-* **الشبكات العصبية** و**التعلم العميق**، وهما في جوهر الذكاء الاصطناعي الحديث. سنوضّح المفاهيم وراء هذه الموضوعات المهمة باستخدام شفرة في اثنين من أكثر الأطر شعبية - [TensorFlow](http://Tensorflow.org) و [PyTorch](http://pytorch.org).
-* **الهياكل العصبية** للعمل مع الصور والنصوص. سنغطي النماذج الحديثة لكن قد نكون ناقصين قليلًا فيما يخص أحدث ما توصلت إليه الأبحاث.
+* نهجًا مختلفًا للذكاء الاصطناعي، بما في ذلك النهج "القديم الجيد" الرمزي مع **تمثيل المعرفة** والاستدلال ([GOFAI](https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence)).
+* **الشبكات العصبية** و**التعلم العميق**، وهي جوهر الذكاء الاصطناعي الحديث. سنوضح المفاهيم وراء هذه المواضيع المهمة باستخدام التعليمات البرمجية في اثنين من أشهر الأطر - [TensorFlow](http://Tensorflow.org) و[PyTorch](http://pytorch.org).
+* **الهياكل العصبية** للعمل مع الصور والنصوص. سنغطي النماذج الحديثة لكنها قد تكون قليلة بعض الشيء في أحدث التقنيات.
 * نهجًا أقل شيوعًا في الذكاء الاصطناعي، مثل **الخوارزميات الجينية** و**أنظمة الوكلاء المتعددين**.
 
-ما الذي لن نغطيه في هذا المنهج:
+ما لن نغطيه في هذا المنهج:
 
-> [اعثر على جميع الموارد الإضافية لهذه الدورة في مجموعة Microsoft Learn الخاصة بنا](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)
+> [اكتشف جميع الموارد الإضافية لهذه الدورة في مجموعة Microsoft Learn](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)
 
-* حالات الأعمال لاستخدام **الذكاء الاصطناعي في الأعمال**. يمكنك أخذ مسار التعلم [مقدمة في الذكاء الاصطناعي لمستخدمي الأعمال](https://docs.microsoft.com/learn/paths/introduction-ai-for-business-users/?WT.mc_id=academic-77998-bethanycheum) على Microsoft Learn، أو [AI Business School](https://www.microsoft.com/ai/ai-business-school/?WT.mc_id=academic-77998-bethanycheum)، المطور بالتعاون مع [INSEAD](https://www.insead.edu/).
-* **تعلم الآلة الكلاسيكي**، الذي وُصِف جيدًا في [منهج تعلم الآلة للمبتدئين](http://github.com/Microsoft/ML-for-Beginners) الخاص بنا.
-* تطبيقات الذكاء الاصطناعي العملية المبنية باستخدام **[Cognitive Services](https://azure.microsoft.com/services/cognitive-services/?WT.mc_id=academic-77998-bethanycheum)**. من أجل ذلك، نوصي أن تبدأ بوحدات Microsoft Learn الخاصة بـ [الرؤية](https://docs.microsoft.com/learn/paths/create-computer-vision-solutions-azure-cognitive-services/?WT.mc_id=academic-77998-bethanycheum)، و[معالجة اللغة الطبيعية](https://docs.microsoft.com/learn/paths/explore-natural-language-processing/?WT.mc_id=academic-77998-bethanycheum)، **[الذكاء التوليدي مع Azure OpenAI Service](https://learn.microsoft.com/en-us/training/paths/develop-ai-solutions-azure-openai/?WT.mc_id=academic-77998-bethanycheum)** وغيرها.
-* أطر سحابية محددة لتعلم الآلة، مثل [Azure Machine Learning](https://azure.microsoft.com/services/machine-learning/?WT.mc_id=academic-77998-bethanycheum)، [Microsoft Fabric](https://learn.microsoft.com/en-us/training/paths/get-started-fabric/?WT.mc_id=academic-77998-bethanycheum)، أو [Azure Databricks](https://docs.microsoft.com/learn/paths/data-engineer-azure-databricks?WT.mc_id=academic-77998-bethanycheum). ضع في اعتبارك استخدام مسارات التعلم [بناء وتشغيل حلول تعلم الآلة مع Azure Machine Learning](https://docs.microsoft.com/learn/paths/build-ai-solutions-with-azure-ml-service/?WT.mc_id=academic-77998-bethanycheum) و [بناء وتشغيل حلول تعلم الآلة مع Azure Databricks](https://docs.microsoft.com/learn/paths/build-operate-machine-learning-solutions-azure-databricks/?WT.mc_id=academic-77998-bethanycheum).
-* **الذكاء المحادثي** والـ **روبوتات الدردشة**. هناك مسار تعلم منفصل [إنشاء حلول ذكاء محادثي](https://docs.microsoft.com/learn/paths/create-conversational-ai-solutions/?WT.mc_id=academic-77998-bethanycheum)، ويمكنك أيضًا الرجوع إلى [هذه التدوينة](https://soshnikov.com/azure/hello-bot-conversational-ai-on-microsoft-platform/) لمزيد من التفاصيل.
-* **الرياضيات العميقة** وراء التعلم العميق. لهذا، نوصي بكتاب [Deep Learning](https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618) لذي كتبه Ian Goodfellow و Yoshua Bengio و Aaron Courville، والمتاح أيضًا عبر الإنترنت على [https://www.deeplearningbook.org/](https://www.deeplearningbook.org/).
+* الحالات التجارية لاستخدام **الذكاء الاصطناعي في الأعمال**. ننصح بأخذ مسار التعلم [مقدمة إلى الذكاء الاصطناعي لمستخدمي الأعمال](https://docs.microsoft.com/learn/paths/introduction-ai-for-business-users/?WT.mc_id=academic-77998-bethanycheum) على Microsoft Learn، أو [مدرسة الأعمال للذكاء الاصطناعي](https://www.microsoft.com/ai/ai-business-school/?WT.mc_id=academic-77998-bethanycheum)، التي تم تطويرها بالتعاون مع [INSEAD](https://www.insead.edu/).
+* **التعلم الآلي الكلاسيكي**، الموصوف جيدًا في منهجنا [التعلم الآلي للمبتدئين](http://github.com/Microsoft/ML-for-Beginners).
+* تطبيقات الذكاء الاصطناعي العملية المبنية باستخدام **[الخدمات المعرفية](https://azure.microsoft.com/services/cognitive-services/?WT.mc_id=academic-77998-bethanycheum)**. لذا نوصي بدءًا من وحدات Microsoft Learn لـ [الرؤية](https://docs.microsoft.com/learn/paths/create-computer-vision-solutions-azure-cognitive-services/?WT.mc_id=academic-77998-bethanycheum)، و[معالجة اللغة الطبيعية](https://docs.microsoft.com/learn/paths/explore-natural-language-processing/?WT.mc_id=academic-77998-bethanycheum)، و**[الذكاء الاصطناعي التوليدي مع خدمة Azure OpenAI](https://learn.microsoft.com/en-us/training/paths/develop-ai-solutions-azure-openai/?WT.mc_id=academic-77998-bethanycheum)** وغيرها.
+* أُطُر سحابية محددة للتعلم الآلي، مثل [Azure Machine Learning](https://azure.microsoft.com/services/machine-learning/?WT.mc_id=academic-77998-bethanycheum)، [Microsoft Fabric](https://learn.microsoft.com/en-us/training/paths/get-started-fabric/?WT.mc_id=academic-77998-bethanycheum)، أو [Azure Databricks](https://docs.microsoft.com/learn/paths/data-engineer-azure-databricks?WT.mc_id=academic-77998-bethanycheum). يُنصح باستخدام مسارات التعلم [إنشاء وتشغيل حلول التعلم الآلي باستخدام Azure Machine Learning](https://docs.microsoft.com/learn/paths/build-ai-solutions-with-azure-ml-service/?WT.mc_id=academic-77998-bethanycheum) و[إنشاء وتشغيل حلول التعلم الآلي باستخدام Azure Databricks](https://docs.microsoft.com/learn/paths/build-operate-machine-learning-solutions-azure-databricks/?WT.mc_id=academic-77998-bethanycheum).
+* **الذكاء الاصطناعي التفاعلي** و**الروبوتات الحوارية**. هناك مسار تعلم منفصل [إنشاء حلول الذكاء الاصطناعي التفاعلية](https://docs.microsoft.com/learn/paths/create-conversational-ai-solutions/?WT.mc_id=academic-77998-bethanycheum)، ويمكنك أيضًا الرجوع إلى [منشور المدونة هذا](https://soshnikov.com/azure/hello-bot-conversational-ai-on-microsoft-platform/) لمزيد من التفاصيل.
+* **الرياضيات العميقة** خلف التعلم العميق. لذلك نوصي بـ[التعلم العميق](https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618) بواسطة إيان جودفيلو ويوشوا بنجيو وآرون كورفيل، والمتوفر أيضًا عبر الإنترنت على [https://www.deeplearningbook.org/](https://www.deeplearningbook.org/).
 
-للمقدمة اللطيفة في موضوعات _الذكاء الاصطناعي في السحابة_ يمكنك النظر في أخذ مسار التعلم [البدء مع الذكاء الاصطناعي على Azure](https://docs.microsoft.com/learn/paths/get-started-with-artificial-intelligence-on-azure/?WT.mc_id=academic-77998-bethanycheum).
+للحصول على مقدمة لطيفة حول مواضيع _الذكاء الاصطناعي في السحابة_ يمكنك التفكير في أخذ مسار التعلم [البدء مع الذكاء الاصطناعي على Azure](https://docs.microsoft.com/learn/paths/get-started-with-artificial-intelligence-on-azure/?WT.mc_id=academic-77998-bethanycheum).
 
 # المحتوى
 
-|     |                                                                 رابط الدرس                                                                  |                                           PyTorch/Keras/TensorFlow                                          | المعمل                                                            |
+|     |                                                                 رابط الدرس                                                                  |                                           PyTorch/Keras/TensorFlow                                          | المختبر                                                            |
 | :-: | :------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------ |
 | 0  |                                 [إعداد الدورة](./lessons/0-course-setup/setup.md)                                 |                      [إعداد بيئة التطوير الخاصة بك](./lessons/0-course-setup/how-to-run.md)                       |   |
-| I  |               [**مقدمة في الذكاء الاصطناعي**](./lessons/1-Intro/README.md)      | | |
+| I  |               [**مقدمة إلى الذكاء الاصطناعي**](./lessons/1-Intro/README.md)      | | |
 | 01  |       [مقدمة وتاريخ الذكاء الاصطناعي](./lessons/1-Intro/README.md)       |           -                            | -  |
 | II |              **الذكاء الاصطناعي الرمزي**              |
-| 02  |       [تمثيل المعرفة وأنظمة الخبراء](./lessons/2-Symbolic/README.md)       |            [أنظمة الخبراء](./lessons/2-Symbolic/Animals.ipynb) /  [أنتولوجيا](./lessons/2-Symbolic/FamilyOntology.ipynb) /[مخطط المفاهيم](./lessons/2-Symbolic/MSConceptGraph.ipynb)                             |  |
-| III |                        [**مقدمة في الشبكات العصبية**](./lessons/3-NeuralNetworks/README.md) |||
-| 03  |                [بيرسيبترون](./lessons/3-NeuralNetworks/03-Perceptron/README.md)                 |                       [دفتر الملاحظات](./lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb)                      | [مختبر](./lessons/3-NeuralNetworks/03-Perceptron/lab/README.md) |
-| 04  |                   [بيرسيبترون متعدد الطبقات وإنشاء إطار عمل خاص بنا](./lessons/3-NeuralNetworks/04-OwnFramework/README.md)                   |        [دفتر الملاحظات](./lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb)        | [مختبر](./lessons/3-NeuralNetworks/04-OwnFramework/lab/README.md) |
-| 05  |            [مقدمة إلى الأطر (PyTorch/TensorFlow) والفرط في التكيّف](./lessons/3-NeuralNetworks/05-Frameworks/README.md)             |           [PyTorch](./lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb) / [Keras](./lessons/3-NeuralNetworks/05-Frameworks/IntroKeras.ipynb) / [TensorFlow](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [مختبر](./lessons/3-NeuralNetworks/05-Frameworks/lab/README.md) |
-| IV  |            [**الرؤية الحاسوبية**](./lessons/4-ComputerVision/README.md)             | [PyTorch](https://docs.microsoft.com/learn/modules/intro-computer-vision-pytorch/?WT.mc_id=academic-77998-cacaste) / [TensorFlow](https://docs.microsoft.com/learn/modules/intro-computer-vision-TensorFlow/?WT.mc_id=academic-77998-cacaste)| [استكشاف الرؤية الحاسوبية على Microsoft Azure](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) |
-| 06  |            [مقدمة في الرؤية الحاسوبية. OpenCV](./lessons/4-ComputerVision/06-IntroCV/README.md)             |           [دفتر الملاحظات](./lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)         | [مختبر](./lessons/4-ComputerVision/06-IntroCV/lab/README.md) |
-| 07  |            [الشبكات العصبية التلافيفية](./lessons/4-ComputerVision/07-ConvNets/README.md) &  [هياكل شبكات CNN](./lessons/4-ComputerVision/07-ConvNets/CNN_Architectures.md)             |           [PyTorch](./lessons/4-ComputerVision/07-ConvNets/ConvNetsPyTorch.ipynb) /[TensorFlow](./lessons/4-ComputerVision/07-ConvNets/ConvNetsTF.ipynb)             | [مختبر](./lessons/4-ComputerVision/07-ConvNets/lab/README.md) |
-| 08  |            [الشبكات المدربة مسبقًا والتعلم بالنقل](./lessons/4-ComputerVision/08-TransferLearning/README.md) and [حيل التدريب](./lessons/4-ComputerVision/08-TransferLearning/TrainingTricks.md)             |           [PyTorch](./lessons/4-ComputerVision/08-TransferLearning/TransferLearningPyTorch.ipynb) / [TensorFlow](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [مختبر](./lessons/4-ComputerVision/08-TransferLearning/lab/README.md) |
-| 09  |            [المشفّرات التلقائية وVAEs](./lessons/4-ComputerVision/09-Autoencoders/README.md)             |           [PyTorch](./lessons/4-ComputerVision/09-Autoencoders/AutoEncodersPyTorch.ipynb) / [TensorFlow](./lessons/4-ComputerVision/09-Autoencoders/AutoencodersTF.ipynb)             |  |
-| 10  |            [الشبكات التوليدية الخصامية ونقل الأسلوب الفني](./lessons/4-ComputerVision/10-GANs/README.md)             |           [PyTorch](./lessons/4-ComputerVision/10-GANs/GANPyTorch.ipynb) / [TensorFlow](./lessons/4-ComputerVision/10-GANs/GANTF.ipynb)             |  |
-| 11  |            [الكشف عن الكائنات](./lessons/4-ComputerVision/11-ObjectDetection/README.md)             |         [TensorFlow](./lessons/4-ComputerVision/11-ObjectDetection/ObjectDetection.ipynb)             | [مختبر](./lessons/4-ComputerVision/11-ObjectDetection/lab/README.md) |
-| 12  |            [التقسيم الدلالي. U-Net](./lessons/4-ComputerVision/12-Segmentation/README.md)             |           [PyTorch](./lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationPytorch.ipynb) / [TensorFlow](./lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationTF.ipynb)             |  |
-| V  |            [**معالجة اللغة الطبيعية**](./lessons/5-NLP/README.md)             | [PyTorch](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste) /[TensorFlow](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-TensorFlow/?WT.mc_id=academic-77998-cacaste) | [استكشاف معالجة اللغة الطبيعية على Microsoft Azure](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)|
-| 13  |            [تمثيل النص. حقيبة الكلمات/TF-IDF](./lessons/5-NLP/13-TextRep/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationTF.ipynb)             | |
-| 14  |            [التضمينات الدلالية للكلمات. Word2Vec وGloVe](./lessons/5-NLP/14-Embeddings/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb)             |  |
-| 15  |            [نمذجة اللغة. تدريب التضمينات الخاصة بك](./lessons/5-NLP/15-LanguageModeling/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-PyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-TF.ipynb)             | [مختبر](./lessons/5-NLP/15-LanguageModeling/lab/README.md) |
-| 16  |            [الشبكات العصبية المتكررة](./lessons/5-NLP/16-RNN/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNTF.ipynb)             |  |
-| 17  |            [الشبكات التوليدية المتكررة](./lessons/5-NLP/17-GenerativeNetworks/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativePyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativeTF.ipynb)             | [مختبر](./lessons/5-NLP/17-GenerativeNetworks/lab/README.md) |
-| 18  |            [المحوّلات. BERT.](./lessons/5-NLP/18-Transformers/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/18-Transformers/TransformersPyTorch.ipynb) /[TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/18-Transformers/TransformersTF.ipynb)             |  |
-| 19  |            [التعرّف على الكيانات المسماة](./lessons/5-NLP/19-NER/README.md)             |           [TensorFlow](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/19-NER/NER-TF.ipynb)             | [مختبر](./lessons/5-NLP/19-NER/lab/README.md) |
-| 20  |            [نماذج اللغة الكبيرة، برمجة المطالبات ومهام القليل من الأمثلة](./lessons/5-NLP/20-LangModels/README.md)             |           [PyTorch](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/20-LangModels/GPT-PyTorch.ipynb) | |
-| VI |            **تقنيات ذكاء اصطناعي أخرى** || |
-| 21  |            [الخوارزميات الجينية](./lessons/6-Other/21-GeneticAlgorithms/README.md)             |           [دفتر الملاحظات](./lessons/6-Other/21-GeneticAlgorithms/Genetic.ipynb) | |
-| 22  |            [التعلم المعزز العميق](./lessons/6-Other/22-DeepRL/README.md)             |           [PyTorch](./lessons/6-Other/22-DeepRL/CartPole-RL-PyTorch.ipynb) /[TensorFlow](./lessons/6-Other/22-DeepRL/CartPole-RL-TF.ipynb)             | [مختبر](./lessons/6-Other/22-DeepRL/lab/README.md) |
-| 23  |            [أنظمة متعددة الوكلاء](./lessons/6-Other/23-MultiagentSystems/README.md)             |  | |
+| 02  |       [تمثيل المعرفة وأنظمة الخبراء](./lessons/2-Symbolic/README.md)       |            [أنظمة الخبراء](./lessons/2-Symbolic/Animals.ipynb) /  [الأنتولوجيا](./lessons/2-Symbolic/FamilyOntology.ipynb) /[رسم بياني للمفاهيم](./lessons/2-Symbolic/MSConceptGraph.ipynb)                             |  |
+| III |                        [**مقدمة إلى الشبكات العصبية**](./lessons/3-NeuralNetworks/README.md) |||
+| 03  |                [بيرسيترون](./lessons/3-NeuralNetworks/03-Perceptron/README.md)                 |                       [دفتر ملاحظات](./lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb)                      | [معمل](./lessons/3-NeuralNetworks/03-Perceptron/lab/README.md) |
+| 04  |                   [بيرسيترون متعدد الطبقات وإنشاء إطار العمل الخاص بنا](./lessons/3-NeuralNetworks/04-OwnFramework/README.md)                   |        [دفتر ملاحظات](./lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb)        | [معمل](./lessons/3-NeuralNetworks/04-OwnFramework/lab/README.md) |
+| 05  |            [مقدمة في الأطر (بايتورتش/تينسرفلو) والإفراط في التعميم](./lessons/3-NeuralNetworks/05-Frameworks/README.md)             |           [بايتورتش](./lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb) / [كيراس](./lessons/3-NeuralNetworks/05-Frameworks/IntroKeras.ipynb) / [تينسرفلو](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [معمل](./lessons/3-NeuralNetworks/05-Frameworks/lab/README.md) |
+| IV  |            [**رؤية الحاسوب**](./lessons/4-ComputerVision/README.md)             | [بايتورتش](https://docs.microsoft.com/learn/modules/intro-computer-vision-pytorch/?WT.mc_id=academic-77998-cacaste) / [تينسرفلو](https://docs.microsoft.com/learn/modules/intro-computer-vision-TensorFlow/?WT.mc_id=academic-77998-cacaste)| [استكشاف رؤية الحاسوب على مايكروسوفت آزور](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) |
+| 06  |            [مقدمة في رؤية الحاسوب. OpenCV](./lessons/4-ComputerVision/06-IntroCV/README.md)             |           [دفتر ملاحظات](./lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)         | [معمل](./lessons/4-ComputerVision/06-IntroCV/lab/README.md) |
+| 07  |            [الشبكات العصبية الالتفافية](./lessons/4-ComputerVision/07-ConvNets/README.md) &  [هندسات CNN](./lessons/4-ComputerVision/07-ConvNets/CNN_Architectures.md)             |           [بايتورتش](./lessons/4-ComputerVision/07-ConvNets/ConvNetsPyTorch.ipynb) /[تينسرفلو](./lessons/4-ComputerVision/07-ConvNets/ConvNetsTF.ipynb)             | [معمل](./lessons/4-ComputerVision/07-ConvNets/lab/README.md) |
+| 08  |            [الشبكات المدربة مسبقًا والتعلم النقلي](./lessons/4-ComputerVision/08-TransferLearning/README.md) و [خدع التدريب](./lessons/4-ComputerVision/08-TransferLearning/TrainingTricks.md)             |           [بايتورتش](./lessons/4-ComputerVision/08-TransferLearning/TransferLearningPyTorch.ipynb) / [تينسرفلو](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [معمل](./lessons/4-ComputerVision/08-TransferLearning/lab/README.md) |
+| 09  |            [التشفير التلقائي و VAEs](./lessons/4-ComputerVision/09-Autoencoders/README.md)             |           [بايتورتش](./lessons/4-ComputerVision/09-Autoencoders/AutoEncodersPyTorch.ipynb) / [تينسرفلو](./lessons/4-ComputerVision/09-Autoencoders/AutoencodersTF.ipynb)             |  |
+| 10  |            [الشبكات التنافسية التوليدية ونقل النمط الفني](./lessons/4-ComputerVision/10-GANs/README.md)             |           [بايتورتش](./lessons/4-ComputerVision/10-GANs/GANPyTorch.ipynb) / [تينسرفلو](./lessons/4-ComputerVision/10-GANs/GANTF.ipynb)             |  |
+| 11  |            [الكشف عن الأشياء](./lessons/4-ComputerVision/11-ObjectDetection/README.md)             |         [تينسرفلو](./lessons/4-ComputerVision/11-ObjectDetection/ObjectDetection.ipynb)             | [معمل](./lessons/4-ComputerVision/11-ObjectDetection/lab/README.md) |
+| 12  |            [التجزئة الدلالية. U-Net](./lessons/4-ComputerVision/12-Segmentation/README.md)             |           [بايتورتش](./lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationPytorch.ipynb) / [تينسرفلو](./lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationTF.ipynb)             |  |
+| V  |            [**معالجة اللغة الطبيعية**](./lessons/5-NLP/README.md)             | [بايتورتش](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste) /[تينسرفلو](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-TensorFlow/?WT.mc_id=academic-77998-cacaste) | [استكشاف معالجة اللغة الطبيعية على مايكروسوفت آزور](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)|
+| 13  |            [تمثيل النص. Bow/TF-IDF](./lessons/5-NLP/13-TextRep/README.md)             |           [بايتورتش](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationPyTorch.ipynb) / [تينسرفلو](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationTF.ipynb)             | |
+| 14  |            [تضمينات الكلمات الدلالية. Word2Vec و GloVe](./lessons/5-NLP/14-Embeddings/README.md)             |           [بايتورتش](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb) / [تينسرفلو](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb)             |  |
+| 15  |            [نمذجة اللغة. تدريب التضمينات الخاصة بك](./lessons/5-NLP/15-LanguageModeling/README.md)             |           [بايتورتش](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-PyTorch.ipynb) / [تينسرفلو](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-TF.ipynb)             | [معمل](./lessons/5-NLP/15-LanguageModeling/lab/README.md) |
+| 16  |            [الشبكات العصبية المتكررة](./lessons/5-NLP/16-RNN/README.md)             |           [بايتورتش](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNPyTorch.ipynb) / [تينسرفلو](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNTF.ipynb)             |  |
+| 17  |            [الشبكات التكرارية التوليدية](./lessons/5-NLP/17-GenerativeNetworks/README.md)             |           [بايتورتش](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativePyTorch.ipynb) / [تينسرفلو](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativeTF.ipynb)             | [معمل](./lessons/5-NLP/17-GenerativeNetworks/lab/README.md) |
+| 18  |            [المحوّلات. BERT.](./lessons/5-NLP/18-Transformers/README.md)             |           [بايتورتش](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/18-Transformers/TransformersPyTorch.ipynb) /[تينسرفلو](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/18-Transformers/TransformersTF.ipynb)             |  |
+| 19  |            [تمييز الكيانات المسماة](./lessons/5-NLP/19-NER/README.md)             |           [تينسرفلو](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/19-NER/NER-TF.ipynb)             | [معمل](./lessons/5-NLP/19-NER/lab/README.md) |
+| 20  |            [نماذج اللغة الكبيرة، برمجة المطالبات ومهام القليل من الأمثلة](./lessons/5-NLP/20-LangModels/README.md)             |           [بايتورتش](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/20-LangModels/GPT-PyTorch.ipynb) | |
+| VI |            **تقنيات أخرى في الذكاء الاصطناعي** || |
+| 21  |            [الخوارزميات الجينية](./lessons/6-Other/21-GeneticAlgorithms/README.md)             |           [دفتر ملاحظات](./lessons/6-Other/21-GeneticAlgorithms/Genetic.ipynb) | |
+| 22  |            [التعلم المعزز العميق](./lessons/6-Other/22-DeepRL/README.md)             |           [بايتورتش](./lessons/6-Other/22-DeepRL/CartPole-RL-PyTorch.ipynb) /[تينسرفلو](./lessons/6-Other/22-DeepRL/CartPole-RL-TF.ipynb)             | [معمل](./lessons/6-Other/22-DeepRL/lab/README.md) |
+| 23  |            [أنظمة الوكلاء المتعددة](./lessons/6-Other/23-MultiagentSystems/README.md)             |  | |
 | VII |            **أخلاقيات الذكاء الاصطناعي** | | |
-| 24  |            [أخلاقيات الذكاء الاصطناعي والذكاء الاصطناعي المسؤول](./lessons/7-Ethics/README.md)             |           [Microsoft Learn: مبادئ الذكاء الاصطناعي المسؤول](https://docs.microsoft.com/learn/paths/responsible-ai-business-principles/?WT.mc_id=academic-77998-cacaste) | |
+| 24  |            [أخلاقيات الذكاء الاصطناعي والمسؤولية](./lessons/7-Ethics/README.md)             |           [مايكروسوفت ليرن: مبادئ الذكاء الاصطناعي المسؤول](https://docs.microsoft.com/learn/paths/responsible-ai-business-principles/?WT.mc_id=academic-77998-cacaste) | |
 | IX  |            **إضافات** | | |
-| 25  |            [الشبكات متعددة الوسائط، CLIP وVQGAN](./lessons/X-Extras/X1-MultiModal/README.md)             |           [دفتر الملاحظات](./lessons/X-Extras/X1-MultiModal/Clip.ipynb)    | |
+| 25  |            [الشبكات متعددة الوسائط، CLIP و VQGAN](./lessons/X-Extras/X1-MultiModal/README.md)             |           [دفتر ملاحظات](./lessons/X-Extras/X1-MultiModal/Clip.ipynb)    | |
 
-## كل درس يحتوي على
+## تحتوي كل درس على
 
 * مواد للقراءة المسبقة
-* دفاتر Jupyter القابلة للتنفيذ، التي غالبًا ما تكون مخصصة لإطار العمل (**PyTorch** or **TensorFlow**). كما أن الدفتر القابل للتنفيذ يحتوي أيضًا على الكثير من المواد النظرية، لذا لفهم الموضوع تحتاج إلى الاطلاع على نسخة واحدة على الأقل من الدفتر (إما PyTorch أو TensorFlow).
-* **المختبرات** متاحة لبعض المواضيع، والتي تمنحك فرصة لتجربة تطبيق ما تعلمته على مشكلة محددة.
-* تحتوي بعض الأقسام على روابط إلى وحدات [**MS Learn**](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) التي تغطي مواضيع ذات صلة.
+* دفاتر مُنفذة من جيوبتر، وغالبًا ما تكون خاصة بإطار عمل معين (**بايتورتش** أو **تينسرفلو**). يحتوي الدفتر التنفيذي أيضًا على الكثير من المواد النظرية، لذا لفهم الموضوع تحتاج إلى مراجعة نسخة واحدة على الأقل من الدفتر (سواء كانت بايتورتش أو تينسرفلو).
+* **معامل** متوفرة لبعض المواضيع، تتيح لك فرصة تجربة تطبيق المادة التي تعلمتها على مشكلة محددة.
+* بعض الأقسام تحتوي على روابط لوحدات [**مايكروسوفت ليرن**](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) التي تغطي مواضيع ذات صلة.
 
 ## البدء
 
-### 🎯 جديد على الذكاء الاصطناعي؟ ابدأ من هنا!
+### 🎯 جديد على الذكاء الاصطناعي؟ ابدأ هنا!
 
-إذا كنت جديدًا تمامًا على الذكاء الاصطناعي وتريد أمثلة عملية سريعة، فراجع [**أمثلة مناسبة للمبتدئين**](./examples/README.md)! تشمل هذه الأمثلة:
+إذا كنت جديدًا تمامًا على الذكاء الاصطناعي وتريد أمثلة عملية سريعة، تحقق من [**أمثلة للمبتدئين**](./examples/README.md)! تتضمن:
 
-- 🌟 **مرحبًا بالعالم في الذكاء الاصطناعي** - برنامجك الأول في الذكاء الاصطناعي (التعرف على الأنماط)
+- 🌟 **مرحبًا بالعالم الذكي** - برنامج الذكاء الاصطناعي الأول الخاص بك (التعرف على الأنماط)
 - 🧠 **شبكة عصبية بسيطة** - بناء شبكة عصبية من الصفر  
-- 🖼️ **مُصنِّف الصور** - تصنيف الصور مع تعليقات تفصيلية
+- 🖼️ **مصنف الصور** - تصنيف الصور مع تعليقات مفصلة
 - 💬 **تحليل مشاعر النص** - تحليل النصوص الإيجابية/السلبية
 
 تم تصميم هذه الأمثلة لمساعدتك على فهم مفاهيم الذكاء الاصطناعي قبل الغوص في المنهج الكامل.
 
 ### 📚 إعداد المنهج الكامل
 
-- لقد أنشأنا درسًا تمهيديًا [درس الإعداد](./lessons/0-course-setup/setup.md) لمساعدتك في إعداد بيئة التطوير الخاصة بك. - للمربين، أنشأنا أيضًا درسًا لإعداد المناهج [درس إعداد المناهج](./lessons/0-course-setup/for-teachers.md) من أجلكم!
-- كيفية [تشغيل الكود في VSCode أو في Codepace](./lessons/0-course-setup/how-to-run.md)
+- لقد أنشأنا [درس الإعداد](./lessons/0-course-setup/setup.md) لمساعدتك في إعداد بيئة التطوير الخاصة بك. - للمعلمين، أنشأنا أيضًا [درس إعداد المنهج](./lessons/0-course-setup/for-teachers.md) لكم!
+- كيفية [تشغيل الكود في VSCode أو Codepace](./lessons/0-course-setup/how-to-run.md)
 
-اتبع الخطوات التالية:
+اتبع هذه الخطوات:
 
-Fork the Repository: انقر على زر "Fork" في الزاوية اليمنى العلوية من هذه الصفحة.
+تفرع المستودع: انقر على زر "Fork" في أعلى يمين هذه الصفحة.
 
-Clone the Repository: `git clone https://github.com/microsoft/AI-For-Beginners.git`
+نسخ المستودع: `git clone https://github.com/microsoft/AI-For-Beginners.git`
 
-لا تنس أن تمنح هذا المستودع نجمة (🌟) لتسهيل العثور عليه لاحقًا.
+لا تنسَ وضع نجمة (🌟) على هذا المستودع لتجده بسهولة لاحقًا.
 
-## التعرف على متعلمين آخرين
+## تعرف على المتعلمين الآخرين
 
-انضم إلى [خادم Discord الرسمي للذكاء الاصطناعي](https://aka.ms/genai-discord?WT.mc_id=academic-105485-bethanycheum) للقاء والتواصل مع متعلمين آخرين يأخذون هذه الدورة والحصول على الدعم.
+انضم إلى [خادم الديسكورد الرسمي للذكاء الاصطناعي](https://aka.ms/genai-discord?WT.mc_id=academic-105485-bethanycheum) للتعرف على متعلمين آخرين يأخذون هذا المساق والتواصل معهم والحصول على الدعم.
 
-إذا كان لديك ملاحظات على المنتج أو أسئلة أثناء البناء قم بزيارة منتدى المطورين [منتدى مطوري Azure AI Foundry](https://aka.ms/foundry/forum)
+إذا كان لديك ملاحظات على المنتج أو أسئلة أثناء البناء قم بزيارة منتدى مطوري [Azure AI Foundry](https://aka.ms/foundry/forum)
 
-## الاختبارات 
+## الاختبارات القصيرة
 
-> **ملاحظة حول الاختبارات**: جميع الاختبارات موجودة في مجلد Quiz-app في etc\quiz-app، أو [على الإنترنت هنا](https://ff-quizzes.netlify.app/) وهي مرتبطة ضمن الدروس. يمكن تشغيل تطبيق الاختبار محليًا أو نشره على Azure؛ اتبع التعليمات في مجلد `quiz-app`. يجري تعريبها تدريجيًا.
+> **ملاحظة عن الاختبارات القصيرة**: جميع الاختبارات موجودة في مجلد Quiz-app في etc\quiz-app، أو [متاحة عبر الإنترنت هنا](https://ff-quizzes.netlify.app/) وهي مرتبطة من داخل الدروس، يمكن تشغيل تطبيق الاختبارات محليًا أو نشره على Azure؛ اتبع التعليمات في مجلد `quiz-app`. يتم تعريبها تدريجياً.
 
 ## مطلوب المساعدة
 
-هل لديك اقتراحات أو وجدت أخطاء إملائية أو أخطاء في الكود؟ افتح Issue أو أنشئ طلب سحب (pull request).
+هل لديك اقتراحات أو وجدت أخطاء إملائية أو في الكود؟ ارفع مشكلة أو أنشئ طلب سحب.
 
-## شكر خاص
+## الشكر الخاص
 
-* **✍️ المؤلف الرئيسي:** [Dmitry Soshnikov](http://soshnikov.com), PhD
-* **🔥 المحرر:** [Jen Looper](https://twitter.com/jenlooper), PhD
-* **🎨 رسام الملاحظات:** [Tomomi Imura](https://twitter.com/girlie_mac)
-* **✅ منشئ الاختبار:** [Lateefah Bello](https://github.com/CinnamonXI), [MLSA](https://studentambassadors.microsoft.com/)
+* **✍️ المؤلف الرئيسي:** [Dmitry Soshnikov](http://soshnikov.com)، دكتوراه
+* **🔥 المحرر:** [Jen Looper](https://twitter.com/jenlooper)، دكتوراه
+* **🎨 رسام الملاحظات التوضيحية:** [Tomomi Imura](https://twitter.com/girlie_mac)
+* **✅ منشئ الاختبارات القصيرة:** [Lateefah Bello](https://github.com/CinnamonXI)، [MLSA](https://studentambassadors.microsoft.com/)
 * **🙏 المساهمون الأساسيون:** [Evgenii Pishchik](https://github.com/Pe4enIks)
 
 ## مناهج أخرى
@@ -171,7 +181,7 @@ Clone the Repository: `git clone https://github.com/microsoft/AI-For-Beginners.g
 
 ---
 
-### Azure / Edge / MCP / Agents
+### Azure / Edge / MCP / الوكلاء
 [![AZD للمبتدئين](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI للمبتدئين](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP للمبتدئين](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -179,16 +189,16 @@ Clone the Repository: `git clone https://github.com/microsoft/AI-For-Beginners.g
 
 ---
  
-### سلسلة الذكاء التوليدي
-[![الذكاء التوليدي للمبتدئين](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![الذكاء التوليدي (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![الذكاء التوليدي (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![الذكاء التوليدي (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+### سلسلة الذكاء الاصطناعي التوليدي
+[![الذكاء الاصطناعي التوليدي للمبتدئين](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![الذكاء الاصطناعي التوليدي (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![الذكاء الاصطناعي التوليدي (جافا)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![الذكاء الاصطناعي التوليدي (جافا سكريبت)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### التعلم الأساسي
-[![تعلم الآلة للمبتدئين](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![التعلم الآلي للمبتدئين](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 [![علوم البيانات للمبتدئين](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![الذكاء الاصطناعي للمبتدئين](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![الأمن السيبراني للمبتدئين](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
@@ -198,25 +208,25 @@ Clone the Repository: `git clone https://github.com/microsoft/AI-For-Beginners.g
 
 ---
  
-### سلسلة Copilot
-[![Copilot للبرمجة المزدوجة بالذكاء الاصطناعي](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![Copilot لـ C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![مغامرة Copilot](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+### سلسلة المساعد الذكي
+[![المساعد الذكي للبرمجة المشتركة بالذكاء الاصطناعي](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![المساعد الذكي لـ C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![مغامرة المساعد الذكي](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ## الحصول على المساعدة
 
-إذا واجهت عائقًا أو كانت لديك أي أسئلة حول بناء تطبيقات الذكاء الاصطناعي، انضم إلى المتعلمين الآخرين والمطورين ذوي الخبرة في مناقشات حول MCP. إنه مجتمع داعم حيث الأسئلة مرحب بها والمعرفة متبادلة بحرية.
+إذا واجهت صعوبة أو كان لديك أي سؤال حول بناء تطبيقات الذكاء الاصطناعي. انضم إلى المتعلمين الآخرين والمطورين ذوي الخبرة في مناقشات حول MCP. إنها مجتمع داعم حيث تُرحب الأسئلة ويتم مشاركة المعرفة بحرية.
 
-[![خادم Microsoft Foundry على Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-إذا كان لديك ملاحظات حول المنتج أو أخطاء أثناء البناء فقم بزيارة:
+إذا كان لديك ملاحظات أو أخطاء في المنتج أثناء البناء قم بزيارة:
 
-[![منتدى مطوري Microsoft Foundry](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لا نتحمل أي مسؤولية عن أي سوء فهم أو تفسيرات خاطئة تنتج عن استخدام هذه الترجمة.
+**إخلاء المسؤولية**:  
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. بالنسبة للمعلومات الحيوية، يُنصح بالترجمة الاحترافية بواسطة مترجم بشري. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

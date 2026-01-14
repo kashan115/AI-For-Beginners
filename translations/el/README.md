@@ -1,168 +1,178 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "37ee7f47d982b98152785f96eefd5ffc",
-  "translation_date": "2025-12-21T11:55:34+00:00",
+  "original_hash": "0dc6311637b811abb415a936669d7e76",
+  "translation_date": "2026-01-05T15:28:10+00:00",
   "source_file": "README.md",
   "language_code": "el"
 }
 -->
-[![Άδεια GitHub](https://img.shields.io/github/license/microsoft/AI-For-Beginners.svg)](https://github.com/microsoft/AI-For-Beginners/blob/main/LICENSE)
-[![Συνεισφέροντες GitHub](https://img.shields.io/github/contributors/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/graphs/contributors/)
-[![Ζητήματα GitHub](https://img.shields.io/github/issues/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/issues/)
-[![Pull Requests GitHub](https://img.shields.io/github/issues-pr/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/pulls/)
-[![PRs Καλωσορίζονται](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![GitHub license](https://img.shields.io/github/license/microsoft/AI-For-Beginners.svg)](https://github.com/microsoft/AI-For-Beginners/blob/main/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/graphs/contributors/)
+[![GitHub issues](https://img.shields.io/github/issues/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/issues/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/microsoft/AI-For-Beginners.svg)](https://GitHub.com/microsoft/AI-For-Beginners/pulls/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-[![Παρακολουθητές GitHub](https://img.shields.io/github/watchers/microsoft/AI-For-Beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/AI-For-Beginners/watchers/)
-[![Forks GitHub](https://img.shields.io/github/forks/microsoft/AI-For-Beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/AI-For-Beginners/network/)
-[![Αστέρια GitHub](https://img.shields.io/github/stars/microsoft/AI-For-Beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/AI-For-Beginners/stargazers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/AI-For-Beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/AI-For-Beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/AI-For-Beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/AI-For-Beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/AI-For-Beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/AI-For-Beginners/stargazers/)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/microsoft/ai-for-beginners/HEAD)
 [![Gitter](https://badges.gitter.im/Microsoft/ai-for-beginners.svg)](https://gitter.im/Microsoft/ai-for-beginners?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-[![Discord του Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-# Τεχνητή Νοημοσύνη για Αρχάριους - Ένα Πρόγραμμα Σπουδών
+# Τεχνητή Νοημοσύνη για Αρχάριους - Ένα Αναλυτικό Πρόγραμμα
 
-|![Σκίτσο από @girlie_mac https://twitter.com/girlie_mac](../../translated_images/ai-overview.0857791951d19500d0ef8b803d77110c738dcafc52306e6d68724742cd4af167.el.png)|
+|![Sketchnote by @girlie_mac https://twitter.com/girlie_mac](../../translated_images/ai-overview.0857791951d19500.el.png)|
 |:---:|
-| AI For Beginners - _Σκίτσο από [@girlie_mac](https://twitter.com/girlie_mac)_ |
+| AI For Beginners - _Σημείωση σχεδίασης από [@girlie_mac](https://twitter.com/girlie_mac)_ |
 
-Εξερευνήστε τον κόσμο της **Τεχνητής Νοημοσύνης** (AI) με το 12-εβδομάδων, 24-μαθημάτων πρόγραμμα σπουδών μας! Περιλαμβάνει πρακτικά μαθήματα, κουίζ και εργαστήρια. Το πρόγραμμα είναι φιλικό προς αρχάριους και καλύπτει εργαλεία όπως TensorFlow και PyTorch, καθώς και ζητήματα ηθικής στην AI
+Εξερευνήστε τον κόσμο της **Τεχνητής Νοημοσύνης** (AI) με το 12-εβδομάδων, 24-μαθημάτων αναλυτικό μας πρόγραμμα! Περιλαμβάνει πρακτικά μαθήματα, κουίζ και εργαστήρια. Το πρόγραμμα είναι φιλικό προς τους αρχάριους και καλύπτει εργαλεία όπως TensorFlow και PyTorch, καθώς και θέματα ηθικής στην AI
 
-### 🌐 Υποστήριξη Πολλών Γλωσσών
+### 🌐 Υποστήριξη Πολύγλωσσης
 
 #### Υποστηρίζεται μέσω GitHub Action (Αυτοματοποιημένο & Πάντα Ενημερωμένο)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Αραβικά](../ar/README.md) | [Βεγγαλικά](../bn/README.md) | [Βουλγαρικά](../bg/README.md) | [Βιρμανικά (Μυανμάρ)](../my/README.md) | [Κινεζικά (Απλοποιημένα)](../zh/README.md) | [Κινεζικά (Παραδοσιακά, Χονγκ Κονγκ)](../hk/README.md) | [Κινεζικά (Παραδοσιακά, Μακάο)](../mo/README.md) | [Κινεζικά (Παραδοσιακά, Ταϊβάν)](../tw/README.md) | [Κροατικά](../hr/README.md) | [Τσέχικα](../cs/README.md) | [Δανικά](../da/README.md) | [Ολλανδικά](../nl/README.md) | [Εσθονικά](../et/README.md) | [Φινλανδικά](../fi/README.md) | [Γαλλικά](../fr/README.md) | [Γερμανικά](../de/README.md) | [Ελληνικά](./README.md) | [Εβραϊκά](../he/README.md) | [Χίντι](../hi/README.md) | [Ουγγρικά](../hu/README.md) | [Ινδονησιακά](../id/README.md) | [Ιταλικά](../it/README.md) | [Ιαπωνικά](../ja/README.md) | [Κανάντα](../kn/README.md) | [Κορεατικά](../ko/README.md) | [Λιθουανικά](../lt/README.md) | [Μαλαϊκά](../ms/README.md) | [Μαλαγιαλάμ](../ml/README.md) | [Μαράθι](../mr/README.md) | [Νεπαλικά](../ne/README.md) | [Νιγηριανό Πίνγκιν](../pcm/README.md) | [Νορβηγικά](../no/README.md) | [Περσικά (Φαρσί)](../fa/README.md) | [Πολωνικά](../pl/README.md) | [Πορτογαλικά (Βραζιλίας)](../br/README.md) | [Πορτογαλικά (Πορτογαλίας)](../pt/README.md) | [Πουντζάμπι (Γκουρμούκι)](../pa/README.md) | [Ρουμανικά](../ro/README.md) | [Ρωσικά](../ru/README.md) | [Σερβικά (Κυριλλικά)](../sr/README.md) | [Σλοβακικά](../sk/README.md) | [Σλοβενικά](../sl/README.md) | [Ισπανικά](../es/README.md) | [Σουαχίλι](../sw/README.md) | [Σουηδικά](../sv/README.md) | [Ταγκάλογκ (Φιλιππινέζικα)](../tl/README.md) | [Ταμίλ](../ta/README.md) | [Τελούγκου](../te/README.md) | [Ταϊλανδικά](../th/README.md) | [Τουρκικά](../tr/README.md) | [Ουκρανικά](../uk/README.md) | [Ουρντού](../ur/README.md) | [Βιετναμέζικα](../vi/README.md)
+[Αραβικά](../ar/README.md) | [Βεγγαλικά](../bn/README.md) | [Βουλγαρικά](../bg/README.md) | [Βιρμανικά (Μιανμάρ)](../my/README.md) | [Κινέζικα (Απλοποιημένα)](../zh/README.md) | [Κινέζικα (Παραδοσιακά, Χονγκ Κονγκ)](../hk/README.md) | [Κινέζικα (Παραδοσιακά, Μακάο)](../mo/README.md) | [Κινέζικα (Παραδοσιακά, Ταϊβάν)](../tw/README.md) | [Κροατικά](../hr/README.md) | [Τσέχικα](../cs/README.md) | [Δανέζικα](../da/README.md) | [Ολλανδικά](../nl/README.md) | [Εσθονικά](../et/README.md) | [Φινλανδικά](../fi/README.md) | [Γαλλικά](../fr/README.md) | [Γερμανικά](../de/README.md) | [Ελληνικά](./README.md) | [Εβραϊκά](../he/README.md) | [Χίντι](../hi/README.md) | [Ουγγρικά](../hu/README.md) | [Ινδονησιακά](../id/README.md) | [Ιταλικά](../it/README.md) | [Ιαπωνικά](../ja/README.md) | [Κανάντα](../kn/README.md) | [Κορεατικά](../ko/README.md) | [Λιθουανικά](../lt/README.md) | [Μαλαισιανά](../ms/README.md) | [Μαλαγιαλάμ](../ml/README.md) | [Μαράθι](../mr/README.md) | [Νεπάλι](../ne/README.md) | [Νιγηριανό Πίτζιν](../pcm/README.md) | [Νορβηγικά](../no/README.md) | [Περσικά (Φαρσί)](../fa/README.md) | [Πολωνικά](../pl/README.md) | [Πορτογαλικά (Βραζιλίας)](../br/README.md) | [Πορτογαλικά (Πορτογαλίας)](../pt/README.md) | [Πουντζάμπι (Γκουρμούκι)](../pa/README.md) | [Ρουμανικά](../ro/README.md) | [Ρωσικά](../ru/README.md) | [Σερβικά (Κυριλλικά)](../sr/README.md) | [Σλοβάκικα](../sk/README.md) | [Σλοβενικά](../sl/README.md) | [Ισπανικά](../es/README.md) | [Σουαχίλι](../sw/README.md) | [Σουηδικά](../sv/README.md) | [Ταγκάλογκ (Φιλιππινέζικα)](../tl/README.md) | [Ταμίλ](../ta/README.md) | [Τελούγκου](../te/README.md) | [Ταϊλανδικά](../th/README.md) | [Τουρκικά](../tr/README.md) | [Ουκρανικά](../uk/README.md) | [Ουρντού](../ur/README.md) | [Βιετναμέζικα](../vi/README.md)
+
+> **Προτιμάτε να Κλωνοποιήσετε Τοπικά;**
+
+> Αυτό το αποθετήριο περιλαμβάνει πάνω από 50 μεταφράσεις γλωσσών που αυξάνουν σημαντικά το μέγεθος λήψης. Για να κλωνοποιήσετε χωρίς μεταφράσεις, χρησιμοποιήστε sparse checkout:
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/AI-For-Beginners.git
+> cd AI-For-Beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> Αυτό σας δίνει όλα όσα χρειάζεστε για να ολοκληρώσετε το μάθημα με πολύ γρηγορότερη λήψη.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-**Εάν επιθυμείτε να προστεθούν επιπλέον γλώσσες μεταφράσεων, οι υποστηριζόμενες γλώσσες αναγράφονται [εδώ](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+**Εάν επιθυμείτε να υποστηριχθούν επιπλέον γλώσσες, αυτές αναγράφονται [εδώ](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
 ## Ενταχθείτε στην Κοινότητα
-[![Discord του Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ## Τι θα μάθετε
 
-**[Χάρτης Εννοιών του Μαθήματος](http://soshnikov.com/courses/ai-for-beginners/mindmap.html)**
+**[Μυαλόχάρτης του Μαθήματος](http://soshnikov.com/courses/ai-for-beginners/mindmap.html)**
 
-Στο πρόγραμμα σπουδών αυτό, θα μάθετε:
+Σε αυτό το αναλυτικό πρόγραμμα, θα μάθετε:
 
-* Διάφορες προσεγγίσεις στην Τεχνητή Νοημοσύνη, συμπεριλαμβανομένης της «παλιάς καλής» συμβολικής προσέγγισης με **Αναπαράσταση Γνώσης** και λογική ([GOFAI](https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence)).
-* **Νευρωνικά Δίκτυα** και **Βαθιά Μάθηση**, που βρίσκονται στον πυρήνα της σύγχρονης AI. Θα απεικονίσουμε τις έννοιες πίσω από αυτά τα σημαντικά θέματα χρησιμοποιώντας κώδικα σε δύο από τα πιο δημοφιλή πλαίσια - [TensorFlow](http://Tensorflow.org) και [PyTorch](http://pytorch.org).
-* **Νευρωνικές Αρχιτεκτονικές** για εργασία με εικόνες και κείμενο. Θα καλύψουμε πρόσφατα μοντέλα αλλά ενδέχεται να μην είμαστε πλήρως ενημερωμένοι με την τελευταία αιχμή της τεχνολογίας.
-* Λιγότερο δημοφιλείς προσεγγίσεις της AI, όπως **Γενετικοί Αλγόριθμοι** και **Συστήματα Πολλαπλών Πρακτόρων**.
+* Διάφορες προσεγγίσεις στην Τεχνητή Νοημοσύνη, συμπεριλαμβανομένης της "παλιάς καλής" συμβολικής προσέγγισης με **Αναπαράσταση Γνώσης** και συλλογιστική ([GOFAI](https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence)).
+* **Νευρωνικά Δίκτυα** και **Βαθιά Μάθηση**, που βρίσκονται στον πυρήνα της σύγχρονης AI. Θα εικονογραφήσουμε τις έννοιες πίσω από αυτά τα σημαντικά θέματα χρησιμοποιώντας κώδικα σε δύο από τα πιο δημοφιλή πλαίσια - [TensorFlow](http://Tensorflow.org) και [PyTorch](http://pytorch.org).
+* **Νευρωνικές Αρχιτεκτονικές** για εργασία με εικόνες και κείμενο. Θα καλύψουμε σύγχρονα μοντέλα αλλά μπορεί να υπάρχει κάποια έλλειψη στην τελευταία τεχνολογία.
+* Λιγότερο δημοφιλείς προσεγγίσεις AI, όπως οι **Γενετικοί Αλγόριθμοι** και τα **Πολυ-πρακτορικά Συστήματα**.
 
-Τι δεν θα καλύψουμε σε αυτό το πρόγραμμα σπουδών:
+Τι δεν θα καλύψουμε σε αυτό το αναλυτικό πρόγραμμα:
 
-> [Βρείτε όλους τους επιπλέον πόρους για αυτό το μάθημα στη συλλογή Microsoft Learn](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)
+> [Βρείτε όλους τους επιπλέον πόρους για αυτό το μάθημα στη συλλογή μας στο Microsoft Learn](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)
 
-* Επιχειρηματικές περιπτώσεις χρήσης της **AI στις Επιχειρήσεις**. Σκεφτείτε να παρακολουθήσετε την πορεία εκμάθησης [Introduction to AI for business users](https://docs.microsoft.com/learn/paths/introduction-ai-for-business-users/?WT.mc_id=academic-77998-bethanycheum) στο Microsoft Learn, ή το [AI Business School](https://www.microsoft.com/ai/ai-business-school/?WT.mc_id=academic-77998-bethanycheum), που αναπτύχθηκε σε συνεργασία με το [INSEAD](https://www.insead.edu/).
-* **Κλασική Μηχανική Μάθηση**, η οποία περιγράφεται καλά στο [Machine Learning for Beginners Curriculum](http://github.com/Microsoft/ML-for-Beginners).
-* Πρακτικές εφαρμογές AI που χτίζονται χρησιμοποιώντας **[Cognitive Services](https://azure.microsoft.com/services/cognitive-services/?WT.mc_id=academic-77998-bethanycheum)**. Για αυτό, προτείνουμε να ξεκινήσετε με modules του Microsoft Learn για [όραση](https://docs.microsoft.com/learn/paths/create-computer-vision-solutions-azure-cognitive-services/?WT.mc_id=academic-77998-bethanycheum), [επεξεργασία φυσικής γλώσσας](https://docs.microsoft.com/learn/paths/explore-natural-language-processing/?WT.mc_id=academic-77998-bethanycheum), **[Generative AI with Azure OpenAI Service](https://learn.microsoft.com/en-us/training/paths/develop-ai-solutions-azure-openai/?WT.mc_id=academic-77998-bethanycheum)** και άλλα.
-* Συγκεκριμένα πλαίσια ML **Cloud Frameworks**, όπως το [Azure Machine Learning](https://azure.microsoft.com/services/machine-learning/?WT.mc_id=academic-77998-bethanycheum), [Microsoft Fabric](https://learn.microsoft.com/en-us/training/paths/get-started-fabric/?WT.mc_id=academic-77998-bethanycheum), ή [Azure Databricks](https://docs.microsoft.com/learn/paths/data-engineer-azure-databricks?WT.mc_id=academic-77998-bethanycheum). Σκεφτείτε να χρησιμοποιήσετε τα μονοπάτια μάθησης [Build and operate machine learning solutions with Azure Machine Learning](https://docs.microsoft.com/learn/paths/build-ai-solutions-with-azure-ml-service/?WT.mc_id=academic-77998-bethanycheum) και [Build and Operate Machine Learning Solutions with Azure Databricks](https://docs.microsoft.com/learn/paths/build-operate-machine-learning-solutions-azure-databricks/?WT.mc_id=academic-77998-bethanycheum).
-* **Συνομιλητική AI** και **Chat Bots**. Υπάρχει ξεχωριστό μονοπάτι μάθησης [Create conversational AI solutions](https://docs.microsoft.com/learn/paths/create-conversational-ai-solutions/?WT.mc_id=academic-77998-bethanycheum), και μπορείτε επίσης να ανατρέξετε σε [αυτό το blog post](https://soshnikov.com/azure/hello-bot-conversational-ai-on-microsoft-platform/) για περισσότερες λεπτομέρειες.
-* **Βαθιά Μαθηματικά** πίσω από τη βαθιά μάθηση. Για αυτό, θα προτείναμε το [Deep Learning](https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618) των Ian Goodfellow, Yoshua Bengio και Aaron Courville, το οποίο είναι επίσης διαθέσιμο online στο [https://www.deeplearningbook.org/](https://www.deeplearningbook.org/).
+* Επιχειρηματικές περιπτώσεις χρήσης της **AI στις Επιχειρήσεις**. Σκεφτείτε να ακολουθήσετε την εκπαιδευτική διαδρομή [Εισαγωγή στην AI για επιχειρηματικούς χρήστες](https://docs.microsoft.com/learn/paths/introduction-ai-for-business-users/?WT.mc_id=academic-77998-bethanycheum) στο Microsoft Learn, ή την [Σχολή Επιχειρηματικής AI](https://www.microsoft.com/ai/ai-business-school/?WT.mc_id=academic-77998-bethanycheum), που αναπτύχθηκε σε συνεργασία με το [INSEAD](https://www.insead.edu/).
+* **Κλασική Μηχανική Μάθηση**, που έχει καλή περιγραφή στο [Μάθημα Μηχανικής Μάθησης για Αρχάριους](http://github.com/Microsoft/ML-for-Beginners).
+* Πρακτικές εφαρμογές AI που έχουν κατασκευαστεί χρησιμοποιώντας **[Cognitive Services](https://azure.microsoft.com/services/cognitive-services/?WT.mc_id=academic-77998-bethanycheum)**. Για αυτό, προτείνουμε να ξεκινήσετε με τα μαθήματα του Microsoft Learn για [όραση](https://docs.microsoft.com/learn/paths/create-computer-vision-solutions-azure-cognitive-services/?WT.mc_id=academic-77998-bethanycheum), [επεξεργασία φυσικής γλώσσας](https://docs.microsoft.com/learn/paths/explore-natural-language-processing/?WT.mc_id=academic-77998-bethanycheum), **[Γεννητική AI με Azure OpenAI Service](https://learn.microsoft.com/en-us/training/paths/develop-ai-solutions-azure-openai/?WT.mc_id=academic-77998-bethanycheum)** και άλλες.
+* Συγκεκριμένα ML **Cloud Frameworks**, όπως [Azure Machine Learning](https://azure.microsoft.com/services/machine-learning/?WT.mc_id=academic-77998-bethanycheum), [Microsoft Fabric](https://learn.microsoft.com/en-us/training/paths/get-started-fabric/?WT.mc_id=academic-77998-bethanycheum), ή [Azure Databricks](https://docs.microsoft.com/learn/paths/data-engineer-azure-databricks?WT.mc_id=academic-77998-bethanycheum). Σκεφτείτε να χρησιμοποιήσετε τις εκπαιδευτικές διαδρομές [Δημιουργήστε και λειτουργήστε λύσεις μηχανικής μάθησης με Azure Machine Learning](https://docs.microsoft.com/learn/paths/build-ai-solutions-with-azure-ml-service/?WT.mc_id=academic-77998-bethanycheum) και [Δημιουργήστε και λειτουργήστε λύσεις μηχανικής μάθησης με Azure Databricks](https://docs.microsoft.com/learn/paths/build-operate-machine-learning-solutions-azure-databricks/?WT.mc_id=academic-77998-bethanycheum).
+* **Conversational AI** και **Chat Bots**. Υπάρχει ξεχωριστή εκπαιδευτική διαδρομή [Δημιουργήστε λύσεις συνομιλιακής AI](https://docs.microsoft.com/learn/paths/create-conversational-ai-solutions/?WT.mc_id=academic-77998-bethanycheum), και μπορείτε επίσης να ανατρέξετε σε [αυτό το άρθρο στο blog](https://soshnikov.com/azure/hello-bot-conversational-ai-on-microsoft-platform/) για περισσότερες λεπτομέρειες.
+* **Βαθιά Μαθηματικά** πίσω από τη βαθιά μάθηση. Για αυτό, προτείνουμε το βιβλίο [Deep Learning](https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618) των Ian Goodfellow, Yoshua Bengio και Aaron Courville, που είναι επίσης διαθέσιμο online στο [https://www.deeplearningbook.org/](https://www.deeplearningbook.org/).
 
-Για μια ήπια εισαγωγή σε θέματα _AI στο Cloud_ μπορείτε να εξετάσετε την παρακολούθηση του μονοπατιού μάθησης [Get started with artificial intelligence on Azure](https://docs.microsoft.com/learn/paths/get-started-with-artificial-intelligence-on-azure/?WT.mc_id=academic-77998-bethanycheum).
+Για μια ομαλή εισαγωγή στα θέματα _AI στο Cloud_ μπορείτε να σκεφτείτε να ακολουθήσετε την εκπαιδευτική διαδρομή [Ξεκινήστε με την τεχνητή νοημοσύνη στο Azure](https://docs.microsoft.com/learn/paths/get-started-with-artificial-intelligence-on-azure/?WT.mc_id=academic-77998-bethanycheum).
 
 # Περιεχόμενο
 
-|     |                                                                 Σύνδεσμος Μαθήματος                                                                  |                                           PyTorch/Keras/TensorFlow                                          | Lab                                                            |
+|     |                                                                 Σύνδεσμος Μαθήματος                                                                  |                                           PyTorch/Keras/TensorFlow                                          | Εργαστήριο                                                            |
 | :-: | :------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------ |
-| 0  |                                 [Ρύθμιση Μαθήματος](./lessons/0-course-setup/setup.md)                                 |                      [Ρυθμίστε το Περιβάλλον Ανάπτυξής σας](./lessons/0-course-setup/how-to-run.md)                       |   |
-| I  |               [**Εισαγωγή στην Τεχνητή Νοημοσύνη**](./lessons/1-Intro/README.md)      | | |
-| 01  |       [Εισαγωγή και Ιστορία της Τεχνητής Νοημοσύνης](./lessons/1-Intro/README.md)       |           -                            | -  |
-| II |              **Συμβολική Τεχνητή Νοημοσύνη**              |
-| 02  |       [Αναπαράσταση Γνώσης και Συστήματα Εμπειρογνωμόνων](./lessons/2-Symbolic/README.md)       |            [Συστήματα Εμπειρογνωμόνων](./lessons/2-Symbolic/Animals.ipynb) /  [Οντολογία](./lessons/2-Symbolic/FamilyOntology.ipynb) /[Γράφος Εννοιών](./lessons/2-Symbolic/MSConceptGraph.ipynb)                             |  |
+| 0  |                                 [Ρύθμιση Μαθήματος](./lessons/0-course-setup/setup.md)                                 |                      [Ρύθμιση Περιβάλλοντος Ανάπτυξης](./lessons/0-course-setup/how-to-run.md)                       |   |
+| I  |               [**Εισαγωγή στην AI**](./lessons/1-Intro/README.md)      | | |
+| 01  |       [Εισαγωγή και Ιστορία της AI](./lessons/1-Intro/README.md)       |           -                            | -  |
+| II |              **Συμβολική AI**              |
+| 02  |       [Αναπαράσταση Γνώσης και Εμπειρικά Συστήματα](./lessons/2-Symbolic/README.md)       |            [Εμπειρικά Συστήματα](./lessons/2-Symbolic/Animals.ipynb) /  [Οντολογία](./lessons/2-Symbolic/FamilyOntology.ipynb) /[Διάγραμμα Εννοιών](./lessons/2-Symbolic/MSConceptGraph.ipynb)                             |  |
 | III |                        [**Εισαγωγή στα Νευρωνικά Δίκτυα**](./lessons/3-NeuralNetworks/README.md) |||
-| 03  |                [Perceptron](./lessons/3-NeuralNetworks/03-Perceptron/README.md)                 |                       [Σημειωματάριο](./lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb)                      | [Εργαστήριο](./lessons/3-NeuralNetworks/03-Perceptron/lab/README.md) |
-| 04  |                   [Πολυστρωματικό Perceptron και Δημιουργία του δικού μας Πλαισίου](./lessons/3-NeuralNetworks/04-OwnFramework/README.md)                   |        [Σημειωματάριο](./lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb)        | [Εργαστήριο](./lessons/3-NeuralNetworks/04-OwnFramework/lab/README.md) |
-| 05  |            [Εισαγωγή στα Πλαίσια (PyTorch/TensorFlow) και Υπερεκπαίδευση](./lessons/3-NeuralNetworks/05-Frameworks/README.md)             |           [PyTorch](./lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb) / [Keras](./lessons/3-NeuralNetworks/05-Frameworks/IntroKeras.ipynb) / [TensorFlow](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [Εργαστήριο](./lessons/3-NeuralNetworks/05-Frameworks/lab/README.md) |
-| IV  |            [**Υπολογιστική Όραση**](./lessons/4-ComputerVision/README.md)             | [PyTorch](https://docs.microsoft.com/learn/modules/intro-computer-vision-pytorch/?WT.mc_id=academic-77998-cacaste) / [TensorFlow](https://docs.microsoft.com/learn/modules/intro-computer-vision-TensorFlow/?WT.mc_id=academic-77998-cacaste)| [Εξερευνήστε την Υπολογιστική Όραση στο Microsoft Azure](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) |
-| 06  |            [Εισαγωγή στην Υπολογιστική Όραση. OpenCV](./lessons/4-ComputerVision/06-IntroCV/README.md)             |           [Σημειωματάριο](./lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)         | [Εργαστήριο](./lessons/4-ComputerVision/06-IntroCV/lab/README.md) |
-| 07  |            [Συνελικτικά Νευρωνικά Δίκτυα](./lessons/4-ComputerVision/07-ConvNets/README.md) &  [Αρχιτεκτονικές CNN](./lessons/4-ComputerVision/07-ConvNets/CNN_Architectures.md)             |           [PyTorch](./lessons/4-ComputerVision/07-ConvNets/ConvNetsPyTorch.ipynb) /[TensorFlow](./lessons/4-ComputerVision/07-ConvNets/ConvNetsTF.ipynb)             | [Εργαστήριο](./lessons/4-ComputerVision/07-ConvNets/lab/README.md) |
-| 08  |            [Προεκπαιδευμένα Δίκτυα και Μεταφορά Μάθησης](./lessons/4-ComputerVision/08-TransferLearning/README.md) and [Τεχνικές Εκπαίδευσης](./lessons/4-ComputerVision/08-TransferLearning/TrainingTricks.md)             |           [PyTorch](./lessons/4-ComputerVision/08-TransferLearning/TransferLearningPyTorch.ipynb) / [TensorFlow](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [Εργαστήριο](./lessons/4-ComputerVision/08-TransferLearning/lab/README.md) |
+| 03  |                [Perceptron](./lessons/3-NeuralNetworks/03-Perceptron/README.md)                 |                       [Notebook](./lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb)                      | [Lab](./lessons/3-NeuralNetworks/03-Perceptron/lab/README.md) |
+| 04  |                   [Πολυστρωματικός Perceptron και Δημιουργία του δικού μας Framework](./lessons/3-NeuralNetworks/04-OwnFramework/README.md)                   |        [Notebook](./lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb)        | [Lab](./lessons/3-NeuralNetworks/04-OwnFramework/lab/README.md) |
+| 05  |            [Εισαγωγή στα Frameworks (PyTorch/TensorFlow) και Υπερεκπαίδευση](./lessons/3-NeuralNetworks/05-Frameworks/README.md)             |           [PyTorch](./lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb) / [Keras](./lessons/3-NeuralNetworks/05-Frameworks/IntroKeras.ipynb) / [TensorFlow](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [Lab](./lessons/3-NeuralNetworks/05-Frameworks/lab/README.md) |
+| IV  |            [**Επεξεργασία Εικόνας**](./lessons/4-ComputerVision/README.md)             | [PyTorch](https://docs.microsoft.com/learn/modules/intro-computer-vision-pytorch/?WT.mc_id=academic-77998-cacaste) / [TensorFlow](https://docs.microsoft.com/learn/modules/intro-computer-vision-TensorFlow/?WT.mc_id=academic-77998-cacaste)| [Εξερεύνηση Επεξεργασίας Εικόνας στο Microsoft Azure](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) |
+| 06  |            [Εισαγωγή στην Επεξεργασία Εικόνας. OpenCV](./lessons/4-ComputerVision/06-IntroCV/README.md)             |           [Notebook](./lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb)         | [Lab](./lessons/4-ComputerVision/06-IntroCV/lab/README.md) |
+| 07  |            [Συνελικτικά Νευρωνικά Δίκτυα](./lessons/4-ComputerVision/07-ConvNets/README.md) &  [Αρχιτεκτονικές CNN](./lessons/4-ComputerVision/07-ConvNets/CNN_Architectures.md)             |           [PyTorch](./lessons/4-ComputerVision/07-ConvNets/ConvNetsPyTorch.ipynb) /[TensorFlow](./lessons/4-ComputerVision/07-ConvNets/ConvNetsTF.ipynb)             | [Lab](./lessons/4-ComputerVision/07-ConvNets/lab/README.md) |
+| 08  |            [Προεκπαιδευμένα Δίκτυα και Μεταφορά Μάθησης](./lessons/4-ComputerVision/08-TransferLearning/README.md) και [Τεχνάσματα Εκπαίδευσης](./lessons/4-ComputerVision/08-TransferLearning/TrainingTricks.md)             |           [PyTorch](./lessons/4-ComputerVision/08-TransferLearning/TransferLearningPyTorch.ipynb) / [TensorFlow](./lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb)             | [Lab](./lessons/4-ComputerVision/08-TransferLearning/lab/README.md) |
 | 09  |            [Αυτοκωδικοποιητές και VAEs](./lessons/4-ComputerVision/09-Autoencoders/README.md)             |           [PyTorch](./lessons/4-ComputerVision/09-Autoencoders/AutoEncodersPyTorch.ipynb) / [TensorFlow](./lessons/4-ComputerVision/09-Autoencoders/AutoencodersTF.ipynb)             |  |
-| 10  |            [Γενετικά Αντιπαραθετικά Δίκτυα & Μεταφορά Καλλιτεχνικού Στυλ](./lessons/4-ComputerVision/10-GANs/README.md)             |           [PyTorch](./lessons/4-ComputerVision/10-GANs/GANPyTorch.ipynb) / [TensorFlow](./lessons/4-ComputerVision/10-GANs/GANTF.ipynb)             |  |
-| 11  |            [Ανίχνευση Αντικειμένων](./lessons/4-ComputerVision/11-ObjectDetection/README.md)             |         [TensorFlow](./lessons/4-ComputerVision/11-ObjectDetection/ObjectDetection.ipynb)             | [Εργαστήριο](./lessons/4-ComputerVision/11-ObjectDetection/lab/README.md) |
+| 10  |            [Γενετικά Ανταγωνιστικά Δίκτυα & Μεταφορά Καλλιτεχνικού Στυλ](./lessons/4-ComputerVision/10-GANs/README.md)             |           [PyTorch](./lessons/4-ComputerVision/10-GANs/GANPyTorch.ipynb) / [TensorFlow](./lessons/4-ComputerVision/10-GANs/GANTF.ipynb)             |  |
+| 11  |            [Ανίχνευση Αντικειμένων](./lessons/4-ComputerVision/11-ObjectDetection/README.md)             |         [TensorFlow](./lessons/4-ComputerVision/11-ObjectDetection/ObjectDetection.ipynb)             | [Lab](./lessons/4-ComputerVision/11-ObjectDetection/lab/README.md) |
 | 12  |            [Σημασιολογική Τμηματοποίηση. U-Net](./lessons/4-ComputerVision/12-Segmentation/README.md)             |           [PyTorch](./lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationPytorch.ipynb) / [TensorFlow](./lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationTF.ipynb)             |  |
-| V  |            [**Επεξεργασία Φυσικής Γλώσσας**](./lessons/5-NLP/README.md)             | [PyTorch](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste) /[TensorFlow](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-TensorFlow/?WT.mc_id=academic-77998-cacaste) | [Εξερευνήστε την Επεξεργασία Φυσικής Γλώσσας στο Microsoft Azure](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)|
-| 13  |            [Αναπαράσταση Κειμένου. BoW/TF-IDF](./lessons/5-NLP/13-TextRep/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationTF.ipynb)             | |
-| 14  |            [Σημασιολογικές ενσωματώσεις λέξεων. Word2Vec and GloVe](./lessons/5-NLP/14-Embeddings/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb)             |  |
-| 15  |            [Μοντελοποίηση Γλώσσας. Εκπαίδευση των δικών σας ενσωματώσεων](./lessons/5-NLP/15-LanguageModeling/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-PyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-TF.ipynb)             | [Εργαστήριο](./lessons/5-NLP/15-LanguageModeling/lab/README.md) |
-| 16  |            [Αναδρομικά Νευρωνικά Δίκτυα](./lessons/5-NLP/16-RNN/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNTF.ipynb)             |  |
-| 17  |            [Γενετικά Αναδρομικά Δίκτυα](./lessons/5-NLP/17-GenerativeNetworks/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativePyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativeTF.ipynb)             | [Εργαστήριο](./lessons/5-NLP/17-GenerativeNetworks/lab/README.md) |
+| V  |            [**Επεξεργασία Φυσικής Γλώσσας**](./lessons/5-NLP/README.md)             | [PyTorch](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-pytorch/?WT.mc_id=academic-77998-cacaste) /[TensorFlow](https://docs.microsoft.com/learn/modules/intro-natural-language-processing-TensorFlow/?WT.mc_id=academic-77998-cacaste) | [Εξερεύνηση Επεξεργασίας Φυσικής Γλώσσας στο Microsoft Azure](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum)|
+| 13  |            [Αναπαράσταση Κειμένου. Bow/TF-IDF](./lessons/5-NLP/13-TextRep/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/13-TextRep/TextRepresentationTF.ipynb)             | |
+| 14  |            [Σημασιολογικές λέξεις ενσωματώσεις. Word2Vec και GloVe](./lessons/5-NLP/14-Embeddings/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb)             |  |
+| 15  |            [Μοντελοποίηση Γλώσσας. Εκπαίδευση των δικών σου ενσωματώσεων](./lessons/5-NLP/15-LanguageModeling/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-PyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/15-LanguageModeling/CBoW-TF.ipynb)             | [Lab](./lessons/5-NLP/15-LanguageModeling/lab/README.md) |
+| 16  |            [Επαναλαμβανόμενα Νευρωνικά Δίκτυα](./lessons/5-NLP/16-RNN/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNPyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/16-RNN/RNNTF.ipynb)             |  |
+| 17  |            [Γενετικά Επαναλαμβανόμενα Δίκτυα](./lessons/5-NLP/17-GenerativeNetworks/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativePyTorch.ipynb) / [TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/17-GenerativeNetworks/GenerativeTF.ipynb)             | [Lab](./lessons/5-NLP/17-GenerativeNetworks/lab/README.md) |
 | 18  |            [Transformers. BERT.](./lessons/5-NLP/18-Transformers/README.md)             |           [PyTorch](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/18-Transformers/TransformersPyTorch.ipynb) /[TensorFlow](https://github.com/microsoft/AI-For-Beginners/blob/main/lessons/5-NLP/18-Transformers/TransformersTF.ipynb)             |  |
-| 19  |            [Αναγνώριση Ονομαστικών Οντοτήτων](./lessons/5-NLP/19-NER/README.md)             |           [TensorFlow](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/19-NER/NER-TF.ipynb)             | [Εργαστήριο](./lessons/5-NLP/19-NER/lab/README.md) |
-| 20  |            [Μεγάλα Γλωσσικά Μοντέλα, Προγραμματισμός Προτροπών και Εργασίες Few-Shot](./lessons/5-NLP/20-LangModels/README.md)             |           [PyTorch](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/20-LangModels/GPT-PyTorch.ipynb) | |
+| 19  |            [Αναγνώριση Ονομαστικών Οντοτήτων](./lessons/5-NLP/19-NER/README.md)             |           [TensorFlow](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/19-NER/NER-TF.ipynb)             | [Lab](./lessons/5-NLP/19-NER/lab/README.md) |
+| 20  |            [Μεγάλα Μοντέλα Γλώσσας, Προγραμματισμός Υποδείξεων και Εργασίες με Λίγα Παραδείγματα](./lessons/5-NLP/20-LangModels/README.md)             |           [PyTorch](https://microsoft.github.io/AI-For-Beginners/lessons/5-NLP/20-LangModels/GPT-PyTorch.ipynb) | |
 | VI |            **Άλλες Τεχνικές Τεχνητής Νοημοσύνης** || |
-| 21  |            [Γενετικοί Αλγόριθμοι](./lessons/6-Other/21-GeneticAlgorithms/README.md)             |           [Σημειωματάριο](./lessons/6-Other/21-GeneticAlgorithms/Genetic.ipynb) | |
-| 22  |            [Βαθιά Ενισχυτική Μάθηση](./lessons/6-Other/22-DeepRL/README.md)             |           [PyTorch](./lessons/6-Other/22-DeepRL/CartPole-RL-PyTorch.ipynb) /[TensorFlow](./lessons/6-Other/22-DeepRL/CartPole-RL-TF.ipynb)             | [Εργαστήριο](./lessons/6-Other/22-DeepRL/lab/README.md) |
+| 21  |            [Γενετικοί Αλγόριθμοι](./lessons/6-Other/21-GeneticAlgorithms/README.md)             |           [Notebook](./lessons/6-Other/21-GeneticAlgorithms/Genetic.ipynb) | |
+| 22  |            [Ενισχυτική Μάθηση Βαθιάς Μάθησης](./lessons/6-Other/22-DeepRL/README.md)             |           [PyTorch](./lessons/6-Other/22-DeepRL/CartPole-RL-PyTorch.ipynb) /[TensorFlow](./lessons/6-Other/22-DeepRL/CartPole-RL-TF.ipynb)             | [Lab](./lessons/6-Other/22-DeepRL/lab/README.md) |
 | 23  |            [Συστήματα Πολλαπλών Πρακτόρων](./lessons/6-Other/23-MultiagentSystems/README.md)             |  | |
 | VII |            **Ηθική της Τεχνητής Νοημοσύνης** | | |
-| 24  |            [Ηθική της Τεχνητής Νοημοσύνης και Υπεύθυνη AI](./lessons/7-Ethics/README.md)             |           [Microsoft Learn: Αρχές Υπεύθυνης AI](https://docs.microsoft.com/learn/paths/responsible-ai-business-principles/?WT.mc_id=academic-77998-cacaste) | |
+| 24  |            [Ηθική της Τεχνητής Νοημοσύνης και Υπεύθυνη Τεχνητή Νοημοσύνη](./lessons/7-Ethics/README.md)             |           [Microsoft Learn: Αρχές Υπεύθυνης Τεχνητής Νοημοσύνης](https://docs.microsoft.com/learn/paths/responsible-ai-business-principles/?WT.mc_id=academic-77998-cacaste) | |
 | IX  |            **Επιπλέον** | | |
-| 25  |            [Πολυμορφικά Δίκτυα, CLIP και VQGAN](./lessons/X-Extras/X1-MultiModal/README.md)             |           [Σημειωματάριο](./lessons/X-Extras/X1-MultiModal/Clip.ipynb)    | |
+| 25  |            [Πολυμορφικά Δίκτυα, CLIP και VQGAN](./lessons/X-Extras/X1-MultiModal/README.md)             |           [Notebook](./lessons/X-Extras/X1-MultiModal/Clip.ipynb)    | |
 
 ## Κάθε μάθημα περιέχει
 
 * Υλικό προανάγνωσης
-* Εκτελέσιμα Jupyter σημειωματάρια, τα οποία συχνά είναι συγκεκριμένα για το πλαίσιο (**PyTorch** ή **TensorFlow**). Το εκτελέσιμο σημειωματάριο περιέχει επίσης πολύ θεωρητικό υλικό, οπότε για να κατανοήσετε το θέμα πρέπει να διαβάσετε τουλάχιστον μία έκδοση του σημειωματάριου (είτε PyTorch είτε TensorFlow).
-* **Εργαστήρια** διαθέσιμα για ορισμένα θέματα, τα οποία σας δίνουν την ευκαιρία να δοκιμάσετε την εφαρμογή του υλικού που έχετε μάθει σε ένα συγκεκριμένο πρόβλημα.
-* Ορισμένες ενότητες περιέχουν συνδέσμους προς [**MS Learn**](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) ενότητες που καλύπτουν σχετικά θέματα.
+* Εκτελέσιμα Jupyter Notebooks, τα οποία συχνά είναι συγκεκριμένα για το framework (**PyTorch** ή **TensorFlow**). Το εκτελέσιμο notebook περιέχει επίσης μεγάλο θεωρητικό υλικό, οπότε για να κατανοήσετε το θέμα χρειάζεται να περάσετε τουλάχιστον από μια έκδοση του notebook (είτε PyTorch είτε TensorFlow).
+* **Εργαστήρια** διαθέσιμα για ορισμένα θέματα, που σας δίνουν την ευκαιρία να δοκιμάσετε να εφαρμόσετε το υλικό που μάθατε σε ένα συγκεκριμένο πρόβλημα.
+* Ορισμένα τμήματα περιέχουν συνδέσμους σε ενότητες του [**MS Learn**](https://learn.microsoft.com/en-us/collections/7w28iy2xrqzdj0?WT.mc_id=academic-77998-bethanycheum) που καλύπτουν συναφή θέματα.
 
 ## Ξεκινώντας
 
-### 🎯 Νέος στην Τεχνητή Νοημοσύνη; Ξεκινήστε Εδώ!
+### 🎯 Νέος στην Τεχνητή Νοημοσύνη; Ξεκίνα Εδώ!
 
-Αν είστε εντελώς νέοι στην Τεχνητή Νοημοσύνη και θέλετε γρήγορα, πρακτικά παραδείγματα, ρίξτε μια ματιά στα [**Παραδείγματα για Αρχάριους**](./examples/README.md)! Αυτά περιλαμβάνουν:
+Αν είστε εντελώς νέος στην Τεχνητή Νοημοσύνη και θέλετε γρήγορα, πρακτικά παραδείγματα, δείτε τα [**Φιλικά Παραδείγματα για Αρχάριους**](./examples/README.md)! Αυτά περιλαμβάνουν:
 
 - 🌟 **Hello AI World** - Το πρώτο σας πρόγραμμα AI (αναγνώριση προτύπων)
 - 🧠 **Απλό Νευρωνικό Δίκτυο** - Δημιουργήστε ένα νευρωνικό δίκτυο από το μηδέν  
-- 🖼️ **Ταξινομητής Εικόνων** - Ταξινομήστε εικόνες με λεπτομερή σχόλια
-- 💬 **Συναίσθημα Κειμένου** - Αναλύστε θετικό/αρνητικό κείμενο
+- 🖼️ **Ταξινομητής Εικόνων** - Ταξινομήστε εικόνες με λεπτομερείς σχολιασμούς
+- 💬 **Συναίσθημα Κειμένου** - Ανάλυση θετικού/αρνητικού κειμένου
 
-These examples are designed to help you understand AI concepts before diving into the full curriculum.
+Αυτά τα παραδείγματα έχουν σχεδιαστεί για να σας βοηθήσουν να κατανοήσετε τις έννοιες της Τεχνητής Νοημοσύνης πριν βυθιστείτε στο πλήρες πρόγραμμα σπουδών.
 
 ### 📚 Ρύθμιση Πλήρους Προγράμματος Σπουδών
 
-- Έχουμε δημιουργήσει ένα [μάθημα εγκατάστασης](./lessons/0-course-setup/setup.md) για να σας βοηθήσει στη ρύθμιση του περιβάλλοντος ανάπτυξης. - Για εκπαιδευτικούς, έχουμε επίσης δημιουργήσει ένα [μάθημα ρύθμισης προγράμματος σπουδών](./lessons/0-course-setup/for-teachers.md) για εσάς!
-- Πώς να [Εκτελέσετε τον κώδικα σε ένα VSCode ή ένα Codepace](./lessons/0-course-setup/how-to-run.md)
+- Έχουμε δημιουργήσει ένα [μάθημα ρύθμισης](./lessons/0-course-setup/setup.md) για να σας βοηθήσουμε με τη ρύθμιση του περιβάλλοντος ανάπτυξής σας. - Για εκπαιδευτές, έχουμε δημιουργήσει και ένα [μάθημα ρύθμισης προγράμματος σπουδών](./lessons/0-course-setup/for-teachers.md) για εσάς επίσης!
+- Πώς να [τρέξετε τον κώδικα σε VSCode ή Codepace](./lessons/0-course-setup/how-to-run.md)
 
-Follow these steps:
+Ακολουθήστε αυτά τα βήματα:
 
-Fork the Repository: Click on the "Fork" button at the top-right corner of this page.
+Δημιουργήστε Fork του Αποθετηρίου: Πατήστε το κουμπί "Fork" στην πάνω δεξιά γωνία αυτής της σελίδας.
 
-Clone the Repository: `git clone https://github.com/microsoft/AI-For-Beginners.git`
+Κλωνοποιήστε το Αποθετήριο: `git clone https://github.com/microsoft/AI-For-Beginners.git`
 
-Don't forget to star (🌟) this repo to find it easier later.
+Μην ξεχάσετε να βάλετε αστέρι (🌟) σε αυτό το αποθετήριο για να το βρείτε πιο εύκολα αργότερα.
 
 ## Γνωρίστε άλλους Μαθητές
 
-Join our [official AI Discord server](https://aka.ms/genai-discord?WT.mc_id=academic-105485-bethanycheum) to meet and network with other learners taking this course and get support.
+Ενταχθείτε στον [επίσημο διακομιστή AI Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-bethanycheum) για να γνωρίσετε και να δικτυωθείτε με άλλους μαθητές που παρακολουθούν αυτό το μάθημα και να λάβετε υποστήριξη.
 
-If you have product feedback or questions whilst building visit our [Azure AI Foundry Developer Forum](https://aka.ms/foundry/forum)
+Εάν έχετε σχόλια προϊόντος ή ερωτήσεις κατά την ανάπτυξη επισκεφτείτε το [Azure AI Foundry Developer Forum](https://aka.ms/foundry/forum)
 
-## Κουίζ 
+## Κουίζ
 
-> **Μια σημείωση σχετικά με τα κουίζ**: All quizzes are contained in the Quiz-app folder in etc\quiz-app, or [Online Here](https://ff-quizzes.netlify.app/) They are linked from within the lessons the quiz app can be run locally or deployed to Azure; follow the instruction in the `quiz-app` folder. They are gradually being localized.
+> **Μια σημείωση για τα κουίζ**: Όλα τα κουίζ βρίσκονται στον φάκελο Quiz-app στο etc\quiz-app, ή [Ηλεκτρονικά Εδώ](https://ff-quizzes.netlify.app/) Είναι συνδεδεμένα από τα μαθήματα, η εφαρμογή κουίζ μπορεί να τρέχει τοπικά ή να αναπτύσσεται στο Azure. Ακολουθήστε τις οδηγίες στον φάκελο `quiz-app`. Βρίσκονται σε διαδικασία σταδιακής τοπικοποίησης.
 
-## Χρειαζόμαστε Βοήθεια
+## Ζητείται Βοήθεια
 
-Do you have suggestions or found spelling or code errors? Raise an issue or create a pull request.
+Έχετε προτάσεις ή βρήκατε ορθογραφικά ή κώδικα σφάλματα; Δημιουργήστε ένα issue ή ένα pull request.
 
 ## Ειδικές Ευχαριστίες
 
 * **✍️ Κύριος Συγγραφέας:** [Dmitry Soshnikov](http://soshnikov.com), PhD
-* **🔥 Επιμελήτρια:** [Jen Looper](https://twitter.com/jenlooper), PhD
-* **🎨 Εικονογράφος Sketchnote:** [Tomomi Imura](https://twitter.com/girlie_mac)
+* **🔥 Συντάκτης:** [Jen Looper](https://twitter.com/jenlooper), PhD
+* **🎨 Σχεδιαστής Σημειώσεων:** [Tomomi Imura](https://twitter.com/girlie_mac)
 * **✅ Δημιουργός Κουίζ:** [Lateefah Bello](https://github.com/CinnamonXI), [MLSA](https://studentambassadors.microsoft.com/)
-* **🙏 Βασικοί Συνεισφέροντες:** [Evgenii Pishchik](https://github.com/Pe4enIks)
+* **🙏 Κύριοι Συνεισφέροντες:** [Evgenii Pishchik](https://github.com/Pe4enIks)
 
 ## Άλλα Προγράμματα Σπουδών
 
-Our team produces other curricula! Check out:
+Η ομάδα μας παράγει και άλλα προγράμματα σπουδών! Δείτε:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
@@ -187,11 +197,11 @@ Our team produces other curricula! Check out:
 
 ---
  
-### Βασική Εκπαίδευση
+### Βασική Μάθηση
 [![ML για Αρχάριους](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Data Science για Αρχάριους](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI για Αρχάριους](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![Cybersecurity για Αρχάριους](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Επιστήμη Δεδομένων για Αρχάριους](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![ΤΝ για Αρχάριους](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Κυβερνοασφάλεια για Αρχάριους](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Web Dev για Αρχάριους](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT για Αρχάριους](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 [![XR Development για Αρχάριους](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -199,24 +209,24 @@ Our team produces other curricula! Check out:
 ---
  
 ### Σειρά Copilot
-[![Copilot για AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot για AI Προγραμματισμό σε Ζεύγη](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 [![Copilot για C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Περιπέτεια Copilot](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
-## Λήψη Βοήθειας
+## Πώς να Λάβετε Βοήθεια
 
-If you get stuck or have any questions about building AI apps. Join fellow learners and experienced developers in discussions about MCP. It's a supportive community where questions are welcome and knowledge is shared freely.
+Εάν κολλήσετε ή έχετε ερωτήσεις σχετικά με την κατασκευή εφαρμογών AI. Ενταχθείτε σε συνομιλίες με άλλους μαθητές και έμπειρους προγραμματιστές σχετικά με το MCP. Είναι μια υποστηρικτική κοινότητα όπου οι ερωτήσεις είναι ευπρόσδεκτες και η γνώση μοιράζεται ελεύθερα.
 
-[![Discord της Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-If you have product feedback or errors while building visit:
+Εάν έχετε σχόλια ή λάθη κατά την ανάπτυξη, επισκεφτείτε:
 
-[![Φόρουμ Προγραμματιστών Microsoft Foundry](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Το παρόν έγγραφο έχει μεταφραστεί με χρήση υπηρεσίας αυτόματης μετάφρασης τεχνητής νοημοσύνης Co-op Translator (https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για την ακρίβεια, παρακαλούμε να λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αξιόπιστη/επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση Ευθυνών**:  
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που επιδιώκουμε την ακρίβεια, παρακαλούμε να γνωρίζετε ότι οι αυτόματες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική μετάφραση από ανθρώπους. Δεν φέρουμε καμία ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
